@@ -31,7 +31,7 @@ twitter_username: colib0
 github_username:  colib0
 
 # Build settings
-remote-theme: pages-themes/minimal@v0.2.0
+remote-theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
