@@ -9,5 +9,5 @@ here is a first list of models:
 <details>
 <summary>Models</summary>
 <br>
-[Line](line.md).
+[Line](piLine.md)
 </details>

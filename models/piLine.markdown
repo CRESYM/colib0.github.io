@@ -1,11 +1,13 @@
 ---
 layout: page
 title: Pi Line Model
-permalink: /models/piline
+permalink: /models/piLine
 ---
 # Pi Line model 
 
 ## Model context and assumptions
+
+## Model schema
 
 ## Line parameters
   R : Resistance 
@@ -22,8 +24,8 @@ permalink: /models/piline
 
 
 ## Equations 
- $Z * (i2 - Y * V2) = V2  - V1 $
- $Z * (i1 - Y * V1) = V1 - V2 $
+ $$Z * (i2 - Y * V2) = V2  - V1 $$
+ $$Z * (i1 - Y * V1) = V1 - V2 $$
 
 
 ## Open source implementations

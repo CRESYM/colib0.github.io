@@ -1,8 +1,8 @@
 ---
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
+---
+layout: default
 ---
 ![Common library](/assets/images/max-langelott_image.jpg)
 # Why this library?
@@ -19,8 +19,8 @@ They both face the need for a collaborative shared dynamic simulation library th
 # What does this library contains?
 In this Colib0 workspace, we aim at addressing  power systems components, networks, and small and large test cases for steady-state and dynamic stability studies.
 For each of them, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
-[Models](models.md)
-[Test cases](testCase.md)
+[Models](models/models.md)
+[Test cases](testCases/testCase.md)
 
 # How to contribute? 
 
