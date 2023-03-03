@@ -1,5 +1,4 @@
-# colib0.github.io
-Collaborative Open-Source Dynamic Simulation Library
+# Collaborative Open-Source Dynamic Simulation Library
 
 The power system and energy systems at large experience a paradigm shift with many novel , active components connected. Appraising the behavior and reactions of such new items is critical for network operators to simulate and anticipate system operation, and for this, available, reliable up to date and possibly specifically targeted component models are required.
 
