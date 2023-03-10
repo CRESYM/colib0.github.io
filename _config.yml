@@ -27,7 +27,6 @@ description: >- # this means to ignore newlines until "baseurl:"
   Future connected ones (components at design stage, latest technology, and proprietary manufacturer models). On the other hand, research also suffers from the lack of all the necessary component models and is slowed down by the effort required to circumvent it.
   They both face the need for a collaborative shared dynamic simulation library that would benefit to all by its high quality, transparency of model equations, and concrete applications (real test cases).
   In this Colib0 workspace, we aim at addressing power systems components, networks, and small and large test cases for steady-state and dynamic stability studies. For each of them, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://colib0.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: colib0
 github_username:  colib0
