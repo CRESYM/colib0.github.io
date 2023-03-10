@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Models
-permalink: /models/
+permalink: /models/steadyState
 ---
 
 The steady state models are organised in a specific 

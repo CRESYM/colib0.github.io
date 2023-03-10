@@ -1,12 +1,16 @@
 ---
 layout: default
 title: About
-permalink: /about/
+permalink: /about/team
 ---
 
-# Team members
+## Team members
+The developing team is constituted of the following persons:
+- etienne cuisinier
+- mathilde bongrain
+- robert dimitrovski
+- adrien guironnet
+- leopold herman
 
-the teams is constituted by 
 
-
-# Community
+## Community

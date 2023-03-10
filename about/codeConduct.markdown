@@ -1,7 +1,7 @@
 ---
 layout: default
 title: About
-permalink: /about/
+permalink: /about/codeConduct
 ---
 
 # How to contribute?

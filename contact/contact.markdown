@@ -11,9 +11,7 @@ As user, don't hesitate to create a Github issue or to directly contact us at in
 
 As developper, you may want to consult the following pages:
 - How to contribute
-
 - Code of conduct
-
 - Maintainers and Governance
 
 For any further information, please contact info@cresym.eu

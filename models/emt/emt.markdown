@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Models
-permalink: /models/
+permalink: /models/emt
 ---
 
 The EMT models are organised in a specific 

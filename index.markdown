@@ -11,5 +11,5 @@ In this Colib workspace, we aim at addressing  **power systems components, netwo
 For each model and test case, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
 
 For further information about the models, please look at:
-- **[Models](models/models.md)**
-- **[Test cases](testCases/testCase.md)**
+- **[Models](models/models.markdown)**
+- **[Test cases](testCases/testCase.markdown)**

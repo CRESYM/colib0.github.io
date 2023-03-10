@@ -1,11 +1,11 @@
 ---
 layout: default
 title: About
-permalink: /about/
+permalink: /about
 ---
 
 
-# Why this library?
+## Why this library?
 
 The power system and energy systems at large experience a paradigm shift with many novel , active components connected. Appraising the behavior and reactions of such new items is critical for network operators to simulate and anticipate system operation, and for this, available, reliable up to date and possibly specifically targeted component models are required.
 
@@ -16,13 +16,13 @@ On the other hand, research also suffers from the lack of all the necessary comp
 
 They both face the need for a collaborative shared dynamic simulation library that would benefit to all by its high quality, transparency of model equations, and concrete applications (real test cases).
 
-# How does it work?
+## How does it work?
 
-# Who develops it ? Who uses it? 
+## Who develops it ? Who uses it? 
 
-# How to contribute ?
+## How to contribute ?
 
-# Code of conduct
+## Code of conduct
 
 
 

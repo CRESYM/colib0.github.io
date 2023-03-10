@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Models
-permalink: /models/
+permalink: /models/dp/
 ---
 
 The dynamic phasor models are organised in a specific 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Test cases
-permalink: /testCases/
+permalink: /testCases/codingRules
 ---
 
 The coding for test cases are:
