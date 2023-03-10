@@ -1,13 +1,14 @@
 ---
-layout: page
+layout: default
 title: Models
 permalink: /models/
 ---
 
-here is a first list of models:
+The dynamic models are organised in a specific 
 
-<details>
-<summary>Models</summary>
-<br>
-[Line](piLine.md)
-</details>
+|Model   |Steady state | Phasor | DP | EMT |
+|--------|-------------|--------|----|-----|
+|Load|{::nomarkdown}<ul><li>Composite load model</li></ul>{:/}| toto | | |
+|Line|{::nomarkdown}<ul><li>[Line](piLine.md)</li></ul>{:/}| toto | | |
+
+

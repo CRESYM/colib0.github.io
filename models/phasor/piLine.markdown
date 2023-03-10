@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Pi Line Model
 permalink: /models/piLine
 ---
