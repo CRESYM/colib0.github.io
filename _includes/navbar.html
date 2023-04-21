@@ -1,0 +1,48 @@
+<!--From https://gist.github.com/pdarragh/c7ca120604c1a1d8b8de -->
+<!-- This finds the current page so it can be highlighted. -->
+{% for entry in site.data.navigation %}
+{% capture fullurl %}{{ site.baseurl }}{{ entry.url }}{% endcapture %}
+  {% if fullurl == page.url %}
+    {% assign current_page = fullurl %}
+      {% break %}
+  {% elsif page.url contains fullurl %}
+    {% assign current_page = fullurl %}
+  {% endif %}
+{% endfor %}
+
+<nav class="navbar navbar-expand-sm justify-content-center">
+  <ul class="navbar-nav">
+    {% for entry in site.data.navigation %}
+      {% if entry.url == current_page %}
+        {% assign current = ' current' %}
+      {% else %}
+        {% assign current = null %}
+      {% endif %}
+      {% if entry.url != '/about' %}  
+        {% if entry.url != '/models' %}  
+          <li class="nav-item"><a class="nav-link{{ current }}" href="{{ entry.url }}">{{ entry.title }}</a></li>
+        {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
+            <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ '/models' }}">Models</a>
+            <a class="dropdown-item" href="{{ '/models/steadyState' }}">Steady State</a>
+            <a class="dropdown-item" href="{{ '/models/phasor' }}">Phasor</a>
+            <a class="dropdown-item" href="{{ '/models/dp' }}">Dynamic Phasor</a>
+            <a class="dropdown-item" href="{{ '/models/emt' }}">EMT</a>
+            </div>
+          </li>
+        {% endif%}
+      {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">About</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ '/about/team' }}">Teams and Community</a>
+            <a class="dropdown-item" href="{{ '/about/contribute' }}">How to contribute</a>
+            <a class="dropdown-item" href="{{ '/about/codeConduct' }}">Code of conduct</a>
+          </div>
+        </li>
+      {% endif%}
+    {% endfor %}
+  </ul>
+</nav>
