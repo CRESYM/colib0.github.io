@@ -2,6 +2,7 @@
 layout: default
 title: Flywheel Model
 permalink: /models/flywheel
+tags: ["flywheel", "FW", "Optimal Power Flow", "storage","optimal design", "DC OPF", "inertia"]
 ---
 
 
@@ -10,9 +11,15 @@ permalink: /models/flywheel
 ## Context and assumptions
 This model is used in the following publication: Rigo-Mariani R, Sareni B, Roboam X. Integrated Optimal Design of a Smart Microgrid With Storage. IEEE Trans Smart Grid 2017;8:1762–70. https://doi.org/10.1109/TSG.2015.2507131.
 
-It is used to model the operation of a flywheel as a part of a microgrid system where different components are connected through a common DC bus. The objective of the model is to size the flywheel (and the other components). Only active power flows are modelled. 
+It is used to model the operation of a flywheel as a part of a microgrid system where different components are connected through a common DC bus. The objective of the model is to size the flywheel (and the other components) by minimization of the operational cost of the microgrid system. 
+
+Only active power flows are modelled. 
 
 ## Model 
+
+### Description 
+
+### Schema
 
 ### Indexes
 $$ t $$: Time, defined in $$[1,..,T]$$, where $$T \in \Re^+$$ is the horizon<br>
@@ -42,8 +49,6 @@ $$\begin{array}{ccccc}
 \end{array}$$
 [^1]
 
-
-
 ### Equations
 True power of the flywheel:<br>
 $$
@@ -57,6 +62,7 @@ $$
 
 Discretization of the SOC differential equation:<br><br><br><br><br>
 
+## Open source implementations
 
 
 [^1]: For details on these functions, see: G. Celli et al., “Meshed vs. radial MV distribution network in presence of large amount of DG,” in Proc. IEEE PES Power Syst. Conf. Expo., New York, NY, USA, 2004, pp. 709–714.
