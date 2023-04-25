@@ -1,6 +1,11 @@
-_site
+# VScode
 .vscode
-.sass-cache
+
+# Jekyll geenerated directory
+_site
 .jekyll-cache
 .jekyll-metadata
+.sass-cache
+
+# Bundle
 vendor
