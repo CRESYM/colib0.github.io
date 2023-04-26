@@ -1,0 +1,214 @@
+---
+---
+
+// https://github.com/pages-themes/slate/blob/master/_sass/jekyll-theme-slate.scss
+@import "{{ site.theme }}";
+
+nav
+{
+	background-color: #0090FF;
+}
+
+#project_title
+{
+	text-align: center;
+}
+
+ .dropdown:hover .dropdown-menu
+ {
+   display:block;
+ }
+
+.nav-link
+{
+  color: #FFFFFF;
+}
+
+.current
+{
+  color: #0056b3;
+}
+
+div
+{
+  text-align: justify;
+}
+
+.inner
+{
+  max-width: 850px;
+}
+
+// Custom CSS
+.center-image
+{
+  margin: 0 auto;
+  display: block;
+}
+
+#footer_wrap.outer
+{
+  height: 100px;
+  margin-top: auto;
+  background: linear-gradient(to top, #212121, #373737);
+  border-top: none;
+}
+
+header.inner
+{
+  max-height: 100px;
+}
+
+#header_wrap .inner
+{
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+}
+
+#main_content_wrap
+{
+  border-bottom: none;
+}
+
+footer.inner
+{
+  padding-bottom: 10px;
+}
+
+body,html
+{
+  height:100%;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  background: #f2f2f2;
+}
+
+aside
+{
+  padding-top: 40px;
+  margin-left: 40px;
+  float: left;
+  max-width: 320px;
+}
+
+#forkme_banner
+{
+  display: block;
+  position: absolute;
+  top:0;
+  right: 10px;
+  z-index: 10;
+  padding: 10px 50px 10px 10px;
+  color: #fff;
+  background: url('../images/github.png') #0090ff no-repeat 95% 50%;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+#footer_par
+{
+  text-align: center;
+  margin: 0px;
+}
+
+@media screen and (max-width: 1580px) {
+  aside
+  {
+    float: none;
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-left: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  #main_content.inner
+  {
+    padding-top: 20px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #footer_wrap.outer
+  {
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  #header_wrap .inner
+  {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  }
+
+  .nav-link
+  {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #display_view_on_github
+  {
+    display: none;
+  }
+
+  #forkme_banner
+  {
+    display: block;
+    position: absolute;
+    top:0;
+    right: 10px;
+    z-index: 10;
+    width: 35px;
+    height: 35px;
+    padding: 0px;
+    color: #fff;
+    background: url('../images/github.png') #0090ff no-repeat;
+    background-position: 3px 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #footer_wrap.outer
+  {
+    height: 120px;
+  }
+
+  aside
+  {
+    padding-top: 10px;
+  }
+
+  #main_content.inner
+  {
+    padding-top: 10px;
+  }
+
+  p
+  {
+    margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #footer_wrap.outer
+  {
+    height: 120px;
+  }
+}
