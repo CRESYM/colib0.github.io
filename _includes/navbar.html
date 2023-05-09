@@ -18,30 +18,32 @@
       {% else %}
         {% assign current = null %}
       {% endif %}
-      {% if entry.url != '/about' %}  
-        {% if entry.url != '/models' %}  
-          <li class="nav-item"><a class="nav-link{{ current }}" href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% else %}
-          <li class="nav-item dropdown">
-            <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
-            <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ '/models' }}">Models</a>
-            <a class="dropdown-item" href="{{ '/models/steadyState' }}">Steady State</a>
-            <a class="dropdown-item" href="{{ '/models/phasor' }}">Phasor</a>
-            <a class="dropdown-item" href="{{ '/models/dp' }}">Dynamic Phasor</a>
-            <a class="dropdown-item" href="{{ '/models/emt' }}">EMT</a>
-            </div>
-          </li>
-        {% endif%}
-      {% else %}
+
+      {% if entry.url == '/models' %}  
+        <li class="nav-item dropdown">
+          <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item-rep">Lines</a>
+            <a class="dropdown-item" href="{{ '/models/line/piLine' }}">PiLine</a>
+            <a class="dropdown-item-rep">Loads</a>
+            <a class="dropdown-item" href="{{ '/models/load/load' }}">Load</a>
+            <a class="dropdown-item-rep">Storages</a>
+            <a class="dropdown-item" href="{{ '/models/storage/flywheel' }}">Flywheel</a>
+          </div>
+        </li>
+      {% elsif entry.url == '/about' %}  
         <li class="nav-item dropdown">
           <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">About</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ '/about/team' }}">Teams and Community</a>
+            <a class="dropdown-item" href="{{ '/about/team' }}">Teams and community</a>
             <a class="dropdown-item" href="{{ '/about/contribute' }}">How to contribute</a>
             <a class="dropdown-item" href="{{ '/about/codeConduct' }}">Code of conduct</a>
           </div>
         </li>
+
+      {% else %}  
+        <li class="nav-item"><a class="nav-link{{ current }}" href="{{ entry.url }}">{{ entry.title }}</a></li>
+
       {% endif%}
     {% endfor %}
   </ul>

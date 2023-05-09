@@ -9,3 +9,5 @@ _site
 
 # Bundle
 vendor
+Gemfile.lock
+notes.md
