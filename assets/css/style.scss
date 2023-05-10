@@ -14,10 +14,17 @@ nav
 	text-align: center;
 }
 
- .dropdown:hover .dropdown-menu
- {
-   display:block;
- }
+.dropdown:hover .dropdown-menu
+{
+  display:block;
+}
+
+.dropdown:hover .dropdown-item-rep 
+{
+  position: left;
+  font-weight: bolder;
+}
+
 
 .nav-link
 {
