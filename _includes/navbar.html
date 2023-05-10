@@ -1,6 +1,6 @@
 <!--From https://gist.github.com/pdarragh/c7ca120604c1a1d8b8de -->
 <!-- This finds the current page so it can be highlighted. -->
-{% for entry in site.data.navigation %}
+{% for entry in site.data.navbar %}
 {% capture fullurl %}{{ site.baseurl }}{{ entry.url }}{% endcapture %}
   {% if fullurl == page.url %}
     {% assign current_page = fullurl %}
@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-sm justify-content-center">
   <ul class="navbar-nav">
-    {% for entry in site.data.navigation %}
+    {% for entry in site.data.navbar %}
       {% if entry.url == current_page %}
         {% assign current = ' current' %}
       {% else %}
@@ -24,8 +24,8 @@
           <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="/models/line/lines">Lines</a>
-            <a class="dropdown-item" href="{{ '/models/load/loads' }}">Load</a>
-            <a class="dropdown-item" href="{{ '/models/storage/storages' }}">Flywheel</a>
+            <a class="dropdown-item" href="{{ '/models/load/loads' }}">Loads</a>
+            <a class="dropdown-item" href="{{ '/models/storage/storages' }}">Storages</a>
           </div>
         </li>
       {% elsif entry.url == '/about' %}  
