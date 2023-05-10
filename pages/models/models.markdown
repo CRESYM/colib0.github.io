@@ -4,21 +4,15 @@ title: Models
 permalink: /models
 ---
 
-The steady state and dynamic models are classified in the following table by category in line and modeling classes in column:
+# Models 
+
+Type the model you are looking for:
 
 
 
-
-|**Category**  |**Steady state**| **Phasor** | **DP** | **EMT** |
-|:--------|:-------------|:--------|:----|:-----|
-|Load|{::nomarkdown}<ul><li>Composite load model</li></ul>{:/}| toto | | |
-|:--------|:-------------|:--------|:----|:-----|
-|Line|{::nomarkdown}<ul><li>[Line](#phasor/piLine.markdown)</li></ul>{:/}| [X]  |  [X]  | |
-|=====================
-{: rules="groups"}
-
-
-
-
-
+<form action="/search" method="get">
+  <label for="search-box">Search</label>
+  <input type="text" id="search-box" name="query">
+  <input type="submit" value="search">
+</form>
 
