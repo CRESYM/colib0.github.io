@@ -1,0 +1,14 @@
+- title: PiLine
+  url: /models/line/piLine
+
+- title: Loads
+  url: /models/load
+
+- title: Load
+  url: /models/load/load
+
+- title: Storages
+  url: /models/storage
+
+- title: Flywheel
+  url: /models/storage/flywheel

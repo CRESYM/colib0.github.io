@@ -23,12 +23,9 @@
         <li class="nav-item dropdown">
           <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item-rep">Lines</a>
-            <a class="dropdown-item" href="{{ '/models/line/piLine' }}">PiLine</a>
-            <a class="dropdown-item-rep">Loads</a>
-            <a class="dropdown-item" href="{{ '/models/load/load' }}">Load</a>
-            <a class="dropdown-item-rep">Storages</a>
-            <a class="dropdown-item" href="{{ '/models/storage/flywheel' }}">Flywheel</a>
+            <a class="dropdown-item" href="/models/line/lines">Lines</a>
+            <a class="dropdown-item" href="{{ '/models/load/loads' }}">Load</a>
+            <a class="dropdown-item" href="{{ '/models/storage/storages' }}">Flywheel</a>
           </div>
         </li>
       {% elsif entry.url == '/about' %}  
