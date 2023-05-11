@@ -3,6 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 title: Collaborative Open-Source Dynamic Simulation Library
 layout: default
+permalink: /
 ---
 {:refdef: style="float: left; margin-right: 3em; margin-left: auto;"}
 ![Common library](/assets/images/max-langelott_image.jpg){: refdef}

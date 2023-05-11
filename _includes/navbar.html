@@ -1,47 +1,54 @@
 <!--From https://gist.github.com/pdarragh/c7ca120604c1a1d8b8de -->
-<!-- This finds the current page so it can be highlighted. -->
-{% for entry in site.data.navbar %}
-{% capture fullurl %}{{ site.baseurl }}{{ entry.url }}{% endcapture %}
-  {% if fullurl == page.url %}
-    {% assign current_page = fullurl %}
-      {% break %}
-  {% elsif page.url contains fullurl %}
-    {% assign current_page = fullurl %}
-  {% endif %}
-{% endfor %}
+
+
+<!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
+{% assign navItems = "/about/,/news,/models/,/testCases,/contact" %}
+{% assign navItems = navItems | split: "," | string %}
+
 
 <nav class="navbar navbar-expand-sm justify-content-center">
   <ul class="navbar-nav">
-    {% for entry in site.data.navbar %}
-      {% if entry.url == current_page %}
-        {% assign current = ' current' %}
-      {% else %}
-        {% assign current = null %}
-      {% endif %}
+    {% for page in site.pages %}
 
-      {% if entry.url == '/models' %}  
-        <li class="nav-item dropdown">
-          <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">Models</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/models/line/lines">Lines</a>
-            <a class="dropdown-item" href="{{ '/models/load/loads' }}">Loads</a>
-            <a class="dropdown-item" href="{{ '/models/storage/storages' }}">Storages</a>
-          </div>
-        </li>
-      {% elsif entry.url == '/about' %}  
-        <li class="nav-item dropdown">
-          <a class="nav-link{{ current }} dropdown-toggle" href="{{ entry.url}}" role="button" aria-haspopup="true" aria-expanded="true">About</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ '/about/team' }}">Teams and community</a>
-            <a class="dropdown-item" href="{{ '/about/contribute' }}">How to contribute</a>
-            <a class="dropdown-item" href="{{ '/about/codeConduct' }}">Code of conduct</a>
-          </div>
-        </li>
+      <!-- Check if the current page should be added in the navigation bar (2 cases: with or without dropdown menu) -->
+      {% assign url = page.url %}
+      {% assign urlDropdown = url | append: '/' %}
+      {% if navItems contains url or navItems contains urlDropdown %}
 
-      {% else %}  
-        <li class="nav-item"><a class="nav-link{{ current }}" href="{{ entry.url }}">{{ entry.title }}</a></li>
+        <!-- Highlight current page -->
+        {% if url == current_page %}
+          {% assign current = ' current' %}
+        {% else %}
+          {% assign current = null %}
+        {% endif %}
+        
+        <!-- Case of a dropdown menu: include all subfolders -->
+        {% if navItems contains urlDropdown %}
+          <li class="nav-item dropdown">
+            <a class="nav-link{{ current }} dropdown-toggle" href="{{url}}" role="button" aria-haspopup="true" aria-expanded="true">{{page.title}}</a>
+            <div class="dropdown-menu">
+              {% for pageBis in site.pages %}
+              
+              {% assign urlList = (pageBis.url | split: '/') %}
 
+              {% if pageBis.url contains urlDropdown and urlList.size == 3 %}
+                {% if pageBis.url contains 'template' %}
+                {% else %}
+                  <a class="dropdown-item" href="{{pageBis.url}}">{{pageBis.title}}</a>
+                {% endif%}
+              {% endif%}
+
+              {% endfor %}
+            </div>
+          </li>
+        
+         <!-- Case of no dropdown menu -->
+        {% else %}  
+          <li class="nav-item"><a class="nav-link{{current}}" href="{{page.url}}">{{page.title}}</a></li>
+            
+        {% endif%}
       {% endif%}
+
     {% endfor %}
   </ul>
 </nav>
