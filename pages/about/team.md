@@ -1,6 +1,6 @@
 ---
 layout: default
-title: About
+title: Teams and community
 permalink: /about/team
 ---
 

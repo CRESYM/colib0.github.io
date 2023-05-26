@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Pi Line Model
-permalink: /models/line/piLine
+permalink: /models/lines/piLine
 ---
 # Pi Line model 
 

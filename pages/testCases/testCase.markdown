@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Test cases
-permalink: /testCases/
+permalink: /testCases
 ---
 
 Here is a first list of test cases:

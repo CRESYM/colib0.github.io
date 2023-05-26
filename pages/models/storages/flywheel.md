@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Flywheel Model
-permalink: /models/storage/flywheel
+title: Flywheel model
+permalink: /models/storages/flywheel
 tags: ["flywheel", "FW", "Optimal Power Flow", "storage","optimal design", "DC OPF", "inertia"]
 ---
 

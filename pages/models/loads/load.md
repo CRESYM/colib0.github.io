@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Load Model
-permalink: /models/load/load
+permalink: /models/loads/load
 ---
 # Load model 
 
