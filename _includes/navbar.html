@@ -2,11 +2,18 @@
 
 
 <!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
-{% assign navItems = "/about/,/news,/models/,/testCases,/contact" %}
+{% assign navItems = "/home,/about/,/news,/models/,/testCases,/contact" %}
 {% assign navItems = navItems | split: "," | string %}
 
 
 <nav class="navbar navbar-expand-sm justify-content-center">
+  <div class="logo mr-auto">
+    <a href="/https://cresym.eu/"><img src="/assets/images/Cresym_logo.png" height="50" alt="Cresym"></a>
+  </div>
+  <div class="logo mr-auto">
+    <a href="/home"><img src="/assets/images/colib_logo2.png" height="70" alt="Colib"></a>
+  </div>
+
   <ul class="navbar-nav">
     {% for page in site.pages %}
 
