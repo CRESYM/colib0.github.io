@@ -6,7 +6,7 @@
 
 nav
 {
-	background-color: #0090FF;
+	background-color: #fff;
 }
 
 #project_title
@@ -28,12 +28,12 @@ nav
 
 .nav-link
 {
-  color: #FFFFFF;
+  color: #898b8d;
 }
 
 .current
 {
-  color: #0056b3;
+  color: #0057b353;
 }
 
 div
@@ -44,12 +44,15 @@ div
 .inner
 {
   max-width: 850px;
+  text-align: justify;
+  text-align: left;
+  margin-left: 40px;
 }
 
 // Custom CSS
 .center-image
 {
-  margin: 0 auto;
+  margin-left: 40px;
   display: block;
 }
 
@@ -110,7 +113,7 @@ aside
   z-index: 10;
   padding: 10px 50px 10px 10px;
   color: #fff;
-  background: url('../images/github.png') #0090ff no-repeat 95% 50%;
+  background: url('../images/github.png') #4986c3 no-repeat 95% 50%;
   font-weight: 700;
   box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
@@ -182,8 +185,8 @@ aside
     width: 35px;
     height: 35px;
     padding: 0px;
-    color: #fff;
-    background: url('../images/github.png') #0090ff no-repeat;
+    color: #4986c3;
+    background: url('../images/github.png') #fff no-repeat;
     background-position: 3px 2px;
     box-shadow: 0 0 10px rgba(0,0,0,.5);
     border-bottom-left-radius: 5px;
