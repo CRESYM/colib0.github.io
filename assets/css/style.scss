@@ -6,12 +6,9 @@
 
 nav
 {
-	background-color: #fff;
-}
-
-#project_title
-{
-	text-align: center;
+  //background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%);
+  background: #fff;
+  box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
 }
 
 .dropdown:hover .dropdown-menu
@@ -24,7 +21,6 @@ nav
   position: left;
   font-weight: bolder;
 }
-
 
 .nav-link
 {
@@ -49,26 +45,6 @@ div
   margin-left: 40px;
 }
 
-// Custom CSS
-.center-image
-{
-  margin-left: 40px;
-  display: block;
-}
-
-#footer_wrap.outer
-{
-  height: 100px;
-  margin-top: auto;
-  background: linear-gradient(to top, #212121, #373737);
-  border-top: none;
-}
-
-header.inner
-{
-  max-height: 100px;
-}
-
 #header_wrap .inner
 {
   padding-top: 20px;
@@ -79,29 +55,15 @@ header.inner
 
 #main_content_wrap
 {
-  border-bottom: none;
-}
-
-footer.inner
-{
-  padding-bottom: 10px;
+  position: relative;
 }
 
 body,html
 {
-  height:100%;
-  margin:0;
-  display:flex;
-  flex-direction:column;
-  background: #f2f2f2;
-}
-
-aside
-{
-  padding-top: 40px;
-  margin-left: 40px;
-  float: left;
-  max-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
 }
 
 #forkme_banner
@@ -120,12 +82,17 @@ aside
   border-bottom-right-radius: 2px;
 }
 
-#footer_par
-{
-  text-align: center;
-  margin: 0px;
+#footer {
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%; 
+  background: #fff;
+  padding-top: 10px;
+  box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
 }
 
+// Screen adaptation
 @media screen and (max-width: 1580px) {
   aside
   {
