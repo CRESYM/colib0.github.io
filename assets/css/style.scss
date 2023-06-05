@@ -11,6 +11,12 @@ nav
   box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .dropdown:hover .dropdown-menu
 {
   display:block;
