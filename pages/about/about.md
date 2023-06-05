@@ -17,6 +17,9 @@ On the other hand, research also suffers from the lack of all the necessary comp
 They both face the need for a collaborative shared dynamic simulation library that would benefit to all by its high quality, transparency of model equations, and concrete applications (real test cases).
 
 ## How does it work?
+We aim at building a library that contains detailed dynamic models of electrical components and power systems test cases. 
+Each model or test case is described in a dedicated post, with links to known existing implementations.
+Some of the models and test cases directly comes from CRESYM projects, other are 
 
 ## Who develops it ? Who uses it? 
 
