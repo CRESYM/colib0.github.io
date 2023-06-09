@@ -5,12 +5,17 @@ title: Home
 layout: default
 permalink: /home
 ---
+
+
+The power system and energy systems at large experience a **paradigm shift with many novel, various active components connected**. Appraising the behaviour and reactions of such new items is critical for network operators to simulate and anticipate system operation. 
+
 {:refdef: style="float:left; margin-right: 3em; margin-left: auto;"}
 ![Common library ><](/assets/images/max-langelott_image.jpg){: refdef}
 
-In this Colib workspace, we aim at addressing  **power systems components, networks, and small and large test cases for steady-state and dynamic stability studies**.
-For each model and test case, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
+Power industries and academic institutions constantly develop their own models, cases and tools, but they **lack of resources to cover the full scope of components, interesting test cases and maintain those over time.**
+Both face the need for a **collaborative shared dynamic simulation library that would benefit to all** by its high quality, its up-to-dateness, transparency of model equations, and concrete applications (real test cases).
 
-For further information about the models, please look at:
-- **[Models](models/)**
-- **[Test cases](testCases/)**
+Hence this Colib workspace contains  **power systems components, networks, and small and large test cases for steady-state and dynamic stability studies**.
+For each component model and test case, a pure text description is given on one side (following a generic common template), and links to open source implementations with indicators on the quality on the other side. 
+
+Specific tags are associated with each article to ease the search. 

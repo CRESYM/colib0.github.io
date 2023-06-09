@@ -42,7 +42,9 @@ div
   max-width: 850px;
   text-align: justify;
   text-align: left;
-  margin-left: 40px;
+  margin-left: 200px;
+  max-width:700px;
+  background:#fff;
 }
 
 #header_wrap .inner
@@ -55,7 +57,7 @@ div
 
 #main_content_wrap
 {
-  position: relative;
+  border-spacing:10px;
 }
 
 body,html
