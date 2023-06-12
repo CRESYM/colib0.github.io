@@ -4,16 +4,12 @@ title: Code of conduct
 permalink: /about/codeConduct
 ---
 
-# How to contribute?
+# Code of conduct 
+
+This project applies the [Mozilla Community Participation Guidelines.](https://www.mozilla.org/en-US/about/governance/policies/participation/) 
+
+As a user or developer of this code, you are expected to follow those guidelines. 
+
+Please report unacceptable behavior to the project's teams at info@cresym.eu.
  
-# Tutorial 
-
-# Validation process and rules 
-
-For all contribution, we apply a general set of coding rules: 
-For developing a model (component, aggregation, ), we apply a specific: 
-For developing a test case (), 
-for sharing an implementation, 
-
-
 
