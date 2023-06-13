@@ -13,7 +13,6 @@
   <ul class="navbar-nav mr-auto">
     {% for item in navItems %}
       {% for page in site.pages %}
-
         <!-- Find the current page that corresponds to the item (2 cases: with or without dropdown menu), this way, the navItem order is respected. -->
         {% assign urlCurrent= page.url %}
         {% assign urlDropdownCurrent = urlCurrent | append: '/' %}
@@ -21,10 +20,6 @@
           {% assign pageNo = forloop.index0 %}
           {% assign url = urlCurrent %}
           {% assign urlDropdown = urlDropdownCurrent %}
-          <!-- <p> item: {{ item }}  </p> 
-          <p> urlCurrent: {{ urlCurrent }}  </p> 
-          <p> urlDropdown: {{ urlDropdown }}  </p>  -->
-
         {% endif%}
       {% endfor %}
 

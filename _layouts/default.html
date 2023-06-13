@@ -14,17 +14,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
   </head>
 
   <body>
     {% include navbar.html %}
-    <div id="main_content_wrap" class="outer">
+    <div id="main_content_wrap">
       <section id="main_content" class="inner">
-        <p style="text-align:center;text-align:justify;">
-          {{ content }}
-        </p>
+          <article class="markdown-body">
+            {{ content }}
+          </article>
       </section>
   </div>
+  {% include tableOfContents.html %}
   {% include footer.html %}
   </body>
 </html>

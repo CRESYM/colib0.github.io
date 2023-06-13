@@ -1,0 +1,32 @@
+<div class="side_right" id="tableOfContents">
+    <ul>
+    </ul>  
+</div>
+
+<!-- <script src="{{ '/assets/js/tableOfContents.js' | relative_url }}"></script> -->
+
+<script>
+
+(function($) {
+
+    for (let step=1; step <4; step++) {
+        var collectHeaders = function(){
+        headings.push({"id":$(this).attr('id'),"text":$(this).text()});
+        }
+        let headings = [];
+        $(".markdown-body h"+step).each(collectHeaders)
+
+        // $(".test .name").text(headings[0].id);
+        // $(".test .name").attr('href',"#"+String(headings[0].id));
+        for (heading of headings) {
+            var href = "#"+String(heading.id);
+            var title = heading.text;
+            $("#tableOfContents ul").append('<li><a href='+href+'>'+title+'</a></li>');
+        }
+    }
+    })(jQuery)
+
+</script>
+  
+
+  

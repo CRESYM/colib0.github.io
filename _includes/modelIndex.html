@@ -2,16 +2,6 @@
 {% assign dir = page.url | split:"/" %} 
 {% assign type = dir[-1] %}
 
-
-
-<!-- {% assign last = types | slice: -1 %}
-<p>last {{last}}</p>
-
-{% if last == 's' %}
-    {% assign type = types | remove_last:'s' %}
-{% endif%} -->
-
-
 <!-- Index content -->
 <h1>{{type | capitalize}} models</h1>
 <p>List of available {{type}} models:</p>
