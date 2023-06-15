@@ -18,7 +18,7 @@ Reactive current injection during fault and current blocking protection is also 
 ## Model description
 
 The general structure of the HVDC VSC standard model is this one:
-<img src="/pages/models/HVDC/VSC/standardVSCmodelGeneralView.png"
+<img src="/pages/models/HVDC/VSC/HvdcVSC.svg"
      alt="General view of the HVDC VSC standard model: physical and control connections"
      style="float: left; margin-right: 10px;" />
 
@@ -31,6 +31,7 @@ In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVD
 ### AC side of the converter 
 The VSC converter is modelled on the AC side by a current injector with a parallel admittance. 
 It transforms the references of active and reactive currents IqRef and IpRef and the internal angle into a couple of to be injected in the network currents, which are the real Ir and imaginary Ii values.
+
 <img src="/pages/models/HVDC/VSC/standardVSCmodelCurrentInjector.png"
      alt="Current injector"
      style="float: left; margin-right: 10px;" />
