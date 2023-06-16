@@ -54,19 +54,57 @@ RDC12  represents the resistance of the DC cable
      alt="P control of the VSC"
      style="float: left; margin-right: 10px;" />
 
-The rpfault signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
+The $$r_{p_{fault}}$$ signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
 
-The block signal indicates if the converter is blocked (=1) or not.
-Pmax and Pmin are operating limits, Ipmax and Ipmin are active power limits of the converter.
-DeltaP is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage.
+The $$block$$ signal indicates if the converter is blocked (=1) or not.
+$$P_{max}$$ and $$P_{min}$$ are operating limits, $$I_{p_{max}}$$ and $$I_{p_{min}}$$ are active power limits of the converter.
+
+$$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. it is calculated as follows:
+<img src="/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg"
+     alt="Delta P calculation"
+     style="float: left; margin-right: 10px;" />
+The threshold goes to 1 if the active current $$I_p^*$$ reaches its caps (by a matter of DUDC)
+
+### DC Voltage Control 
+<img src="/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg"
+     alt="VDC control of the VSC"
+     style="float: left; margin-right: 10px;" />
+
+$$I_{p_{max}}$$ is the maximum active nominal current of the DC line.
+
+NB: if the nominal power $$S_n$$ is assumed equal to nominal active power $$P_n$$, there is a correspondance between pu and SI units, $$I_{p_{max}}$$ will be equal to 1, and InPu will be equal to $$I_n^{Pu} = \frac{\sqrt{P_{max}^2 + Q_{max}^2}}{S_n}$$
+
+### AC Voltage control 
+it the the reactive control loop and can be operated with two modes U-mode or Q-mode. In both moes, a reference of the reactive power to be injected to the grid is assessed.
+
+**Q-mode:**
+<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg"
+     alt="Q mode of the U AC control of the VSC"
+     style="float: left; margin-right: 10px;" />
+
+**U-mode:**
+<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg"
+     alt="U mode of the U AC control of the VSC"
+     style="float: left; margin-right: 10px;" />
+
+$$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits. 
 
 
+Once the reference $$Q^*$$ is calculated, we apply to this reference the different limits 
 
-### Voltage Control
-
-### Reactive power control
+Finally, the reactive power is converted into a reactive reference current $$I_q^*$$ by the following control:
+<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg"
+     alt="calculation of the reference reactive current by the U AC control of the VSC"
+     style="float: left; margin-right: 10px;" />
+$$U$$ represents the voltage value at the PCC.
+The $$T_Q$$ time constant represents tha dynamique of the voltage/reactive power control.
+The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It depends on the voltage level, and follows the ENTSOE requirements during a fault ride through.
+TO BE FURTHER DEVELOPED
 
 ### Secondary voltage control 
+
+### Blocking function
+When the voltage goes below at certain trheshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
 
 ## Initial equations / boundary conditions (optional)
 Give the set of equations satisfied by the model at the initialization if different from the dynamic equations.  
@@ -78,3 +116,5 @@ Table of the different open source implementations of this model. It gives links
 A fundamental study on the impact of HVDC lines on transient stability of power systems, Lukas Sigrist; Francisco Echavarren; Luis Rouco; Patrick Panciatici
 
 Modeling and control of HVDC grids: A key challenge for the future power system, Jef Beerten; Oriol Gomis-Bellmunt; Xavier Guillaud; Johan Rimez; Arjen van der Meer
+
+The Comparison of Polish Grid Codes to Certain European Standards and resultant Differences for WPP Requirements
