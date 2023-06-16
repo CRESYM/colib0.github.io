@@ -50,6 +50,18 @@ RDC12  represents the resistance of the DC cable
 
 ### Active power control
 
+<img src="/pages/models/HVDC/VSC/HVDCVSCPControl.svg"
+     alt="P control of the VSC"
+     style="float: left; margin-right: 10px;" />
+
+The rpfault signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
+
+The block signal indicates if the converter is blocked (=1) or not.
+Pmax and Pmin are operating limits, Ipmax and Ipmin are active power limits of the converter.
+DeltaP is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage.
+
+
+
 ### Voltage Control
 
 ### Reactive power control
