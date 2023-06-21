@@ -1,7 +1,7 @@
 ---
 layout: default
 title: HVDC
-permalink: /models/hvdc
+permalink: /models/HVDC
 tags: [HVDC]
 ---
 

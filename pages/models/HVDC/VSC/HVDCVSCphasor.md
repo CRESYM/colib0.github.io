@@ -6,14 +6,18 @@ permalink: /models/HVDC/VSC/HVDCVSCPhasor
 # Phasor VSC HVDC model  
 
 ## Context 
-This standard voltage source converter based high voltage DC transmission line (VSC-HVDC) model has been developped in ENTSOE G-HVDC working group. It gathers most of the features of specific detailed models, while being kept as simple and generic as possible.
+This standard voltage source converter based high voltage DC transmission line (VSC-HVDC) model has been developed by RTE [@cossart2021]  based on some outputs of ENTSOE G-HVDC working group. It gathers most of the features of specific detailed models, while being kept as simple and generic as possible.
  
 
 ## Model use, assumptions, validity domain and limitations
-It can be used for voltage and transient stability studies, when a detailed specific model can't be used. It can't be used for studies that look at the DC side behaviour nor the frequency behaviour (the secondary voltage control isn't implemented in this model) as the DC link and its interaction with the converter isn't properly modelled.
 
-Details on the voltage control, reactive power control, active/reactive limits are represented and key for the voltage studies.
-Reactive current injection during fault and current blocking protection is also represented in this model for an acurate beahviour during a fault.
+It can be used for voltage and transient stability studies by using the link specifications or customer data, when a detailed specific model can't be used (data isn't available or can't be shared). 
+
+It can't be used for studies that look at the DC side behaviour (a simplified DC bus is considered in the model) nor the frequency behaviour (the secondary voltage control isn't implemented in this model) as the DC link and its interaction with the converter isn't properly modelled.
+
+Details on the voltage control, reactive power control, active/reactive limits are represented and key for the voltage studies.  This model contains UQ and PQ diagrams limitations, current limitations to respect the apparent power constraints and operator-defined PQ limitations.
+
+Additional reactive current injection ($$I_{q}^{FRT}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies. 
 
 ## Model description
 
@@ -24,95 +28,148 @@ The general structure of the HVDC VSC standard model is this one:
 
 ### DC transmission line and converters model
 In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVDC system are represented by controlled Thévenin sources. The controllers act on the two voltage sources to provide the prescribed terminal conditions by adjusting the magnitude and frequency of the source voltage. 
-<img src="/pages/models/HVDC/VSC/standardVSCmodelACDCConverterConnections.png"
+<img src="/pages/models/HVDC/VSC/HVDCVSCACDCConverterView.svg"
      alt="DC and AC sides of the converter"
      style="float: left; margin-right: 10px;" />
 
-### AC side of the converter 
+There is no transformer between the converter and the PCC. The modeling choice is deliberated and is motivated by several reasons:
+- Most of the data (nominal power, nominal voltage ranges, PQ and UQ diagrams) are provided at the PCC. The addition of a transformer makes the limits implementation more complex.
+- There is no standardized behavior for the tap changer of the transformer.
+- Reactive power or AC voltage control is done at the PCC. Introducing a transformer demands to compensate for the reactive losses in the control scheme, leading to a more complex and less readable model, without adding a real added value.
+
+
+### HVDC physical parts
+
+The physical parts of the HVDC line consist in two AC/DC converters and a DC line connecting them.
+
+#### Converters 
 The VSC converter is modelled on the AC side by a current injector with a parallel admittance. 
-It transforms the references of active and reactive currents IqRef and IpRef and the internal angle into a couple of to be injected in the network currents, which are the real Ir and imaginary Ii values.
+It transforms the set points of active and reactive currents $$I_q^*$$ and $$I_p^*$$ and the internal angle given by the HVDC control into a couple of to be injected in the network currents, which are the real $$I_r$$ and imaginary $$I_i$$ values.
 
-<img src="/pages/models/HVDC/VSC/standardVSCmodelCurrentInjector.png"
+<img src="/pages/models/HVDC/VSC/HVDCVSCConverterCurrentSourceAdmittance.svg"
      alt="Current injector"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
-### DC link model
+#### DC link model
 The DC link model is incorporated into the controller description and not explicitly physically represented.
 However, the relationships between DC currents and voltages of the receiving-end and sending-end sides are represented by the following figure:
 
-<img src="/pages/models/HVDC/VSC/standardVSCmodelDCSide.png"
+<img src="/pages/models/HVDC/VSC/HVDCVSCDCLinkPhysicalModel.svg"
      alt="Electrotechnical components representing the DC side"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
-CDC represents the equivalent capacity of the converter
-RDC12  represents the resistance of the DC cable 
+Where :
+- $$C_{DC}$$ represents the equivalent capacity of the converter ( in $$F$$)
+- $$R_{DC}$$ represents the resistance of the DC cable (in $$\Omega$$)
 
 
-### Active power control
+### Control parts
+The control is divided into two main functions, each one of them associated to one converter: 
+- the part in charge of the DC voltage control (also called Udc Control) and 
+- the part in charge of the active power control (also called P Control).
+
+Both parts control the reactive power or the voltage at each converter’s terminal (named U/Q Control).
+
+#### Active power control
+ It deduces the active current reference $$I_p^*$$ to give to the converter from an active
+power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
 
 <img src="/pages/models/HVDC/VSC/HVDCVSCPControl.svg"
      alt="P control of the VSC"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
+
 
 The $$r_{p_{fault}}$$ signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
 
 The $$block$$ signal indicates if the converter is blocked (=1) or not.
-$$P_{max}$$ and $$P_{min}$$ are operating limits, $$I_{p_{max}}$$ and $$I_{p_{min}}$$ are active power limits of the converter.
+$$P_{max}$$ and $$P_{min}$$ are operating limits (user defined), $$I_{p_{max}}$$ and $$I_{p_{min}}$$ are active power limits of the converter.
 
-$$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. it is calculated as follows:
+$$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. It is calculated as follows:
+
 <img src="/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg"
      alt="Delta P calculation"
-     style="float: left; margin-right: 10px;" />
-The threshold goes to 1 if the active current $$I_p^*$$ reaches its caps (by a matter of DUDC)
+     style="float: center; margin-right: 10px;" />
 
-### DC Voltage Control 
+The Switch signal goes to 1 if the active current $$I_p^*$$ reaches its caps (by a matter of DUDC, margin added to increase model stability).
+<!-- two spaces -->
+
+#### DC Voltage Control 
+The DC voltage control deduces the active current reference $$I_p^*$$ to give to the converter from a DC voltage reference $$V_{DC}^*$$ and a measure of the DC voltage $$V_{DC}$$, thanks to an anti-wind-up proportional integral block.
+
 <img src="/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg"
      alt="VDC control of the VSC"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
-$$I_{p_{max}}$$ is the maximum active nominal current of the DC line.
+$$I_{P_{MAX}}$$ is the nominal active current of the DC line (in pu).
 
 NB: if the nominal power $$S_n$$ is assumed equal to nominal active power $$P_n$$, there is a correspondance between pu and SI units, $$I_{p_{max}}$$ will be equal to 1, and InPu will be equal to $$I_n^{Pu} = \frac{\sqrt{P_{max}^2 + Q_{max}^2}}{S_n}$$
+<!-- two spaces -->
 
-### AC Voltage control 
-it the the reactive control loop and can be operated with two modes U-mode or Q-mode. In both moes, a reference of the reactive power to be injected to the grid is assessed.
+#### AC Voltage control 
+This part of the control contains the reactive power/AC voltage control loop (Q-Mode or U-Mode).
+There is one AC voltage control/reactive power control for each converter, as the AC voltage/reactive power is controlled at each terminal of the HVDC line. 
+
+In both modes, a reference of the reactive power to be injected to the grid is assessed.
 
 **Q-mode:**
 <img src="/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg"
      alt="Q mode of the U AC control of the VSC"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
 **U-mode:**
+In the AC voltage control the control is ensured by the anti-windup proportional integral block, and contains a deadband and a reactive power droop.
 <img src="/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg"
      alt="U mode of the U AC control of the VSC"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
-$$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits. 
+$$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits as follows:
 
+<img src="/pages/models/HVDC/VSC/HVDCVSCQMaxMinComb.svg"
+     alt="Combinaison of the operational, PQ and UQ limits"
+     style="float: center; margin-right: 10px;" />
 
-Once the reference $$Q^*$$ is calculated, we apply to this reference the different limits 
+The limits $$Q_{max}^P$$/$$Q_{min}^P$$ and $$Q_{max}^U$$/$$Q_{min}^U$$ respectively represent the PQ and UQ diagrams of the link.
 
 Finally, the reactive power is converted into a reactive reference current $$I_q^*$$ by the following control:
+
 <img src="/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg"
      alt="calculation of the reference reactive current by the U AC control of the VSC"
-     style="float: left; margin-right: 10px;" />
-$$U$$ represents the voltage value at the PCC.
-The $$T_Q$$ time constant represents tha dynamique of the voltage/reactive power control.
-The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It depends on the voltage level, and follows the ENTSOE requirements during a fault ride through.
-TO BE FURTHER DEVELOPED
+     style="float: center; margin-right: 10px;" />
 
-### Secondary voltage control 
+Where:
+- $$U$$ represents the voltage value at the PCC.it is limited to a minimum value to avoid divsion by zero.
+- The $$T_Q$$ time constant represents the dynamics of the voltage/reactive power control.
+- The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It very much depends on the AC voltage value and gives a fast response to a large disturbance, giving then priority to the reactive current. It is representative of the grid reactive voltage support during a fault ride through as defined by the ENTSOE requirements in HVDC network code.
+
+### Current limits:
+Active and reactive current limits are calculated in the model depending on the value of $$I_q^{FRT}$$. By default, the priority is given to the active power control side - i.e no fast reactive current injection ($$I_q^{FRT}=0$$) -, and the limits are given by the following equations:
+
+$$I_{p_{max}} = I_{P_{MAX}}$$
+
+$$I_{p_{min}} = -I_{P_{MAX}}$$
+
+$$I_{q_{max}} = \sqrt{I_n - I_p^*}$$
+
+$$I_{q_{min}} = -I_{q_{max}}$$
+
+where $$I_n (pu)$$ is to total link nominal current.
 
 ### Blocking function
 When the voltage goes below at certain trheshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
 
 ## Initial equations / boundary conditions (optional)
-Give the set of equations satisfied by the model at the initialization if different from the dynamic equations.  
+TO BE COMPLETED 
 
 ## Open source implementations (if any)
-Table of the different open source implementations of this model. It gives links and languages used for each implementations.
+This model has been successfully implemented in :
+
+| Software      | URL |  
+| -----------------  | --- | 
+| Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVSC) |  
 
 ## Table of references & license
+[@cossart2021] Q. Cossart, M. Saugier and A. Guironnet, "An Open-Source Average HVDC Model for Stability Studies," 2021 IEEE Madrid PowerTech, Madrid, Spain, 2021, pp. 1-6, doi: 10.1109/PowerTech46648.2021.9495096.
+
 A fundamental study on the impact of HVDC lines on transient stability of power systems, Lukas Sigrist; Francisco Echavarren; Luis Rouco; Patrick Panciatici
 
 Modeling and control of HVDC grids: A key challenge for the future power system, Jef Beerten; Oriol Gomis-Bellmunt; Xavier Guillaud; Johan Rimez; Arjen van der Meer
