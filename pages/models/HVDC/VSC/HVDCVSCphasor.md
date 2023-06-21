@@ -1,12 +1,14 @@
 ---
 layout: default
-title: Phasor VSC HVDC Model
+title: VSC HVDC Model
 permalink: /models/HVDC/VSC/HVDCVSCPhasor
+tags: ["phasor", "HVDC", "VSC", "generic"]
 ---
-# Phasor VSC HVDC model  
+# VSC HVDC model  
 
 ## Context 
-This standard voltage source converter based high voltage DC transmission line (VSC-HVDC) model has been developed by RTE [@cossart2021]  based on some outputs of ENTSOE G-HVDC working group. It gathers most of the features of specific detailed models, while being kept as simple and generic as possible.
+This average phasor voltage source converter based high voltage DC transmission line (VSC-HVDC) model has been developed by RTE [[1]](#1)  based on some work done by ENTSOE G-HVDC WP.
+ It gathers most of the features of specific detailed models, while being kept as simple and generic as possible.
  
 
 ## Model use, assumptions, validity domain and limitations
@@ -17,7 +19,9 @@ It can't be used for studies that look at the DC side behaviour (a simplified DC
 
 Details on the voltage control, reactive power control, active/reactive limits are represented and key for the voltage studies.  This model contains UQ and PQ diagrams limitations, current limitations to respect the apparent power constraints and operator-defined PQ limitations.
 
-Additional reactive current injection ($$I_{q}^{FRT}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies. 
+Additional reactive current injection ($$I_{q}^{FFC}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies [[2]](#2). 
+
+The modeling choice for HVDC VSC for stability studies is an ongoing active research topic. The fast interaction between AC and DC systems requires changes in the manner in which the modeling and computation of the system is done, both at the DC and the AC side [[3]](#3).
 
 ## Model description
 
@@ -139,7 +143,7 @@ Finally, the reactive power is converted into a reactive reference current $$I_q
 Where:
 - $$U$$ represents the voltage value at the PCC.it is limited to a minimum value to avoid divsion by zero.
 - The $$T_Q$$ time constant represents the dynamics of the voltage/reactive power control.
-- The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It very much depends on the AC voltage value and gives a fast response to a large disturbance, giving then priority to the reactive current. It is representative of the grid reactive voltage support during a fault ride through as defined by the ENTSOE requirements in HVDC network code.
+- The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It very much depends on the AC voltage value and gives a fast response to a large disturbance, giving then priority to the reactive current. It is compliant with the HVDC network code [[4]](#4)  and RfG [[5]](#5)  describing the HVDC VSC capability to provide fast fault current (FFC) at a connection point the grid.  Reactive current injection during faults helps to both recovering the voltage during faults and to injecting enough current quickly enough for system protections to function reliably.
 
 ### Current limits:
 Active and reactive current limits are calculated in the model depending on the value of $$I_q^{FRT}$$. By default, the priority is given to the active power control side - i.e no fast reactive current injection ($$I_q^{FRT}=0$$) -, and the limits are given by the following equations:
@@ -148,30 +152,69 @@ $$I_{p_{max}} = I_{P_{MAX}}$$
 
 $$I_{p_{min}} = -I_{P_{MAX}}$$
 
-$$I_{q_{max}} = \sqrt{I_n - I_p^*}$$
+$$I_{q_{max}} = \sqrt{I_n^2 - I_p^{*2}}$$
 
 $$I_{q_{min}} = -I_{q_{max}}$$
 
 where $$I_n (pu)$$ is to total link nominal current.
 
+if the priority is given to the reactive power control side, then the equations are:
+
+$$I_{q_{max}} = I_n$$
+
+$$I_{q_{min}} = -I_{q_{max}}$$
+
+$$I_{p_{max}} = \sqrt{I_n^2 - I_q^{*2}}$$
+
+$$I_{p_{min}} = -I_{p_{max}}$$
+
 ### Blocking function
-When the voltage goes below at certain trheshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
+When the voltage goes below at certain threshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
 
-## Initial equations / boundary conditions (optional)
-TO BE COMPLETED 
+## Initial equations 
+The initial values of the active and reactive powers $$P_{SEC}(t=0)$$, $$Q_{SEC}(t=0)$$, $$P_{REC}(t=0)$$ and $$Q_{SEC}(t=0)$$ at both converters PCC are determined by the power flow calculation, assuming a steady state is achieved.
+The rest of the initial values of the internal variables can be determined by the following equations: 
 
-## Open source implementations (if any)
+$$U_{DC}^*(t=0) = 1$$
+
+$$P_{SEC}(t=0) = - U_{SEC}(t=0) * I_{p,SEC}(t=0) * \frac{S_n}{Sn^*} $$
+
+$$Q_{SEC}(t=0) = U_{SEC}(t=0) * I_{q,SEC}(t=0) * \frac{S_n}{S_n^*} $$
+
+Same equations apply on the REC converter side.
+
+if $$ P_{SEC}^*(t=0) > 0$$ then:
+
+ $$U_{DC, SEC}(t=0) = 1$$ 
+ $$U_{DC, REC}(t=0) = 1 - R_{DC} * P_{SEC}(t=0)$$
+
+ else 
+ $$U_{DC, SEC}(t=0) = 1 + R_{DC} * P_{SEC}(t=0)$$ 
+ $$U_{DC, REC}(t=0) = 1 $$
+
+$$Q_{SEC}^*(t=0) = - Q_{SEC}(t=0) * \frac{S_n^*}{S_n}$$
+
+$$P_{SEC}^*(t=0) = - P_{SEC}(t=0) * \frac{S_n^*}{S_n} $$
+
+$$U_{SEC}^*(t=0) = $$U_{SEC}(t=0) - \lambda * Q_{SEC}(t=0) * \frac{S_n^*}{S_n}$$
+
+The mode of the AC voltage control can be either set to 1 or 0.
+
+## Open source implementations
 This model has been successfully implemented in :
 
 | Software      | URL |  
 | -----------------  | --- | 
 | Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVSC) |  
 
-## Table of references & license
-[@cossart2021] Q. Cossart, M. Saugier and A. Guironnet, "An Open-Source Average HVDC Model for Stability Studies," 2021 IEEE Madrid PowerTech, Madrid, Spain, 2021, pp. 1-6, doi: 10.1109/PowerTech46648.2021.9495096.
+## Table of references
 
-A fundamental study on the impact of HVDC lines on transient stability of power systems, Lukas Sigrist; Francisco Echavarren; Luis Rouco; Patrick Panciatici
+<a id="1">[1]</a>  Q. Cossart, M. Saugier and A. Guironnet, "An Open-Source Average HVDC Model for Stability Studies," 2021 IEEE Madrid PowerTech, Madrid, Spain, 2021, pp. 1-6, doi: 10.1109/PowerTech46648.2021.9495096.
 
-Modeling and control of HVDC grids: A key challenge for the future power system, Jef Beerten; Oriol Gomis-Bellmunt; Xavier Guillaud; Johan Rimez; Arjen van der Meer
+<a id="2">[2]</a> A fundamental study on the impact of HVDC lines on transient stability of power systems, Lukas Sigrist; Francisco Echavarren; Luis Rouco; Patrick Panciatici
 
-The Comparison of Polish Grid Codes to Certain European Standards and resultant Differences for WPP Requirements
+<a id="3">[3]</a> Modeling and control of HVDC grids: A key challenge for the future power system, Jef Beerten; Oriol Gomis-Bellmunt; Xavier Guillaud; Johan Rimez; Arjen van der Meer
+
+<a id="4">[4]</a> NC HVDC Commission Regulation (EU) 2016/1447 of 26 August 2016 establishing a network code on requirements for grid connection of high voltage direct current systems and direct current-connected power park modules (Text with EEA relevance) - Articles: 19
+
+<a id="5">[5]</a> NC Rfg Commission Regulation (EU) 2016/631 of 14 April 2016 establishing a network code on requirements for grid connection of generators (Text with EEA relevance) - Articles: 20 2 (b) and (c)

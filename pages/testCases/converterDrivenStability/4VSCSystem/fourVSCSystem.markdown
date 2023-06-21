@@ -163,11 +163,10 @@ The damping effect of the constant admittance load isn't properly captured.
 ## Open source implementations
 Some open source implementations of this use case are available in the following software solutions:
 
-For the phasor part:
-| Software name   | URL |  Phasor/EMT |
+| Software   | Phasor/EMT  |   URL |
 | --------------- | --- | ----------- |
-| Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/examples/DynaSwing/GridForming_GridFollowing) | Phasor |
-| STEPSS  | ... | Phasor |
-| EMTP-RV | ... | EMT   |
-| PSCAD   | ... | EMT   |
-| SimPowerSystem | ... | EMT |
+| Dynawo        | Phasor | [Link](https://github.com/dynawo/dynawo/tree/master/examples/DynaSwing/GridForming_GridFollowing) |
+| STEPSS  | Phasor | ... |
+| EMTP-RV | EMT | ...   |
+| PSCAD   | EMT | ...   |
+| SimPowerSystem | EMT | ... |
