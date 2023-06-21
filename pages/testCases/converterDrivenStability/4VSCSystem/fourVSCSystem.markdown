@@ -10,9 +10,9 @@ permalink: /testCases/converterDrivenStability/4VSCSystem/
 This 100% power electronics small test system conbines VSC and wind turbines technologies, grid following and grid forming controls. 
 It aims at showing the limitations of the phasor approximation while being small and easily tractable but realistic. Hence, an EMT and RMS version of this system exist for the benchmark.
 
-This case is typical of the converter driven stability slow interactions type of problem. 
+This case is typical of the converter driven stability slow interactions problem. 
 
-## Table of references: who did the test, link to article or code repository​
+## References:
 This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université de Liège, Belgium) in the view of showing the limitations of the phasor approximation, and use several network components developed by Prof. Xavier Guillaud (Ecole Centrale de Lille, France).
 
 
@@ -20,11 +20,11 @@ This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université 
 The network is described by the following figure:
 <img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png"
      alt="Four VSC system"
-     style="float: left; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;" />
 
 ## Dynamic models​
 This test case includes: 
-- two HVDC VSC lines
+- two generic [HVDC VSC lines](/models/HVDC/VSC/HVDCVSCPhasor)
 - two wind turbines generators (equivalent for a Wind park)
 - two sets of 6 cables in parallel (225kV)
 - seven 400kV overhead lines
@@ -35,7 +35,8 @@ This test case includes:
 
 ## Data 
 
-| Line/Cable  | Nominal Voltage |  R (\ohm) |  X (\ohm)  | \omega C/2 (\micriS) | length (km) | Snom (MVA) |
+| Line/Cable  | Nominal Voltage |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
+|   | (V) | ($$\Omega$$) | ($$\Omega$$)  | ($$\mu S$$) | (km) | (MVA) |
 | ----------- | --------------- | --------- | ---------- | -------------------- | ----------- | -----------|
 | A-C*        | 400             |    1.04   |   20.80    | 98                   | 65          | 3000       |
 | A-B*        | 400             |    0.51   |   10.24    | 48                   | 32          | 3000       |
@@ -46,7 +47,7 @@ This test case includes:
 * data for a single circuit
 ** data for a 6 cables in parallel
 
-| Transformer | Nominal Voltage |  R (%)    |  X (%)     | ratio (%)     | Snom (MVA) |
+| Transformer | Nominal Voltage (V) |  R (%)    |  X (%)     | ratio (%)     | Snom (MVA) |
 | ----------- | --------------- | --------- | ---------- | ------------- | -----------|
 | A1-A        | 320/400         |    0.5   |   15.0      | 102           | 1200       |
 | B1-A        | 320/400         |    0.5   |   15.0      | 104           | 1700       |
@@ -57,7 +58,7 @@ This test case includes:
 
 * 6 transformers in parallel 400MVA each 
 
-| Converter   | Snom (MVA) |  Pnom  | 
+| Converter   | Snom (MVA) |  Pnom (MVA)  | 
 | ----------- | ---------- | ------ | 
 | WP1         | 2400       |   2300 | 
 | WP2         | 2400       |   2300 |
