@@ -2,7 +2,7 @@
 
 
 <!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
-{% assign navItems = "/home,/about/,/models/,/testCases,/contact" %}
+{% assign navItems = "/home,/about/,/models/,/testCases,/colib0.github.io/contact" %}
 {% assign navItems = navItems | split: "," | string %}
 
 <nav class="navbar navbar-expand sticky-top">
@@ -12,6 +12,9 @@
 
   <ul class="navbar-nav mr-auto">
     {% for item in navItems %}
+      <!-- <p> item: {{ item }} </p>  -->
+
+      <!-- {% assign item = '/colib0.github.io' | append: item %} -->
       {% for page in site.pages %}
         <!-- Find the current page that corresponds to the item (2 cases: with or without dropdown menu), this way, the navItem order is respected. -->
         {% assign urlCurrent= page.url %}
@@ -53,7 +56,8 @@
       <!-- Case of no dropdown menu -->
       {% else %}  
         <li class="nav-item"><a class="nav-link{{current}}" href="{{site.pages[pageNo].url}}">{{site.pages[pageNo].title}}</a></li>
-          
+        <!-- <p> url: {{site.pages[pageNo].url}} </p>  -->
+        <!-- <p> no: {{pageNo}} </p>  -->
       {% endif%}
     {% endfor %}
   </ul>

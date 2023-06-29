@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Contact
-permalink: /contact
+# permalink: /colib0.github.io/contact
 ---
 
 
