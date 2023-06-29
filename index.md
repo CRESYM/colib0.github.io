@@ -21,12 +21,12 @@ For each component model and test case, a pure text description is given on one 
 Specific tags are associated with each article to ease the search. 
 
 ## Colib Sponsors
-
-<img src="/colib0.github.io/assets/images/RTE_logo.png"  width="5%" height="5%">
-<img src="/assets/images/aachen_rwth_logo.png"  width="10%" height="10%">
-<img src="/assets/images/ELES_logo.png"  width="10%" height="10%">
-<img src="/assets/images/Fraunhofer-logo.png"  width="10%" height="10%">
-<img src="/assets/images/Swissgrid-logo.png"  width="10%" height="10%">
-<img src="/assets/images/Tennet_TSO_logo.png"  width="10%" height="10%">
-<img src="/assets/images/TU_Delft_Logo.png"  width="10%" height="10%">
-<img src="/assets/images/University_Ljubljana_logo.png"  width="10%" height="10%">
+{:refdef: style="max-width:10%; height:auto"}
+![logo](/assets/images/RTE_logo.png){: style="max-width:5%; height:auto"}
+![logo](/assets/images/aachen_rwth_logo.png){: refdef}
+![logo](/assets/images/ELES_logo.png){: refdef}
+![logo](/assets/images/Fraunhofer-logo.png){: refdef}
+![logo](/assets/images/Swissgrid-logo.png){: refdef}
+![logo](/assets/images/Tennet_TSO_logo.png){: refdef}
+![logo](/assets/images/TU_Delft_Logo.png){: refdef}
+![logo](/assets/images/University_Ljubljana_logo.png){: refdef}
