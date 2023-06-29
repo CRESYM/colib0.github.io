@@ -22,7 +22,7 @@ Specific tags are associated with each article to ease the search.
 
 ## Colib Sponsors
 
-<img src="/assets/images/RTE_logo.png"  width="5%" height="5%">
+<img src="/colib0.github.io/assets/images/RTE_logo.png"  width="5%" height="5%">
 <img src="/assets/images/aachen_rwth_logo.png"  width="10%" height="10%">
 <img src="/assets/images/ELES_logo.png"  width="10%" height="10%">
 <img src="/assets/images/Fraunhofer-logo.png"  width="10%" height="10%">
