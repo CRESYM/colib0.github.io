@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Events
-permalink: /models/events
+# permalink: /models/events
 tags: []
 ---
 

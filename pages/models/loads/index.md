@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Loads
-permalink: /models/loads
+# permalink: /models/loads
 tags: []
 ---
 

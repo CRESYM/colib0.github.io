@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Regulations
-permalink: /models/regulations
+# permalink: /models/regulations
 tags: []
 ---
 

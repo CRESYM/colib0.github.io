@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Code of conduct
-permalink: /about/codeConduct
+# permalink: /about/codeConduct
 ---
 
 # Code of conduct 

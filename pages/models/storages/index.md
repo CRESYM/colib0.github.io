@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Storages
-permalink: /models/storages
+# permalink: /models/storages
 tags: []
 ---
 

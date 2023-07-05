@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Others
-permalink: /models/others
+# permalink: /models/others
 tags: []
 ---
 
