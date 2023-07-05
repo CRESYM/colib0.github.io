@@ -2,67 +2,83 @@
 
 
 <!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
-{% assign navItems = "/home,/about/,/news,/models/,/testCases,/contact" %}
+{% assign navItems = "home,about/,news,models/,testCases,contact" %}
 {% assign navItems = navItems | split: "," | string %}
 
 <nav class="navbar navbar-expand sticky-top">
-  <div class="logo mr">
-    <a href="/home"><img src="/assets/images/colib_logo2.png" height="50" alt="Colib"></a>
+
+  <div>
+    <a href="/home">
+      <img src="/colib0.github.io/assets/images/colib_logo2.png" height="50" alt="Colib">
+    </a>
   </div>
-
+  
   <ul class="navbar-nav mr-auto">
-    {% for item in navItems %}
-      <!-- <p> item: {{ item }} </p>  -->
-
-      <!-- {% assign item = '/colib0.github.io' | append: item %} -->
+    {% for item in navItems %}      
+      <!-- 2 cases: with or without dropdown menu -->
+      {% if item contains '/' %}
+        {% assign dropdown = true %}
+        {% assign itemDropD = item | remove: "/"%}
+      {% else %}
+        {% assign dropdown = false %}
+      {% endif%}
+      <!-- Find the current page that corresponds to the navigation item -->
       {% for page in site.pages %}
-        <!-- Find the current page that corresponds to the item (2 cases: with or without dropdown menu), this way, the navItem order is respected. -->
-        {% assign urlCurrent= page.url %}
-        {% assign urlDropdownCurrent = urlCurrent | append: '/' %}
-        {% if item == urlCurrent or item == urlDropdownCurrent %}
-          {% assign pageNo = forloop.index0 %}
-          {% assign url = urlCurrent %}
-          {% assign urlDropdown = urlDropdownCurrent %}
+        {% assign pageFound = false %}
+        {% assign urlEndCurrent = page.url | split: "/" | last %}
+        {% if dropdown %}
+          {% if urlEndCurrent == itemDropD %}
+            {% assign pageFound = true %}
+          {% endif%}
+        {% else %}
+          {% assign itemHtml = item | append: ".html" %}
+          {% if urlEndCurrent == item or urlEndCurrent == itemHtml%}
+            {% assign pageFound = true %}
+          {% endif%}
         {% endif%}
+        <!-- Exception for the home link -->
+        {% if page.title=="Home" and item =="home"%}
+          {% assign pageFound = true %}
+        {% endif %}
+        <!-- Gather information from the corresponding page -->
+        {% if pageFound%}
+          {% assign pageNo = forloop.index0 %}
+          {% assign url = page.url %}
+          {% assign urlEnd = url | split: "/" | last %}
+          {% assign title = page.title %}
+        {% endif %}
       {% endfor %}
-
       <!-- Highlight current page -->
       {% if url == current_page %}
         {% assign current = ' current' %}
       {% else %}
         {% assign current = null %}
       {% endif %}
-      
       <!-- Case of a dropdown menu: include all subfolders -->
-      {% if navItems contains urlDropdown %}
+      {% if dropdown %}
         <li class="nav-item dropdown">
-          <a class="nav-link{{ current }} dropdown-toggle" href="{{url}}" role="button" aria-haspopup="true" aria-expanded="true">{{site.pages[pageNo].title}}</a>
+          <a class="nav-link{{ current }} dropdown-toggle" href="{{url}}" role="button" aria-haspopup="true" aria-expanded="true">{{title}}</a>
           <div class="dropdown-menu">
-            {% for pageBis in site.pages %}
-            
-            {% assign urlList = (pageBis.url | split: '/') %}
-
-            {% if pageBis.url contains urlDropdown and urlList.size == 3 %}
-              {% if pageBis.url contains 'template' %}
-              {% else %}
-                <a class="dropdown-item" href="{{pageBis.url}}">{{pageBis.title}}</a>
+            {% for pageDropD in site.pages %}
+              {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
+              {% assign dir = urlArrayDropD[-2] %}
+              {% if dir == urlEnd %}
+                <a class="dropdown-item" href="{{pageDropD.url}}">{{pageDropD.title}}</a>
               {% endif%}
-            {% endif%}
-
             {% endfor %}
           </div>
         </li>
-      
       <!-- Case of no dropdown menu -->
       {% else %}  
-        <li class="nav-item"><a class="nav-link{{current}}" href="{{site.pages[pageNo].url}}">{{site.pages[pageNo].title}}</a></li>
-        <!-- <p> url: {{site.pages[pageNo].url}} </p>  -->
-        <!-- <p> no: {{pageNo}} </p>  -->
+        <li class="nav-item"><a class="nav-link{{current}}" href="{{url}}">{{title}}</a></li>
       {% endif%}
     {% endfor %}
   </ul>
 
-  <div class="logo">
-    <a href="/https://cresym.eu/"><img src="/assets/images/Cresym_logo.png" height="50" alt="Cresym"></a>
+  <div markdown=1>
+    <a href="/https://cresym.eu/">
+      <!-- <img src="/assets/images/Cresym_logo.png" height="50" alt="Cresym"> -->
+      ![logo](/assets/images/Cresym_logo.png){: height:50"}
+    </a>
   </div>
 </nav>

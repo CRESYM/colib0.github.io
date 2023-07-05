@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Test cases description template
-permalink: /testCases/template
+# permalink: /testCases/template
 ---
 
 You can use the following template for any model post:

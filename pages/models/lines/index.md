@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Lines
-permalink: /models/lines
+# permalink: /models/lines
 tags: []
 ---
 

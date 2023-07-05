@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Generations
-permalink: /models/generations
+# permalink: /models/generations
 tags: []
 ---
 

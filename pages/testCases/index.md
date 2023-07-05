@@ -1,10 +1,22 @@
+---
+layout: default
+title: Test cases
+# permalink: /testCases
+---
+
+<!-- <details>
+<summary>Test cases</summary>
+<br>
+TBF
+</details> -->
+
 <!-- Get the current model type -->
 {% assign dir = page.url | split:"/" %} 
 {% assign type = dir[-1] %}
 
 <!-- Index content -->
-<h1>{{type | capitalize}} models</h1>
-<p>List of available {{type}} models:</p>
+<h1>Test cases</h1>
+<p>List of available test cases:</p>
 
 <ul>
 {% for page in site.pages %}
@@ -14,4 +26,3 @@
     {% endif%}
 {% endfor %}
 </ul>
-
