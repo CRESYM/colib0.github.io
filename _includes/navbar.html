@@ -8,7 +8,7 @@
       <img src= "{{ '/assets/images/colib_logo2.png' | relative_url }}" height="50" alt="Colib">
     </a>
   </div>
-  
+
   <ul class="navbar-nav mr-auto">
     {% for item in navItems %}      
       <!-- 2 cases: with or without dropdown menu -->
@@ -59,7 +59,7 @@
               {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
               {% assign dir = urlArrayDropD[-2] %}
               {% if dir == urlEnd %}
-                <a class="dropdown-item" href="{{pageDropD.url}}">{{pageDropD.title}}</a>
+                <a class="dropdown-item" href="{{pageDropD.url | relative_url}}">{{pageDropD.title}}</a>
               {% endif%}
             {% endfor %}
           </div>
