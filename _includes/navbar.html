@@ -1,12 +1,13 @@
-<!--From https://gist.github.com/pdarragh/c7ca120604c1a1d8b8de -->
+<!-- Turn "local" to "true" to test the -->
+{% assign githubLink = "/colib0.github.io/assets/images/colib_logo2.png" %}
 
+{% assign githubLink = "/colib0.github.io/assets/images/colib_logo2.png" %}
 
 <!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
 {% assign navItems = "home,about/,news,models/,testCases,contact" %}
 {% assign navItems = navItems | split: "," | string %}
 
 <nav class="navbar navbar-expand sticky-top">
-
   <div>
     <a href="/home">
       <img src="/colib0.github.io/assets/images/colib_logo2.png" height="50" alt="Colib">
@@ -46,6 +47,10 @@
           {% assign url = page.url %}
           {% assign urlEnd = url | split: "/" | last %}
           {% assign title = page.title %}
+          <p>URLREL: {{url | relative_url}}</p>
+          <p>___</p>
+          <p>URLABS: {{url | absolute_url}}</p>
+
         {% endif %}
       {% endfor %}
       <!-- Highlight current page -->
@@ -75,7 +80,7 @@
     {% endfor %}
   </ul>
 
-  <div markdown=1>
+  <div markdown="1">
     <a href="/https://cresym.eu/">
       <!-- <img src="/assets/images/Cresym_logo.png" height="50" alt="Cresym"> -->
       ![logo](/assets/images/Cresym_logo.png){: height:50"}
