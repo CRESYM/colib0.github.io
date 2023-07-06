@@ -12,13 +12,13 @@ layout: search
 <script>
   window.store = {
     {% for page in site.pages %}
-      "{{ page.url | slugify }}": {
+      "{{ page.url | relative_url | slugify }}": {
         "title": "{{ page.title | xml_escape }}",
         "author": "{{ page.author | xml_escape }}",
         "category": "{{ page.category | xml_escape }}",
         "content": {{ page.content | strip_html | strip_newlines | jsonify }},
         "tags": {{ page.tags | strip_html | strip_newlines | jsonify }},
-        "url": "{{ page.url | xml_escape }}"
+        "url": "{{ page.url | relative_url | xml_escape }}"
       }
       {% unless forloop.last %},{% endunless %}
     {% endfor %}
