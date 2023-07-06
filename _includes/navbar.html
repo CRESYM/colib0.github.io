@@ -59,8 +59,7 @@
               {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
               {% assign dir = urlArrayDropD[-2] %}
               {% if dir == urlEnd %}
-                {% assign urlDropD = page.url | relative_url%}
-                <a class="dropdown-item" href="{{urlDropD}}">{{pageDropD.title}}</a>
+                <a class="dropdown-item" href="{{pageDropD.url | relative_url}}">{{pageDropD.title}}</a>
               {% endif%}
             {% endfor %}
           </div>
