@@ -22,7 +22,7 @@ TBF
 {% for page in site.pages %}
     {% assign urlArray = page.url | split: "/" %}
     {% if urlArray[-2] == type %}
-        <li><a href="{{page.url}}">{{page.title}}</a></li>
+        <li><a href="{{page.url | relative_url}}">{{page.title}}</a></li>
     {% endif%}
 {% endfor %}
 </ul>
