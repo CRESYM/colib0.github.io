@@ -44,13 +44,9 @@
         <!-- Gather information from the corresponding page -->
         {% if pageFound%}
           {% assign pageNo = forloop.index0 %}
-          {% assign url = page.url %}
+          {% assign url = page.url | relative_url%}
           {% assign urlEnd = url | split: "/" | last %}
           {% assign title = page.title %}
-          <p>URLREL: {{url | relative_url}}</p>
-          <p>___</p>
-          <p>URLABS: {{url | absolute_url}}</p>
-
         {% endif %}
       {% endfor %}
       <!-- Highlight current page -->
