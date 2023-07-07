@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Regulations
-# permalink: /models/regulations
 tags: []
 ---
 

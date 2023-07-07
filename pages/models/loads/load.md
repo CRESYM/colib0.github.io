@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Load Model
-# permalink: /models/loads/load
 ---
 # Load model 
 

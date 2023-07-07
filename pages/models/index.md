@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Models
-# permalink: /models
 ---
 
 # Models 

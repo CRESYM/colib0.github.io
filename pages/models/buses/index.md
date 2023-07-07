@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Buses
-# permalink: /models/buses
 tags: []
 ---
 

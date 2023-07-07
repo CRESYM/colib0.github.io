@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Pi Line Model
-# permalink: /models/lines/piLine
 ---
 # Pi Line model 
 
