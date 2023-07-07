@@ -26,7 +26,7 @@ If you want to post an article about a component or a test case, please use the 
 
 ## Create a post 
 
-- please use the following component template at [modelTemplate](/models/modelTemplate.markdown) and test case template at: [testCaseTemplate](/testCases/testCaseTemplate.markdown)
+- please use the following component template at [modelTemplate](/models/template) and test case template at [testCaseTemplate](/testCases/template)
 
 - put your post in the right pages folder (_pages/models/...)
 
