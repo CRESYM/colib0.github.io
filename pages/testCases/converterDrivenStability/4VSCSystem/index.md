@@ -1,7 +1,6 @@
 ---
-layout: default
+layout: page
 title: Four VSC benchmark system
-permalink: /testCases/converterDrivenStability/4VSCSystem/
 ---
 
 # Four VSC benchmark System

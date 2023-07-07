@@ -4,4 +4,4 @@ title: Others
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

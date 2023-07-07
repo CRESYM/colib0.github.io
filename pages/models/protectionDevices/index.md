@@ -4,4 +4,4 @@ title: Protection devices
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

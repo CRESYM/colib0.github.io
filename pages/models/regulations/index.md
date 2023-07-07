@@ -4,4 +4,4 @@ title: Regulations
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

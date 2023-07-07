@@ -4,4 +4,4 @@ title: Generations
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

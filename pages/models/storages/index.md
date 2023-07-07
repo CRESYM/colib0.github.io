@@ -4,4 +4,4 @@ title: Storages
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

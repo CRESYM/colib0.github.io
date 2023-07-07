@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: Flywheel model
 tags: ["flywheel", "FW", "Optimal Power Flow", "storage","optimal design", "DC OPF", "inertia"]
 ---

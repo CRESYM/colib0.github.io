@@ -4,4 +4,4 @@ title: Buses
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}

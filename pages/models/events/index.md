@@ -4,4 +4,4 @@ title: Events
 tags: []
 ---
 
-{% include modelIndex.html %}
+{% include folderNav.html %}
