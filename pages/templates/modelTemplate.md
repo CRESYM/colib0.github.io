@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Model description template
-# permalink: /models/template
 ---
 You can use the following template for any model post:
 

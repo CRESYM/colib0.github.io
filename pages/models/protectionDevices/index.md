@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Protection devices
-# permalink: /models/protectionDevices
 tags: []
 ---
 

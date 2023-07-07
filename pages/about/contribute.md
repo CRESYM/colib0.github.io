@@ -1,7 +1,6 @@
 ---
 layout: default
 title: How to contribute
-# permalink: /about/contribute
 ---
 
 # How to contribute?

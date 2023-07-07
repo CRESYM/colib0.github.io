@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Teams and community
-# permalink: /about/team
 ---
 
 ## Team members

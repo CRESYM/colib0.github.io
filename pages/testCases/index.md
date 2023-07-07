@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Test cases
-# permalink: /testCases
 ---
 
 <!-- <details>
