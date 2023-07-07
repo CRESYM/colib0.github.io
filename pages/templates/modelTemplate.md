@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: page
 title: Model description template
+tags: []
+author: Toto
 ---
 You can use the following template for any model post:
 
@@ -13,7 +15,18 @@ Reminds the history of the model, what are the physics and the modelling approxi
 Each model is an approximation of the reality, and considers some assumptions. This section gives the validity domain of the model (frequency range, type of dynamics, type of stability phenomena). 
 
 ## Model description
-explains the different components of the model, how it works, what it is made of.
+Explains the different components of the model, how it works, what it is made of.
+
+*Latex can be used: $$ x_{j}^{i} $$*
+
+*Footnotes can be included.[^1]*
+
+*Images can be added:*
+
+![Normalized Gaussian curves](/pages/templates/gaussian.png)
+
+[^1]: This is a footnote.
+
 
 ## Model schema (optional)
 Any kind of illustration that can help the understanding of the model. It can be: electrical representation, control diagram, phasor diagram, schematic representation, etc.
