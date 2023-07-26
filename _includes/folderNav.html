@@ -7,7 +7,8 @@
 {% assign toRemove = currentDir | append: "/"%}
 {% assign dirUrl = url | remove: toRemove%}
 {% for page in site.pages %}
-    {% if page.url == dirUrl %}
+    {% assign pageUrl = page.url | relative_url%}
+    {% if pageUrl == dirUrl %}
         {% assign dirTitle = page.title %}
     {% endif%}
 {% endfor %}
