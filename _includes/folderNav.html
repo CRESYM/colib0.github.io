@@ -14,7 +14,7 @@
 
 <!-- Display the title -->
 {% if depth > 3 %}
-<h1><a href="{{dirUrl}}">{{dirTitle}}</a>: {{page.title}}</h1>    
+<h1><a href="{{dirUrl | relative_url}}">{{dirTitle}}</a>: {{page.title}}</h1>    
 {% else %}
 <h1>{{page.title}}</h1>
 {% endif %}
