@@ -22,8 +22,6 @@ Explains the different components of the model, how it works, what it is made of
 *Footnotes can be included.[^1]*
 
 *Images can be added:*
-
-![Normalized Gaussian curves](/pages/templates/gaussian.png)
 <img src="{{'pages/templates/gaussian.png' | relative_url}}" alt="Normalized Gaussian curves"/>
 
 [^1]: This is a footnote.
