@@ -31,7 +31,7 @@ The general structure of the HVDC VSC standard model is this one:
 
 ### DC transmission line and converters model
 In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVDC system are represented by controlled Thévenin sources. The controllers act on the two voltage sources to provide the prescribed terminal conditions by adjusting the magnitude and frequency of the source voltage. 
-<img src="/pages/models/HVDC/VSC/HVDCVSCACDCConverterView.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCACDCConverterView.svg' | relative_url }}"
      alt="DC and AC sides of the converter"
      style="float: left; margin-right: 10px;" />
 
@@ -49,7 +49,7 @@ The physical parts of the HVDC line consist in two AC/DC converters and a DC lin
 The VSC converter is modelled on the AC side by a current injector with a parallel admittance. 
 It transforms the set points of active and reactive currents $$I_q^*$$ and $$I_p^*$$ and the internal angle given by the HVDC control into a couple of to be injected in the network currents, which are the real $$I_r$$ and imaginary $$I_i$$ values.
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCConverterCurrentSourceAdmittance.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCConverterCurrentSourceAdmittance.svg' | relative_url }}"
      alt="Current injector"
      style="float: center; margin-right: 10px;" />
 
@@ -57,7 +57,7 @@ It transforms the set points of active and reactive currents $$I_q^*$$ and $$I_p
 The DC link model is incorporated into the controller description and not explicitly physically represented.
 However, the relationships between DC currents and voltages of the receiving-end and sending-end sides are represented by the following figure:
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCDCLinkPhysicalModel.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDCLinkPhysicalModel.svg' | relative_url }}"
      alt="Electrotechnical components representing the DC side"
      style="float: center; margin-right: 10px;" />
 
@@ -77,7 +77,7 @@ Both parts control the reactive power or the voltage at each converter’s termi
  It deduces the active current reference $$I_p^*$$ to give to the converter from an active
 power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCPControl.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCPControl.svg ' | relative_url }}"
      alt="P control of the VSC"
      style="float: center; margin-right: 10px;" />
 
@@ -89,7 +89,7 @@ $$P_{max}$$ and $$P_{min}$$ are operating limits (user defined), $$I_{p_{max}}$$
 
 $$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. It is calculated as follows:
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg' | relative_url }}"
      alt="Delta P calculation"
      style="float: center; margin-right: 10px;" />
 
@@ -99,7 +99,7 @@ The Switch signal goes to 1 if the active current $$I_p^*$$ reaches its caps (by
 #### DC Voltage Control 
 The DC voltage control deduces the active current reference $$I_p^*$$ to give to the converter from a DC voltage reference $$V_{DC}^*$$ and a measure of the DC voltage $$V_{DC}$$, thanks to an anti-wind-up proportional integral block.
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg' | relative_url }}"
      alt="VDC control of the VSC"
      style="float: center; margin-right: 10px;" />
 
@@ -115,19 +115,19 @@ There is one AC voltage control/reactive power control for each converter, as th
 In both modes, a reference of the reactive power to be injected to the grid is assessed.
 
 **Q-mode:**
-<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg' | relative_url }}"
      alt="Q mode of the U AC control of the VSC"
      style="float: center; margin-right: 10px;" />
 
 **U-mode:**
 In the AC voltage control the control is ensured by the anti-windup proportional integral block, and contains a deadband and a reactive power droop.
-<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg' | relative_url }}"
      alt="U mode of the U AC control of the VSC"
      style="float: center; margin-right: 10px;" />
 
 $$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits as follows:
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCQMaxMinComb.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCQMaxMinComb.svg' | relative_url }}"
      alt="Combinaison of the operational, PQ and UQ limits"
      style="float: center; margin-right: 10px;" />
 
@@ -135,7 +135,7 @@ The limits $$Q_{max}^P$$/$$Q_{min}^P$$ and $$Q_{max}^U$$/$$Q_{min}^U$$ respectiv
 
 Finally, the reactive power is converted into a reactive reference current $$I_q^*$$ by the following control:
 
-<img src="/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg' | relative_url }}"
      alt="calculation of the reference reactive current by the U AC control of the VSC"
      style="float: center; margin-right: 10px;" />
 

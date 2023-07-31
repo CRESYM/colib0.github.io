@@ -17,7 +17,7 @@ This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université 
 
 ## Network ​description:
 The network is described by the following figure:
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png' | relative_url }}"
      alt="Four VSC system"
      style="float: center; margin-right: 10px;" />
 
@@ -70,7 +70,7 @@ This test case includes:
 ### Scenario No. 1: Full export to transmission grid and large disturbance
 
 **Operating point No. 1**
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point1.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point1.png' | relative_url }}"
      alt="Four VSC system"
      style="float: left; margin-right: 10px;" />
  
@@ -86,7 +86,7 @@ HVDC2 is in grid forming mode.
 
 
 **Operating point No. 2**
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point2.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point2.png' | relative_url }}"
      alt="Four VSC system"
      style="float: left; margin-right: 10px;" />
 
@@ -115,26 +115,26 @@ The duration of simulation is of 1 second in the first scenario (event at 150ms)
 
 ### First scenario:  Full export to transmission grid and large disturbance
 The disturbance is seen at bus A, B and C with highest impact on bus A voltage as expected.
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_bus_voltages.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_bus_voltages.png' | relative_url }}"
      alt="Scenario 1 bus voltages"
      style="float: left; margin-right: 10px;" />
 
 On the grid following converters' responses, we can see the grid voltage support from WP2 and HVDC1 due to their voltage control support, whereas WP1 is in reactive power control.
 
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gf.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gf.png' | relative_url }}"
      alt="Scenario 1 grid following converters' responses: active powers and currents"
      style="float: left; margin-right: 10px;" />
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gfollowing_Q_iq.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gfollowing_Q_iq.png' | relative_url }}"
      alt="Scenario 1 grid following converters' responses : reactive powers and currents"
      style="float: left; margin-right: 10px;" />
 
 On the grid forming converter's response (HVDC2), the injected current increases after fault up to its maximum value. When the fault is cleared (250ms), the injected current falls down quickly before slowly returning to a steady state value.
 
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming.png' | relative_url }}"
      alt="Scenario 1 grid forming converter's response: injected total current and voltages"
      style="float: left; margin-right: 10px;" />
 
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming2.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming2.png' | relative_url }}"
      alt="Scenario 1 grid forming converter's response: injected active power (P) and angle's difference (deltam)"
      style="float: left; margin-right: 10px;" />
 
@@ -143,20 +143,20 @@ On the grid forming converter's response (HVDC2), the injected current increases
 In this second scenario, we can see that the response of the system to a mild disturbance very much depends on the short-circuit power of the connected equivalent grid. More importantly, this response is different if the system is simulated with a phasor simulator or an EMT one.
 
 On the EMT simulation (left figure) we can see that the system becomes unstable if the short-circuit power is lower than 16 GVA. On the phasor simulation (right figure), the system is stable even if the short-circuit power is lower than 16 GVA (5.5 GVA). It seems that the phasor is underestimating the stability of the system in this very specific case.
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2_converter_response_Gfollowing.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2_converter_response_Gfollowing.png' | relative_url }}"
      alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
      style="float: left; margin-right: 10px;" />
 
 
 **Variant A:** When the C bus is unload and full power is taken by the external network, the difference between voltages curves is significant with the EMT simulation, with the phasor approximation, the difference is bearly noticable. 
 The damping effect of the constant admittance load isn't properly captured. 
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png' | relative_url }}"
      alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
      style="float: left; margin-right: 10px;" />
 
 
 **Variant B:** When WP2 grid following control is changed by a grid forming one, the grid-forming control has such a strong stabilizing effect that both response remains stable even if the short-circuit power is as low as 300 MVA. Both simulation has comparable results.
-<img src="/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png"
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png' | relative_url }}"
      alt="Scenario 2 variant A:  grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage responses"
      style="float: left; margin-right: 10px;" />
 
