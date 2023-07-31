@@ -1,7 +1,8 @@
 ---
-layout: default
+layout: page
 title: Test cases description template
-permalink: /testCases/template
+tags: []
+author: Toto
 ---
 
 You can use the following template for any model post:

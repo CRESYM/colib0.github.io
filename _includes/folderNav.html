@@ -1,0 +1,39 @@
+<!-- Script to add navigation links between folders: 
+    link to the previous folder and link to subfolders/pages.
+    To be included in "index.md" files. -->
+
+{% assign url = page.url | relative_url %} 
+
+<!-- To get the current directory and its relative depth 
+    (removing "/colib0.github.io" to have the same depth on offline and online versions)-->
+{% assign urlArray = url | remove: "/colib0.github.io" | split:"/" %} 
+{% assign currentDir = urlArray[-1] %}
+{% assign depth = urlArray.size %}
+
+<!-- To get the title of the parent directory -->
+{% assign toRemove = currentDir | append: "/"%}
+{% assign dirUrl = url | remove: toRemove%}
+{% for page in site.pages %}
+    {% assign pageUrl = page.url | relative_url%}
+    {% if pageUrl == dirUrl %}
+        {% assign dirTitle = page.title %}
+    {% endif%}
+{% endfor %}
+
+<!-- Display the title -->
+{% if depth > 3 %}
+<h1><a href="{{dirUrl}}">{{dirTitle}}</a>: {{page.title}}</h1>    
+{% else %}
+<h1>{{page.title}}</h1>
+{% endif %}
+
+<!-- Display the sub-directories or pages -->
+<ul>
+{% for page in site.pages %}
+    {% assign urlArray = page.url | split: "/" %}
+    {% if urlArray[-2] == currentDir %}
+        <li><a href="{{page.url | relative_url}}">{{page.title}}</a></li>
+    {% endif%}
+{% endfor %}
+</ul>
+

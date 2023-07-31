@@ -1,7 +1,6 @@
 ---
 layout: default
-title: Loads
-tags: []
+title: Test cases
 ---
 
 {% include folderNav.html %}

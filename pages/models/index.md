@@ -1,14 +1,7 @@
 ---
 layout: default
 title: Models
-permalink: /models
 ---
-
-# Models 
-
-Type the model you are looking for:
-
-
 
 <form action="/search" method="get">
   <label for="search-box">Search</label>
@@ -16,3 +9,4 @@ Type the model you are looking for:
   <input type="submit" value="search">
 </form>
 
+{% include folderNav.html %}

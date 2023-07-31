@@ -1,7 +1,6 @@
 ---
 layout: default
 title: How to contribute
-permalink: /about/contribute
 ---
 
 # How to contribute?
@@ -20,13 +19,13 @@ If you want to post an article about a component or a test case, please use the 
 
 ## Create an issue and related branch
 
-- for any post creation, modification or deletion, please create an issue on the github space of the colib project with one of the following tag: **new component**, **new test case**, **modify component**, **modify testCase**. A dedicated template should be proposed to you depending on the type of issue.
+- for any post creation, modification or deletion, please create an issue on the github space of the colib project with one of the following tag: **new component**, **new test case**, **modify component**, **modify test case**. A dedicated template should be proposed to you depending on the type of issue.
 
 - create a branch using the issue number: `git checkout -b issue_number_name_of_new_branch`
 
 ## Create a post 
 
-- please use the following component template at [modelTemplate](/models/template) and test case template at [testCaseTemplate](/testCases/template)
+- please use the following [model template](/pages/templates/modelTemplate) and [test case template](/pages/templates/testCaseTemplate).
 
 - put your post in the right pages folder (_pages/models/...)
 
