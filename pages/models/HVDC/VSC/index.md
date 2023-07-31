@@ -25,8 +25,9 @@ The modeling choice for HVDC VSC for stability studies is an ongoing active rese
 ## Model description
 
 The general structure of the HVDC VSC standard model is this one:
-{:refdef: style="float:left; margin-right:10px; height:auto"}
-![genView](/pages/models/HVDC/VSC/HvdcVSC.svg){: refdef}
+<img src="{{ '/pages/models/HVDC/VSC/HvdcVSC.svg' | relative_url }}"
+     alt="General view of the HVDC VSC standard model: physical and control connections"
+     style="float: left; margin-right: 10px;" />
 
 ### DC transmission line and converters model
 In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVDC system are represented by controlled Thévenin sources. The controllers act on the two voltage sources to provide the prescribed terminal conditions by adjusting the magnitude and frequency of the source voltage. 
