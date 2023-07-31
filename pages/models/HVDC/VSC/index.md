@@ -77,7 +77,7 @@ Both parts control the reactive power or the voltage at each converter’s termi
  It deduces the active current reference $$I_p^*$$ to give to the converter from an active
 power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
 
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCPControl.svg ' | relative_url }}"
+<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCPControl.svg' | relative_url }}"
      alt="P control of the VSC"
      style="float: center; margin-right: 10px;" />
 
