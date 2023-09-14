@@ -21,5 +21,5 @@
     {% endfor %}
   };
 </script>
-<script src="/assets/js/lunr.min.js"></script>
-<script src="/assets/js/search.js"></script>
+<script src="{{ '/assets/js/lunr.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
