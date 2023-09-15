@@ -7,7 +7,7 @@
   
         for (var i = 0; i < results.length; i++) {  // Iterate over the results
           var item = store[results[i].ref];
-          appendString += '<li><a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
+          appendString += '<li><a href="{{' + item.url + ' | relative_url }}"><h3>' + item.title + '</h3></a>';
           appendString += '<p>' + item.content.substring(0, 150) + '...</p></li>';
         }
   
@@ -28,6 +28,10 @@
           return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
         }
       }
+      str = JSON.stringify(query);
+      str = JSON.stringify(query, null, 4); // (Optional) beautiful indented output.
+      console.log(str); // Logs output to dev tools console.
+      alert(str); // Displays
     }
   
     var searchTerm = getQueryVariable('query');
