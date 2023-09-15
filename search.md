@@ -1,4 +1,4 @@
-<form action="https://cresym.github.io/colib0.github.io/pages/models/" method="get">
+<form action="search.html" method="get">
   <label for="search-box">Search</label>
   <input type="text" id="search-box" name="query">
   <input type="submit" value="search">
@@ -23,5 +23,3 @@
 </script>
 <script src="/assets/js/lunr.min.js"></script>
 <script src="/assets/js/search.js"></script>
-
-"{{ page.url | absolute_url }}"
