@@ -23,3 +23,5 @@
 </script>
 <script src="/assets/js/lunr.min.js"></script>
 <script src="/assets/js/search.js"></script>
+
+"{{ page.url | absolute_url }}"

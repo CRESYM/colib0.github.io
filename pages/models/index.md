@@ -10,3 +10,5 @@ title: Models
 </form>
 
 {% include folderNav.html %}
+
+"{{ page.url | absolute_url }}"
