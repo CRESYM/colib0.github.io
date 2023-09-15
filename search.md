@@ -1,4 +1,4 @@
-<form action="{{ 'search.html' | relative_url }}" method="get">
+<form action="https://cresym.github.io/colib0.github.io/pages/models/" method="get">
   <label for="search-box">Search</label>
   <input type="text" id="search-box" name="query">
   <input type="submit" value="search">
