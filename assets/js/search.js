@@ -28,6 +28,10 @@
           return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
         }
       }
+      str = JSON.stringify(variable);
+      str = JSON.stringify(variable, null, 4); // (Optional) beautiful indented output.
+      console.log(str); // Logs output to dev tools console.
+      alert(str); // Displays
     }
   
     var searchTerm = getQueryVariable('query');
