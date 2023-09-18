@@ -1,5 +1,4 @@
 {% include search.html %}
-
 <ul id="search-results"></ul>
 
 <script>
