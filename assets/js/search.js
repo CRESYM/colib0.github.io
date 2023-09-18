@@ -31,7 +31,12 @@
     }
   
     var searchTerm = getQueryVariable('query');
-  
+
+    str = JSON.stringify(searchTerm);
+    str = JSON.stringify(searchTerm, null, 4); // (Optional) beautiful indented output.
+    console.log(str); // Logs output to dev tools console.
+    alert(str); // Displays
+
     if (searchTerm) {
       document.getElementById('search-box').setAttribute("value", searchTerm);
   
