@@ -25,7 +25,7 @@ If you want to post an article about a component or a test case, please use the 
 
 ## Create a post 
 
-- please use the following [model template](/pages/templates/modelTemplate) and [test case template](/pages/templates/testCaseTemplate).
+- please use the following <a href="{{'pages/templates/modelTemplate' | relative_url}}">model template</a> and <a href="{{'pages/templates/testCaseTemplate' | relative_url}}">test case template</a>.
 
 - put your post in the right pages folder (_pages/models/...)
 
