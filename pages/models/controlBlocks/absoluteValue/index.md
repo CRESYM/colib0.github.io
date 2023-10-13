@@ -12,8 +12,8 @@ $$  x_j = |x_i | $$
 
 Syntax:  
 
-- input state : $x_i$
-- output state: $x_j$
+- input variable : $x_i$
+- output variable: $x_j$
 - function abs
 
 Internal states : none

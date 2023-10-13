@@ -17,8 +17,8 @@ tags: ["control block", "hysteresis"]
 Syntax:  
 
 - & hyst
-- input state : $x_i$
-- output state: $x_j$
+- input variable : $x_i$
+- output variable: $x_j$
 - data name, parameter name or math expression for $x_I$
 - data name, parameter name or math expression for $y_{IB}$
 - data name, parameter name or math expression for $y_{IA}$

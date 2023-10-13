@@ -12,8 +12,8 @@ tags: ["control block", "deadband"]
 Syntax:  
 
 - & db
-- input state : $x_i$
-- output state: $x_j$
+- input variable : $x_i$
+- output variable: $x_j$
 - data name, parameter name or math expression for $\delta_1$
 - data name, parameter name or math expression for $s_1$
 - data name, parameter name or math expression for $a_1$
