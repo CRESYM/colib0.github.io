@@ -4,6 +4,12 @@
 // https://github.com/pages-themes/slate/blob/master/_sass/jekyll-theme-slate.scss
 @import "{{ site.theme }}";
 
+.search {
+	width: 50%;
+	margin: 0 auto;
+	padding: 100px 0;
+}
+
 nav
 {
   //background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%);
@@ -102,6 +108,7 @@ body,html
 }
 
 /* Markdown */
+
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3,
@@ -395,9 +402,5 @@ body,html
   }
 }
 
-.search {
-	width: 50%;
-	margin: 0 auto;
-	padding: 100px 0;
-}
+
 

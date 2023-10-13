@@ -19,7 +19,6 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Collaborative Open-Source Dynamic Simulation Library
-theme: jekyll-theme-cayman
 markdown: kramdown
 email: info@cresym.eu
 show_downloads: false
@@ -35,8 +34,7 @@ github_username:  colib0
 
 # Build settings
 plugins:
-  - jekyll-feed
-  - jekyll-relative-links
+  - jekyll-feed #To generate automatic RSS flux
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -45,15 +43,10 @@ plugins:
 #
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - LICENSE
+  - README.md
