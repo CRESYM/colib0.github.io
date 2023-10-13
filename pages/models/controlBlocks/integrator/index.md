@@ -10,7 +10,7 @@ tags: ["control block", "integrator"]
 
 Syntax:  
 
-- & int
+- function name: int
 - input variable : $x_i$
 - output variable : $x_j$
 - data name, parameter name or math expression for $T$

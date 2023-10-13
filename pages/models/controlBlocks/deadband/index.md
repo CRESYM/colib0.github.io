@@ -11,7 +11,7 @@ tags: ["control block", "deadband"]
 
 Syntax:  
 
-- & db
+- function name: db
 - input variable : $x_i$
 - output variable: $x_j$
 - data name, parameter name or math expression for $\delta_1$

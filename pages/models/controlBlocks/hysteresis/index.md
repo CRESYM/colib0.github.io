@@ -16,7 +16,7 @@ tags: ["control block", "hysteresis"]
 
 Syntax:  
 
-- & hyst
+- function name: hyst
 - input variable : $x_i$
 - output variable: $x_j$
 - data name, parameter name or math expression for $x_I$

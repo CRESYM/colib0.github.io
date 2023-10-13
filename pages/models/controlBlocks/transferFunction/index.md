@@ -10,7 +10,7 @@ tags: ["control block", "transfer function"]
 
 Syntax:  
 
-- & tf1p
+- function name: tf1p
 - input variable : $x_i$
 - output variable : $x_j$
 - data name, parameter name or math expression for $G$

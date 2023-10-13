@@ -14,7 +14,7 @@ example for $n=3$
 
 Syntax:  
 
-- & switch
+- function name: switch
 - input variable : $x_i(l),  l \in \{1, 2, ... , n \}$
 - variable $x_k$
 - variable $x_j$

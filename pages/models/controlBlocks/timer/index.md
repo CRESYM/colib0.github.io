@@ -15,7 +15,7 @@ If $x_i$ is smaller than a threshold $v_1$, the output $x_j$ is equal to zero. O
 
 Syntax:  
 
-- & timer
+- function name: timer
 - input variable : $x_i$
 - output variable: $x_j$
 - data name, parameter name or math expression for $v_l$ where $l \in \{0,1, ..., n\}$

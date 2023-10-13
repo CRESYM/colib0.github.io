@@ -10,7 +10,7 @@ tags: ["control block", "limiter", "limiter variable bounds"]
 
 Syntax:  
 
-- & limvb
+- function name: limvb
 - input variable : $x_i$
 - output variable: $x_j$
 - variable $x_{min}$

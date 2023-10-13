@@ -10,7 +10,7 @@ tags: ["control block", "PI", "Proportional Integral"]
 
 Syntax:  
 
-- & pictl
+- function name: pictl
 - input variable : $x_k$
 - output variable: $x_j$
 - data name, parameter name or math expression for $K_I$

@@ -10,7 +10,7 @@ tags: ["control block", "integrator", "limited integrator"]
 
 Syntax:  
 
-- & invlim
+- function name: invlim
 - input variable : $x_i$
 - output variable: $x_j$
 - variable $x_{min}$
