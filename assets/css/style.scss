@@ -48,7 +48,7 @@ p
   background:#fff;
 }
 
-.side_right
+.side-right
 {
   position: fixed;
   top: 90px;
@@ -57,13 +57,12 @@ p
   text-align: center;
 }
 
-#tableOfContents
+#table-of-content
 {
   text-align: left;
 }
 
-
-#main_content_wrap
+#main-content-wrap
 {
   border-spacing:10px;
 }
@@ -76,7 +75,7 @@ body,html
   background: #fff;
 }
 
-#forkme_banner
+#forkme-banner
 {
   display: block;
   position: absolute;
@@ -348,7 +347,7 @@ body,html
     display: none;
   }
 
-  #forkme_banner
+  #forkme-banner
   {
     display: block;
     position: absolute;

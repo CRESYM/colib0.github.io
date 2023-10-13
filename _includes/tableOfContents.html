@@ -1,9 +1,9 @@
-<div class="side_right" id="tableOfContents">
+<div class="side-right" id="table-of-content">
     <ul>
     </ul>  
 </div>
 
-<!-- <script src="{{ '/assets/js/tableOfContents.js' | relative_url }}"></script> -->
+<!-- <script src="{{ '/assets/js/table-of-content.js' | relative_url }}"></script> -->
 
 <script>
 
@@ -21,7 +21,7 @@
         for (heading of headings) {
             var href = "#"+String(heading.id);
             var title = heading.text;
-            $("#tableOfContents ul").append('<li><a href='+href+'>'+title+'</a></li>');
+            $("#table-of-content ul").append('<li><a href='+href+'>'+title+'</a></li>');
         }
     }
     })(jQuery)
