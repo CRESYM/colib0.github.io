@@ -109,6 +109,24 @@ body,html
 
 /* Markdown */
 
+#page h1 {
+  counter-reset: h1
+}
+
+#page h2 {
+  counter-reset: h2
+}
+
+#page h2:before{
+  counter-increment: h1;
+  content: counter(h1) ". "
+}
+
+#page h3:before {
+  counter-increment: h2;
+  content: counter(h1) "." counter(h2) ". " 
+}
+
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3,
