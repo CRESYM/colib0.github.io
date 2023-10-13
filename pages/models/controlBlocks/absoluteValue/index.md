@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Absolute value of input
-tags: ["control block", "discrete"]
+tags: ["control block", "discrete", "abs", "absolute value"]
 ---
 
 ## Diagram
@@ -18,8 +18,7 @@ Syntax:
 
 Internal states : none
 
-Discrete variable :
-$$ z \in \{-1,1\} $$
+Discrete variable : $ z \in \{-1,1\} $
 
 ## Equations
 
