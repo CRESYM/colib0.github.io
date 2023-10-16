@@ -19,14 +19,13 @@
 
   <body>
     {% include navbar.html %}
-    <div id="main_content_wrap">
-      <section id="main_content" class="inner">
-          <article class="markdown-body">
-            {{ content }}
-          </article>
-      </section>
-  </div>
-  {% include tableOfContents.html %}
-  {% include footer.html %}
+    <section class="inner">
+      <article id="page" class="markdown-body">
+        <h1 class="project-name">{{ page.title | default: site.title }}</h1>
+        {{ content }}
+      </article>
+    </section>
+   {% include tableOfContent.html %}
+   {% include footer.html %}
   </body>
 </html>

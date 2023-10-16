@@ -10,7 +10,7 @@
   </div>
 
   <ul class="navbar-nav mr-auto">
-    {% for item in navItems %}      
+    {% for item in navItems %}
       <!-- 2 cases: with or without dropdown menu -->
       {% if item contains '/' %}
         {% assign dropdown = true %}
@@ -65,12 +65,11 @@
           </div>
         </li>
       <!-- Case of no dropdown menu -->
-      {% else %}  
+      {% else %}
         <li class="nav-item"><a class="nav-link{{current}}" href="{{url}}">{{title}}</a></li>
       {% endif%}
     {% endfor %}
   </ul>
-
   <div markdown="1">
     <a href="https://cresym.eu/">
       <img src="{{ '/assets/images/Cresym_logo.png' | relative_url }}" height="50" alt="Cresym">

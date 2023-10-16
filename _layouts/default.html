@@ -19,13 +19,11 @@
 
   <body>
     {% include navbar.html %}
-    <div id="main_content_wrap">
-      <section id="main_content" class="inner">
-          <article class="markdown-body">
-            {{ content }}
-          </article>
-      </section>
-  </div>
-  {% include footer.html %}
+    <section class="inner">
+      <article class="markdown-body">
+        {{ content }}
+      </article>
+    </section>
+    {% include footer.html %}
   </body>
 </html>

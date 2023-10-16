@@ -1,0 +1,76 @@
+<div class="side-right" id="table-of-content">
+</div>
+
+<script>
+(function($) {
+
+    //Step 1: Retrieve all headings in the correct order
+    let headings1 = $(".markdown-body h1");
+    let headings = [];
+
+    for (let i = 0; i < headings1.length; i++) {
+
+        let h1Curr = headings1.eq(i);
+        let h1Next = headings1.eq(i+1);
+
+        headings.push({"id":$(h1Curr).attr('id'),"text":$(h1Curr).text(), "section": false});
+        
+        let h2No = 1;
+        let headings2;
+
+        if (i == headings1.length - 1) {
+            headings2 = h1Curr.nextAll(".markdown-body h2");
+        }
+        else {
+            headings2 = h1Curr.nextUntil(h1Next, ".markdown-body h2");
+        }
+
+        for (let j = 0; j < headings2.length; j++) {
+            let h2Curr = headings2.eq(j);
+            let h2Next = headings2.eq(j+1);
+
+            headings.push({"id":$(h2Curr).attr('id'),"text":$(h2Curr).text(), "section": '&nbsp;&nbsp;'+h2No+'. '});
+
+            let h3No = 1;
+
+            let headings3;
+            if (j == headings2.length - 1) {
+                headings3 = h2Curr.nextAll(".markdown-body h3");
+            }
+            else {
+                headings3 = h2Curr.nextUntil(h2Next, ".markdown-body h3");
+            }
+
+            headings3.each(function(index, h3Curr) {
+                headings.push({"id":$(h3Curr).attr('id'),"text":$(h3Curr).text(), "section": '&nbsp;&nbsp;&nbsp;&nbsp;'+h2No+'.'+h3No+'. '});
+                h3No++;
+            })
+
+            h2No++;
+        }
+    }
+
+    //Step 2: Use all headings to build the table of contents
+    for (heading of headings) {
+        let href = "#"+String(heading.id);
+        
+        let title = heading.text;
+
+        let maxLength = 50
+        if (title.length > maxLength) { 
+            title = title.slice(0, maxLength-3);
+            title = title.slice(0, Math.min(title.length, title.lastIndexOf(" "))); // Remove caracters until the last space
+            title += '...'
+        }        
+
+        let section = heading.section; 
+        if (section){
+            $("#table-of-content").append('<a href='+href+'>'+section+title+'</a><br>');
+        }
+        else{
+            $("#table-of-content").append('<a href='+href+'>'+title+'</a><br>');
+        }
+    }
+
+})(jQuery)
+</script>

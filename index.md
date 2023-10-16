@@ -5,7 +5,6 @@ title: Home
 layout: default
 ---
 
-
 The power system and energy systems at large experience a **paradigm shift with many novel, various active components connected**. Appraising the behaviour and reactions of such new items is critical for network operators to simulate and anticipate system operation. 
 
 {:refdef1: style="float:left; margin-right: 3em; margin-left: auto;"}
