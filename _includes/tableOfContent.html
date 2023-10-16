@@ -52,9 +52,18 @@
 
     //Step 2: Use all headings to build the table of contents
     for (heading of headings) {
-        var href = "#"+String(heading.id);
-        var title = heading.text;
-        var section = heading.section; 
+        let href = "#"+String(heading.id);
+        
+        let title = heading.text;
+
+        let maxLength = 50
+        if (title.length > maxLength) { 
+            title = title.slice(0, maxLength-3);
+            title = title.slice(0, Math.min(title.length, title.lastIndexOf(" "))); // Remove caracters until the last space
+            title += '...'
+        }        
+
+        let section = heading.section; 
         if (section){
             $("#table-of-content").append('<a href='+href+'>'+section+title+'</a><br>');
         }

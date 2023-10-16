@@ -4,18 +4,30 @@
 // https://github.com/pages-themes/slate/blob/master/_sass/jekyll-theme-slate.scss
 @import "{{ site.theme }}";
 
-.search {
-	width: 50%;
-	margin: 0 auto;
-	padding: 100px 0;
+// General
+p
+{
+  text-align: justify;
 }
 
+a
+{
+  color: #0E6BB7;
+}
+
+body
+{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Navigation
 nav
 {
-  //background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(247, 247, 247) 100%);
-  background: #fff;
   box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
   margin-left: 0px;
+  background: #fff;
 }
 
 .dropdown:hover .dropdown-menu
@@ -34,35 +46,26 @@ nav
   color: #898b8d;
 }
 
-.current
-{
-  color: #0057b353;
-}
-
-p
-{
-  text-align: justify;
-}
-
+// Main content
 .inner
 {
-  max-width: 850px;
+  max-width: 70%;
   text-align: justify;
   text-align: left;
-  margin-left: 200px;
-  max-width:700px;
-  background:#fff;
+  margin-left: 5%;
+  padding-top: 20px;
 }
 
+// Table of content
 .side-right
 {
   position: fixed;
-  top: 95px;
-  left: 1000px;
-  width: 400px;
-  text-align: center;
+  top: 90px;
+  left: 80%;
+  width: 20%;
   box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
-  background:#fff;
+  text-align: right;
+  white-space: nowrap;
 }
 
 #table-of-content
@@ -70,23 +73,21 @@ p
   text-align: left;
   a {
     text-decoration: none;
+    color: #6EC1E4;
   }
   a:hover {
     font-weight: bold;
   }
 }
 
-#main-content-wrap
-{
-  border-spacing:10px;
-}
-
-body,html
-{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
+// Footer
+#footer {
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%; 
+  padding-top: 10px;
+  box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
 }
 
 #forkme-banner
@@ -105,36 +106,7 @@ body,html
   border-bottom-right-radius: 2px;
 }
 
-#footer {
-  margin-top: auto;
-  position: relative;
-  bottom: 0;
-  width: 100%; 
-  background: #fff;
-  padding-top: 10px;
-  box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
-}
-
-/* Markdown */
-
-#page h1 {
-  counter-reset: h1
-}
-
-#page h2 {
-  counter-reset: h2
-}
-
-#page h2:before{
-  counter-increment: h1;
-  content: counter(h1) ". "
-}
-
-#page h3:before {
-  counter-increment: h2;
-  content: counter(h1) "." counter(h2) ". " 
-}
-
+// Markdown
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3,
@@ -212,7 +184,7 @@ body,html
 
 .markdown-body ul,
 .markdown-body ol {
-  padding-left: 30px;
+  padding-left: 40px;
 }
 
 .markdown-body ul {
@@ -329,52 +301,43 @@ body,html
   vertical-align: middle;
 }
 
+// Auto section number
+#page h1 {
+  counter-reset: h1
+}
+
+#page h2 {
+  counter-reset: h2
+}
+
+#page h2:before{
+  counter-increment: h1;
+  content: counter(h1) ". "
+}
+
+#page h3:before {
+  counter-increment: h2;
+  content: counter(h1) "." counter(h2) ". " 
+}
+
+@media screen and (max-width: 1500px) {
+ 
+  .inner
+  {
+    max-width: 60%;
+    margin-left: 5%;
+  }
+  
+  .side-right
+  {
+    left: 70%;
+    width: 30%;
+  }
+}
 
 // Screen adaptation
-@media screen and (max-width: 1580px) {
-  aside
-  {
-    float: none;
-    display: block;
-    width: 100%;
-    max-height: 200px;
-    margin: 0 auto;
-    padding-top: 20px;
-    padding-left: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  #main_content.inner
-  {
-    padding-top: 20px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  #footer_wrap.outer
-  {
-    height: 120px;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  #header_wrap .inner
-  {
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-  }
-
-  .nav-link
-  {
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
-}
-
 @media screen and (max-width: 500px) {
+ 
   #display_view_on_github
   {
     display: none;
@@ -398,35 +361,3 @@ body,html
     border-bottom-right-radius: 5px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  #footer_wrap.outer
-  {
-    height: 120px;
-  }
-
-  aside
-  {
-    padding-top: 10px;
-  }
-
-  #main_content.inner
-  {
-    padding-top: 10px;
-  }
-
-  p
-  {
-    margin-top: 0px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  #footer_wrap.outer
-  {
-    height: 120px;
-  }
-}
-
-
-
