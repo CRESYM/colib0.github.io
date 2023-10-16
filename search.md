@@ -1,9 +1,4 @@
-<form action="/search" method="get">
-  <label for="search-box">Search</label>
-  <input type="text" id="search-box" name="query">
-  <input type="submit" value="search">
-</form>
-
+{% include search.html %}
 <ul id="search-results"></ul>
 
 <script>
@@ -21,5 +16,5 @@
     {% endfor %}
   };
 </script>
-<script src="/assets/js/lunr.min.js"></script>
-<script src="/assets/js/search.js"></script>
+<script src="{{'/assets/js/lunr.min.js' | relative_url}}"></script>
+<script src="{{'/assets/js/search.js' | relative_url}}"></script>
