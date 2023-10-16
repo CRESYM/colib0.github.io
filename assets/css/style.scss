@@ -15,13 +15,6 @@ a
   color: #0E6BB7;
 }
 
-body
-{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 // Navigation
 nav
 {
@@ -81,6 +74,14 @@ nav
 }
 
 // Footer
+body
+{
+  // Keeping footer down
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 #footer {
   margin-top: auto;
   position: relative;
