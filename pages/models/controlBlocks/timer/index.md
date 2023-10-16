@@ -10,8 +10,8 @@ If $x_i$ is smaller than a threshold $v_1$, the output $x_j$ is equal to zero. O
 
 ## Diagram
 
-![timer diagram](/pages/models/controlBlocks/timer/timer.svg)
-![detailed timer diagram](/pages/models/controlBlocks/timer/detailedTimer.svg){ width=25% }
+![timer diagram](timer.svg)
+![detailed timer diagram](detailedTimer.svg){ width=25% }
 
 Syntax:  
 

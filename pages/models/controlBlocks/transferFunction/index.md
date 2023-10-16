@@ -6,7 +6,7 @@ tags: ["control block", "transfer function"]
 
 ## Diagram
 
-![transfer function diagram](/pages/models/controlBlocks/transferFunction/transferFunction.svg)
+![transfer function diagram](transferFunction.svg)
 
 Syntax:  
 
@@ -14,7 +14,7 @@ Syntax:
 - input variable : $x_i$
 - output variable : $x_j$
 - data name, parameter name or math expression for $G$
-- - data name, parameter name or math expression for $T$
+- data name, parameter name or math expression for $T$
 
 Internal states : none
 
