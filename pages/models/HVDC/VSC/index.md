@@ -78,7 +78,7 @@ Both parts control the reactive power or the voltage at each converter’s termi
  It deduces the active current reference $$I_p^*$$ to give to the converter from an active
 power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
 
-![VSCPcontrol](HVDCVSCPControl.svg)
+![VSCPcontrol](HvdcVSCPControl.svg)
 
 The $$r_{p_{fault}}$$ signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
 

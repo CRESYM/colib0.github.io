@@ -17,7 +17,7 @@ This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université 
 ## Network ​description
 
 The network is described by the following figure:
-![FourVSCSystem](4VSCSystem/4VSCsystem.png)
+![FourVSCSystem](4VSCsystem.png)
 
 ## Dynamic models​
 
