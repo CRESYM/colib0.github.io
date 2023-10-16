@@ -2,6 +2,9 @@
 layout: page
 title: Transfer function between an input and output one time constant
 tags: ["control block", "transfer function"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram

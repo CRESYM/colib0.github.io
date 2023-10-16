@@ -1,16 +1,19 @@
 ---
+id: pict2lim1
 layout: page
 title: Proportional integral (PI) controller with non-windup limit on the integral term and limit on the proportional term
 tags: ["control block", "PI", "Proportional Integral", "non-windup", "limits"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
-
 ## Diagram
 
-![pict2lim diagram](/pages/models/controlBlocks/2limitedProportionalIntegralController/2limitedProportionalIntegralController.svg)
+![pict2lim diagram](2limitedProportionalIntegralController.svg)
 
 Syntax:  
 
-- & pictl2lim
+- function name: pictl2lim
 - input variable : $x_k$
 - output variable: $x_j$
 - data name, parameter name or math expression for $K_I$

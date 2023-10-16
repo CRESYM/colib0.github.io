@@ -1,14 +1,17 @@
 ---
+id: abs1
 layout: page
 title: Absolute value of input
 tags: ["control block", "discrete", "abs", "absolute value"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
-
 ## Diagram
 
 $$  x_j = |x_i | $$
 
-![absDiagram](/pages/models/controlBlocks/absoluteValue/absDiagram.svg)
+![absDiagram](absDiagram.svg)
 
 Syntax:  
 

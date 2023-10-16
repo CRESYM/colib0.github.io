@@ -1,14 +1,18 @@
 ---
+id: switch1
 layout: page
 title: Switch
 tags: ["control block", "switch"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 Set the output state to one among $n$ input states, based on the value of a controlling state.
 
 ## Diagram
 
-![switch diagram](/pages/models/controlBlocks/switch/switch.svg)
+![switch diagram](switch.svg)
 
 example for $n=3$
 

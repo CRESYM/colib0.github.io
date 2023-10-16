@@ -1,12 +1,16 @@
 ---
+id: pictllim1
 layout: page
 title: Proportional integral (PI) controller with non-windup limit on the integral term
 tags: ["control block", "PI", "Proportional Integral", "non-windup"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![pictlim diagram](/pages/models/controlBlocks/limitedProportionalIntegralController/limitedProportionalIntegralController.svg)
+![pictlim diagram](limitedProportionalIntegralController.svg)
 
 Syntax:  
 

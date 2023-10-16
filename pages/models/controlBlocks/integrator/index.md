@@ -1,12 +1,16 @@
 ---
+id: int1
 layout: page
 title: Integrator control block with a positive time constant T
 tags: ["control block", "integrator"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![integrator diagram](/pages/models/controlBlocks/integrator/integrator.svg)
+![integrator diagram](integrator.svg)
 
 Syntax:  
 

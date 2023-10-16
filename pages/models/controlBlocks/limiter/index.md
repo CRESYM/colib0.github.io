@@ -1,12 +1,16 @@
 ---
+id: lim1
 layout: page
 title: Limiter control block with constant bounds
 tags: ["control block", "limiter"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![limiter diagram](/pages/models/controlBlocks/limiter/limiter.svg)
+![limiter diagram](limiter.svg)
 
 Syntax:  
 

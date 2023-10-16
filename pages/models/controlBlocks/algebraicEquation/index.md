@@ -1,12 +1,16 @@
 ---
+id: algeq1
 layout: page
 title: Algebraic equation
 tags: ["control block", "algebraic equation"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 Syntax:
 
-function name: algeq
+- function name: algeq
 
 Internal states : none
 

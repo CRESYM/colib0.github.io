@@ -1,12 +1,16 @@
 ---
+id: limvb1
 layout: page
 title: Limiter control block with variable bounds
 tags: ["control block", "limiter", "limiter variable bounds"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![limiter diagram](/pages/models/controlBlocks/limiterVariableBounds/limiterVariableBounds.svg)
+![limiter diagram](limiterVariableBounds.svg)
 
 Syntax:  
 

@@ -1,13 +1,17 @@
 ---
+id: db1
 layout: page
 title: Deadband control block
 tags: ["control block", "deadband"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![deadbandDiagram](/pages/models/controlBlocks/deadband/deadband.svg)
-![detailedDeadbandDiagram](/pages/models/controlBlocks/deadband/detailedDeadband.svg){ width=25% }
+![deadbandDiagram](deadband.svg)
+![detailedDeadbandDiagram](detailedDeadband.svg)
 
 Syntax:  
 

@@ -1,12 +1,16 @@
 ---
+id: inlim1
 layout: page
 title: Integrator control block with (positive) time constant T and non-windup limits on output
 tags: ["control block", "integrator", "limited integrator"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![integrator diagram](/pages/models/controlBlocks/limitedIntegrator/limitedIntegrator.svg)
+![integrator diagram](limitedIntegrator.svg)
 
 Syntax:  
 

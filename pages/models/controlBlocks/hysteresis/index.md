@@ -1,13 +1,17 @@
 ---
+id: hyst1
 layout: page
 title: Hysteresis control block
 tags: ["control block", "hysteresis"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![hysteresis diagram](/pages/models/controlBlocks/hysteresis/hysteresis.svg)
-![detailedHysteresisDiagram](/pages/models/controlBlocks/hysteresis/detailedHysteresis.svg){ width=25% }
+![hysteresis diagram](hysteresis.svg)
+![detailedHysteresisDiagram](detailedHysteresis.svg)
 
 - D stands for "Decreasing"
 - I stands for "Increasing"

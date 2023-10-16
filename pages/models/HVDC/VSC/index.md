@@ -1,7 +1,11 @@
 ---
+id: VSCHVDCRTE1
 layout: page
 title: VSC HVDC Model
 tags: ["phasor", "HVDC", "VSC", "generic"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Context  

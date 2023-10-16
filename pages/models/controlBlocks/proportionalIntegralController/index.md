@@ -1,12 +1,16 @@
 ---
+id: pictl1
 layout: page
 title: Proportional integral (PI) controller
 tags: ["control block", "PI", "Proportional Integral"]
+author: Mathilde Bongrain
+date: 16/10/2023
+version: version-1.0.0
 ---
 
 ## Diagram
 
-![pictl diagram](/pages/models/controlBlocks/proportionalIntegralController/proportionalIntegralController.svg)
+![pictl diagram](proportionalIntegralController.svg)
 
 Syntax:  
 
