@@ -17,13 +17,13 @@ This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université 
 ## Network ​description
 
 The network is described by the following figure:
-![FourVSCSystem](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png)
+![FourVSCSystem](4VSCSystem/4VSCsystem.png)
 
 ## Dynamic models​
 
 This test case includes:  
 
-- two generic [HVDC VSC lines](/models/HVDC/VSC/HVDCVSCPhasor)
+- two generic [HVDC VSC lines](../../../models/HVDC/VSC/HVDCVSCPhasor)
 - two wind turbines generators (equivalent for a Wind park)
 - two sets of 6 cables in parallel (225kV)
 - seven 400kV overhead lines
@@ -68,7 +68,7 @@ This test case includes:
 ### Scenario No. 1: Full export to transmission grid and large disturbance
 
 **Operating point No. 1**
-![4VSCSystemOp1](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point1.png)
+![4VSCSystemOp1](4VSCSystem_operating_point1.png)
 
 In this scenario, the power injected by the wind power plants WP1 and WP2 and by the HVDC links HVDC1 and HVDC2 is exported to the external system. The network is heavily loaded, and the active power of the load is equal to zero.  
 
@@ -81,7 +81,7 @@ HVDC2 is in grid forming mode.
 ### Scenario No. 2: No export to transmission grid and mild disturbance
 
 **Operating point No. 2**
-![4VSCSystemOp2](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point2.png)
+![4VSCSystemOp2](4VSCSystem_operating_point2.png)
 
 In this scenario, the power injected by the wind power plants WP1 and WP2 are exported by HVDC links, there is no export to the external network and the network is lightly loaded.
 The load at bus C is withdrawing active power, and the shunt reactors are withdrawing reactive power.
@@ -107,32 +107,32 @@ The duration of simulation is of 1 second in the first scenario (event at 150ms)
 ### First scenario:  Full export to transmission grid and large disturbance
 
 The disturbance is seen at bus A, B and C with highest impact on bus A voltage as expected.
-![Scenario1BusVoltage](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_bus_voltages.png)
+![Scenario1BusVoltage](4VSCSystem_results_scenario1_bus_voltages.png)
 
 On the grid following converters' responses, we can see the grid voltage support from WP2 and HVDC1 due to their voltage control support, whereas WP1 is in reactive power control.
-![Scenario1ActivePAndCurrent](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gf.png)
+![Scenario1ActivePAndCurrent](4VSCSystem_results_scenario1_converter_response_Gf.png)
 
-![Scenario1ReactivePAndCurrent](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gfollowing_Q_iq.png)
+![Scenario1ReactivePAndCurrent](4VSCSystem_results_scenario1_converter_response_Gfollowing_Q_iq.png)
 
 On the grid forming converter's response (HVDC2), the injected current increases after fault up to its maximum value. When the fault is cleared (250ms), the injected current falls down quickly before slowly returning to a steady state value.
 
-![Scenario1InjectedCurrentAndVoltages](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming.png)
+![Scenario1InjectedCurrentAndVoltages](4VSCSystem_results_scenario1_converter_response_GForming.png)
 
-![Scenario1ActivePowerAndDeltaM](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming2.png)
+![Scenario1ActivePowerAndDeltaM](4VSCSystem_results_scenario1_converter_response_GForming2.png)
 
 ### Scenario No. 2 : No export to transmission grid and mild disturbance
 
 In this second scenario, we can see that the response of the system to a mild disturbance very much depends on the short-circuit power of the connected equivalent grid. More importantly, this response is different if the system is simulated with a phasor simulator or an EMT one.
 
 On the EMT simulation (left figure) we can see that the system becomes unstable if the short-circuit power is lower than 16 GVA. On the phasor simulation (right figure), the system is stable even if the short-circuit power is lower than 16 GVA (5.5 GVA). It seems that the phasor is underestimating the stability of the system in this very specific case.
-![Scenario2GFResponse](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2_converter_response_Gfollowing.png)
+![Scenario2GFResponse](4VSCSystem_results_scenario2_converter_response_Gfollowing.png)
 
 **Variant A:** When the C bus is unload and full power is taken by the external network, the difference between voltages curves is significant with the EMT simulation, with the phasor approximation, the difference is bearly noticable.  
 The damping effect of the constant admittance load isn't properly captured.  
-![Scenario2GfResponse](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png)
+![Scenario2GfResponse](4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png)
 
 **Variant B:** When WP2 grid following control is changed by a grid forming one, the grid-forming control has such a strong stabilizing effect that both response remains stable even if the short-circuit power is as low as 300 MVA. Both simulation has comparable results.
-![Scenario2VarAGfResponse](/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png)
+![Scenario2VarAGfResponse](4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png)
 
 ## Open source implementations  
 
