@@ -57,15 +57,23 @@ p
 .side-right
 {
   position: fixed;
-  top: 90px;
+  top: 95px;
   left: 1000px;
-  width: 300px;
+  width: 400px;
   text-align: center;
+  box-shadow: 0 0 5px rgba(219, 219, 219, 0.5);
+  background:#fff;
 }
 
 #table-of-content
 {
   text-align: left;
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    font-weight: bold;
+  }
 }
 
 #main-content-wrap
