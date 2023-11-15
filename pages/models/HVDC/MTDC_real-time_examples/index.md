@@ -19,7 +19,7 @@ The proposed model uses the CIGRE benchmark models [[1]](#1) and it closes the f
 
 ## Model description
 
-The general structure of the HVDC VSC standard model is this one:
+The general structure of the HVDC VSC standard model is this one [[5]](#5):
 <img src="{{ '/pages/models/HVDC/MTDC_real-time_examples/MTDC_network.png' | relative_url }}"
      alt="MTDC topologies"
      style="float: left; margin-right: 10px;" />
@@ -52,4 +52,4 @@ This model has been successfully implemented in : RSCAD software
 
 <a id="4">[4]</a> CIGRE Working Group B4.76, “DC-DC converters in HVDC grids and for connections to HVDC systems,”Tech. Broch., vol. 827, 2021.
 
-<a id="5">[5]</a> NC Rfg Commission Regulation (EU) 2016/631 of 14 April 2016 establishing a network code on requirements for grid connection of generators (Text with EEA relevance) - Articles: 20 2 (b) and (c)
+<a id="5">[5]</a> A. Shetgaonkar, T. Karmokar, M. Popov, and A. Lekić, “Enhanced Real-Time Multi-Terminal HVDC Power System Benchmark Models with Perfor-mance Evaluation Strategies,” CIGRE Science & Engineering, February 2024.
