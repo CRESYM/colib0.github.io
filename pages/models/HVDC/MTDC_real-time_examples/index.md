@@ -50,9 +50,9 @@ Both parts control the reactive power or the voltage at each converter’s termi
 
 
 ## Open source implementations
-This model has been successfully implemented in :
+This model has been successfully implemented in : RSCAD software
 
-| Software      | URL |  
+| Software      | [Link](https://www.rtds.com/) |  
 | -----------------  | --- | 
 | Models        | [Link](https://github.com/control-protection-grids-tudelft/HVDC-RTDS-models) |  
 
