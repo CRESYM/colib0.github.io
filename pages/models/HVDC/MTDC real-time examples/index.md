@@ -11,18 +11,12 @@ These real time MTDC models designed for the for the RTDS-based simulation are u
 
 ## Model use, assumptions, validity domain and limitations
 The proposed model uses the CIGRE benchmark models [[1]](#1) and it closes the following modelings gap in the benchmark network: 
--Proposed network models consist of ±525 kV Submarine and land cables. 
--Proposed network models consider wind farm/wind turbine dynamics based on Real-time wind gusts using SiL setup. 
--Electrical and Control parameter perturbation using an automatic script.
--Provides an overview of required cores per network models. 
--Proposed networks consist of an average model of VARC DC CB. 
+- Proposed network models consist of ±525 kV Submarine and land cables. 
+- Proposed network models consider wind farm/wind turbine dynamics based on Real-time wind gusts using SiL setup. 
+- Electrical and Control parameter perturbation using an automatic script.
+- Provides an overview of required cores per network models. 
+- Proposed networks consist of an average model of VARC DC CB. 
 
-
-It can be used for voltage and transient stability studies by using the link specifications or customer data, when a detailed specific model can't be used (data isn't available or can't be shared). 
-
-It can't be used for studies that look at the DC side behaviour (a simplified DC bus is considered in the model) nor the frequency behaviour (the secondary voltage control isn't implemented in this model) as the DC link and its interaction with the converter isn't properly modelled.
-
-Details on the voltage control, reactive power control, active/reactive limits are represented and key for the voltage studies.  This model contains UQ and PQ diagrams limitations, current limitations to respect the apparent power constraints and operator-defined PQ limitations.
 
 Additional reactive current injection ($$I_{q}^{FFC}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies [[2]](#2). 
 
@@ -210,7 +204,7 @@ This model has been successfully implemented in :
 
 | Software      | URL |  
 | -----------------  | --- | 
-| Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVSC) |  
+| Models        | [Link](https://github.com/control-protection-grids-tudelft/HVDC-RTDS-models) |  
 
 ## Table of references
 
