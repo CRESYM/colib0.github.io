@@ -6,7 +6,7 @@ tags: ["RTDS", "HVDC", "MMC", "generic"]
 # MTDC real-time models  
 
 ## Context 
-These real time MTDC models designed for the for the RTDS-based simulation are using the CIGRE models [[1]](#1) and CIGRE brochures as the basis.
+These real time MTDC models designed for the for the RTDS-based simulation are using the CIGRE models [[1]](#1) and CIGRE brochures [[2]](#2), [[3]](#3), [[4]](#4) as the basis for the models design.
  
 
 ## Model use, assumptions, validity domain and limitations
@@ -25,8 +25,8 @@ The modeling choice for HVDC VSC for stability studies is an ongoing active rese
 ## Model description
 
 The general structure of the HVDC VSC standard model is this one:
-<img src="{{ '/pages/models/HVDC/VSC/HvdcVSC.svg' | relative_url }}"
-     alt="General view of the HVDC VSC standard model: physical and control connections"
+<img src="{{ '/pages/models/HVDC/MTDC_real-time_examples/MTDC_network.png' | relative_url }}"
+     alt="MTDC topologies"
      style="float: left; margin-right: 10px;" />
 
 ### DC transmission line and converters model
