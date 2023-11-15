@@ -28,42 +28,17 @@ The general structure of the HVDC VSC standard model is this one:
 <img src="{{ '/pages/models/HVDC/MTDC_real-time_examples/MTDC_network.png' | relative_url }}"
      alt="MTDC topologies"
      style="float: left; margin-right: 10px;" />
+	 
+The network topologies have a DC voltage rating of ±525 kV, with bipolar dedicated metallic return (DMR) configurations. The converter is a half-bridge topology. The system can be divided into three subsystems: the onshore AC system, the DC system, and the offshore AC system.
 
-### DC transmission line and converters model
-In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVDC system are represented by controlled Thévenin sources. The controllers act on the two voltage sources to provide the prescribed terminal conditions by adjusting the magnitude and frequency of the source voltage. 
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCACDCConverterView.svg' | relative_url }}"
-     alt="DC and AC sides of the converter"
-     style="float: left; margin-right: 10px;" />
+The onshore AC system consists of Thevenin’s equivalent circuit (static voltage source) of a strong grid; the grid impedance is computed based on the short circuit current level—a series resistor connection of a parallel resistor and inductor models it. By adjusting the values of the inductance and resistance, the short circuit current value and the damping angle at funda-mental and Nth harmonic are controlled.
 
-There is no transformer between the converter and the PCC. The modeling choice is deliberated and is motivated by several reasons:
-- Most of the data (nominal power, nominal voltage ranges, PQ and UQ diagrams) are provided at the PCC. The addition of a transformer makes the limits implementation more complex.
-- There is no standardized behavior for the tap changer of the transformer.
-- Reactive power or AC voltage control is done at the PCC. Introducing a transformer demands to compensate for the reactive losses in the control scheme, leading to a more complex and less readable model, without adding a real added value.
+The rated line-to-line (LL) voltage is 400 kV. The onshore converter station has two Y-D transformers, with ratings of 2 GVA each. The voltage ratio of this transformer is 400 kV/275 kV. Onshore converters are labeled CSA1, CSA4, and CSA5. However, based on the se-lected topology, the converters are omitted.
 
+The number of land and submarine DMR cables varies depending on the network topologies. For the five-terminal HVDC system, the number of land DMR cables are Cable 0a, 0b, and 0c. The length of these cables is 12 km. The land cables connect the onshore DC hub, which comprises DC breakers; for simplicity and to reduce the computation burden, only one DC breaker is employed. Furthermore, the DC system comprises six submarine cable links: ca-ble 1 (300 km), cable 2 (200 km), cable 3 (400 km), cable 4a (150 km), cable 4b (150 km), and cable 5 (200 km). The cables are modeled as a frequency phase-depended model. Fur-thermore, the cable link consists of three conductors (i.e., a positive, a negative cable, and metallic return per cable link) due to DMR topology. Cable 1 consists of two simplified VARC DC CB placed on the positive pole at either end of the cable, as seen in previous figure.
 
-### HVDC physical parts
+The offshore AC system consists of converter stations and aggregated average-value model wind farms. In the applied networks, offshore converters are labeled CSA2 and CSA3. How-ever, based on the topologies, the converters are omitted. The offshore converter is connect-ed to the offshore AC system via D-Y transformers. The rating of this transformer is 275 kV/220 kV, 2 GVA. Besides, this converter transformer is connected to a wind turbine trans-former. This transformer has a voltage ratio of 220 kV/66 kV and acts as a VA scaled-up transformer. Thus, a power rating of 2 GW can be achieved by choosing the proper scaling factor. The lower voltage end of this transformer is connected to the wind turbine. The wind turbines are type 4 and have a rating of 2 MW at a wind speed of 15 m/s. In this work, three fault locations are selected. F1 indicates an AC fault at the Point-of-Common Coupling (PCC) of the CSA1, F2 indicates a DC fault at the DC terminal near CSA1, and F3 indicates an AC fault at the PCC of CSA2.
 
-The physical parts of the HVDC line consist in two AC/DC converters and a DC line connecting them.
-
-#### Converters 
-The VSC converter is modelled on the AC side by a current injector with a parallel admittance. 
-It transforms the set points of active and reactive currents $$I_q^*$$ and $$I_p^*$$ and the internal angle given by the HVDC control into a couple of to be injected in the network currents, which are the real $$I_r$$ and imaginary $$I_i$$ values.
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCConverterCurrentSourceAdmittance.svg' | relative_url }}"
-     alt="Current injector"
-     style="float: center; margin-right: 10px;" />
-
-#### DC link model
-The DC link model is incorporated into the controller description and not explicitly physically represented.
-However, the relationships between DC currents and voltages of the receiving-end and sending-end sides are represented by the following figure:
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDCLinkPhysicalModel.svg' | relative_url }}"
-     alt="Electrotechnical components representing the DC side"
-     style="float: center; margin-right: 10px;" />
-
-Where :
-- $$C_{DC}$$ represents the equivalent capacity of the converter ( in $$F$$)
-- $$R_{DC}$$ represents the resistance of the DC cable (in $$\Omega$$)
 
 
 ### Control parts
@@ -73,131 +48,6 @@ The control is divided into two main functions, each one of them associated to o
 
 Both parts control the reactive power or the voltage at each converter’s terminal (named U/Q Control).
 
-#### Active power control
- It deduces the active current reference $$I_p^*$$ to give to the converter from an active
-power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCPControl.svg' | relative_url }}"
-     alt="P control of the VSC"
-     style="float: center; margin-right: 10px;" />
-
-
-The $$r_{p_{fault}}$$ signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
-
-The $$block$$ signal indicates if the converter is blocked (=1) or not.
-$$P_{max}$$ and $$P_{min}$$ are operating limits (user defined), $$I_{p_{max}}$$ and $$I_{p_{min}}$$ are active power limits of the converter.
-
-$$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. It is calculated as follows:
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg' | relative_url }}"
-     alt="Delta P calculation"
-     style="float: center; margin-right: 10px;" />
-
-The Switch signal goes to 1 if the active current $$I_p^*$$ reaches its caps (by a matter of DUDC, margin added to increase model stability).
-<!-- two spaces -->
-
-#### DC Voltage Control 
-The DC voltage control deduces the active current reference $$I_p^*$$ to give to the converter from a DC voltage reference $$V_{DC}^*$$ and a measure of the DC voltage $$V_{DC}$$, thanks to an anti-wind-up proportional integral block.
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg' | relative_url }}"
-     alt="VDC control of the VSC"
-     style="float: center; margin-right: 10px;" />
-
-$$I_{P_{MAX}}$$ is the nominal active current of the DC line (in pu).
-
-NB: if the nominal power $$S_n$$ is assumed equal to nominal active power $$P_n$$, there is a correspondance between pu and SI units, $$I_{p_{max}}$$ will be equal to 1, and InPu will be equal to $$I_n^{Pu} = \frac{\sqrt{P_{max}^2 + Q_{max}^2}}{S_n}$$
-<!-- two spaces -->
-
-#### AC Voltage control 
-This part of the control contains the reactive power/AC voltage control loop (Q-Mode or U-Mode).
-There is one AC voltage control/reactive power control for each converter, as the AC voltage/reactive power is controlled at each terminal of the HVDC line. 
-
-In both modes, a reference of the reactive power to be injected to the grid is assessed.
-
-**Q-mode:**
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg' | relative_url }}"
-     alt="Q mode of the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
-
-**U-mode:**
-In the AC voltage control the control is ensured by the anti-windup proportional integral block, and contains a deadband and a reactive power droop.
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg' | relative_url }}"
-     alt="U mode of the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
-
-$$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits as follows:
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCQMaxMinComb.svg' | relative_url }}"
-     alt="Combinaison of the operational, PQ and UQ limits"
-     style="float: center; margin-right: 10px;" />
-
-The limits $$Q_{max}^P$$/$$Q_{min}^P$$ and $$Q_{max}^U$$/$$Q_{min}^U$$ respectively represent the PQ and UQ diagrams of the link.
-
-Finally, the reactive power is converted into a reactive reference current $$I_q^*$$ by the following control:
-
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg' | relative_url }}"
-     alt="calculation of the reference reactive current by the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
-
-Where:
-- $$U$$ represents the voltage value at the PCC.it is limited to a minimum value to avoid divsion by zero.
-- The $$T_Q$$ time constant represents the dynamics of the voltage/reactive power control.
-- The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It very much depends on the AC voltage value and gives a fast response to a large disturbance, giving then priority to the reactive current. It is compliant with the HVDC network code [[4]](#4)  and RfG [[5]](#5)  describing the HVDC VSC capability to provide fast fault current (FFC) at a connection point the grid.  Reactive current injection during faults helps to both recovering the voltage during faults and to injecting enough current quickly enough for system protections to function reliably.
-
-### Current limits:
-Active and reactive current limits are calculated in the model depending on the value of $$I_q^{FRT}$$. By default, the priority is given to the active power control side - i.e no fast reactive current injection ($$I_q^{FRT}=0$$) -, and the limits are given by the following equations:
-
-$$I_{p_{max}} = I_{P_{MAX}}$$
-
-$$I_{p_{min}} = -I_{P_{MAX}}$$
-
-$$I_{q_{max}} = \sqrt{I_n^2 - I_p^{*2}}$$
-
-$$I_{q_{min}} = -I_{q_{max}}$$
-
-where $$I_n (pu)$$ is to total link nominal current.
-
-if the priority is given to the reactive power control side, then the equations are:
-
-$$I_{q_{max}} = I_n$$
-
-$$I_{q_{min}} = -I_{q_{max}}$$
-
-$$I_{p_{max}} = \sqrt{I_n^2 - I_q^{*2}}$$
-
-$$I_{p_{min}} = -I_{p_{max}}$$
-
-### Blocking function
-When the voltage goes below at certain threshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
-
-## Initial equations 
-The initial values of the active and reactive powers $$P_{SEC}(t=0)$$, $$Q_{SEC}(t=0)$$, $$P_{REC}(t=0)$$ and $$Q_{SEC}(t=0)$$ at both converters PCC are determined by the power flow calculation, assuming a steady state is achieved.
-The rest of the initial values of the internal variables can be determined by the following equations: 
-
-$$U_{DC}^*(t=0) = 1$$
-
-$$P_{SEC}(t=0) = - U_{SEC}(t=0) * I_{p,SEC}(t=0) * \frac{S_n}{Sn^*} $$
-
-$$Q_{SEC}(t=0) = U_{SEC}(t=0) * I_{q,SEC}(t=0) * \frac{S_n}{S_n^*} $$
-
-Same equations apply on the REC converter side.
-
-if $$ P_{SEC}^*(t=0) > 0$$ then:
-
- $$U_{DC, SEC}(t=0) = 1$$ 
- $$U_{DC, REC}(t=0) = 1 - R_{DC} * P_{SEC}(t=0)$$
-
- else 
- $$U_{DC, SEC}(t=0) = 1 + R_{DC} * P_{SEC}(t=0)$$ 
- $$U_{DC, REC}(t=0) = 1 $$
-
-$$Q_{SEC}^*(t=0) = - Q_{SEC}(t=0) * \frac{S_n^*}{S_n}$$
-
-$$P_{SEC}^*(t=0) = - P_{SEC}(t=0) * \frac{S_n^*}{S_n} $$
-
-$$U_{SEC}^*(t=0) = $$U_{SEC}(t=0) - \lambda * Q_{SEC}(t=0) * \frac{S_n^*}{S_n}$$
-
-The mode of the AC voltage control can be either set to 1 or 0.
 
 ## Open source implementations
 This model has been successfully implemented in :
