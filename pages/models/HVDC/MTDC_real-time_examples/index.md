@@ -17,11 +17,6 @@ The proposed model uses the CIGRE benchmark models [[1]](#1) and it closes the f
 - Provides an overview of required cores per network models. 
 - Proposed networks consist of an average model of VARC DC CB. 
 
-
-Additional reactive current injection ($$I_{q}^{FFC}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies [[2]](#2). 
-
-The modeling choice for HVDC VSC for stability studies is an ongoing active research topic. The fast interaction between AC and DC systems requires changes in the manner in which the modeling and computation of the system is done, both at the DC and the AC side [[3]](#3).
-
 ## Model description
 
 The general structure of the HVDC VSC standard model is this one:
@@ -38,15 +33,6 @@ The rated line-to-line (LL) voltage is 400 kV. The onshore converter station has
 The number of land and submarine DMR cables varies depending on the network topologies. For the five-terminal HVDC system, the number of land DMR cables are Cable 0a, 0b, and 0c. The length of these cables is 12 km. The land cables connect the onshore DC hub, which comprises DC breakers; for simplicity and to reduce the computation burden, only one DC breaker is employed. Furthermore, the DC system comprises six submarine cable links: ca-ble 1 (300 km), cable 2 (200 km), cable 3 (400 km), cable 4a (150 km), cable 4b (150 km), and cable 5 (200 km). The cables are modeled as a frequency phase-depended model. Fur-thermore, the cable link consists of three conductors (i.e., a positive, a negative cable, and metallic return per cable link) due to DMR topology. Cable 1 consists of two simplified VARC DC CB placed on the positive pole at either end of the cable, as seen in previous figure.
 
 The offshore AC system consists of converter stations and aggregated average-value model wind farms. In the applied networks, offshore converters are labeled CSA2 and CSA3. How-ever, based on the topologies, the converters are omitted. The offshore converter is connect-ed to the offshore AC system via D-Y transformers. The rating of this transformer is 275 kV/220 kV, 2 GVA. Besides, this converter transformer is connected to a wind turbine trans-former. This transformer has a voltage ratio of 220 kV/66 kV and acts as a VA scaled-up transformer. Thus, a power rating of 2 GW can be achieved by choosing the proper scaling factor. The lower voltage end of this transformer is connected to the wind turbine. The wind turbines are type 4 and have a rating of 2 MW at a wind speed of 15 m/s. In this work, three fault locations are selected. F1 indicates an AC fault at the Point-of-Common Coupling (PCC) of the CSA1, F2 indicates a DC fault at the DC terminal near CSA1, and F3 indicates an AC fault at the PCC of CSA2.
-
-
-
-### Control parts
-The control is divided into two main functions, each one of them associated to one converter: 
-- the part in charge of the DC voltage control (also called Udc Control) and 
-- the part in charge of the active power control (also called P Control).
-
-Both parts control the reactive power or the voltage at each converter’s terminal (named U/Q Control).
 
 
 ## Open source implementations
