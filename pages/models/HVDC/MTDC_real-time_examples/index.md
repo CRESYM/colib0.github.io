@@ -36,7 +36,7 @@ The offshore AC system consists of converter stations and aggregated average-val
 
 
 ## Open source implementations
-This model has been successfully implemented in : RSCAD software
+This model has been successfully implemented in : RSCAD FX 2.0 software
 
 | Software      | [Link](https://www.rtds.com/) |  
 | -----------------  | --- | 
