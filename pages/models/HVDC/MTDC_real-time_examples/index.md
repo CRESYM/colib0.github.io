@@ -6,8 +6,12 @@ tags: ["RTDS", "HVDC", "MMC", "generic"]
 # MTDC real-time models  
 
 ## Context 
+In the global pursuit of carbon neutrality, the European energy transition stands out as a pioneering effort, aiming to make Europe climate-neutral by 2050. Offshore wind energy in the North Sea is instrumental in achieving this goal, with the European Union setting ambitious targets of 60 GW by 2030 and 300 GW by 2050.
+
+TenneT's 2GW Program: TenneT, a offshore transmission operator, is at the forefront of this movement. Their vision: 14 high-voltage direct current (HVDC) offshore grids with 2 GW transmission each, delivering green energy to the Dutch and German North Sea by 2031.
+
 These real time MTDC models designed for the for the RTDS-based simulation are using the CIGRE models [[1]](#1) and CIGRE brochures [[2]](#2), [[3]](#3), [[4]](#4) as the basis for the models design.
- 
+
 
 ## Model use, assumptions, validity domain and limitations
 The proposed model uses the CIGRE benchmark models [[1]](#1) and it closes the following modelings gap in the benchmark network: 
@@ -34,6 +38,7 @@ The number of land and submarine DMR cables varies depending on the network topo
 
 The offshore AC system consists of converter stations and aggregated average-value model wind farms. In the applied networks, offshore converters are labeled CSA2 and CSA3. How-ever, based on the topologies, the converters are omitted. The offshore converter is connect-ed to the offshore AC system via D-Y transformers. The rating of this transformer is 275 kV/220 kV, 2 GVA. Besides, this converter transformer is connected to a wind turbine trans-former. This transformer has a voltage ratio of 220 kV/66 kV and acts as a VA scaled-up transformer. Thus, a power rating of 2 GW can be achieved by choosing the proper scaling factor. The lower voltage end of this transformer is connected to the wind turbine. The wind turbines are type 4 and have a rating of 2 MW at a wind speed of 15 m/s. In this work, three fault locations are selected. F1 indicates an AC fault at the Point-of-Common Coupling (PCC) of the CSA1, F2 indicates a DC fault at the DC terminal near CSA1, and F3 indicates an AC fault at the PCC of CSA2.
 
+The detailed description of the models can be found in the publication [[5]](#5).
 
 ## Open source implementations
 This model has been successfully implemented in : RSCAD FX 2.0 software
