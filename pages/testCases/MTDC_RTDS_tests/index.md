@@ -12,14 +12,15 @@ It aims at showing the limitations of the phasor approximation while being small
 This case is typical of the converter driven stability slow interactions problem. 
 
 ## References:
-This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université de Liège, Belgium) in the view of showing the limitations of the phasor approximation, and use several network components developed by Prof. Xavier Guillaud (Ecole Centrale de Lille, France).
-
+This benchmark has been designed by the Control of HVDC/AC electrical grids group from TU Delft, 
 
 ## Network ​description:
 The network is described by the following figure:
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png' | relative_url }}"
-     alt="Four VSC system"
-     style="float: center; margin-right: 10px;" />
+The general structure of the HVDC VSC standard model is this one [[5]](#5):
+<img src="{{ '/pages/testCases/MTDC_RTDS_tests/MTDC_network.png' | relative_url }}"
+     alt="MTDC topologies"
+     style="float: left; margin-right: 10px;" />
+This figure shouws four different HVDC configurations that are available in the repository.
 
 ## Dynamic models​
 This test case includes: 
@@ -34,6 +35,8 @@ This test case includes:
 
 ## Data 
 
+* Parameters of the converters
+
 | Parameter   | Onshore converter station per MMC |  Offshore converter station per MMC  | 
 | ----------- | --------------- | --------------- |
 | Rated Power (MVA)     | 2000      |    2000   |  
@@ -41,18 +44,13 @@ This test case includes:
 | AC grid voltage (kV)  | 400       |    220    |   
 | AC converter bus voltage (kV)     | 275             |    275   |   
 | DC link voltage (kV)  | 525       |    525    |   
-
-| Line/Cable  | Nominal Voltage |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
-|   | (V) | ($$\Omega$$) | ($$\Omega$$)  | ($$\mu S$$) | (km) | (MVA) |
-| ----------- | --------------- | --------- | ---------- | -------------------- | ----------- | -----------|
-| A-C*        | 400             |    1.04   |   20.80    | 98                   | 65          | 3000       |
-| A-B*        | 400             |    0.51   |   10.24    | 48                   | 32          | 3000       |
-| B-C*        | 400             |    1.12   |   22.40    | 105                  | 70          | 3000       |
-| A2-E**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
-| B2-F**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
-
-* data for a single circuit
-** data for a 6 cables in parallel
+| Transformer reactance (p.u.)  | 0.18      |    0.15    |   
+| MMC equivalent arm inductance (mH)  | 0.025       |    0.0497    |   
+| MMC equivalent arm resistance ($\Omega$)  | 0.0785       |    0.0785   |   
+| Capacitor energy in each submodule (MJ)  | 30       |    30    |   
+| Number of submodules per valve  | 240       |    200    |   
+| Rated voltage and current of each sub-module   | 2.5 kV /2kA       |    2.5 kV /2kA    |   
+| Conduction resistance of each IGBT/diode   | $5.44 \times 10^{-4}$       |    $5.44 \times 10^{-4}$    |   
 
 | Transformer | Nominal Voltage (V) |  R (%)    |  X (%)     | ratio (%)     | Snom (MVA) |
 | ----------- | --------------- | --------- | ---------- | ------------- | -----------|
@@ -169,12 +167,7 @@ The damping effect of the constant admittance load isn't properly captured.
      style="float: left; margin-right: 10px;" />
 
 ## Open source implementations
-Some open source implementations of this use case are available in the following software solutions:
 
-| Software   | Phasor/EMT  |   URL |
-| --------------- | --- | ----------- |
-| Dynawo        | Phasor | [Link](https://github.com/dynawo/dynawo/tree/master/examples/DynaSwing/GridForming_GridFollowing) |
-| STEPSS  | Phasor | ... |
-| EMTP-RV | EMT | ...   |
-| PSCAD   | EMT | ...   |
-| SimPowerSystem | EMT | ... |
+| Software      | [Link](https://www.rtds.com/) |  
+| -----------------  | --- | 
+| Models        | [Link](https://github.com/control-protection-grids-tudelft/HVDC-RTDS-models) |  
