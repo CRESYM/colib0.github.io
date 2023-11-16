@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Four VSC benchmark system
+title: MTDC benchmark models and test simulations
 ---
 
-# Four VSC benchmark System
+# MTDC benchmark models for the real-time simulation
 
 ## Use case purpose: ​
 This 100% power electronics small test system combines VSC and wind turbines technologies, grid following and grid forming controls. 
@@ -12,7 +12,7 @@ It aims at showing the limitations of the phasor approximation while being small
 This case is typical of the converter driven stability slow interactions problem. 
 
 ## References:
-This benchmark has been designed by the Control of HVDC/AC electrical grids group from TU Delft, 
+This benchmark has been designed by the Control of HVDC/AC electrical grids group from TU Delft. 
 
 ## Network ​description:
 The network is described by the following figure:
@@ -52,14 +52,12 @@ This test case includes:
 | Rated voltage and current of each sub-module   | 2.5 kV /2kA       |    2.5 kV /2kA    |   
 | Conduction resistance of each IGBT/diode   | $5.44 \times 10^{-4}$       |    $5.44 \times 10^{-4}$    |   
 
-| Transformer | Nominal Voltage (V) |  R (%)    |  X (%)     | ratio (%)     | Snom (MVA) |
-| ----------- | --------------- | --------- | ---------- | ------------- | -----------|
-| A1-A        | 320/400         |    0.5   |   15.0      | 102           | 1200       |
-| B1-A        | 320/400         |    0.5   |   15.0      | 104           | 1700       |
-| A2-A        | 225/400         |    0.5   |   15.0      | 102           | 2400       |
-| B2-B        | 225/400         |    0.5   |   15.0      | 105           | 2400       |
-| WP1-E*      | 66/225          |    0.5   |   12.0      | 105           | 2400       |
-| WP2-F*      | 66/225          |    0.5   |   12.0      | 104           | 2400       |
+* Relevant Geometrical and Material Data of Generic 525 kV HVDC Land Cable
+
+| Main layers | Properties (unit) |  Parameter value    | 
+| ----------- | --------------- | --------- |
+| Core conductor        | Metallic cross-sectional area (mm$^2$)    |    3000      |
+
 
 * 6 transformers in parallel 400MVA each 
 
