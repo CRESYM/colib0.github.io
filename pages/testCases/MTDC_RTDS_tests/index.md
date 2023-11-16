@@ -34,13 +34,13 @@ This test case includes:
 
 ## Data 
 
-| Parameter   | Onshore converter station per MMC |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
-| ----------- | --------------- | --------- | ---------- | -------------------- | ----------- | -----------|
-| A-C*        | 400             |    1.04   |   20.80    | 98                   | 65          | 3000       |
-| A-B*        | 400             |    0.51   |   10.24    | 48                   | 32          | 3000       |
-| B-C*        | 400             |    1.12   |   22.40    | 105                  | 70          | 3000       |
-| A2-E**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
-| B2-F**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
+| Parameter   | Onshore converter station per MMC |  Offshore converter station per MMC  | 
+| ----------- | --------------- | --------------- |
+| Rated Power (MVA)     | 2000      |    2000   |  
+| Line frequency (Hz)   | 50        |    50     |   
+| AC grid voltage (kV)  | 400       |    220    |   
+| AC converter bus voltage (kV)     | 275             |    275   |   
+| DC link voltage (kV)  | 525       |    525    |   
 
 | Line/Cable  | Nominal Voltage |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
 |   | (V) | ($$\Omega$$) | ($$\Omega$$)  | ($$\mu S$$) | (km) | (MVA) |
