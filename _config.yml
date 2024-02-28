@@ -1,52 +1,36 @@
-# Welcome to Jekyll!
 #
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
+# Copyright (c) 2018, RTE (http://www.rte-france.com)
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 
 title: Collaborative Open-Source Dynamic Simulation Library
+theme: null
 markdown: kramdown
-email: info@cresym.eu
-show_downloads: false
-description: >- # this means to ignore newlines until "baseurl:"
-  The power system and energy systems at large experience a paradigm shift with many novel , active components connected. Appraising the behavior and reactions of such new items is critical for network operators to simulate and anticipate system operation, and for this, available, reliable up to date and possibly specifically targeted component models are required. At present, on one hand, operators manage to gather and build pragmatically a model database of the components directly connected to their network. They remain however blind or use rough proxies to cope with: Components indirectly connected (e.g. to neighboring, coupled networks, such as electricity or gas grids ; and/or quite likely in a soon future: across sectors )
-  Future connected ones (components at design stage, latest technology, and proprietary manufacturer models). On the other hand, research also suffers from the lack of all the necessary component models and is slowed down by the effort required to circumvent it.
-  They both face the need for a collaborative shared dynamic simulation library that would benefit to all by its high quality, transparency of model equations, and concrete applications (real test cases).
-  In this Colib0 workspace, we aim at addressing power systems components, networks, and small and large test cases for steady-state and dynamic stability studies. For each of them, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
-url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/colib0.github.io/"
-twitter_username: colib0
-github_username:  colib0
 
-# Build settings
-plugins:
-  - jekyll-feed #To generate automatic RSS flux
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
+kramdown:
+  toc_levels: 2..3
 
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - .gitignore
-  - LICENSE
-  - README.md
+  - /backup
+  - /pages/todo
+  - /vendor
+  - /Gemfile
+  - /Gemfile.lock
+  - /LICENSE
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-scholar
+
+
+scholar:
+  style: apa
+  locale: en
+  sort_by: none
+  order: ascending
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: ""
+  query: "@*"

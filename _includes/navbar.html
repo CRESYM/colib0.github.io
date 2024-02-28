@@ -1,78 +1,129 @@
-<!-- Indicate which pages should be included in the navigation bar (add a "/" to include a dropdown menu) -->
-{% assign navItems = "home,about/,models/,testCases,contact" %}
+{% assign navItems = "home,about/,models/,testCases/,templates/,contact" %}
 {% assign navItems = navItems | split: "," | string %}
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
 
-<nav class="navbar navbar-expand sticky-top">
-  <div>
-    <a href="{{ '/' | relative_url }}">
-      <img src= "{{ '/assets/images/colib_logo2.png' | relative_url }}" height="50" alt="Colib">
-    </a>
-  </div>
+        <div class="logo mr-auto">
+            <a href="/index.html"><img src="/assets/img/Logo_colib.svg" height="600" alt="PowSyBl"></a>
+        </div>
 
-  <ul class="navbar-nav mr-auto">
-    {% for item in navItems %}
-      <!-- 2 cases: with or without dropdown menu -->
-      {% if item contains '/' %}
-        {% assign dropdown = true %}
-        {% assign itemDropD = item | remove: "/"%}
-      {% else %}
-        {% assign dropdown = false %}
-      {% endif%}
-      <!-- Find the current page that corresponds to the navigation item -->
-      {% for page in site.pages %}
-        {% assign pageFound = false %}
-        {% assign urlEndCurrent = page.url | split: "/" | last %}
-        {% if dropdown %}
-          {% if urlEndCurrent == itemDropD %}
-            {% assign pageFound = true %}
-          {% endif%}
-        {% else %}
-          {% assign itemHtml = item | append: ".html" %}
-          {% if urlEndCurrent == item or urlEndCurrent == itemHtml%}
-            {% assign pageFound = true %}
-          {% endif%}
-        {% endif%}
-        <!-- Exception for the home link -->
-        {% if page.title=="Home" and item =="home"%}
-          {% assign pageFound = true %}
-        {% endif %}
-        <!-- Gather information from the corresponding page -->
-        {% if pageFound%}
-          {% assign pageNo = forloop.index0 %}
-          {% assign url = page.url | relative_url%}
-          {% assign urlEnd = url | split: "/" | last %}
-          {% assign title = page.title %}
-        {% endif %}
-      {% endfor %}
-      <!-- Highlight current page -->
-      {% if url == current_page %}
-        {% assign current = ' current' %}
-      {% else %}
-        {% assign current = null %}
-      {% endif %}
-      <!-- Case of a dropdown menu: include all subfolders -->
-      {% if dropdown %}
-        <li class="nav-item dropdown">
-          <a class="nav-link{{ current }} dropdown-toggle" href="{{url}}" role="button" aria-haspopup="true" aria-expanded="true">{{title}}</a>
-          <div class="dropdown-menu">
-            {% for pageDropD in site.pages %}
-              {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
-              {% assign dir = urlArrayDropD[-2] %}
-              {% if dir == urlEnd %}
-                <a class="dropdown-item" href="{{pageDropD.url | relative_url}}">{{pageDropD.title}}</a>
+        <!-- TODO.md(mathbagu): ameliorer le style en version mobile -->
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                {% for item in navItems %}
+                <!-- 2 cases: with or without dropdown menu -->
+                {% if item contains '/' %}
+                  {% assign dropdown = true %}
+                  {% assign itemDropD = item | remove: "/"%}
+                {% else %}
+                  {% assign dropdown = false %}
+                {% endif%}
+                <!-- Find the current page that corresponds to the navigation item -->
+                {% for page in site.pages %}
+                  {% assign pageFound = false %}
+                  {% assign urlEndCurrent = page.url | split: "/" | last %}
+                  {% if dropdown %}
+                    {% if urlEndCurrent == itemDropD %}
+                      {% assign pageFound = true %}
+                    {% endif%}
+                  {% else %}
+                    {% assign itemHtml = item | append: ".html" %}
+                    {% if urlEndCurrent == item or urlEndCurrent == itemHtml%}
+                      {% assign pageFound = true %}
+                    {% endif%}
+                  {% endif%}
+                  <!-- Exception for the home link -->
+                  {% if page.title=="Home" and item =="home"%}
+                    {% assign pageFound = true %}
+                  {% endif %}
+                  <!-- Gather information from the corresponding page -->
+                  {% if pageFound%}
+                    {% assign pageNo = forloop.index0 %}
+                    {% assign url = page.url | relative_url%}
+                    {% assign urlEnd = url | split: "/" | last %}
+                    {% assign title = page.title %}
+                  {% endif %}
+                {% endfor %}
+                <!-- Highlight current page -->
+                {% if url == current_page %}
+                  {% assign current = ' current' %}
+                {% else %}
+                  {% assign current = null %}
+                {% endif %}
+                <!-- Case of a dropdown menu: include all subfolders -->
+                {% if dropdown %}
+                <li class="drop-down">
+                    <a href="{{url}}">{{title}}</a>
+                    <ul>
+                        {% for pageDropD in site.pages %}
+                        {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
+                        {% assign dir = urlArrayDropD[-2] %}
+                        {% if dir == urlEnd and pageDropD.title != "TestCases-search" and pageDropD.title != "Models-search" %}
+                          <li><a href="{{pageDropD.url | relative_url}}">{{pageDropD.title}}</a></li>
+                        {% endif%}
+                      {% endfor %}
+                    </ul>
+                </li>
+                {% else %}
+                <li><a href="{{url}}">{{title}}</a></li>
               {% endif%}
             {% endfor %}
-          </div>
-        </li>
-      <!-- Case of no dropdown menu -->
-      {% else %}
-        <li class="nav-item"><a class="nav-link{{current}}" href="{{url}}">{{title}}</a></li>
-      {% endif%}
-    {% endfor %}
-  </ul>
-  <div markdown="1">
-    <a href="https://cresym.eu/">
-      <img src="{{ '/assets/images/Cresym_logo.png' | relative_url }}" height="50" alt="Cresym">
-    </a>
-  </div>
+            {% if page.dir contains "/pages/models" %}
+            <li>
+                <!--
+                    inside a <a/> for similar styling as other items. Add
+                     py-1 because the input is taller than just text, so
+                    compensate with less padding on the <a/>
+                -->
+                <a class="py-1" ><form class="d-inline-flex form-inline" action="/pages/models/models-search" method="get">
+                    <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
+                    <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search for models" aria-label="Search" />
+                </form></a>
+            </li>
+            </ul>
+            {% elsif page.dir contains "/pages/testCases" %}
+            <li>
+                <!--
+                    inside a <a/> for similar styling as other items. Add
+                     py-1 because the input is taller than just text, so
+                    compensate with less padding on the <a/>
+                -->
+                <a class="py-1" ><form class="d-inline-flex form-inline" action="/pages/testCases/testcases-search" method="get">
+                    <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
+                    <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search for test cases" aria-label="Search" />
+                </form></a>
+            </li>
+            </ul>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<!--
+<nav class="navbar navbar-expand navbar-light bg-light fixed-top">
+    <div class="row no-gutters" style="flex-grow:1;">
+        <div class="col-auto mr-auto align-self-center">
+            {% if page.sidebar %}
+                <button id="sidebarToggler" class="navbar-toggler d-inline d-lg-none border-0 mr-0 pl-0" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            {% endif %}
+
+            <a class="navbar-brand mr-0" href="/">
+                <img src="/assets/powsybl/logo_lfe_powsybl.svg" height="30" alt="">
+            </a>
+        </div>
+        <div class="col-5 col-sm-auto">
+            <div class="row no-gutters">
+                <div class="col-sm-auto">
+                    <ul class="navbar-nav ml-auto">
+                        <a class="nav-link mx-1" href="https://github.com/powsybl" target="_blank" rel="noopener" aria-label="GitHub" data-toggle="tooltip" data-placement="bottom" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="nav-link mx-1" href="https://spectrum.chat/powsybl" target="_blank" rel="noopener" aria-label="Spectrum" data-toggle="tooltip" data-placement="bottom" title="Spectrum"><i class="fas fa-comment"></i></a>
+                        <a class="nav-link mx-1" href="https://lists.lfenergy.org/g/powsybl" target="_blank" rel="noopener" aria-label="Mailing Lists" data-toggle="tooltip" data-placement="bottom" title="Mailing Lists"><i class="fas fa-envelope"></i></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>
+-->

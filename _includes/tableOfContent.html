@@ -14,6 +14,7 @@
         let h1Next = headings1.eq(i+1);
 
         headings.push({"id":$(h1Curr).attr('id'),"text":$(h1Curr).text(), "section": false});
+  
         
         let h2No = 1;
         let headings2;
@@ -24,6 +25,7 @@
         else {
             headings2 = h1Curr.nextUntil(h1Next, ".markdown-body h2");
         }
+
 
         for (let j = 0; j < headings2.length; j++) {
             let h2Curr = headings2.eq(j);
@@ -73,4 +75,8 @@
     }
 
 })(jQuery)
+
+// Fix Navigation bar convering content
+const navigationHeight = document.querySelector('nav').offsetHeight;
+document.documentElement.style.setProperty('--scroll-padding', navigationHeight + "px");
 </script>
