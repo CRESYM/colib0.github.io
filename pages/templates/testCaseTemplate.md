@@ -11,31 +11,41 @@ tags: [] # pick none, one or several tags for the following categories:
 # Contains: gives the list of electrical device the case contains: Protection, line, bus, machines, synchronous generator, transformer, controllers, capacitors, sources, excitation system, automatic voltage regulator, PSS, PLL, Governor, load, sensors, wind generation, solar generation, load, HVDC, synchronous condensers, DLR, etc.
 # Implementation tools: software name (EMTP, PSCAD, PSS/E, NEPLAN, dynawo, DPSIM, Power Factory, Matlab, STEPSS, RTDS, Opal RT, powerworld, GE PSLF) to be used as tag if your test case is implemented in specific software 
 date: XX/XX/20XX # date of last page modification 
-bibliography: # if you have a bibtex file to include
-  - my_references.bib
 ---
+
 # Test cases description template
-  
+
  A test case include a network test system with static and dynamic models for each element, some input data, and some scenarios
  Each test case must be specific enough to be added in a new page. In other words, it means that the test case should be significatively different from existing standard test cases (either by its network topology, generation mix, static data values), either by its operating point, either by the phenomena/event it tackles. The differences with existing well-known test cases should be clearly explained.
 
 ## Use case purpose​ and context
 
 this section aims at explaining the main purpose of the test case, the reason why it was built. The history behind the test case can also be given for clarity. ​
-References citations can be made pointing to the references section (at the end of the document). A citation can simply be included by using footnote links: [^1] inside the main text and
-<a id="1">[1]</a> Author's name, "Title" Date Journal, doi: 10.1109/>XXXXx46648.2021.9495096 at the end of the document.
+References citations can be made pointing to the references section (at the end of the document). Two ways to include a citation:
+
+- by using footnote links:
+  put [^1] inside the main text
+  insert references manually by using this markdown list links in the reference section below.
+  
+- by using a bibtex file:
+  add your bibtexfile in the _bibliography folder.
+  Add a citation inside your text {% cite DUMMY:2 %}
+  inserting directly the bibtex file bibliography in the reference section below
 
 ## Table of references
 
 This section lists all the references. It must comply with current citation standards. A bibtex file can directly be used.
 
-For example:
-You can insert references manually by using this markdown list links:
+ Two ways to include a bibliography:
 
-<a id="1">[1]</a> Author's name, "Title" Date Journal, doi: 10.1109/>XXXXx46648.2021.9495096 at the end of the document.
-<a id="2">[2]</a> Author's name 2, "Title2" Date Journal, doi: 10.1109/>XXXXXXXXX.2021.9495096 at the end of the document.
-
-or by using directly a bibtex file in the model's folder and using the citation command: [@texbook]
+- by using footnote links:
+  insert references manually by using this markdown list:
+  <a id="1">[1]</a> Author's name, "Title" Date Journal, doi: 10.1109/>XXXXx46648.2021.9495096
+  <a id="2">[2]</a> Author's name 2, "Title2" Date Journal, doi: 10.1109/>XXXXXXXXX.2021.9495096
+- by inserting directly the bibtex file biblioagraphy with the following command:
+{% bibliography --file references  %}
+'--cited' command list only the ones that are cited in the page.
+More details about the citations details can be found at: [jekyllScholarCitations](https://github.com/inukshuk/jekyll-scholar#citations)
 
 ## Network ​description
 
@@ -53,18 +63,22 @@ This section includes all the needed input data the test case needs to be run.
 It covers:
 
 - static data for the network
+
 | Line/Cable  | Nominal Voltage (kV) |  R (\ohm) |  X (\ohm)  |
 | ----------- | -------------------- | --------- | ---------- |
 | XXX         |    XXX               |   XXX     | XXX        |
 
 - dynamic data for each dynamic element component. For example :
+
 | PLL parameter| Units (if pu specify the base) |
 | ------------ | -------------------- ----------|
 | Tpll         |   ms                           |
+
 - load flow values
 - initial states of dynamic variables
 
-If the network is too big, input data can be provided by uploading data files directly in the page. The data files should be understandable and contains unit information. For example: [Data](data.xlsx)
+If the network is too big, input data can be provided by uploading data files directly in the page. The data files should be understandable and contains unit information. 
+For example: [Data](data.xlsx)
 
 ## Scenarios
 
@@ -92,11 +106,14 @@ if slight changes are made in the network configuration, topology, mix, dynamic 
 The section gathers the main simulation parameters used to run the case.
 For example:
 
-- type of problem: Differential algebraic equations
-- solver name: e.g. IDA
-- computing method: e.g. variable-order, variable-coefficient Backward differentiation formula in fixed-leading-coefficient form
-- time step (min,max): e.g. 5 ms
-- simulation duration: e.g. 5 s
+| Parameter | value |
+| --------- | ------ |
+| Type of problem | DAE |
+| Solver name | IDA |
+| Computing method | variable-order, variable-coefficient Backward differentiation formula in fixed-leading-coefficient form |
+| Time step | 5 ms |
+| Simulation duration | 5 s |
+
 
 ## Outputs
 
@@ -104,7 +121,7 @@ The section presents the key outputs of the simulation by providing figures, cur
 The results should be interpreted to the extent possible.
 The plots can be provided in various forms.
 
-## Modelica implementation (if any)
+## Modelica implementation (optional)
 
 This section is a code section that provides the source code for model described above. The implementation should correspond strictly the equations/diagram/algorithm described before and should have been validated in a tool. The date of the code should be specified at the beginning of the section, the code should be clean, readable and organized.
 The code can be presented in a markdown code block like this:
@@ -121,6 +138,6 @@ The markdown table can be used to display such list, for example:
 
 This model has been successfully implemented in :
 
-| Software      | URL | Language  | Last consulted date |
-| --------------| --- | --------- | ------------------- |
-| Software name | [Link](https://github.com/toto) | modelica | XX/XX/20XX |
+| Software      | URL | Language  | Open-Source License | Last consulted date |
+| --------------| --- | --------- | -------------------| ------------------- |
+| Software name | [Link](https://github.com/toto) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | XX/XX/20XX |

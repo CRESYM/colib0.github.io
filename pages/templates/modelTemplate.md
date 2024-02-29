@@ -11,9 +11,8 @@ tags: [] # pick none, one or several tags for the following categories:
 # Component type: gives the electrical category of the device: Protection, line, bus, machines, synchronous generator, transformer, controllers, capacitors, sources, excitation system, automatic voltage regulator, PSS, PLL, Governor, load, sensors, wind generation, solar generation, load, HVDC, synchronous condensers, DLR, etc.
 # Implementation tools: software name (EMTP, PSCAD, PSS/E, NEPLAN, dynawo, DPSIM, Power Factory, Matlab, STEPSS, RTDS, Opal RT, powerworld, GE PSLF) to be used as tag if your model is implemented in specific software 
 date: XX/XX/20XX # date of last page modification 
-bibliography: # if you have a bibtex file to include
-  - my_references.bib
 ---
+
 # Model description template 
 
  Each model post must be a consistent whole that cannot be subdivided into sub-models without loss of understanding (for example, due to a consistent notation system, intertwined equations, etc.) 
@@ -21,8 +20,12 @@ bibliography: # if you have a bibtex file to include
 ## Context (mandatory)
 
 short paragraph reminding the history of the model, in which context it was developed for, what are the physics and the modelling approximations behind it.
-References citations can be made pointing to the references section (at the end of the document). A citation can simply be included by using footnote links: [^1] inside the main text and
-<a id="1">[1]</a> Author's name, "Title" Date Journal, doi: 10.1109/>XXXXx46648.2021.9495096 at the end of the document.
+References citations can be made pointing to the references section (at the end of the document). Two ways to include a citation:
+
+- by using footnote links: put [^1] inside the main text and a markdown list at the end of the document.
+- by using a bibtex file: 
+  add your bibtexfile in the _bibliography folder. Add a citation inside your text {% cite DUMMY:2 %}. 
+add bibliography at the end of the document.
 
 ## Model use, assumptions, validity domain and limitations (mandatory)
 
@@ -45,7 +48,7 @@ For each component, is given: a brief explanation about the functioning of the c
 
 - Initial equations/boundary conditions: when initial equations or boundary conditions are necessary to fully described the system, a subsection dedicated to those aspects can be added in this section.
 
-## Modelica implementation (if any)
+## Modelica implementation (optional)
 
 This section is a code section that provides the source code for model described above. The implementation should correspond strictly the equations/diagram/algorithm described before and should have been validated in a tool. The date of the code should be specified at the beginning of the section, the code should be clean, readable and organized.
 The code can be presented in a markdown code block like this:
@@ -63,9 +66,9 @@ The markdown table can be used to display such list, for example:
 
 This model has been successfully implemented in :
 
-| Software      | URL | Language  | Last consulted date |
-| --------------| --- | --------- | ------------------- |
-| Software name | [Link](https://github.com/toto) | modelica | XX/0X/20XX |
+| Software      | URL | Language | Open-Source License | Last consulted date |
+| --------------| --- | --------- | ------------------- |------------------- |
+| Software name | [Link](https://github.com/toto) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | XX/0X/20XX |
 
 ## Table of references & license
 
@@ -77,4 +80,7 @@ You can insert references manually by using this markdown list links:
 <a id="1">[1]</a> Author's name, "Title" Date Journal, doi: 10.1109/>XXXXx46648.2021.9495096 at the end of the document.
 <a id="2">[2]</a> Author's name 2, "Title2" Date Journal, doi: 10.1109/>XXXXXXXXX.2021.9495096 at the end of the document.
 
-or by using directly a bibtex file in the model's folder and using the citation command: [@texbook]
+or by inserting directly the bibtex file biblioagraphy with the following command:
+{% bibliography --file references  %}
+'--cited' command list only the ones that are cited in the page.
+More details about the citations details can be found at: [jekyllScholarCitations](https://github.com/inukshuk/jekyll-scholar#citations)
