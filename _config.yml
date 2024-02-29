@@ -9,7 +9,7 @@ title: Collaborative Open-Source Dynamic Simulation Library
 theme: null
 markdown: kramdown
 url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/"
+baseurl: "/colib0.github.io"
 
 kramdown:
   toc_levels: 2..3
