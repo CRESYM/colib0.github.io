@@ -13,3 +13,32 @@ In this Colib workspace, we aim at addressing  power systems components, network
 For each of them, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
 
 Want to contribute? Go see: [How to contribute page](/about/contribute)
+
+
+# Installation Guide
+
+## 1. Install Ruby 2.6.5
+- Go to [RubyInstaller](https://rubyinstaller.org/downloads/archives/) and download the Ruby+Devkit 2.6.5 installer.
+
+## 2. Install Gem
+- Visit [RubyGems](https://rubygems.org/pages/download?locale=fr) and follow the instructions to install Gem.
+
+## 3. Install GCC for Jekyll
+- Download and install GCC for Jekyll from [SourceForge](https://sourceforge.net/projects/mingw/).
+
+## 4. Install Make for Jekyll
+1. Open a new PowerShell terminal.
+2. Run the following lines written in the quickstart on [Scoop](https://scoop.sh/#/) (check if the commands below are the same on the website):
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    ```
+    Close the terminal after running the above commands.
+3. Search for Make using the search bar on [Scoop](https://scoop.sh/#/).
+4. Open a new PowerShell terminal.
+5. Execute the following command to install Make:
+    ```powershell
+    scoop install main/make
+    ```
+
+Follow these steps to install the necessary tools for Jekyll.
