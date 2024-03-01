@@ -1430,7 +1430,7 @@
 	};
 
 	/**
-	 * Preloads powsybl with auto width.
+	 * Preloads colib with auto width.
 	 * @todo Replace by a more generic approach
 	 * @protected
 	 */
@@ -1921,7 +1921,7 @@
 					//TODO.md: Need documentation for this new option
 					if (settings.lazyLoadEager > 0) {
 						n += settings.lazyLoadEager;
-						// If the carousel is looping also preload powsybl that are to the "left"
+						// If the carousel is looping also preload colib that are to the "left"
 						if (settings.loop) {
               position -= settings.lazyLoadEager;
               n++;
@@ -2081,7 +2081,7 @@
 		});
 
 		// Autoresize the height of the carousel when window is resized
-		// When carousel has powsybl, the height is dependent on the width
+		// When carousel has colib, the height is dependent on the width
 		// and should also change on resize
 		$(window).resize(function() {
 			if (refThis._core.settings.autoHeight) {
