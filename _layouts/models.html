@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Mathjax Support -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+</head>
+{% include head.html %}
+
+<body>
+    {% include navbar.html %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-justify">
+                <article id="page" class="markdown-body">
+                    {{ content }}
+                </article>
+            </div>
+            <div class="row">
+                <div class="col text-justify">
+                    <article id="page" class="markdown-body">
+                        <br><br><br><br><br><br>
+                        <form class="d-inline-flex form-inline" action="{{ site.baseurl }}/pages/models/models-search" method="get">
+                            <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
+                            <input class="form-control form-control-sm px-2 py-1" id="models-search-box" name="query"
+                                type="text" placeholder="Search for models" aria-label="Search" />
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                        <br><br>
+                        {% include models_tags.html %}
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include footer.html %}
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    {% include javascript.html %}
+</body>
+
+</html>

@@ -2,22 +2,21 @@
     link to the previous folder and link to subfolders/pages.
     To be included in "index.md" files. -->
 
-{% assign url = page.url | relative_url %} 
+{% assign path = page.path %} 
+{% assign url = page.url %}
 
-<!-- To get the current directory and its relative depth 
-    (removing "/colib0.github.io" to have the same depth on offline and online versions)-->
-{% assign urlArray = url | remove: "/colib0.github.io" | split:"/" %} 
-{% assign currentDir = urlArray[-1] %}
-{% assign depth = urlArray.size %}
+<!-- To get the current directory and its relative depth -->
+{% assign pathArray = path | split:"/" %}
+{% assign currentDir = pathArray[-2] %}
+{% assign depth = pathArray.size %}
 
 <!-- To get the title of the parent directory -->
-{% assign toRemove = currentDir | append: "/"%}
-{% assign dirUrl = url | remove: toRemove%}
-{% for page in site.pages %}
-    {% assign pageUrl = page.url | relative_url%}
-    {% if pageUrl == dirUrl %}
+{% for page in site.posts %}
+    {% assign pagePath = page.path | split:'/' %}
+    {% if pathArray[1] == pagePath[1] and pagePath[-2] != currentDir and pagePath[-1] contains 'index' %}
+        {% assign dirUrl = page.url %}
         {% assign dirTitle = page.title %}
-    {% endif%}
+    {% endif %}
 {% endfor %}
 
 <!-- Display the title -->
@@ -29,9 +28,13 @@
 
 <!-- Display the sub-directories or pages -->
 <ul>
-{% for page in site.pages %}
-    {% assign urlArray = page.url | split: "/" %}
-    {% if urlArray[-2] == currentDir %}
+{% for page in site.posts %}
+    {% assign pathArray = page.path | split: "/" %}
+    {% if depth > 3 and pathArray[-2] == currentDir and page.url != url %}
+        {% unless page.title contains "search" %}
+        <li><a href="{{page.url | relative_url}}">{{page.title}}</a></li>
+        {% endunless %}
+    {% elsif depth <= 3 and pathArray[-3] == currentDir and pathArray[-1] contains 'index' and page.url != url %}
         {% unless page.title contains "search" %}
         <li><a href="{{page.url | relative_url}}">{{page.title}}</a></li>
         {% endunless %}

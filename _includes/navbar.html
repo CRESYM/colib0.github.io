@@ -4,7 +4,7 @@
     <div class="container d-flex align-items-center">
 
         <div class="logo mr-auto">
-            <a href="{{ site.baseurl }}/index.html"><img src="{{ site.baseurl }}/assets/img/Logo_colib.svg" height="600" alt="Colib"></a>
+          <a href="{{ site.baseurl }}/index.html"><img src="{{ site.baseurl }}/assets/img/Logo_colib.svg" height="600" alt="Colib"></a>
         </div>
 
         <!-- TODO.md(mathbagu): ameliorer le style en version mobile -->
@@ -55,10 +55,9 @@
                 <li class="drop-down">
                     <a href="{{url}}">{{title}}</a>
                     <ul>
-                        {% for pageDropD in site.pages %}
-                        {% assign urlArrayDropD = (pageDropD.url | split: '/') %}
-                        {% assign dir = urlArrayDropD[-2] %}
-                        {% if dir == urlEnd and pageDropD.title != "TestCases-search" and pageDropD.title != "Models-search" %}
+                        {% for pageDropD in site.posts %}
+                        {% assign urlArrayDropD = (pageDropD.path | split: '/') %}
+                        {% if urlArrayDropD[1] == urlEnd and urlArrayDropD[-1] contains 'index' and pageDropD.title != "TestCases-search" and pageDropD.title != "Models-search" and  pageDropD.title != "Models" and pageDropD.title != "Templates" and pageDropD.title != "Test cases" and pageDropD.title != "About" %}
                           <li><a href="{{pageDropD.url | relative_url}}">{{pageDropD.title}}</a></li>
                         {% endif%}
                       {% endfor %}
@@ -68,34 +67,18 @@
                 <li><a href="{{url}}">{{title}}</a></li>
               {% endif%}
             {% endfor %}
-            {% if page.dir contains "/pages/models" %}
             <li>
                 <!--
                     inside a <a/> for similar styling as other items. Add
                      py-1 because the input is taller than just text, so
                     compensate with less padding on the <a/>
                 -->
-                <a class="py-1" ><form class="d-inline-flex form-inline" action="{{ site.baseurl }}/pages/models/models-search" method="get">
+                <a class="py-1" ><form class="d-inline-flex form-inline" action="{{ site.baseurl }}/pages/search" method="get">
                     <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
-                    <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search for models" aria-label="Search" />
+                    <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search" aria-label="Search" />
                 </form></a>
             </li>
             </ul>
-            {% elsif page.dir contains "/pages/testCases" %}
-            <li>
-                <!--
-                    inside a <a/> for similar styling as other items. Add
-                     py-1 because the input is taller than just text, so
-                    compensate with less padding on the <a/>
-                -->
-                <a class="py-1" ><form class="d-inline-flex form-inline" action="{{ site.baseurl }}/pages/testCases/testcases-search" method="get">
-                    <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
-                    <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search for test cases" aria-label="Search" />
-                </form></a>
-            </li>
-            </ul>
-            {% endif %}
         </nav>
     </div>
 </header>
-
