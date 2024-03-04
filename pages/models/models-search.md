@@ -11,7 +11,7 @@ title: Models-search
     {% for page in site.pages %}
     {% if page.title.size > 0 and page.content.size > 0 and page.dir contains "/pages/models" and page.url != "/pages/models/models-search.html" %}
     "{{ page.url | slugify }}": {
-        "url": "{{ page.url }}",
+        "url": "{{site.baseurl}}{{ page.url }}",
         "title": "{{ page.title | xml_escape }}",
         "content": {{ page.content | strip_html | jsonify }},
     },
