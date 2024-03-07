@@ -1,8 +1,6 @@
 ---
-layout: default
+layout: base
 title: Models
 ---
-
-{% include search.html %}
 
 {% include folderNav.html %}

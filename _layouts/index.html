@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Mathjax Support -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+</head>
+{% include head.html %}
+
+<body>
+  {% include navbar.html %}
+
+  {{ content }}
+
+  {% include footer.html %}
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  {% include javascript.html %}
+</body>
+
+</html>
