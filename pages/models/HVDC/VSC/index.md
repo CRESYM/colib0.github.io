@@ -204,7 +204,7 @@ This model has been successfully implemented in :
 
 | Software      | URL |  
 | -----------------  | --- | 
-| Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVSC) |  
+| Dynawo        | [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVsc) |  
 
 ## Table of references
 
