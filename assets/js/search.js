@@ -13,7 +13,7 @@
 
             searchResults.innerHTML = appendString;
         } else {
-            searchResults.innerHTML = 'No results found';
+            searchResults.innerHTML = '<p class="not-found-message"> No results found! Please try a different search tag. </p>';
         }
     }
 
