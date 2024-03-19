@@ -7,15 +7,15 @@ title: How to contribute?
 
 Imagine a shared library of dynamic simulations – transparent, high-quality, and packed with real-world applications. We invite you to contribute an article focusing on a component or a test case. Explore the various sections to find guidance on how to make your contribution.  
 
-[Set up your Git environment and clone the project](#Set up your Git environment and clone the project)
+[Set up your Git environment and clone the project](#set-up-your-git-environment-and-clone-the-project)
 
-[Create a post](#Create a post)
+[Create a post](#create-a-post)
 
-[Create an issue and related branch](#Create an issue and related branch)
+[Create an issue and related branch](#create-an-issue-and-related-branch)
 
-[Validation process](#Validation process)
+[Validation process](#validation-process)
 
-## Set up your Git environment and clone the project: <a id="Set up your Git environment and clone the project:"></a>
+## Set up your Git environment and clone the project: <a id="set-up-your-git-environment-and-clone-the-project"></a>
 
 Please follow the prerequisites to begin the project. 
 
@@ -33,7 +33,7 @@ Please follow the prerequisites to begin the project.
 - Verify you are on the main branch: `git status` should return `on branch main`
 
 
-## Create a post <a id="Create a post"></a>
+## Create a post <a id="create-a-post"></a>
 
 - Please use the following [model template](/pages/templates/modelTemplate) and [test case template](/pages/templates/testCaseTemplate) for your reference.
 - Make sure you are posting in the right "pages" folder (pages/models/...)
@@ -48,7 +48,7 @@ Please follow the prerequisites to begin the project.
     - Before pushing any updates, authentify yourself using `git config --global user.email *you@example.com*` and `git config --global user.name *Your name*`
 
 
-## Create an issue and related branch: <a id="Create an issue and related branch"></a>
+## Create an issue and related branch: <a id="create-an-issue-and-related-branch"></a>
 
 - Create an issue before making any changes as it helps in tracking and managing contributions. 
   
@@ -58,7 +58,7 @@ Please follow the prerequisites to begin the project.
 
 
 
-## Validation process <a id="Validation process"></a>
+## Validation process <a id="validation-process"></a>
 
 - Create a merge request and select at least one reviewer among the cresym team. 
 
