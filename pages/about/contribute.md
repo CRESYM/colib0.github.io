@@ -38,7 +38,7 @@ Please follow the prerequisites to begin the project.
 - Please use the following [model template](/pages/templates/modelTemplate) and [test case template](/pages/templates/testCaseTemplate) for your reference.
 - Make sure you are posting in the right "pages" folder (pages/models/...)
 
-- You can see the how your changes impact the website by running locally a static site generator such as Jekyll (for more information, see [testing-your-github-pages-site-locally-with-jekyll](https://docs.github.com/fr/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) )
+- You can see the how your changes impact the website by running locally a static site generator such as Jekyll (for more information, see [testing-your-github-pages-site-locally-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) )
 
 - Verify your changes: 
     - `git status`: Check the status of your local repository to see what files have been modified, staged, or are untracked.
