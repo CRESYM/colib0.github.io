@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Switch 
+
 Set the output state to one among $n$ input states, based on the value of a controlling state.
 
 ## Diagram

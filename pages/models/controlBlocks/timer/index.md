@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Timer Control block
+
 Timer with varying delay. The latter is a piecewise linear function of the monitored variable
 If $x_i$ is smaller than a threshold $v_1$, the output $x_j$ is equal to zero. Otherwise, $x_j$ changes from zero to one at time $t* + \tau(x_i)$ where t* is the time at which the input $x_i$ became larger than $v_1$ and the delay $\tau (x_i)$ varies with $x_i$ according to a piecewise linear characteristic involving $n$ points (see diagram below).
 

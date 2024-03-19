@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Proportional integral (PI) controll with non-windup limit on the integral term
+
 ## Diagram
 
 ![pictlim diagram](limitedProportionalIntegralController.svg)

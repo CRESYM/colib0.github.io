@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Limiter control block with variable bounds
+
 ## Diagram
 
 ![limiter diagram](limiterVariableBounds.svg)

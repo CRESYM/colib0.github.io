@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Integrator control block with a positive time constant T
+
 ## Diagram
 
 ![integrator diagram](integrator.svg)

@@ -7,6 +7,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Transfer function between an input and output one time constant 
+
 ## Diagram
 
 ![transfer function diagram](transferFunction.svg)

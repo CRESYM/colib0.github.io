@@ -7,6 +7,8 @@ author: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
+# Proportional integral (PI) controller with non-windup limit on the integral term and limit on the proportional term
+
 ## Diagram
 
 ![pict2lim diagram](2limitedProportionalIntegralController.svg)

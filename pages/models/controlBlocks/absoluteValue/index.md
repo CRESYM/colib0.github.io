@@ -7,6 +7,8 @@ author: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
+# Absolute value of input
+
 ## Diagram
 
 $$  x_j = |x_i | $$
