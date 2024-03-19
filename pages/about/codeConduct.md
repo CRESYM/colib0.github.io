@@ -9,6 +9,6 @@ This project applies the [Mozilla Community Participation Guidelines.](https://w
 
 As a user or developer of this code, you are expected to follow those guidelines. 
 
-Please report unacceptable behavior to the project's teams at info@cresym.eu.
+Please report unacceptable behavior to the project's teams at helpdesk@cresym.eu.
  
 
