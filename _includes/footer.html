@@ -1,16 +1,27 @@
-<footer id="footer" class="footer">
-    <div class="row">
-        <div class="col-2">
-            <a id="forkme-banner" href="{{ site.github.repository_url }}"><span id="display_view_on_github">View on Github</span></a>
-        </div>
-        <div class="col-6">
-            <p>Copyright &copy; 2023-{{ 'now' | date: "%Y" }} Authors of <a href="https://github.com/CRESYM/colib0.github.io">Collaborative Open-Source Dynamic Simulation Library</a>.
-                Unless otherwise indicated, content is licensed under <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
-            </p>
-        </div>
-        <div class="col-3 text-right">
-            <a href="{{'pages/about' | relative_url}}">About</a>
-            <a href="{{'pages/contact' | relative_url}}">Contact</a>
+<footer id="footer">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-6 text-lg-left text-center">
+                <div class="copyright">
+                    <p class="text-justify">
+                        <p>Copyright &copy; 2023-{{ 'now' | date: "%Y" }} Authors of <a href="https://github.com/CRESYM/colib0.github.io">Collaborative Open-Source Dynamic Simulation Library</a>.
+                            Unless otherwise indicated, content is licensed under <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>.
+                        </p>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <p class="footer-icons text-lg-right text-center pt-2 pt-lg-0">
+                    <a href="https://github.com/CRESYM/colib0.github.io"><i class="ri-github-fill ri-2x mr-3"></i></a>
+                </p>
+                <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                    <a href="/pages/about">About</a>
+                    <a href="/pages/contact">Contact</a>
+                    <a href="https://cresym.eu/privacy-policy/">Privacy Policy</a>
+                    <a href="/pages/about/terms">Terms of Reference</a>
+
+                </nav>
+            </div>
         </div>
     </div>
 </footer>

@@ -1,12 +1,13 @@
-# VScode
-.vscode
+# IntelliJ
+/.idea
+*.iml
 
-# Jekyll geenerated directory
+# Jekyll generated directory
 _site
-.jekyll-cache
-.jekyll-metadata
 .sass-cache
+Gemfile.lock
+.jekyll-metadata
 
 # Bundle
-vendor
-Gemfile.lock
+.bundle
+/vendor
