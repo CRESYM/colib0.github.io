@@ -18,13 +18,13 @@ $$  x_j = |x_i | $$
 Syntax:  
 
 - function name: abs
-- input variable : $x_i$
-- output variable: $x_j$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
 
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,1\} $
+Discrete variable : $$ z \in \{-1,1\} $$
 
 ## Equations
 

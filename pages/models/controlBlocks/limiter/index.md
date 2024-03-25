@@ -17,14 +17,14 @@ version: version-1.0.0
 Syntax:  
 
 - function name: lim
-- input variable : $x_i$
-- output variable: $x_j$
-- data name, parameter name or math expression for $x_{min}$
-- data name, parameter name or math expression for $x_{max}$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$x_{min}$$
+- data name, parameter name or math expression for $$x_{max}$$
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,0, 1\} $
+Discrete variable : $$ z \in \{-1,0, 1\} $$
 
 ## Equations
 

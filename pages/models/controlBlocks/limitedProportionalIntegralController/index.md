@@ -17,16 +17,16 @@ version: version-1.0.0
 Syntax:  
 
 - function name: pictllim
-- input variable : $x_k$
-- output variable: $x_j$
-- data name, parameter name or math expression for $K_I$
-- data name, parameter name or math expression for $K_p$
-- data name, parameter name or math expression for $x_i^{min}$
-- data name, parameter name or math expression for $$x_i^{max}$
+- input variable : $$x_k$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$K_I$$
+- data name, parameter name or math expression for $$K_p$$
+- data name, parameter name or math expression for $$x_i^{min}$$
+- data name, parameter name or math expression for $$x_i^{max}$$
 
-Internal states : variable $x_i$
+Internal states : variable $$x_i$$
 
-Discrete variable :  $ z \in \{-1,0,1\} $
+Discrete variable :  $$ z \in \{-1,0,1\} $$
 
 ## Equations
 

@@ -17,14 +17,14 @@ version: version-1.0.0
 Syntax:  
 
 - function name: invlim
-- input variable : $x_i$
-- output variable: $x_j$
-- variable $x_{min}$
-- variable $x_{max}$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
+- variable $$x_{min}$$
+- variable $$x_{max}$$
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,1\} $
+Discrete variable : $$ z \in \{-1,1\} $$
 
 ## Equations
 
@@ -71,4 +71,4 @@ else
 end if
 ```
 
-**N.B.** A zero value for $T$ is not allowed. If too small a value is specified for $T$, the solver may encounter a singularity and the simulation may not proceed.
+**N.B.** A zero value for $$T$$ is not allowed. If too small a value is specified for $$T$$, the solver may encounter a singularity and the simulation may not proceed.
