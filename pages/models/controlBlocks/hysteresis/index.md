@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Hysteresis control block
+
 ## Diagram
 
 ![hysteresis diagram](hysteresis.svg)
@@ -21,19 +23,19 @@ version: version-1.0.0
 Syntax:  
 
 - function name: hyst
-- input variable : $x_i$
-- output variable: $x_j$
-- data name, parameter name or math expression for $x_I$
-- data name, parameter name or math expression for $y_{IB}$
-- data name, parameter name or math expression for $y_{IA}$
-- data name, parameter name or math expression for $x_{D}$
-- data name, parameter name or math expression for $y_{BD}$
-- data name, parameter name or math expression for $y_{DA}$
-- data name, parameter name or math expression for $z_0$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$x_I$$
+- data name, parameter name or math expression for $$y_{IB}$$
+- data name, parameter name or math expression for $$y_{IA}$$
+- data name, parameter name or math expression for $$x_{D}$$
+- data name, parameter name or math expression for $$y_{BD}$$
+- data name, parameter name or math expression for $$y_{DA}$$
+- data name, parameter name or math expression for $$z_0$$
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,1\} $
+Discrete variable : $$ z \in \{-1,1\} $$
 
 ## Equations
 
@@ -79,6 +81,6 @@ end if
 
 ## N.B.
 
-At $t = 0$, if $x_D < x_i(0) < x_I$ the initial state of the system is indeterminate, since it could operate on the ( $y_{IA}$ , $y_{DB}$ ) line (i.e. with an initial value of z equal to 1) as well as on the ( $y_{DA}$, $y_{IB}$) line (i.e. with an initial value of z equal to −1). Hence, the user must specify $z_0$, the initial value of z.
-If $x_i(0) < x_D$ (resp. $x_i(0) > x_I$ ) the initial value is $z = −1$ (resp. $z = 1$) and $z_0$ is not used.
-The data must obey $x_D < x_I$ , otherwise the model would not correspond to hysteresis.
+At $$t = 0$$, if $$x_D < x_i(0) < x_I$$ the initial state of the system is indeterminate, since it could operate on the ( $$y_{IA}$$ , $$y_{DB}$$ ) line (i.e. with an initial value of z equal to 1) as well as on the ( $$y_{DA}$$, $$y_{IB}$$) line (i.e. with an initial value of z equal to −1). Hence, the user must specify $$z_0$$, the initial value of z.
+If $$x_i(0) < x_D$$ (resp. $$x_i(0) > x_I$$ ) the initial value is $$z = −1$$ (resp. $$z = 1$$) and $$z_0$$ is not used.
+The data must obey $$x_D < x_I$$ , otherwise the model would not correspond to hysteresis.

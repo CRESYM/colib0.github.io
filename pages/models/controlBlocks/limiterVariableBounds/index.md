@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Limiter control block with variable bounds
+
 ## Diagram
 
 ![limiter diagram](limiterVariableBounds.svg)
@@ -15,14 +17,14 @@ version: version-1.0.0
 Syntax:  
 
 - function name: limvb
-- input variable : $x_i$
-- output variable: $x_j$
-- variable $x_{min}$
-- variable $x_{max}$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
+- variable $$x_{min}$$
+- variable $$x_{max}$$
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,0, 1\} $
+Discrete variable : $$ z \in \{-1,0, 1\} $$
 
 ## Equations
 

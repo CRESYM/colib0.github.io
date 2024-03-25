@@ -3,6 +3,8 @@ layout: base
 title: Contact
 ---
 
+# How to Contact us?
+
 Colib Dynamic Library is an open-source project. We **welcome any user feedback or developer contribution**. 
 
 As user, don't hesitate to [**create a Github issue**](https://github.com/CRESYM/colib0.github.io/issues/new) or to directly contact us at helpdesk@cresym.eu 

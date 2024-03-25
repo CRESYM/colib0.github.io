@@ -7,6 +7,8 @@ author: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
+# Proportional integral (PI) controller with non-windup limit on the integral term and limit on the proportional term
+
 ## Diagram
 
 ![pict2lim diagram](2limitedProportionalIntegralController.svg)
@@ -14,18 +16,18 @@ version: version-1.0.0
 Syntax:  
 
 - function name: pictl2lim
-- input variable : $x_k$
-- output variable: $x_j$
-- data name, parameter name or math expression for $K_I$
-- data name, parameter name or math expression for $K_p$
-- data name, parameter name or math expression for $x_i^{min}$
-- data name, parameter name or math expression for $$x_i^{max}$
-- data name, parameter name or math expression for $x_p^{min}$
-- data name, parameter name or math expression for $$x_p^{max}$
+- input variable : $$x_k$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$K_I$$
+- data name, parameter name or math expression for $$K_p$$
+- data name, parameter name or math expression for $$x_i^{min}$$
+- data name, parameter name or math expression for $$x_i^{max}$$
+- data name, parameter name or math expression for $$x_p^{min}$$
+- data name, parameter name or math expression for $$x_p^{max}$$
 
-Internal states : variable $x_i$ and $x_p$
+Internal states : variable $$x_i$$ and $$x_p$$
 
-Discrete variable :  $ z_1 \in \{-1,0,1\} $ and $ z_2 \in \{-1,0,1\} $ 
+Discrete variable :  $$ z_1 \in \{-1,0,1\} $$ and $$ z_2 \in \{-1,0,1\} $$ 
 
 ## Equations
 
@@ -93,9 +95,9 @@ end if
 
 ## Initialization of internal state variables and discrete variables
 
-**Initialisation of the internal state $x_p$**: $x_p = min( x_p^{max}, max(x_p^{min}, K_px_k) )$
+**Initialisation of the internal state $$x_p$$**: $$x_p = min( x_p^{max}, max(x_p^{min}, K_px_k) )$$
 
-**Initialisation of the internal $x_i$ and the discrete variables:**
+**Initialisation of the internal $$x_i$$ and the discrete variables:**
 
 ```
 if Kp*xk > xmaxp then
