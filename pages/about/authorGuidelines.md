@@ -72,7 +72,7 @@ please consult the {% cite EditingMathematics %} for guidelines on how to write 
 
 please consult the {% cite StandardDictionary %} for the terms to be used in Electrical and Electronics fields.
 
-For notations and conventions, please look at this [page](pages/about/notationsAndConventions.md)
+For notations and conventions, please look at this [page](/pages/about/notationAndConventions.html)
 
 For electrical and eletronic diagram, you can refer to {% cite GraphicSymbolsElectricalElectronics %} and {% cite SupplementGraphicSymbolElectricalElectronics %}
 
