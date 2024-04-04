@@ -7,6 +7,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Transfer function between an input and output one time constant 
+
 ## Diagram
 
 ![transfer function diagram](transferFunction.svg)
@@ -14,10 +16,10 @@ version: version-1.0.0
 Syntax:  
 
 - function name: tf1p
-- input variable : $x_i$
-- output variable : $x_j$
-- data name, parameter name or math expression for $G$
-- data name, parameter name or math expression for $T$
+- input variable : $$x_i$$
+- output variable : $$x_j$$
+- data name, parameter name or math expression for $$G$$
+- data name, parameter name or math expression for $$T$$
 
 Internal states : none
 
@@ -27,4 +29,4 @@ Discrete variable : none
 
 $$ T \dot{x_j} = - x_j + G x_i$$
 
-**N.B.** A zero value for $T$ is allowed.
+**N.B.** A zero value for $$T$$ is allowed.

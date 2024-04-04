@@ -479,3 +479,7 @@ table tr:nth-child(2n) {
     margin: 0 auto;
     display: block;
 }
+p.not-found-message {
+  margin-top: 50px; /* Add space above the message */
+  font-weight: normal; /* Remove bold formatting (optional) */
+}

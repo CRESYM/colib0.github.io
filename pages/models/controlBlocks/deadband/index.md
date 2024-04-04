@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Deadband control block
+
 ## Diagram
 
 ![deadbandDiagram](deadband.svg)
@@ -16,18 +18,18 @@ version: version-1.0.0
 Syntax:  
 
 - function name: db
-- input variable : $x_i$
-- output variable: $x_j$
-- data name, parameter name or math expression for $\delta_1$
-- data name, parameter name or math expression for $s_1$
-- data name, parameter name or math expression for $a_1$
-- data name, parameter name or math expression for $\delta_2$
-- data name, parameter name or math expression for $s_2$
-- data name, parameter name or math expression for $a_2$
+- input variable : $$x_i$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$\delta_1$$
+- data name, parameter name or math expression for $$s_1$$
+- data name, parameter name or math expression for $$a_1$$
+- data name, parameter name or math expression for $$\delta_2$$
+- data name, parameter name or math expression for $$s_2$$
+- data name, parameter name or math expression for $$a_2$$
 
 Internal states : none
 
-Discrete variable : $ z \in \{-1,0,1\} $
+Discrete variable : $$ z \in \{-1,0,1\} $$
 
 ## Equations
 
@@ -74,5 +76,5 @@ end i
 
 ## N.B.
 
-The data must obey $\delta_1 < \delta_2$, $a_1 \geq 0$ and $a_2 \geq 0$ (see for instance the diagram above).
-A particular case is $s_1 = s_2 = 0$ and $a_1 = a_2 = 1$ (but all values are allowed for these four parameters).
+The data must obey $$\delta_1 < \delta_2$$, $$a_1 \geq 0$$ and $$a_2 \geq 0$$ (see for instance the diagram above).
+A particular case is $$s_1 = s_2 = 0$$ and $$a_1 = a_2 = 1$$ (but all values are allowed for these four parameters).
