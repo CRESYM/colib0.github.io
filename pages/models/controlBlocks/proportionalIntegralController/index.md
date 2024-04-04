@@ -8,6 +8,8 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
+# Propotional integral (PI) controller
+
 ## Diagram
 
 ![pictl diagram](proportionalIntegralController.svg)
@@ -15,12 +17,12 @@ version: version-1.0.0
 Syntax:  
 
 - function name: pictl
-- input variable : $x_k$
-- output variable: $x_j$
-- data name, parameter name or math expression for $K_I$
-- data name, parameter name or math expression for $K_p$
+- input variable : $$x_k$$
+- output variable: $$x_j$$
+- data name, parameter name or math expression for $$K_I$$
+- data name, parameter name or math expression for $$K_p$$
 
-Internal states : variable $x_i$
+Internal states : variable $$x_i$$
 
 Discrete variable : none
 
