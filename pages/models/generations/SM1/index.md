@@ -1,221 +1,156 @@
 ---
 layout: page
-title: VSC HVDC Model
-tags: ["#24","opensource","phasor", "HVDC", "VSC", "generic", "MRL4", "Single phase", "dynawo"]
-date: 21/06/2023 
-last-updated: 29/03/2024
+title: SM1 Model
+tags: []
+date: 10/04/2024 
+last-updated: 10/04/2024
 ---
 
-# VSC HVDC model
+# Synchronous Machine SM1 Model
 
 ## Context
 
-This average phasor voltage source converter based high voltage DC transmission line (VSC-HVDC) model has been developed by RTE [[1]](#1)  based on some work done by ENTSOE G-HVDC WP.
- It gathers most of the features of specific detailed models, while being kept as simple and generic as possible.
+The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in conventional power plants that use a turbine to transfer the energy of steam into mechanical energy. These generators transform this mechanical energy into electric energy. The mathematical model presented, will allow to perform steady-state and transient analysis of round rotor synchronous machines.[[1]](#1)
 
 ## Model use, assumptions, validity domain and limitations
 
-It can be used for voltage and transient stability studies by using the link specifications or customer data, when a detailed specific model can't be used (data isn't available or can't be shared).
+The model is a basic representation of the synchronous machine and can be used to study three-phase synchronous machine for its steady-state. DYnamic studies can be visited in the models SM2 and SM3, which are obtained working the basic equations of this model and the study of the magnetic coupling between the windings. 
 
-It can't be used for studies that look at the DC side behaviour (a simplified DC bus is considered in the model) nor the frequency behaviour (the secondary voltage control isn't implemented in this model) as the DC link and its interaction with the converter isn't properly modelled.
+This model assumes that the rotation of the magnetic field is sinusoidal, the resistance losses are negligible in front of the inductances and a separation of 120º between each of the three phases poles.
 
-Details on the voltage control, reactive power control, active/reactive limits are represented and key for the voltage studies.  This model contains UQ and PQ diagrams limitations, current limitations to respect the apparent power constraints and operator-defined PQ limitations.
-
-Additional reactive current injection ($$I_{q}^{FFC}$$) during fault and current blocking function is also represented in this model for an acurate behaviour during a fault for transient stability studies [[2]](#2).
-
-The modeling choice for HVDC VSC for stability studies is an ongoing active research topic. The fast interaction between AC and DC systems requires changes in the manner in which the modeling and computation of the system is done, both at the DC and the AC side [[3]](#3).
+It is valid for round rotor synchronous generators, generally used for operations with high speed turbines such as the ones in conventional power plants. Salient pole synchronous machines, used in lower speed applications such as hydro power, are out of the domain of the model.
 
 ## Model description
 
-The general structure of the HVDC VSC standard model is this one:
-<img src="{{ '/pages/models/HVDC/VSC/HvdcVSC.svg' | relative_url }}"
-     alt="General view of the HVDC VSC standard model: physical and control connections"
-     style="float: left; margin-right: 10px;" />
+The following schematic shows all the components that participate in the model:
+<p align="center">
+<img src="{{'/pages/models/generations/SM1/SM1_model_scheme.svg' | relative_url }}"
+     alt="Operation of a Synchronous Machine schematic"
+     style="float: center; width: 600px;" />
 
-### DC transmission line and converters model
+</p>
 
-In the AC grid sending-end and receiving-end converters (SEC and REC) of the HVDC system are represented by controlled Thévenin sources. The controllers act on the two voltage sources to provide the prescribed terminal conditions by adjusting the magnitude and frequency of the source voltage.
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCACDCConverterView.svg' | relative_url }}"
-     alt="DC and AC sides of the converter"
-     style="float: left; margin-right: 10px;" />
-</div>
-There is no transformer between the converter and the PCC. The modeling choice is deliberated and is motivated by several reasons:
+### Physical parts of a Synchronous Machine
 
-- Most of the data (nominal power, nominal voltage ranges, PQ and UQ diagrams) are provided at the PCC. The addition of a transformer makes the limits implementation more complex.
-- There is no standardized behavior for the tap changer of the transformer.
-- Reactive power or AC voltage control is done at the PCC. Introducing a transformer demands to compensate for the reactive losses in the control scheme, leading to a more complex and less readable model, without adding a real added value.
+A sychronous machine is formed by the following parts:
 
-### HVDC physical parts
+#### Rotor
 
-The physical parts of the HVDC line consist in two AC/DC converters and a DC line connecting them.
+The rotor is the moving part of the generator. It is at the end of the rotation axis of the turbine, which is the component that transfers the energy of a moving fluid (normally steam) into mechanical energy.
+As the name indicates, the mechanical energy corresponds to the rotational kinetic energy of the body compossed by the blades and axis of the turbine. <!-- Add inertia information>
+It can be round rotor, commonly used in high rotation speed application, or salient pole, used in lower speed applications (i.e. hydro generation) where multiple pair of poles are needed to work at the grid frequency.[[2]](#2) The windings axis will be pointing in a perpendicular direction to the turbine axis, and will rotate with the rotor. This winding will have a current generated by the exciter that will produce a rotating magnetic field ($$\phi_f$$). 
 
-#### Converters
+#### Exciter
 
-The VSC converter is modelled on the AC side by a current injector with a parallel admittance.
-It transforms the set points of active and reactive currents $$I_q^*$$ and $$I_p^*$$ and the internal angle given by the HVDC control into a couple of to be injected in the network currents, which are the real $$I_r$$ and imaginary $$I_i$$ values.
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCConverterCurrentSourceAdmittance.svg' | relative_url }}"
-     alt="Current injector"
-     style="float: center; margin-right: 10px;" />
-</div>
-#### DC link model
+The exciter is the source of power that generates the current flowing through the rotor winding. It applies a DC voltage $$E_f$$ that generates a current in the rotor winding, creating an electromagnet. 
 
-The DC link model is incorporated into the controller description and not explicitly physically represented.
-However, the relationships between DC currents and voltages of the receiving-end and sending-end sides are represented by the following figure:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDCLinkPhysicalModel.svg' | relative_url }}"
-     alt="Electrotechnical components representing the DC side"
-     style="float: center; margin-right: 10px;" />
-</div>
-Where :
+#### Stator
 
-- $$C_{DC}$$ represents the equivalent capacity of the converter ( in $$F$$)
-- $$R_{DC}$$ represents the resistance of the DC cable (in $$\Omega$$)
+It is the static part of the machine, as its name indicates. This structure gives physical support to the whole machine, while it tipically contains the armature winding. It is a three-phase winding distributed in a circular cavity 120º apart one from each other. The uniform rotation of the magnetic field created by the rotor winding will generate currents at each winding 120º apart in the phasorial space. The instantaneous value for each phase is noted as $$i_a$$, $$i_b$$, and $$i_c$$[[2]](#2).
 
-### Control parts
+<p align="center">
+<img src="{{'/pages/models/generations/SM1/SM_rot_stat.svg' | relative_url }}"
+     alt="Operation of a Synchronous Machine schematic"
+     style="float: center; width: 400px;" />
 
-The control is divided into two main functions, each one of them associated to one converter:
+</p>
 
-- the part in charge of the DC voltage control (also called Udc Control) and
-- the part in charge of the active power control (also called P Control).
+#### Governor
 
-Both parts control the reactive power or the voltage at each converter’s terminal (named U/Q Control).
+The governor is the controller of the speed of the motor. It will ensure that the frequency of the rotation is maintained at the setpoint, which is the grid frequency.
+The control will be done by changing the amount of steam entering in the turbine, increasing or decreasing the rate of steam depending on the error signal. 
 
-#### Active power control
+### Operational principles
 
- It deduces the active current reference $$I_p^*$$ to give to the converter from an active
-power reference $$P^*$$ and a measure of the active power $$P$$ flowing through the HVDC line thanks to an anti-wind-up proportional integral block.
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCPControl.svg' | relative_url }}"
-     alt="P control of the VSC"
-     style="float: center; margin-right: 10px;" />
-</div>
-The $$r_{p_{fault}}$$ signal is equal to 1 under normal conditions, and is set to zero when the converter is blocked. It comes back at value 1 following a ramp when the converter is unblocked. This allows to model the ramping power recovery after blocking of the converter.
-
-The $$block$$ signal indicates if the converter is blocked (=1) or not.
-$$P_{max}$$ and $$P_{min}$$ are operating limits (user defined), $$I_{p_{max}}$$ and $$I_{p_{min}}$$ are active power limits of the converter.
-
-$$\Delta P$$ is a corrector that allows to adjust the active power of the current converter when the other converter isn't able to control the DC voltage. It is calculated as follows:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCDeltaP.svg' | relative_url }}"
-     alt="Delta P calculation"
-     style="float: center; margin-right: 10px;" />
-</div>
-The Switch signal goes to 1 if the active current $$I_p^*$$ reaches its caps (by a matter of DUDC, margin added to increase model stability).
-
-#### DC Voltage Control 
-
-The DC voltage control deduces the active current reference $$I_p^*$$ to give to the converter from a DC voltage reference $$V_{DC}^*$$ and a measure of the DC voltage $$V_{DC}$$, thanks to an anti-wind-up proportional integral block.
+The dynamic equation that governs the system relates the mechanical torque applied by the turbine and the electrical torque applied by the grid[[3]](#3):
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCVDCControl.svg' | relative_url }}"
-     alt="VDC control of the VSC"
-     style="float: center; margin-right: 10px;" />
+
+$$J\frac{2}{p_f}  \frac{d\omega}{dt} = T_m - T_e - T_{fw}$$
 </div>
-$$I_{P_{MAX}}$$ is the nominal active current of the DC line (in pu).
 
-NB: if the nominal power $$S_n$$ is assumed equal to nominal active power $$P_n$$, there is a correspondance between pu and SI units, $$I_{p_{max}}$$ will be equal to 1, and InPu will be equal to $$I_n^{Pu} = \frac{\sqrt{P_{max}^2 + Q_{max}^2}}{S_n}$$.
+where $$J$$ is the inertia of the rotating body, $$T_m$$ is the mechanical torque, $$T_e$$ is the electrical torque and $$T_{fw}$$ is the friction and windage torque.
 
-#### AC Voltage control
-This part of the control contains the reactive power/AC voltage control loop (Q-Mode or U-Mode).
-There is one AC voltage control/reactive power control for each converter, as the AC voltage/reactive power is controlled at each terminal of the HVDC line.
+Regarding the electrical part of the model, the rotor winding is magnetized by the exciter current, creating a magnetic field that will rotate with the rotor's angular velocity. As it spins, the stator windings will be subjected to a variable magnetic flux caused by the rotation of the produced magnetic field which, according to Faraday's Law, will induce a current in the windings.
 
-In both modes, a reference of the reactive power to be injected to the grid is assessed.
+The rotational speed of the rotor of a syncrhonous machine is proportional to the grid frequency times the number of poles (i.e. number of different three-phase windings). The induced field $$e_f$$ will lead the terminal voltage $$v_t$$ by a load angle denoted as $$\delta$$.
 
-**Q-mode:**
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlQmode.svg' | relative_url }}"
-     alt="Q mode of the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
+$$n = \frac{120f}{p_f}$$
+
 </div>
-**U-mode:**
-In the AC voltage control the control is ensured by the anti-windup proportional integral block, and contains a deadband and a reactive power droop.
+
+where $$n$$ is the rotational speed in rev/min, $$f$$ is the stator currents frequency in Hz, and $$p_f$$ is the number of field poles.
+
+The equivalent circuit that describes the synchronous generator is[[2]](#2):
+
+<p align="center">
+<img src="{{'/pages/models/generations/SM1/SM_rot_model.svg' | relative_url }}"
+     alt="Operation of a Synchronous Machine schematic"
+     style="float: center; width: 400px;" />
+
+</p>
+
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlUmode.svg' | relative_url }}"
-     alt="U mode of the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
+
+$$v_t = e_f - j i_a X_s - i_a R_a \approx e_f - j i_a X_s$$
+
 </div>
-$$Q_{max_{comb}}$$ and $$Q_{min_{comb}}$$ are a combinaison of the operational limits, the PQ limits and the UQ limits as follows:
+where $$v_t$$ is the voltage at the terminals of the stator winding $$a$$, $$e_f$$ is the induced electromotive force by the magnetic field rotation, $$X_s = X_a + X_l$$ is the total reactance of the generator, which is obtained by adding the armature and the leakage reactance, $$R_a$$ is the series resistance, which can be neglected in front of the reactance effects, and $$i_a$$ is the current through the $$a$$ winding.
+
+For a balanced system and considering $$t=0$$ the instant where $$i_a$$ is maximum, we have:
+
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCQMaxMinComb.svg' | relative_url }}"
-     alt="Combinaison of the operational, PQ and UQ limits"
-     style="float: center; margin-right: 10px;" />
-</div>
-The limits $$Q_{max}^P$$/$$Q_{min}^P$$ and $$Q_{max}^U$$/$$Q_{min}^U$$ respectively represent the PQ and UQ diagrams of the link.
 
-Finally, the reactive power is converted into a reactive reference current $$I_q^*$$ by the following control:
+$$i_a = I_m\cos(2\pi f t)$$
+
+$$i_b = I_m\cos(2\pi f t - \frac{2\pi}{3})$$
+
+$$i_c = I_m\cos(2\pi f t + \frac{2\pi}{3})$$
+</div>
+
+For dynamic studies of the syncrhonous machine, it is convinient to make use of the dq0 transformation, which will yield the expressions of the currents in the rotating reference frame of the AC waveforms[[1]](#1):
+
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/HVDC/VSC/HVDCVSCUACControlIqref.svg' | relative_url }}"
-     alt="calculation of the reference reactive current by the U AC control of the VSC"
-     style="float: center; margin-right: 10px;" />
-</div>
-Where:
-
-- $$U$$ represents the voltage value at the PCC.it is limited to a minimum value to avoid divsion by zero.
-- The $$T_Q$$ time constant represents the dynamics of the voltage/reactive power control.
-- The $$I_q^{FRT}$$ represents the additional reactive current in case of fault or overvoltage on the AC side. It very much depends on the AC voltage value and gives a fast response to a large disturbance, giving then priority to the reactive current. It is compliant with the HVDC network code [[4]](#4)  and RfG [[5]](#5)  describing the HVDC VSC capability to provide fast fault current (FFC) at a connection point the grid.  Reactive current injection during faults helps to both recovering the voltage during faults and to injecting enough current quickly enough for system protections to function reliably.
-
-### Current limits
-
-Active and reactive current limits are calculated in the model depending on the value of $$I_q^{FRT}$$. By default, the priority is given to the active power control side - i.e no fast reactive current injection ($$I_q^{FRT}=0$$) - and the limits are given by the following equations:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$I_{p_{max}} = I_{P_{MAX}}$$
-
-$$I_{p_{min}} = -I_{P_{MAX}}$$
-
-$$I_{q_{max}} = \sqrt{I_n^2 - I_p^{*2}}$$
-
-$$I_{q_{min}} = -I_{q_{max}}$$
-</div>
-where $$I_n (pu)$$ is to total link nominal current.
-
-if the priority is given to the reactive power control side, then the equations are:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$I_{q_{max}} = I_n$$
-
-$$I_{q_{min}} = -I_{q_{max}}$$
-
-$$I_{p_{max}} = \sqrt{I_n^2 - I_q^{*2}}$$
-
-$$I_{p_{min}} = -I_{p_{max}}$$
-</div>
-### Blocking function
-
-When the voltage goes below at certain threshold $$U_{block}$$, the converter is blocked for a certain duration $$T_{block}$$. If the voltage gets back into the range $$[U_{min_{block}}, U_{max_{block}}]$$, it gets unblocked after $$T_{unblock}$$ seconds.
-
-## Initial equations
-
-The initial values of the active and reactive powers $$P_{SEC}(t=0)$$, $$Q_{SEC}(t=0)$$, $$P_{REC}(t=0)$$ and $$Q_{SEC}(t=0)$$ at both converters PCC are determined by the power flow calculation, assuming a steady state is achieved.
-The rest of the initial values of the internal variables can be determined by the following equations:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$U_{DC}^*(t=0) = 1$$
-
-$$P_{SEC}(t=0) = - U_{SEC}(t=0) * I_{p,SEC}(t=0) * \frac{S_n}{Sn^*} $$
-
-$$Q_{SEC}(t=0) = U_{SEC}(t=0) * I_{q,SEC}(t=0) * \frac{S_n}{S_n^*} $$
+$$\begin{bmatrix} i_q \\\ i_d \\\ i_0 \end{bmatrix} = \frac{2}{3} \begin{bmatrix} \cos(\theta) & \cos(\theta - \frac{2\pi}{3}) & \cos(\theta + \frac{2\pi}{3}) \\\ -\sin(\theta) & -\sin(\theta - \frac{2\pi}{3}) & -\sin(\theta + \frac{2\pi}{3}) \\\ \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{bmatrix} \times \begin{bmatrix} i_a \\\ i_b \\\ i_c \end{bmatrix}$$
 </div>
 
-Same equations apply on the REC converter side.
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
- if $$ P_{SEC}^*(t=0) > 0 $$ then:
+The synchronous machine can be operated to provide constant active power while using the excitation to control the reactive power, with $$P = \lvert v_t \rvert \lvert i_a \rvert \cos(\theta) = constant$$. We can also consider an operation with fixed excitation and variable power. The following images show the effect on the induced current $$i_a$$ [[2]](#2):
 
- $$U_{DC, SEC}(t=0) = 1$$ and
- $$U_{DC, REC}(t=0) = 1 - R_{DC} * P_{SEC}(t=0)$$
 
- else
+<p float="center">
+<img src="{{'/pages/models/generations/SM1/SM_fixed_P.svg' | relative_url }}"
+     alt="Phasorial map of the operation with fixed active power"
+     style="width: 350px;" />
 
- $$U_{DC, SEC}(t=0) = 1 + R_{DC} * P_{SEC}(t=0)$$ and
- $$U_{DC, REC}(t=0) = 1 $$
+<img src="{{'/pages/models/generations/SM1/SM_fixed_ef.svg' | relative_url }}"
+     alt="Phasorial map of the operation with fixed excitation"
+     style="width: 350px;" />
 
- $$Q_{SEC}^*(t=0) = - Q_{SEC}(t=0) * \frac{S_n^*}{S_n}$$
+</p>
 
-$$P_{SEC}^*(t=0) = - P_{SEC}(t=0) * \frac{S_n^*}{S_n} $$
+Left image shows different excitation levels for constant power operation. In normal excitation, $$\lvert e_f \rvert \cos(\delta) = \lvert v_t \rvert$$, and the current and voltage of the stator is in phase, meaning that the power factor $$\cos(\theta) = 1$$. In over or underexcitation, the current lags or leads the voltage respectively, providing or drawing reactive power from the grid respectively.
 
-$$U_{SEC}^*(t=0) = U_{SEC}(t=0) - \lambda *Q_{SEC}(t=0)* \frac{S_n^*}{S_n} $$
-</div>
+Right image shows that for constant excitation, a greater torque angle $$\delta$$ improves the power factor. This torque angle is increased by increasing the load of the generator.
 
-The mode of the AC voltage control can be either set to 1 or 0.
+### Operational limits
+
+Depending on the difference in phase between the rotor and grid rotation, the power transfered will be composed of active ($$P$$) and reactive ($$Q$$) power.
+
+These generated powers are limited by the heat limits of the components of the generator. The limits considered are the Armature and field current limit, due to Joule effect heating of both windings, and end region heating limit, which occurs due to currents in the structure of the stator when the field is underexcited.
+
+The following charts show the capability and compound curves for different power factors[[1]](#1). 
+
+<p float="center">
+<img src="{{'/pages/models/generations/SM1/SM_CapCurve.svg' | relative_url }}"
+     alt="Capability curve of a Synchronous Generator"
+     width="350px"/>
+<img src="{{'/pages/models/generations/SM1/SM_CompCurves.svg' | relative_url }}"
+     alt="Compound curves of a Synchronous Generator"
+     width="400px"/>
+</p>
+
+The left chart shows the $$P$$ and $$Q$$ maximum values for differnt limit curves, which depend on the refrigerator used, while the right chart shows the dependency on exciter current and apparent power for different values of the power factor.
 
 ## Open source implementations
 
@@ -224,16 +159,12 @@ This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-| Dynawo| [Link](https://github.com/dynawo/dynawo/tree/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/HVDC/HvdcVsc) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 29/03/2024 | No comment |
+
 
 ## Table of references
 
-<a id="1">[1]</a>  Q. Cossart, M. Saugier and A. Guironnet, "An Open-Source Average HVDC Model for Stability Studies," 2021 IEEE Madrid PowerTech, Madrid, Spain, 2021, pp. 1-6, doi: 10.1109/PowerTech46648.2021.9495096.
+<a id="1">[1]</a>  Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill
 
-<a id="2">[2]</a> A fundamental study on the impact of HVDC lines on transient stability of power systems, Lukas Sigrist; Francisco Echavarren; Luis Rouco; Patrick Panciatici
+<a id="2">[2]</a>  Kothari, D. P.; Nagrath, I. J. "Modern Power System Analysis", 4th ed., New Dehli, India, 2011, Tata McGraw-Hill
 
-<a id="3">[3]</a> Modeling and control of HVDC grids: A key challenge for the future power system, Jef Beerten; Oriol Gomis-Bellmunt; Xavier Guillaud; Johan Rimez; Arjen van der Meer
-
-<a id="4">[4]</a> NC HVDC Commission Regulation (EU) 2016/1447 of 26 August 2016 establishing a network code on requirements for grid connection of high voltage direct current systems and direct current-connected power park modules (Text with EEA relevance) - Articles: 19
-
-<a id="5">[5]</a> NC Rfg Commission Regulation (EU) 2016/631 of 14 April 2016 establishing a network code on requirements for grid connection of generators (Text with EEA relevance) - Articles: 20 2 (b) and (c)
+<a id="3">[3]</a>  PowerWorld Corporation. "ECE 310 Syncrhonous Machine Modeling"
