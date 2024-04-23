@@ -22,7 +22,7 @@ Firstly, the model is developed for the simpler case of round-rotor machines in 
 
 Later on, the model expands for a more general case that also considers salient pole synchronous machines, used in lower speed applications such as hydro power.
 
-The resulting model is described in the dq0 reference frame and scaled to a *per unit* model. The differential equations obtained allow for dynamic studies of the generation, as well as steady-state by direct substitution or phasorial analysis of the equivalent models.
+The resulting model is described in the dq0 reference frame and scaled to a *per unit* model, and it allows for transient studies of the generation.
 ## Model description
 
 The following schematic shows all the components that participate in the model:
@@ -75,7 +75,7 @@ Since it is connected to the prime mover of the generator (generally a turbine),
 
 ### Operational principles
 
-#### Swing equation of the synchronous mcahine
+#### Swing equation of the synchronous machine
 
 The dynamic equation that governs the system relates the mechanical torque applied by the turbine and the electrical torque applied by the grid[[3]](#3):
 
@@ -84,7 +84,7 @@ The dynamic equation that governs the system relates the mechanical torque appli
 $$J\frac{2}{p_f}  \frac{d\omega_m}{dt} = T_m - T_e - T_{fw} \quad (1)$$
 </div>
 
-where $$J$$ is the inertia of the rotating body in $kgm^2$, $$T_m$$ is the mechanical torque, $$T_e$$ is the electrical torque and $$T_{fw}$$ is the friction and windage torque, all in $Nm$.
+where $$J$$ is the inertia of the rotating body in $$kgm^2$$, $$T_m$$ is the mechanical torque, $$T_e$$ is the electrical torque and $$T_{fw}$$ is the friction and windage torque, all in $$Nm$$.
 
 #### Round-rotor synchronous machine in *abc* reference frame
 
@@ -116,7 +116,7 @@ v_f = R_f i_f + \frac{d\psi_f}{dt} \quad (6)
 \end{equation}
 </div>
 
-where $$\psi_i$$ is the magnetic flux passing through the $$i$$ phase in $Wb$, or rotor in case of the subindex $$r$$, $$R_i$$ is the resistance of the associated circuit in $$\Omega$$, $$v_i$$ is the terminal voltage in $V$ and $$i_i$$ is the current in $A$.
+where $$\psi_i$$ is the magnetic flux passing through the $$i$$ phase in $$Wb$$, or rotor in case of the subindex $$r$$, $$R_i$$ is the resistance of the associated circuit in $$\Omega$$, $$v_i$$ is the terminal voltage in $$V$$ and $$i_i$$ is the current in $$A$$.
 
 The total fluxes are calculated taking into account all the present windings in the synchronous machine, which are the three stator windings and the rotor winding.
 The fluxes for one phase and for the rotor are calculated as follows:
@@ -131,7 +131,7 @@ $$ \psi_f = \mathcal{L}_{af} i_a + \mathcal{L}_{br} i_b +\mathcal{L}_{cr} i_c + 
 
 with $$\mathcal{L}_{pp}$$ being the self inductance of the winding and $$\mathcal{L}_{pp'}$$ the mutual inductance between winding $$p$$ and winding $$p'$$, both in henrys. 
 
-The inductance values expressed using the notation $$\mathcal{L}$$ express a general dependency with respect to the rotor position $$\theta_m = \omega t + \theta_0$$ [[4]](#4).
+The inductance values expressed using the notation $$\mathcal{L}$$ express a general dependency with respect to the rotor position $$\theta_{shaft} = \omega t + \theta_0$$ [[4]](#4).
 
 For cylindrical rotor, some of the inductances are independent of this angle due to the uniformity of the air gap. 
 For instance, $$\mathcal{L}_{ff} = L_{ff} = L_{rr0} + L_{rl}$$ where the first term corresponds to the portion of the inductance due to the air gap, and the second term corresponds to the leakage flux.
@@ -139,7 +139,7 @@ $$\mathcal{L}_{aa} = \mathcal{L}_{bb} = \mathcal{L}_{cc} = L_{aa} = L_{aa0} + L_
 
 The mutual inductances, considering a perfect 120º separation between windings, and having $$\cos(120º) = -1/2$$ take the values $$\mathcal{L}_{ab} = \mathcal{L}_{ba} = \mathcal{L}_{ac} = \mathcal{L}_{ca} = \mathcal{L}_{bc} = \mathcal{L}_{cb} = -\frac{1}{2} L_{aa0}$$.
 
-Meanwhile, the stator-rotor inductance depend on the electrical angle $$\theta_{me}$$ between the rotor winding axis and the stator winding axis. The value of this inductance for phase $$a$$ can be calculated with the expression $$\mathcal{L}_{af} = \mathcal{L}_{fa} = L_{af}\cos(\theta_{me})$$, while the same expression can be applied for phase $$b$$ and $$c$$ but replacing $$\theta_{me}$$ with $$\theta_{me} - 120º$$ and $$\theta_{me} + 120º$$ respectively. This angle can be calculated as a function of the rotor position angle expression seen before as $$\theta_{me} = \frac{p_f}{2}\theta_m = \omega_e t + \theta_{e0}$$.
+Meanwhile, the stator-rotor inductance depend on the electrical angle $$\theta_{me}$$ between the rotor winding axis and the stator winding axis. The value of this inductance for phase $$a$$ can be calculated with the expression $$\mathcal{L}_{af} = \mathcal{L}_{fa} = L_{af}\cos(\theta_{me})$$, while the same expression can be applied for phase $$b$$ and $$c$$ but replacing $$\theta_{me}$$ with $$\theta_{me} - 120º$$ and $$\theta_{me} + 120º$$ respectively. This angle can be calculated as a function of the rotor position angle expression seen before as $$\theta_{me} = \frac{p_f}{2}\theta_{shaft} = \omega_e t + \theta_{e0}$$.
 
 For a balanced system and considering $$t=0$$ the instant where $$i_a$$ is maximum, a sinusoidal field distribution over time and a 120º separation between, we have:
 
@@ -178,7 +178,7 @@ Since the excitation of the rotor winding comes from a DC source, the current $$
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
 \begin{equation}
-e_{af} = \frac{d\psi_{af}}{dt} = \frac{d\mathcal{L}_{af}}{dt} i_f = L_{af} \omega_e I_f \sin(\theta_m) \quad (15)
+e_{af} = \frac{d\psi_{af}}{dt} = \frac{d\mathcal{L}_{af}}{dt} i_f = L_{af} \omega_e I_f \sin(\theta_{me}) \quad (15)
 \end{equation}
 </div>
 
@@ -228,7 +228,7 @@ $$\mathcal{L}_{ab} = -\frac{1}{2}L_{aa0} + L_{g2}\cos(2\theta_{me}) $$
 
 with the expressions for the other phases displaced by 120º for the trigonometric part, and the value of the rotor-stator inductance defined as for the round-rotor synchronous machine. Applying this new inductance values to the flux equations yield a much more complicated form that cannot be simplified (the complete flux equations can be seen in Kundur's book [[1]](#1)).
 
-In order to have simpler equations for the salient poles machines (and simplify even more the previous round-rotor model) there is a transformation to a reference frame that rotates with the rotor called the *dq0 reference frame*, also called the *Park transformation*. This reference frame is formed by the *direct axis (d)*, which is the polar axis in which the permeance to the magnetic field is greater than the permeance along the interpolar axis, called *quadrature axis (q)*.
+In order to have simpler equations for the salient poles machines (and simplify even more the previous round-rotor model) there is a transformation to a reference frame that rotates with the rotor called the *dq0 reference frame*, also called the *Park transformation*. This reference frame is formed by the *direct axis (d)*, which is the polar axis in which the permeance to the magnetic field is greater than the permeance along the interpolar axis, called *quadrature axis (q)*. In this reference frame, inductance expressions no longer are a function of the rotor position, yielding much simpler flux expressions.
 
 The following diagram shows the convention for the reference frame as described in [[6]](#6), which is the most common convention used.
 
@@ -283,7 +283,7 @@ $$p_s (t) = \frac{3}{2}(v_d i_d + v_q i_q + 2v_0 i_0)$$
 $$T_{mech} = \frac{3}{2}(\psi_d i_q + \psi_q i_d)\frac{p_f}{2}$$
 </div>
 
-The full model of the synchronous generation can be written in a per unit system as defined in Sauer an Pai book [[6]](#6). Firstly, the displacement with respect to the synchronous speed can be described by $$\delta = \frac{p_f}{2} \theta_{m} - \omega_s t$$, where $$\omega_s = 2\pi f$$ is the synchronous speed. If the rotor is rotating at the same speed as the grid, this angle will be constant. The displacement is:
+The full model of the synchronous generation can be written in a per unit system as defined in Sauer an Pai book [[6]](#6). Firstly, the displacement with respect to the synchronous speed is defined as $$\delta = \frac{p_f}{2} \theta_{shaft} - \omega_s t$$, where $$\omega_s = 2\pi f$$ is the synchronous speed. If the rotor is rotating at the same speed as the grid, this angle will be constant. The displacement is:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
