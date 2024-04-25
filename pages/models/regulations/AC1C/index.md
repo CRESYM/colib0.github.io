@@ -1,38 +1,47 @@
 ---
 layout: page
 title: Standard voltage regulator model AC1C
-tags: ["Voltage regulator", "AC1C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4","Single phase", "ExcIEEEAC1C", "IEEE", "dynawo", "#106"]
+tags: ["Voltage regulator", "AC1C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEAC1C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
-last-updated: 23/04/2024
+last-updated: 24/05/2024
 ---
 # Exc IEEE AC1C model
 
 ## Context
 
-This voltage regulator model firstly appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
-In previous standard versions (2005, 1992), the model was slightly different and was called AC1A. In 2016, additional options for connecting OEL and UEL inputs and limits on the rotating exciter model were added.
+This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
+In previous standard versions (1992, 2005), its predecessor model was called AC1A. Compared to AC1A, AC1C has additional options for connecting OEL and UEL inputs and limits on the rotating exciter model.
 
 ## Model use, assumptions, validity domain and limitations
 
-to be completed
+To be completed
 
-## Model inputs and outputs
+## Model inputs and output
 
-The input variables are the measured and reference stator voltages, the rotor current and possibly the output voltages of the power system stabilizer, the underexcitation limiter, the overexcitation limiter and the stator current underexcitation and overexcitation limiters.
+The input variables are :
 
-The output signal is the excitation voltage EfdPu.
+- IrPu : rotor current in pu (base SNom, user-selected base voltage)
+- UsPu : measured stator voltage in pu (base UNom)
+- UsRefPu : reference stator voltage in pu (base UNom)
+- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
+- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
+- USclOelPu (optional) : output voltage of stator current overexcitation limiter in pu (base UNom)
+- USclUelPu (optional) : output voltage of stator current underexcitation limiter in pu (base UNom)
+- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+
+The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-- AEx : Gain of saturation function
+- AEx : Gain of saturation function in pu
 - BEx : Exponential coefficient of saturation function
-- EfeMaxPu : Maximum output voltage of voltage regulator in pu (user-selected base voltage)
-- EfeMinPu : Minimum output voltage of voltage regulator in pu (user-selected base voltage)
-- Ka : Voltage regulator gain
-- Kc : Rectifier loading factor proportional to commutating reactance
-- Kd : Demagnetizing factor, function of exciter alternator reactances
-- Ke : Exciter field resistance constant
-- Kf : Exciter rate feedback gain
+- EfeMaxPu : Maximum exciter field voltage in pu (user-selected base voltage)
+- EfeMinPu : Minimum exciter field voltage in pu (user-selected base voltage)
+- Ka : Voltage regulator gain in pu
+- Kc : Rectifier loading factor proportional to commutating reactance, in pu
+- Kd : Demagnetizing factor, function of exciter alternator reactances, in pu
+- Ke : Exciter field resistance constant in pu
+- Kf : Exciter rate feedback gain in pu
 - PositionOel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
 - PositionScl : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
 - PositionUel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
@@ -41,7 +50,7 @@ The output signal is the excitation voltage EfdPu.
 - tC : Voltage regulator lead time constant in s
 - tE : Exciter field time constant in s
 - tF : Exciter rate feedback time constant in s
-- TolLi : Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator
+- TolLi : Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator in pu
 - tR : Stator voltage filter time constant in s
 - VaMaxPu : Maximum output voltage of voltage regulator in pu (user-selected base voltage)
 - VaMinPu : Minimum output voltage of voltage regulator in pu (user-selected base voltage)
@@ -66,8 +75,8 @@ In the AC1A model :
 This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
-| Software name | [Link](https://github.com/toto) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | XX/0X/20XX | Comments can contain implementations details such as validation means, implementations key choices, etc. |
+| ------------- | --- | -------- | ------------------- | ------------------- | -------- |
+| Dynawo | [Link](https://github.com/dynawo/dynawo) | Modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 |  |
 
 ## References
 

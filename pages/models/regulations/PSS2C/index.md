@@ -1,27 +1,38 @@
 ---
 layout: page
-title: Standard power system stabilizer model
-tags: ["PSS", "PSS2C", "generic"]
+title: Standard power system stabilizer model PSS2C
+tags: ["Power system stabilizer", "PSS2C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "PssIEEE2C", "IEEE", "dynawo", "#106"]
+date: 05/04/2024
+last-updated: 24/05/2024
 ---
 # PSS2C model
 
 ## Context
 
-This power system stabilizer (PSS) model has been developed by RTE.
+This power system stabilizer model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
+In the previous standard versions, its predecessor models were called PSS2A (1992, 2005) and PSS2B (2005). Compared to PSS2A, PSS2B has a third lead-lag compensation block. Compared to PSS2B, PSS2C has a fourth lead-lag compensation block and an output logic.
+
+## Model use, assumptions, validity domain and limitations
+
+To be completed
 
 ## Model inputs and output
 
-This PSS takes as input the active power PGenPu, the angular frequency omegaPu and the reference angular frequency omegaRefPu.
+The input variables are :
 
-The output signal VPssPu is sent to a voltage regulator.
+- omegaPu : measured angular frequency in pu (base omegaNom)
+- omegaRefPu : reference angular frequency in pu (base omegaNom)
+- PGenPu : active power in pu (base SnRef)
+
+The output signal is VPssPu in pu (base UNom).
 
 ## Model parameters
 
 KOmega : Coefficient applied to angular frequency
 KOmegaRef : Coefficient applied to reference angular frequency
-Ks1 : Gain of power system stabilizer
-Ks2 : Gain of transducer (active power branch)
-Ks3 : Washouts coupling factor
+Ks1 : Gain of power system stabilizer in pu
+Ks2 : Gain of transducer (active power branch) in pu
+Ks3 : Washouts coupling factor in pu
 M : Lag order of ramp-tracking filter
 N : Order of ramp-tracking filter
 OmegaMaxPu : Maximum angular frequency input of power system stabilizer in pu (base omegaNom)
@@ -51,6 +62,10 @@ VPssMinPu : Minimum voltage output of power system stabilizer in pu (base UNom)
 
 SNom : Nominal apparent power in MVA
 
+## Model diagram
+
+<img src="/pages/models/regulations/PSS2C/PSS2C.drawio.svg" alt="PSS2C diagram">
+
 ## Model variants
 
 In the PSS2A and PSS2B models :
@@ -59,4 +74,16 @@ In the PSS2A and PSS2B models :
 - the final lead-lag filter is ignored (t12 = t13 = 0)
 
 Moreover, in the PSS2A model, the second to last lead-lag filter is ignored (t10 = t11 = 0).
+
+## Open source implementations
+
+This model has been successfully implemented in :
+
+| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
+| ------------- | --- | -------- | ------------------- | ------------------- | -------- |
+| Dynawo | [Link](https://github.com/dynawo/dynawo) | Modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 |  |
+
+## References
+
+{% bibliography --cited --file references  %}
 
