@@ -10,20 +10,21 @@ last-updated: 23/04/2024
 
 ## Context
 
-The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in power plants as an interface between the mechanical energy and electrical energy. The mathematical model presented develops the dynamic equations of synchronous machines.[[1]](#1)
+The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in most power plants (thermal, hydro, and some wind) as an interface between the mechanical energy and electrical energy. The mathematical model presented in this article develops the dynamic equations of synchronous machines.[[1]](#1) It only covers the physical part of the machine not the regulations nor protections schemes. Variants of the classical model are listed in a dedicated section below.
 
 ## Model use, assumptions, validity domain and limitations
 
 The model corresponds to a balanced three-phase synchronous machine, considering both the round-rotor model (GENROU) and the salient-pole model (GENSAL) without saturation.
 
-This model assumes that the rotation of the magnetic field is sinusoidal, a separation of 120º between each of the three phases poles, similar characteristics for each of the three phase windings and a conservative coupling field between the windings reflected by the relationship between the flux linkages and currents of the windings. 
+This model assumes that the rotation of the magnetic field is sinusoidal, a separation of 120º between each of the three phases poles, similar characteristics for each of the three phase windings and a conservative coupling field between the windings reflected by the relationship between the flux linkages and currents of the windings.
 
-Firstly, the model is developed for the simpler case of round-rotor machines in the abc reference frame, where some of the inductances do not depend on the rotor's position as the geometry assumes a uniform air gap between rotor and stator. This simplifies the expressions of the differential equations obtained for the generation currents. 
+Firstly, the model is developed for the simpler case of round-rotor machines in the abc reference frame, where some of the inductances do not depend on the rotor's position as the geometry assumes a uniform air gap between rotor and stator. This simplifies the expressions of the differential equations obtained for the generation currents.
 
 Later on, the model expands for a more general case that also considers salient pole synchronous machines, used in lower speed applications such as hydro power.
 
-The resulting model is described in the dq0 reference frame and scaled to a *per unit* model, and it allows for transient studies of the generation.
-## Model description
+The resulting model is described in the dq0 reference frame and scaled to a *per unit* model (to simplify calculations), and it allows for transient studies of the generation.
+
+## Physical description
 
 The following schematic shows all the components that participate in the model:
 <p align="center">
@@ -71,9 +72,78 @@ Figure 2: Synchronous machine part diagram
 #### Governor
 
 The governor is the controller of the speed of the motor. It's primary function is to maintain the speed of the rotor, and hence the frequency of the electrical output of the generator. It is necessary for adapting to load changes, since a sudden increase or decrease of the load would decelerate or accelerate the generator if no actions are taken.
-Since it is connected to the prime mover of the generator (generally a turbine), the control will adjust the amount of energy entering in the turbine, increasing or decreasing the rate of energy as if it needs to accelerate or decelerate the rotation. 
+Since it is connected to the prime mover of the generator (generally a turbine), the control will adjust the amount of energy entering in the turbine, increasing or decreasing the rate of energy as if it needs to accelerate or decelerate the rotation.
 
-### Operational principles
+### Synchronous machine equations
+
+#### Variables
+
+Move here all the variables that you use in your final set of equations.
+
+| Variable    | details  | Unit |
+| --------------| ------ | ----- |
+| V_{abc} | rated RMS phase to neutral voltage | kV |
+
+Then, all the variables are scaled with respect to the rated values as follows:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ V_{abc} = \frac{v_{abc}}{V_{BABC}}$$
+$$ I_{abc} = \frac{-i_{abc}}{I_{BABC}}$$
+$$ \Psi_{abc} = \frac{\psi_{abc}}{\psi_{BABC}}$$
+$$ V_{dq0} = \frac{v_{dq0}}{V_{BDQ}}$$
+$$ I_{dq0} = \frac{-i_{dq0}}{I_{BDQ}}$$
+$$ \Psi_{dq0} = \frac{\psi_{dq0}}{\psi_{BDQ}}$$
+</div>
+
+
+#### Parameters
+
+Move here all the parameters that you use in your final set of equations.
+
+| Parameter    | details  | Unit |
+| --------------| ------ | ----- |
+| V_{BABC} | base to rate RMS phase to neutral voltage | kV |
+
+
+where V_{BABC} and V_{BDQ} are the rated RMS phase to neutral voltage and peak phase to neutral voltage respectively, $$I_{ABC} = \frac{S_B}{3V_{ABC}}$$, $$ I_{BDQ} = \frac{2S_B}{3V_{BDQ}}$$ with S_{B} the rated three-phase apparent power, and
+$$\psi_{BABC} = \frac{V_{BABC}}{\omega_B}$$, $$\psi_{BDQ} = \frac{V_{BDQ}}{\omega_B}$$ with $$\omega_B = \omega_s$$.
+
+The rest of parameters can also be scaled as follows:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ R_{a} = \frac{r_{a}}{Z_{BDQ}}$$
+$$ R_{f} = \frac{r_{f}}{Z_{BFD}}$$
+$$ R_{1d} = \frac{r_{1d}}{Z_{B1D}}$$
+$$ R_{1q} = \frac{r_{1q}}{Z_{B1Q}}$$
+$$ R_{2q} = \frac{r_{2q}}{Z_{B2Q}}$$
+</div>
+
+#### System of equations
+
+The resulting equations for the synchronous machine model in the *dq0* reference frame describe the GENSAL synchronous machine model without saturation:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ \frac{1}{\omega_s} \frac{d\Psi_d}{dt} = R_s I_d + \frac{\omega_m}{\omega_s} \psi_q + V_d$$
+$$ \frac{1}{\omega_s} \frac{d\Psi_q}{dt} = R_s I_q - \frac{\omega_m}{\omega_s} \psi_d + V_q$$
+$$ \frac{1}{\omega_s} \frac{d\Psi_0}{dt} = R_s I_0 + V_0$$
+$$ T'_{d0} \frac{dE'_q}{dt} = -E'_q - (X_d - X'_d)[I_d - \frac{X'_d - X''_d}{(X'_d - X_{ls})^2} (\Psi_{1d} + (X'_d - X_{ls})I_d - E'_q)] + E_{fd}$$
+$$ T''_{d0} \frac{d\Psi_{1d}}{dt} = -\Psi_{1d} + E'_q - (X'_d - X_{ls})I_d$$
+$$ T'_{q0} \frac{dE'_d}{dt} = -E'_d + (X_q - X'_q)[I_q - \frac{X'_q - X''_q}{(X'_q - X_{ls})^2} (\Psi_{2q} + (X'_q - X_{ls})I_q + E'_d)]$$
+$$ T''_{q0} \frac{d\Psi_{2q}}{dt} = -\Psi_{2q} - E'_d - (X'_q - X_{ls})I_q$$
+$$ \frac{d\delta}{dt} = \omega_m - \omega_s$$
+$$ \frac{2H}{\omega_s} \frac{d\omega_m}{dt} = T_m - (\Psi_d I_q - \Psi_q I_d) - T_{fw}$$
+$$ \Psi_d = -X''_d I_d + (\frac{X'_d - X_{ls}}{X'_d - X_{ls}}) E'_q + (\frac{X'_d - X''_d}{X'_d - X_{ls}}) \Psi_{1d}$$
+$$ \Psi_q = -X''_q I_q - (\frac{X'_q - X_{ls}}{X'_q - X_{ls}}) E'_d + (\frac{X'_q - X''_q}{X'_q - X_{ls}}) \Psi_{2q}$$
+$$ \Psi_0 = -X_{ls} I_0$$
+
+</div>
+
+### Focus on Operational principles
+
+I will focus this part in zooming in the different part of the equations.
 
 #### Swing equation of the synchronous machine
 
@@ -102,7 +172,7 @@ $$n = \frac{120f}{p_f} \quad (2)$$
 
 </div>
 
-where $$n$$ is the rotational speed in $rev/min$, $$f$$ is the stator currents frequency in $Hz$, and $$p_f$$ is the number of field poles.
+where $$n$$ is the rotational speed in $$rev/min$$, $$f$$ is the stator currents frequency in $$Hz$$, and $$p_f$$ is the number of field poles.
 
 The coupling between the rotor and the stator windings can be modelled using the terminal voltage equations:
 
@@ -290,50 +360,7 @@ The full model of the synchronous generation can be written in a per unit system
 $$\frac{d\delta}{dt} = \omega_m - \omega_s$$
 </div>
 
-Then, all the variables are scaled with respect to the rated values as follows:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ V_{abc} = \frac{v_{abc}}{V_{BABC}}$$
-$$ I_{abc} = \frac{-i_{abc}}{I_{BABC}}$$
-$$ \Psi_{abc} = \frac{\psi_{abc}}{\psi_{BABC}}$$
-$$ V_{dq0} = \frac{v_{dq0}}{V_{BDQ}}$$
-$$ I_{dq0} = \frac{-i_{dq0}}{I_{BDQ}}$$
-$$ \Psi_{dq0} = \frac{\psi_{dq0}}{\psi_{BDQ}}$$
-</div>
-
-where V_{BABC} and V_{BDQ} are the rated RMS phase to neutral voltage and peak phase to neutral voltage respectively, $$I_{ABC} = \frac{S_B}{3V_{ABC}}$$, $$ I_{BDQ} = \frac{2S_B}{3V_{BDQ}}$$ with S_{B} the rated three-phase apparent power, and
-$$\psi_{BABC} = \frac{V_{BABC}}{\omega_B}$$, $$\psi_{BDQ} = \frac{V_{BDQ}}{\omega_B}$$ with $$\omega_B = \omega_s$$.
-
-The rest of parameters can also be scaled as follows:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ R_{a} = \frac{r_{a}}{Z_{BDQ}}$$
-$$ R_{f} = \frac{r_{f}}{Z_{BFD}}$$
-$$ R_{1d} = \frac{r_{1d}}{Z_{B1D}}$$
-$$ R_{1q} = \frac{r_{1q}}{Z_{B1Q}}$$
-$$ R_{2q} = \frac{r_{2q}}{Z_{B2Q}}$$
-</div>
-
-The resulting equations for the synchronous machine model in the *dq0* reference frame describe the GENSAL synchronous machine model without saturation:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \frac{1}{\omega_s} \frac{d\Psi_d}{dt} = R_s I_d + \frac{\omega_m}{\omega_s} \psi_q + V_d$$
-$$ \frac{1}{\omega_s} \frac{d\Psi_q}{dt} = R_s I_q - \frac{\omega_m}{\omega_s} \psi_d + V_q$$
-$$ \frac{1}{\omega_s} \frac{d\Psi_0}{dt} = R_s I_0 + V_0$$
-$$ T'_{d0} \frac{dE'_q}{dt} = -E'_q - (X_d - X'_d)[I_d - \frac{X'_d - X''_d}{(X'_d - X_{ls})^2} (\Psi_{1d} + (X'_d - X_{ls})I_d - E'_q)] + E_{fd}$$
-$$ T''_{d0} \frac{d\Psi_{1d}}{dt} = -\Psi_{1d} + E'_q - (X'_d - X_{ls})I_d$$
-$$ T'_{q0} \frac{dE'_d}{dt} = -E'_d + (X_q - X'_q)[I_q - \frac{X'_q - X''_q}{(X'_q - X_{ls})^2} (\Psi_{2q} + (X'_q - X_{ls})I_q + E'_d)]$$
-$$ T''_{q0} \frac{d\Psi_{2q}}{dt} = -\Psi_{2q} - E'_d - (X'_q - X_{ls})I_q$$
-$$ \frac{d\delta}{dt} = \omega_m - \omega_s$$
-$$ \frac{2H}{\omega_s} \frac{d\omega_m}{dt} = T_m - (\Psi_d I_q - \Psi_q I_d) - T_{fw}$$
-$$ \Psi_d = -X''_d I_d + (\frac{X'_d - X_{ls}}{X'_d - X_{ls}}) E'_q + (\frac{X'_d - X''_d}{X'_d - X_{ls}}) \Psi_{1d}$$
-$$ \Psi_q = -X''_q I_q - (\frac{X'_q - X_{ls}}{X'_q - X_{ls}}) E'_d + (\frac{X'_q - X''_q}{X'_q - X_{ls}}) \Psi_{2q}$$
-$$ \Psi_0 = -X_{ls} I_0$$
-
-</div>
 
 
 ### Operational limits
