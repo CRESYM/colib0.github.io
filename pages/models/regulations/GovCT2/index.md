@@ -1,11 +1,10 @@
 ---
-id: govct2
 layout: page
 title: GovCT2 (Synchronous Machine Governor)
 tags: ["regulations", "governor", "controller", "synchronus machine"]
 author: Martin Franke
 date: 23/04/2024
-version: version-1.0.0
+last-updated: 23/04/2024
 ---
 
 
@@ -237,11 +236,11 @@ $P_\mathrm{lim}$ will then change with frequency. If f rises above
 $P_\mathrm{lim\,1}$ again, $V_\mathrm{max\,\omega}$ ramps back to
 $V_\mathrm{max}$ \[1\].
 
-![](drawings/GovCT2.frequencylimit.drawio.svg)
+![](GovCT2.frequencylimit.drawio.svg)
 
 # Model schema
 
-![](drawings/GovCT2.drawio.svg)
+![](GovCT2.drawio.svg)
 
 # Parameters
 
