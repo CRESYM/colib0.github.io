@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Regulations
-tags: []
+tags: [Regulations]
 ---
 
 {% include folderNav.html %}
