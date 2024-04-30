@@ -14,19 +14,21 @@ The synchronous machine is one of the most studied component of a power system, 
 
 ## Model use, assumptions, validity domain and limitations
 
-The model corresponds to a balanced three-phase synchronous machine, considering both the round-rotor model (GENROU) and the salient-pole model (GENSAL) without saturation.
+The model presents the general expressions, both in *abc* and *dq0* reference frame, of the differential equations that model a general synchronous machine with the following assumptions:
 
-This model assumes that the rotation of the magnetic field is sinusoidal, a separation of 120º between each of the three phases poles, similar characteristics for each of the three phase windings and a conservative coupling field between the windings reflected by the relationship between the flux linkages and currents of the windings.
+* There are three stator windings ($a, b, c$) distributed 120º apart one from each other, each of them with equal parameters (i.e. same resistance, inductance...).
+* The three phases are balanced, meaning the power is shared equally.
+* The rotor has one winding with a field ($e_f$) applied and three damper windings, with no power source, one of them with the axis parallel to the field winding ($1d$) and the other two with a perpendicular axis ($1q, 2q$).
+* The magnetic field produced by the rotor winding oscillates sinusoidally.
+* The machine may have 2 or more poles, noted as $p_f$.
 
-Firstly, the model is developed for the simpler case of round-rotor machines in the *abc* reference frame, where some inductances do not depend on the rotor's position as the geometry assumes a uniform air gap between rotor and stator. This simplifies the expressions of the differential equations obtained for the generation currents.
+The general model can be solved by detailed models that make further assumptions about the rotor structure and the expressions of some of its parameters as functions of some variables, in particular the interaction between rotor and stator due to magnetic saturation. Each particular model is listed, and its additional assumptions are listed before transforming the set of equations. A per-unit system is also proposed.
 
-Later on, the model expands for a more general case that also considers salient pole synchronous machines, used in lower speed applications such as hydro power.
-
-The resulting model is described in the dq0 reference frame and scaled to a *per unit* model (to simplify calculations), and it allows for transient studies of the generation.
+The resulting models will provide the complete set of dynamic equations of the synchronous machine to perform transient analysis. These equations can be further transformed to perform steady-state analysis.
 
 ## Physical description
 
-The following schematic shows all the components that participate in the model:
+The following schematic shows the components that participate in the synchronous machine operation:
 <p align="center">
 <img src="{{'/pages/models/generations/SM1/SM1_model_scheme.svg' | relative_url }}"
      alt="Operation of a Synchronous Machine schematic"
@@ -122,7 +124,36 @@ $$ R_{2q} = \frac{r_{2q}}{Z_{B2Q}}$$
 
 #### System of equations
 
-The resulting equations for the synchronous machine model in the *dq0* reference frame describe the GENSAL synchronous machine model without saturation:
+%%The resulting equations for the synchronous machine model in the *dq0* reference frame describe the GENSAL synchronous machine model without saturation:%%
+
+The following system of equations describe a general synchronous machine that considers the few assumptions stated in the previous chapter. Some of its parameters are generally non-constant and thus have to be then describe depending on the characteristics of the particular model studied.
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+\textbf{Mechanical dynamic equations:}\\
+J\frac{2}{p_f}  \frac{d\omega_m}{dt} = T_m - T_e - T_{fw} \quad (1)\\
+\frac{d\theta_{shaft}}{dt} = \frac{2}{p_f} \omega\\
+\textbf{Rotor dynamic equations:}\\
+v_a = R_a i_a + \frac{d\psi_a}{dt} \quad (3)\\
+v_b = R_b i_b + \frac{d\psi_b}{dt} \quad (4)\\
+v_c = R_c i_c + \frac{d\psi_c}{dt} \quad (5)\\
+\textbf{Rotor dynamic equations:}\\
+v_f = R_f i_f + \frac{d\psi_f}{dt} \quad (6) \\
+v_{1d} = R_{1d} i_{1d} + \frac{d\psi_{1d}}{dt} \\
+v_{1q} = R_{1q} i_{1q} + \frac{d\psi_{1q}}{dt} \\
+v_{2q} = R_{2q} i_{2q} + \frac{d\psi_{2q}}{dt} \\
+\end{equation}
+</div>
+
+With the general flux expressions as follows: 
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+\psi_a = \mathcal{L}_{aa} i_a + \mathcal{L}_{ab} i_b +\mathcal{L}_{ac} i_c + \mathcal{L}_{af} i_f \quad (7) \\
+\psi_b = \mathcal{L}_{ba} i_a + \mathcal{L}_{bb} i_b +\mathcal{L}_{bc} i_c + \mathcal{L}_{bf} i_f \quad (7) \\
+\psi_c = \mathcal{L}_{ca} i_a + \mathcal{L}_{cb} i_b +\mathcal{L}_{cc} i_c + \mathcal{L}_{cf} i_f \quad (7) \\
+\psi_f = \mathcal{L}_{af} i_a + \mathcal{L}_{br} i_b +\mathcal{L}_{cr} i_c + \mathcal{L}_{ff} i_f \quad (8)
+\end{equation}
+</div>
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
