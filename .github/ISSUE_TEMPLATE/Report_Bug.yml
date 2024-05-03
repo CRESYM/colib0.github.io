@@ -1,0 +1,77 @@
+name: Bug Report- COLib Website
+description: File a bug report about COLib website
+title: "[Bug]: "
+labels: ["bug", "triage"]
+projects: ["Colib0"]
+assignees:
+  - GJCRESYM
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!     
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: There are no existing issues
+          required: true
+  - type: checkboxes
+    attributes:
+      label: Priority of this issue
+      description: Specify the priority of fixing this issue
+      options:
+        - label: high
+        - label: medium
+        - label: low
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: Current-Behaviour
+    attributes:
+      label: Describe the current behaviour
+      description: What is the current behaviour?
+      placeholder: Tell us what you see!
+      value: "Expected this instead of that!"
+    validations:
+      required: true
+  - type: textarea
+    id: Expected-Behaviour
+    attributes:
+      label: Describe the expected behaviour
+      description: What is the expected behaviour?
+      placeholder: Tell us what you see!
+      value: "Display the expected result!"
+    validations:
+      required: false 
+  - type: textarea
+    id: Steps-Reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behaviour!
+      placeholder: Steps to reproduce
+      value: |
+        1. Go to
+        2. Click on
+        3. Enter ...
+        # Add more steps here,
+    validations:
+      required: false 
+

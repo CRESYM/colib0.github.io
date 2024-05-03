@@ -1,0 +1,40 @@
+name: Add Model/Test Cases Template
+description: Add a model or a Test Case
+title: "[Model/ Test case Name]: "
+labels: ["enhancement"]
+projects: ["Colib0"]
+assignees:
+  - GJCRESYM
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report!   
+  - type: checkboxes
+    attributes:
+      label: Do you want to add a new model or test case?
+      description: |
+          * A model is a consistent set of equations describing electric, control or electronic devices, which can be considered as a single, coherent piece of a more complex system.
+          * A test case that includes a network test system with its list of different static/dynamic models, input data, and simulation results.
+      options:
+        - label: New Model
+        - label: Test Cases
+    validations:
+      required: true      
+  - type: textarea
+    id: Expected-Behaviour
+    attributes:
+      label: Briefly describe about the contribution
+      description: Explain about new model/test case
+      placeholder: Tell us what you see!
+      value: "Describe about the contribution"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value:  |
+        To begin with, you can download a pre-formatted markdown template:
+      
+        [Download Model Template](https://github.com/CRESYM/colib0.github.io/blob/5463d2564a273c96ed9c18c777528f9c09dbb2e0/pages/templates/modelTemplate.md)
+        [Download Test Case Template](https://github.com/CRESYM/colib0.github.io/blob/5463d2564a273c96ed9c18c777528f9c09dbb2e0/pages/templates/testCaseTemplate.md)
+
