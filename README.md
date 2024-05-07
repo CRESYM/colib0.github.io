@@ -12,7 +12,7 @@ They both face the need for a collaborative shared dynamic simulation library th
 In this Colib workspace, we aim at addressing  power systems components, networks, and small and large test cases for steady-state and dynamic stability studies.
 For each of them, the description of the object is presented on one side, and the links to open source implementations with indicators on the quality on the other side.
 
-Want to contribute? Go see: [How to contribute page](/about/contribute)
+Want to contribute? Go see: [How to contribute page](/pages/about/contribute)
 
 
 # Installation Guide
