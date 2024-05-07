@@ -1,10 +1,10 @@
 name: Add Model/Test Cases Template
 description: Add a model or a Test Case
 title: "[Model/ Test case Name]: "
-labels: ["enhancement"]
+labels: ["enhancement", "new component"]
 projects: ["Colib0"]
 assignees:
-  - GJCRESYM
+  - GJCRESYM, matoubongrain
 body:
   - type: markdown
     attributes:

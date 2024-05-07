@@ -1,10 +1,10 @@
 name: Evaluate Model/Test case Template
 description: Evaluate a model or a Testcase
 title: "[Name/ID of the model/ test case to be evaluated]: "
-labels: ["enhancement", "bug"]
+labels: ["enhancement", "bug", "evaluate component"]
 projects: ["Colib0"]
 assignees:
-  - GJCRESYM
+  - GJCRESYM, matoubongrain
 body:
   - type: markdown
     attributes:

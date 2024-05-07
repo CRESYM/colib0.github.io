@@ -1,10 +1,10 @@
 name: Modify Model/Test Case Template
 description: Modify a model or a Test Case
 title: "[Name/ID of the model/ test case to be improved]: "
-labels: ["enhancement"]
+labels: ["enhancement", "modify component"]
 projects: ["Colib0"]
 assignees:
-  - GJCRESYM
+  - GJCRESYM, matoubongrain
 body:
   - type: markdown
     attributes:
