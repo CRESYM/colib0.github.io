@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Transformer
-tags: ["#114", "Transformer", "Single-phase", "Three-phase", "Cantilever equivalent", "Leakage flux"]
+tags: ["#114", "Transformer", "Single-phase", "Cantilever equivalent", "Leakage flux", "Steady-state", "Phasorial", "Dynawo", "Modelica"]
 date: 02/05/2024 
 last-updated: 02/05/2024
 ---
@@ -14,7 +14,7 @@ Transformers are essential parts of the grid as two-port devices that change the
 
 ## Model use, assumptions, validity domain and limitations
 
-The model is developed starting from the single-phase transformer, then it is expanded to describe the three-phase configurations and equations. It describes the *cantilever equivalent circuit* of the transformers, which consider a non-ideal model of the transformer with some simplifications that allow to perform the steady-state analysis of transformers.
+The model is developed for the single-phase transformer. It describes the *cantilever equivalent circuit* of the transformers, which consider a non-ideal model of the transformer with some simplifications that allow to perform the steady-state analysis of transformers.
 
 The assumptions are: 
 
@@ -25,6 +25,8 @@ The assumptions are:
 * The final equivalent model neglects the voltage drop produced by the exciting current in the secondary leakage impedance.
 
 The model does replicate exactly the theoretical value of the voltage at the secondary winding calculated with full information, as the equivalent impedance is a simplified approach of the losses. Since the leakage reactances are not easily measured, this approach is preferred as there are short-circuit and open-circuit tests that can be used to determine these equivalent values. 
+
+Steady-state analysis of three-phase transformers can be performed by using this single-phase model in one of the phases and then considering the phase shift for the rest of the phases. Depending on the configuration of the sides of the three-phase transformers (Delta-Delta, Star-Star, Delta-Star, Star-Delta), some rescaling of the impedances may be needed. Chapter 2.7 and Appendix A of [1](#1) discuss the details of this analysis.
 
 ## Model description
 
@@ -40,22 +42,134 @@ They can also be considered high voltage windings or low voltage windings, and b
 
 #### Core
 
-The core has two primary functions. The more obvious one, it acts as the support of both the primary and secondary windings. The second function, but not less important, it creates a low reluctance path for the magnetic flux. It is typically made of soft iron in order to lower the eddy current losses.
+The core has two primary functions. The more obvious one, it acts as the support of both the primary and secondary windings. The second function is to create a low reluctance path for the magnetic flux. It is typically made of soft iron in order to lower the eddy current losses.
 
 
 ### Transformer equations
 
 #### Variables
 
+| Variable    | details  | Unit |
+| --------------| ------ | ----- |
+| $$v^H$$ | HV side terminal voltage | $$p.u.$$ |
+| $$v^L$$ | LV side terminal voltage | $$p.u.$$ |
+| $$i^H$$ | HV side current | $$p.u.$$ |
+| $$i^L$$ | LV side current | $$p.u.$$ |
+| $$P^H$$ | HV side active power | $$p.u.$$ |
+| $$P^L$$ | LV side active power | $$p.u.$$ |
+| $$Q^H$$ | HV side reactive power | $$p.u.$$ |
+| $$Q^L$$ | LV side reactive power | $$p.u.$$ |
+
+
 #### Parameters
+
+| Parameter    | details  | Unit |
+| --------------| ------ | ----- |
+| $$N_1$$ | Number of turns of the primary winding | $$u.$$ |
+| $$N_2$$ | Number of turns of the secondary winding | $$u.$$ |
+| $$a$$| Transformation ratio $$a = \frac{N_1}{N_2}$$ | $$p.u.$$ |
+| $$S_{base}$$ | Transformer rated power | $$VA$$ |
+| $$V_{base, L}$$ | LV side rated voltage | $$V$$ |
+| $$V_{base, H}$$ | HV side rated voltage | $$V$$ |
+| $$I_{base, L}$$ | LV side base current $$I_{base} = \frac{S_{base}}{V_{base, L}}$$ | $$A$$ |
+| $$I_{base, H}$$ | HV side base current $$I_{base} = \frac{S_{base}}{V_{base, H}}$$  | $$A$$ |
+| $$Z_{base, L}$$ | LV side base impedance $$R_{base} = \frac{V_{base, L}^2}{S_{base}}$$ | $$\Omega$$ |
+| $$Z_{base, H}$$ | HV side base impedance $$R_{base} = \frac{V_{base, H}^2}{S_{base}}$$  | $$\Omega$$ |
+| $$V_{oc}$$ | Open-circuit voltage | $$V$$ | 
+| $$P_{oc}$$ | Open-circuit active power | $$W$$ |
+| $$I_{oc}$$ | Open-circuit current | $$A$$ |
+| $$V_{sc}$$ | Short-circuit voltage | $$V$$ | 
+| $$P_{sc}$$ | Short-circuit active power | $$W$$ |
+| $$I_{sc}$$ | Short-circuit current | $$A$$ |
+| $$R_{eq}$$ | Equivalent resistance $$R_{eq} = R_{sc} = \frac{P_{sc}}{I_{sc}^2}$$| $$\Omega$$ |
+| $$\|Z_{eq}\|$$ | Module of the equivalent impedance $$\|Z_{eq}\| = \|Z_{sc}\| = \frac{P_{sc}}{I_{sc}^2}$$| $$\Omega$$ |
+| $$X_{eq}$$ | Equivalent reactance $$X_{eq} = X_{sc} = \sqrt(\|Z_{sc}\|^2 - R_{sc}^2)$$ | $$\Omega$$ |
+| $$R_{c}$$ | Magnetizing resistance $$R_{c} = \frac{V_{oc}^2}{P_{oc}}$$| $$\Omega$$ |
+| $$\|Z_{\varphi}\|$$ | Module of the magnetizing impedance $$\|Z_{\varphi}\| = \frac{V_{oc}}{I_{oc}}$$ | $$\Omega$$ |
+| $$X_{m}$$ | Magnetizing reactance $$X_{m} = \frac{1}{\sqrt(\frac{1}{\|Z_{\varphi}\|^2} - \frac{1}{R_{c}^2})}$$ | $$\Omega$$ |
+| $$Z_{eq}$$ | Equivalent impedance $$Z_{eq} = R_{eq} + jX_{eq}$$| $$\Omega$$ |
+| $$Y_{\varphi}$$ | Magnetizing admittance $$Y_{\varphi} = \frac{1}{R_{c} + jX_{m}}$$| $$\Omega^{-1}$$ |
+
 
 #### Systems of equations
 
+The system of equations has 6 equations and 8 variables. The user must set a fixed value for two of the variables in order to have a single solution. The complete system in Per-Unit representation is:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    v^H = v^L + Z_{eq}^H i^H\\
+    i^H = Y_{\varphi}^L v^L - i^L\\
+    P^H = \mathbb{R}(v^H i^{H*})\\
+    Q^H = \mathbb{I}(v^H i^{H*})\\
+    P^L = \mathbb{R}(v^L i^{L*})\\
+    Q^L = \mathbb{I}(v^L i^{L*})
+\end{equation}
+</div>
+
+where $$\mathbb{R}$$ and $$\mathbb{I}$$ correspond to the real and imaginary part of the complex power. The admittance can be represented in either Per-Unit system, as long as the transformation to Per-Unit is done according to the computation of their values (i.e. if the equivalent impedance is computed referred to the HV, the Per-Unit system used must use the HV base voltage).
+
 ### Operational principles
 
-#### Equivalent-T single-phase transformer
+#### Ideal transformer
 
-Single-phase transformers have two windings around the same iron core, which confines the magnetic flux created by the windings. The relationship between currents and voltages for the windings can be written as follows:
+An ideal transformer consists on a primary winding and a secondary winding that are magnetically coupled by an iron-core, which is assumed to serve as a lossless path of magnetic flux. The primary winding is connected to an alternating voltage source, which produces an alternating flux the amplitude of which depends on the number of turns of the winding.
+
+As it is ideal, all this flux is considered to be *mutual flux* that links the primary and secondary, inducing a voltage in the latter the amplitude of which also depends on the number of turns of the secondary winding. The electromotive force induced by the primary circuit is calculated as:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    e_1 = \frac{d\psi_1}{dt} = N_1 \frac{d\varphi}{dt} 
+\end{equation}
+</div>
+
+where $$N_1$$ is the number of turns of the primary circuit, $$\psi_1$$ is the linkage flux of the primary winding and $$\varphi$$ is the mutual flux that links both windings.
+
+The primary winding magnetic electric equation is:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    v_1 = R_1 i_1 + e_1
+\end{equation}
+</div>
+
+Considering an ideal transformer with no magnetic or electrical losses (i.e, $$R=0$$), the terminal voltage equals the induced electromotive force. Regarding the secondary transformer, the induced electromotive force produces a voltage in its terminals:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    v_2 = e_2 = N_2 \frac{d\varphi}{dt} 
+\end{equation}
+</div>
+
+Since the magnetic flux relates both terminal voltage expressions, the following relationship holds:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    \frac{v_1}{v_2} = \frac{N_1}{N_2} 
+\end{equation}
+</div>
+
+where $$\frac{N_1}{N_2}$$ is also called the *transformation ratio*. Focusing now on the magnetomotive forces produced, the primary circuit can be considered as a generator and the secondary as a load, yielding the following expression:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    N_1 i_1 - N_2 i_2 = 0\\
+    \frac{i_1}{i_2} = \frac{N_2}{N_1}
+\end{equation}
+</div>
+
+and substituting it in the voltage relationship:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    v_1 i_1 = v_2 i_2 
+\end{equation}
+</div>
+
+showing that the input power equals the output power. This is a result of the several idealizations that have been assumed.
+
+#### Equivalent-T circuit for non-ideal transformers
+
+Considering a non-ideal transformer, the relationship between currents and voltages for the windings can be written as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 \begin{equation}
@@ -66,7 +180,7 @@ Single-phase transformers have two windings around the same iron core, which con
 
 where $$R_i$$ is the winding resistance in $$\Omega$$, $$v_i$$ is the terminal voltage in $$V$$, $$i_i$$ is the winding current in $$A$$ and $$\Psi_i$$ is the magnetic flux linkages in $$Wb$$. The subindex $$1$$ refers to the primary winding of the transformer, while the subindex $$2$$ refers to the secondary winding. 
 
-The total linkage flux can be split into mutual flux, which is the flux confined in the iron-core and produced by the magnetomotive forces of both windings, and the leakage flux, which links only the winding at which is generated.
+Since there can be some losses in the magnetic circuit, the total linkage flux is split into mutual flux, which is the flux confined in the iron-core and produced by the magnetomotive forces of both windings, and the leakage flux, which links only the winding at which is generated.
 
 From the point of view of the primary circuit, the leakage flux induces a voltage in the primary winding that adds to the voltage induced by the mutual flux, and it is considered proportional to the current the primary current $$i_1$$. It is represented by the primary leakage inductance $$L_{l_1}$$ and its corresponding reactance $$X_{l_1} = 2\pi f L_{l_1}$$, with $$f$$ the frequency of the current in $$Hz$$.
 
@@ -87,6 +201,10 @@ The transformer can now be seen as an ideal transformer with external impedances
      alt="T-equivalent circuit of a transformer"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align='center'>
+Figure 1. T-equivalent circuit of a transformer
+</div>
+<br>
 
 The transformer has been omitted, and it can be thought as if it was at the right-most or the left-most part of the equivalent circuit, depending on the reference winding chosen. In the equivalent circuit shown in the previous figure, the reference winding is the primary, and all the secondary quantities (those with a $$'$$ on top) are referred from the primary. To recover the actual value of these secondary quantities, the following transformation can be applied as done with the current earlier:
 
@@ -105,6 +223,10 @@ The equivalent-T circuit can be simplified by moving the shunt impedance to befo
      alt="Cantilever equivalent circuit of a transformer"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align='center'>
+Figure 2. Cantilever equivalent circuit of a transformer
+</div>
+<br>
 
 where $$R_{eq} = R_1 + R_2'$$ and $$X_{eq} = X_{l_1} + X_{l_2}'$$. All the parameters of this equivalent model can be obtained after performing an open-circuit and a short-circuit test.
 
@@ -130,7 +252,6 @@ $$ X_{eq} = X_{sc} = \sqrt(|Z_{sc}|^2 - R_{sc}^2)$$
 
 </div>
 
-
 #### Open-circuit test
 
 To calculate the magnetizing impedance, the test performed is the open-circuit test, which is performed by opening the secondary circuit and applying a voltage in the primary circuit, which generates an exciting current. It is performed at the rated voltages, which ensures that the exciting current is of a few percent of the rated current of the transformer.
@@ -152,16 +273,28 @@ $$ X_{m} = \frac{1}{\sqrt((\frac{1}{|Z_{\varphi}|})^2 - (\frac{1}{R_c})^2)}$$
 
 </div>
 
+#### Per-Unit system
+
+The equivalent circuit will be expressed in Per-Unit system, converting the transformer turn ratios in 1:1. This allows the removal of the ideal transformer of the model and hence the need to express the quantities referring to the primary or the secondary. This system is determined by setting arbitrary values for two quantities, typically $$S_{base}$$ and $$V_{base}$$, and then determining the rest of the base quantities using the relationships:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+\begin{equation}
+    S_{base} (P_{base}, Q_{base}) = V_{base} I_{base} \\
+    Z_{base} (R_{base}, X_{base}) = \frac{V_{base}}{I_{base}}
+\end{equation}
+</div>
+
+The $$V_{base}$$ value will change for each side of the transformer according to the transformation ratio.
 
 ## Open source implementations
 
-This model has been successfully implemented in :
-
+This model has been successfully implemented in:
 
 | Software | URL | Language | Open-Source License | Last consulted date | Comments |
 | Dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Transformers/TransformerFixedRatio.mo) | Modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) |02/05/2024 | no comments |
 
-
 ## Table of references
 
 <a id="1">[1]</a> Fitzgerald, A. E.; Kingsley, C.; Umans, S. D. "Electric Machinery", New York, USA, 6th ed., 2002, McGraw-Hill.
+
+<a id="2">[2]</a> Matsch, L.W.; Morgan, J.D. "Electromagnetic and Electromechanical Machines", New York, USA, 6th ed., 2002, McGraw-Hill.
