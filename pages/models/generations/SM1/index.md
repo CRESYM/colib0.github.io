@@ -22,7 +22,7 @@ Firstly, the model is developed for the simpler case of round-rotor machines in 
 
 Later on, the model expands for a more general case that also considers salient pole synchronous machines, used in lower speed applications such as hydro power.
 
-The resulting model is described in the dq0 reference frame and scaled to a *per unit* model (to simplify calculations), and it allows for transient studies of the generation.
+The resulting model is described in the dq0 reference frame and scaled to a *per-unit* model (to simplify calculations), and it allows for transient studies of the generation.
 
 ## Physical description
 
@@ -82,20 +82,8 @@ Move here all the variables that you use in your final set of equations.
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
-| V_{abc} | rated RMS phase to neutral voltage | kV |
 
 Then, all the variables are scaled with respect to the rated values as follows:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ V_{abc} = \frac{v_{abc}}{V_{BABC}}$$
-$$ I_{abc} = \frac{-i_{abc}}{I_{BABC}}$$
-$$ \Psi_{abc} = \frac{\psi_{abc}}{\psi_{BABC}}$$
-$$ V_{dq0} = \frac{v_{dq0}}{V_{BDQ}}$$
-$$ I_{dq0} = \frac{-i_{dq0}}{I_{BDQ}}$$
-$$ \Psi_{dq0} = \frac{\psi_{dq0}}{\psi_{BDQ}}$$
-</div>
-
 
 #### Parameters
 
@@ -103,47 +91,16 @@ Move here all the parameters that you use in your final set of equations.
 
 | Parameter    | details  | Unit |
 | --------------| ------ | ----- |
-| V_{BABC} | base to rate RMS phase to neutral voltage | kV |
 
-
-where V_{BABC} and V_{BDQ} are the rated RMS phase to neutral voltage and peak phase to neutral voltage respectively, $$I_{ABC} = \frac{S_B}{3V_{ABC}}$$, $$ I_{BDQ} = \frac{2S_B}{3V_{BDQ}}$$ with S_{B} the rated three-phase apparent power, and
-$$\psi_{BABC} = \frac{V_{BABC}}{\omega_B}$$, $$\psi_{BDQ} = \frac{V_{BDQ}}{\omega_B}$$ with $$\omega_B = \omega_s$$.
 
 The rest of parameters can also be scaled as follows:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ R_{a} = \frac{r_{a}}{Z_{BDQ}}$$
-$$ R_{f} = \frac{r_{f}}{Z_{BFD}}$$
-$$ R_{1d} = \frac{r_{1d}}{Z_{B1D}}$$
-$$ R_{1q} = \frac{r_{1q}}{Z_{B1Q}}$$
-$$ R_{2q} = \frac{r_{2q}}{Z_{B2Q}}$$
-</div>
-
 #### System of equations
 
-The resulting equations for the synchronous machine model in the *dq0* reference frame describe the GENSAL synchronous machine model without saturation:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \frac{1}{\omega_s} \frac{d\Psi_d}{dt} = R_s I_d + \frac{\omega_m}{\omega_s} \psi_q + V_d$$
-$$ \frac{1}{\omega_s} \frac{d\Psi_q}{dt} = R_s I_q - \frac{\omega_m}{\omega_s} \psi_d + V_q$$
-$$ \frac{1}{\omega_s} \frac{d\Psi_0}{dt} = R_s I_0 + V_0$$
-$$ T'_{d0} \frac{dE'_q}{dt} = -E'_q - (X_d - X'_d)[I_d - \frac{X'_d - X''_d}{(X'_d - X_{ls})^2} (\Psi_{1d} + (X'_d - X_{ls})I_d - E'_q)] + E_{fd}$$
-$$ T''_{d0} \frac{d\Psi_{1d}}{dt} = -\Psi_{1d} + E'_q - (X'_d - X_{ls})I_d$$
-$$ T'_{q0} \frac{dE'_d}{dt} = -E'_d + (X_q - X'_q)[I_q - \frac{X'_q - X''_q}{(X'_q - X_{ls})^2} (\Psi_{2q} + (X'_q - X_{ls})I_q + E'_d)]$$
-$$ T''_{q0} \frac{d\Psi_{2q}}{dt} = -\Psi_{2q} - E'_d - (X'_q - X_{ls})I_q$$
-$$ \frac{d\delta}{dt} = \omega_m - \omega_s$$
-$$ \frac{2H}{\omega_s} \frac{d\omega_m}{dt} = T_m - (\Psi_d I_q - \Psi_q I_d) - T_{fw}$$
-$$ \Psi_d = -X''_d I_d + (\frac{X'_d - X_{ls}}{X'_d - X_{ls}}) E'_q + (\frac{X'_d - X''_d}{X'_d - X_{ls}}) \Psi_{1d}$$
-$$ \Psi_q = -X''_q I_q - (\frac{X'_q - X_{ls}}{X'_q - X_{ls}}) E'_d + (\frac{X'_q - X''_q}{X'_q - X_{ls}}) \Psi_{2q}$$
-$$ \Psi_0 = -X_{ls} I_0$$
-
-</div>
 
 ### Focus on Operational principles
 
-I will focus this part in zooming in the different part of the equations.
 
 #### Swing equation of the synchronous machine
 
@@ -257,7 +214,7 @@ Where $$e_{af}$$ stands for the electromotive force that is induced in the stato
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
 \begin{equation}
-v_a =  R_a i_a + L_s \frac{di_a}{dt} + e_{af} \quad (16)
+v_a = R_a i_a + L_s \frac{di_a}{dt} + e_{af} \quad (16)
 \end{equation}
 </div>
 
@@ -315,13 +272,14 @@ Figure 4: Salient pole synchronous machine schematic
 As it can be seen, in addition to the field winding, the model considers three more windings $$(1d, 1q, 2q)$$ that act as dampers, and do not have electrical connections. The transformation for stator currents is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
 $$\begin{bmatrix} i_d \\\ i_q \\\ i_0 \end{bmatrix} = \frac{2}{3} \begin{bmatrix} \cos(\theta_{me}) & \cos(\theta_{me} - \frac{2\pi}{3}) & \cos(\theta_{me} + \frac{2\pi}{3}) \\\ -\sin(\theta_{me}) & -\sin(\theta_{me} - \frac{2\pi}{3}) & -\sin(\theta_{me} + \frac{2\pi}{3}) \\\ \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{bmatrix} \times \begin{bmatrix} i_a \\\ i_b \\\ i_c \end{bmatrix}$$
+
 </div>
 
 an expression that is applicable to all the stator quantities such as voltage or flux. The *zero-sequence* current is always 0 in three-phase balanced conditions.
 
 The transformation can be applied to the stator currents and fluxes in equations (7) and (8) while using the new inductance values. This derivation is omitted as it is laborious (it can be consulted in [[1]](#1) or [[5]](#5)). The flux expressions in the dq0 reference frame are:
-
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -329,6 +287,7 @@ $$\psi_d = L_d i_d + L_{af} i_f $$
 $$\psi_q = L_q i_q $$
 $$\psi_f = \frac{3}{2} L_{af} i_d + L_{ff} i_f $$
 $$\psi_0 = L_0 i_0 $$
+
 </div>
 
 with new inductance terms $$L_d = L_{al} + \frac{3}{2}(L_{aa0} + L_{g2})$$,  $$L_q = L_{al} + \frac{3}{2}(L_{aa0} - L_{g2})$$ and  $$L_0 = L_{al}$$, all of them independent from the rotor position in this reference frame. 
@@ -353,15 +312,12 @@ $$p_s (t) = \frac{3}{2}(v_d i_d + v_q i_q + 2v_0 i_0)$$
 $$T_{mech} = \frac{3}{2}(\psi_d i_q + \psi_q i_d)\frac{p_f}{2}$$
 </div>
 
-The full model of the synchronous generation can be written in a per unit system as defined in Sauer an Pai book [[6]](#6). Firstly, the displacement with respect to the synchronous speed is defined as $$\delta = \frac{p_f}{2} \theta_{shaft} - \omega_s t$$, where $$\omega_s = 2\pi f$$ is the synchronous speed. If the rotor is rotating at the same speed as the grid, this angle will be constant. The displacement is:
+The full model of the synchronous generation can be written in a per-unit system as defined in Sauer and Pai book [[6]](#6). Firstly, the displacement with respect to the synchronous speed is defined as $$\delta = \frac{p_f}{2} \theta_{shaft} - \omega_s t$$, where $$\omega_s = 2\pi f$$ is the synchronous speed. If the rotor is rotating at the same speed as the grid, this angle will be constant. The displacement is:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
 $$\frac{d\delta}{dt} = \omega_m - \omega_s$$
 </div>
-
-
-
 
 ### Operational limits
 
@@ -390,15 +346,13 @@ The left chart shows the $$P$$ and $$Q$$ maximum values for different limit curv
 
 {% include subfolderNav.html %}
 
-
 ## Open source implementations
 
 This model has been successfully implemented in :
 
-
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-|Dynawo|[Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 23/04/2024 | no comment |
+| Dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 23/04/2024 | no comment |
 
 ## Table of references
 
