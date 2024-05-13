@@ -14,19 +14,21 @@ The synchronous machine is one of the most studied component of a power system, 
 
 ## Model use, assumptions, validity domain and limitations
 
-The model corresponds to a balanced three-phase synchronous machine, considering both the round-rotor model (GENROU) and the salient-pole model (GENSAL) without saturation.
+The model presents the general expressions in *abc* reference frame of the differential equations that model a general synchronous machine with the following assumptions:
 
-This model assumes that the rotation of the magnetic field is sinusoidal, a separation of 120º between each of the three phases poles, similar characteristics for each of the three phase windings and a conservative coupling field between the windings reflected by the relationship between the flux linkages and currents of the windings.
+* There are three stator windings ($a, b, c$) distributed 120º apart one from each other, each of them with equal parameters (i.e. same resistance, inductance...).
+* The three phases are balanced, meaning the power is shared equally.
+* The rotor has one winding with a field ($e_f$) applied and three damper windings, with no power source, one of them with the axis parallel to the field winding ($1d$) and the other two with a perpendicular axis ($1q, 2q$).
+* The magnetic field produced by the rotor winding oscillates sinusoidally.
+* The machine may have 2 or more poles, noted as $p_f$.
 
-Firstly, the model is developed for the simpler case of round-rotor machines in the *abc* reference frame, where some inductances do not depend on the rotor's position as the geometry assumes a uniform air gap between rotor and stator. This simplifies the expressions of the differential equations obtained for the generation currents.
+The general model can be solved by detailed models that make further assumptions about the rotor structure and the expressions of some of its parameters as functions of some variables, in particular the interaction between rotor and stator due to magnetic saturation. Each particular model is listed, and its additional assumptions are explained before transforming the set of equations. A per-unit system is also proposed.
 
-Later on, the model expands for a more general case that also considers salient pole synchronous machines, used in lower speed applications such as hydro power.
-
-The resulting model is described in the dq0 reference frame and scaled to a *per-unit* model (to simplify calculations), and it allows for transient studies of the generation.
+The resulting models will provide the complete set of dynamic equations of the synchronous machine to perform transient analysis. These equations can be further transformed to perform steady-state analysis.
 
 ## Physical description
 
-The following schematic shows all the components that participate in the model:
+The following schematic shows the components that participate in the synchronous machine operation:
 <p align="center">
 <img src="{{'/pages/models/generations/SM1/SM1_model_scheme.svg' | relative_url }}"
      alt="Operation of a Synchronous Machine schematic"
@@ -82,25 +84,81 @@ Move here all the variables that you use in your final set of equations.
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
+| $$\theta_{shaft}$$ | Rotor angle | $$rad$$ |
+| $$\omega$$ | Electrical rotational speed | $$rad/s$$ |
+| $$T_m$$ | Mechanical torque | $$Nm$$ |
+| $$T_e$$ | Electrical torque | $$Nm$$ |
+| $$T_{fw}$$ | Windage and friction torque | $$Nm$$ |
+| $$v_a$$, $$v_b$$, $$v_c$$ | Stator phase voltages | $$V$$ |
+| $$i_a$$, $$i_b$$, $$i_c$$ | Stator phase currents | $$A$$ |
+| $$\psi_a$$, $$\psi_b$$, $$\psi_c$$ | Stator phase flux linkages | $$Wb$$ |
+| $$\psi_f$$, $$\psi_{1d}$$, $$\psi_{1q}$$, $$\psi_{2q}$$ | Rotor flux linkages | $$Wb$$ |
+| $$v_f$$ | Field voltage | $$V$$ |
+| $$\mathcal{L}_{ww'}$$ | Total inductance between two windings (can be itself) | $$H$$ |
 
-Then, all the variables are scaled with respect to the rated values as follows:
 
 #### Parameters
 
 Move here all the parameters that you use in your final set of equations.
 
-| Parameter    | details  | Unit |
-| --------------| ------ | ----- |
+| Parameter | Description | Unit |
+| --- | --- | --- |
+| $$J$$ | Moment of inertia | $$kgm^2$$ |
+| $$p_f$$ | Number of pole pairs | - |
+| $$R_a$$, $$R_b$$, $$R_c$$ | Stator phase resistances | $$\Omega$$ |
+| $$R_f$$, $$R_{1d}$$, $$R_{1q}$$, $$R_{2q}$$ | Rotor windings resistances | $$\Omega$$ |
+| $$L_{ww0}$$ | Self-inductance of a winding | $$H$$ |
+| $$L_{wl}$$ | Leakage inductance of a winding | $$H$$ |
+| $$L_{wg2}$$ | Mutual inductance between windings | $$H$$ |
+| $$L_{af}$$ | Mutual inductance between stator and rotor | $$H$$ |
 
-
-The rest of parameters can also be scaled as follows:
 
 #### System of equations
 
+The following system of equations describe a general synchronous machine with the considered assumptions. Some of its parameters are generally non-constant, meaning it is not directly solved without making some additional assumptions. The particular models are derivations of this system of equations.
 
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-### Focus on Operational principles
+<div style="font-weight: bold;">Mechanical dynamic equations:</div>
 
+$$J\frac{2}{p_f}  \frac{d\omega_m}{dt} = T_m - T_e - T_{fw}$$
+$$\frac{d\theta_{shaft}}{dt} = \frac{2}{p_f} \omega$$
+
+<div style="font-weight: bold;">Stator dynamic equations:</div>
+
+$$v_a = R_a i_a + \frac{d\psi_a}{dt}$$
+$$v_b = R_b i_b + \frac{d\psi_b}{dt}$$
+$$v_c = R_c i_c + \frac{d\psi_c}{dt}$$
+
+<div style="font-weight: bold;">Rotor dynamic equations:</div>
+
+$$v_f = R_f i_f + \frac{d\psi_f}{dt} \quad (6) $$
+$$0 = R_{1d} i_{1d} + \frac{d\psi_{1d}}{dt} $$
+$$0 = R_{1q} i_{1q} + \frac{d\psi_{1q}}{dt} $$
+$$0 = R_{2q} i_{2q} + \frac{d\psi_{2q}}{dt} $$
+
+</div>
+
+With the general flux expressions as follows: 
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+<div style="font-weight: bold;">Stator fluxes:</div>
+
+$$\psi_a = \mathcal{L}_{aa} i_a + \mathcal{L}_{ab} i_b +\mathcal{L}_{ac} i_c + \mathcal{L}_{af} i_f + \mathcal{L}_{a1d} i_{1d} + \mathcal{L}_{a1q} i_{1q} + \mathcal{L}_{a2q} i_{2q}$$
+$$\psi_b = \mathcal{L}_{ba} i_a + \mathcal{L}_{bb} i_b +\mathcal{L}_{bc} i_c + \mathcal{L}_{bf} i_f + \mathcal{L}_{b1d} i_{1d} + \mathcal{L}_{b1q} i_{1q} + \mathcal{L}_{b2q} i_{2q}$$
+$$\psi_c = \mathcal{L}_{ca} i_a + \mathcal{L}_{cb} i_b +\mathcal{L}_{cc} i_c + \mathcal{L}_{cf} i_f + \mathcal{L}_{c1d} i_{1d} + \mathcal{L}_{c1q} i_{1q} + \mathcal{L}_{c2q} i_{2q}$$
+
+<div style="font-weight: bold;">Rotor fluxes:</div>
+
+$$\psi_f = \mathcal{L}_{fa} i_a + \mathcal{L}_{fb} i_b +\mathcal{L}_{fc} i_c + \mathcal{L}_{ff} i_f + \mathcal{L}_{f1d} i_{1d}$$
+$$\psi_{1d} = \mathcal{L}_{1da} i_a + \mathcal{L}_{1db} i_b +\mathcal{L}_{1dc} i_c + \mathcal{L}_{1df} i_f + \mathcal{L}_{1dqd} i_{1d}$$
+$$\psi_{1q} = \mathcal{L}_{1qa} i_a + \mathcal{L}_{1qb} i_b +\mathcal{L}_{1qc} i_c + \mathcal{L}_{1q1q} i_{1q} + \mathcal{L}_{1q2q} i_{2q}$$
+$$\psi_{2q} = \mathcal{L}_{2qa} i_a + \mathcal{L}_{2qb} i_b +\mathcal{L}_{2qc} i_c + \mathcal{L}_{2q1q} i_{1q} + \mathcal{L}_{2q2q} i_{2q}$$
+
+</div>
+
+### Operational principles
 
 #### Swing equation of the synchronous machine
 
@@ -108,12 +166,13 @@ The dynamic equation that governs the system relates the mechanical torque appli
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$J\frac{2}{p_f}  \frac{d\omega_m}{dt} = T_m - T_e - T_{fw} \quad (1)$$
+$$J\frac{2}{p_f}  \frac{d\omega}{dt} = T_m - T_e - T_{fw}$$
+
 </div>
 
-where $$J$$ is the inertia of the rotating body in $$kgm^2$$, $$T_m$$ is the mechanical torque, $$T_e$$ is the electrical torque and $$T_{fw}$$ is the friction and windage torque, all in $$Nm$$.
+where $$\omega$$ is the rotational speed in $$rad/s$$, $$J$$ is the inertia of the rotating body in $$kgm^2$$, $$T_m$$ is the mechanical torque, $$T_e$$ is the electrical torque and $$T_{fw}$$ is the friction and windage torque, all in $$Nm$$.
 
-#### Round-rotor synchronous machine in *abc* reference frame
+#### Electric equations of the synchronous machine in *abc* reference frame
 
 Regarding the electrical part of the model, the rotor winding is magnetized by the exciter current, creating a magnetic field that will rotate with the rotor's angular velocity. As it spins, the stator windings will be subjected to a variable magnetic flux caused by the rotation of the produced magnetic field which, according to Faraday's Law, will induce an electromotive force in the windings.
 
@@ -135,189 +194,48 @@ The coupling between the rotor and the stator windings can be modelled using the
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-\begin{equation}
-v_a = R_a i_a + \frac{d\psi_a}{dt} \quad (3)\\
-v_b = R_b i_b + \frac{d\psi_b}{dt} \quad (4)\\
-v_c = R_c i_c + \frac{d\psi_c}{dt} \quad (5)\\
-v_f = R_f i_f + \frac{d\psi_f}{dt} \quad (6)
-\end{equation}
+$$v_a = R_a i_a + \frac{d\psi_a}{dt}$$
+$$v_b = R_b i_b + \frac{d\psi_b}{dt}$$
+$$v_c = R_c i_c + \frac{d\psi_c}{dt}$$
+$$v_f = R_f i_f + \frac{d\psi_f}{dt}$$
+$$v_{1d} = R_{1d} i_{1d} + \frac{d\psi_{1d}}{dt} $$
+$$v_{1q} = R_{1q} i_{1q} + \frac{d\psi_{1q}}{dt} $$
+$$v_{2q} = R_{2q} i_{2q} + \frac{d\psi_{2q}}{dt} $$
+
 </div>
 
-where $$\psi_i$$ is the magnetic flux passing through the $$i$$ phase in $$Wb$$, or rotor in case of the subindex $$r$$, $$R_i$$ is the resistance of the associated circuit in $$\Omega$$, $$v_i$$ is the terminal voltage in $$V$$ and $$i_i$$ is the current in $$A$$.
+where $$\psi_i$$ is the magnetic flux passing through the $$i$$ winding in $$Wb$$, $$R_i$$ is the resistance of the associated circuit in $$\Omega$$, $$v_i$$ is the terminal voltage in $$V$$ and $$i_i$$ is the current in $$A$$.
 
 The total fluxes are calculated taking into account all the present windings in the synchronous machine, which are the three stator windings and the rotor winding.
-The fluxes for one phase and for the rotor are calculated as follows:
+The fluxes for all the windings are calculated as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \psi_a = \mathcal{L}_{aa} i_a + \mathcal{L}_{ab} i_b +\mathcal{L}_{ac} i_c + \mathcal{L}_{af} i_f \quad (7)$$
+<div style="font-weight: bold;">Stator fluxes:</div>
 
-$$ \psi_f = \mathcal{L}_{af} i_a + \mathcal{L}_{br} i_b +\mathcal{L}_{cr} i_c + \mathcal{L}_{ff} i_f \quad (8)$$
+$$\psi_a = \mathcal{L}_{aa} i_a + \mathcal{L}_{ab} i_b +\mathcal{L}_{ac} i_c + \mathcal{L}_{af} i_f + \mathcal{L}_{a1d} i_{1d} + \mathcal{L}_{a1q} i_{1q} + \mathcal{L}_{a2q} i_{2q}$$
+$$\psi_b = \mathcal{L}_{ba} i_a + \mathcal{L}_{bb} i_b +\mathcal{L}_{bc} i_c + \mathcal{L}_{bf} i_f + \mathcal{L}_{b1d} i_{1d} + \mathcal{L}_{b1q} i_{1q} + \mathcal{L}_{b2q} i_{2q}$$
+$$\psi_c = \mathcal{L}_{ca} i_a + \mathcal{L}_{cb} i_b +\mathcal{L}_{cc} i_c + \mathcal{L}_{cf} i_f + \mathcal{L}_{c1d} i_{1d} + \mathcal{L}_{c1q} i_{1q} + \mathcal{L}_{c2q} i_{2q}$$
 
-</div>
+<div style="font-weight: bold;">Rotor fluxes:</div>
 
-with $$\mathcal{L}_{pp}$$ being the self inductance of the winding and $$\mathcal{L}_{pp'}$$ the mutual inductance between winding $$p$$ and winding $$p'$$, both in henrys. 
-
-The inductance values expressed using the notation $$\mathcal{L}$$ express a general dependency with respect to the rotor position $$\theta_{shaft} = \omega t + \theta_0$$ [[4]](#4).
-
-For cylindrical rotor, some of the inductances are independent of this angle due to the uniformity of the air gap. 
-For instance, $$\mathcal{L}_{ff} = L_{ff} = L_{rr0} + L_{rl}$$ where the first term corresponds to the portion of the inductance due to the air gap, and the second term corresponds to the leakage flux.
-$$\mathcal{L}_{aa} = \mathcal{L}_{bb} = \mathcal{L}_{cc} = L_{aa} = L_{aa0} + L_{al}$$ are the self-inductance of the stator windings, which assuming that all three windings have the same characteristics can be considered to have the same inductances. Again, the first term corresponds to the component coming from the air gap, and the second component corresponds to the armature leakage flux.
-
-The mutual inductances, considering a perfect 120º separation between windings, and having $$\cos(120º) = -1/2$$ take the values $$\mathcal{L}_{ab} = \mathcal{L}_{ba} = \mathcal{L}_{ac} = \mathcal{L}_{ca} = \mathcal{L}_{bc} = \mathcal{L}_{cb} = -\frac{1}{2} L_{aa0}$$.
-
-Meanwhile, the stator-rotor inductance depend on the electrical angle $$\theta_{me}$$ between the rotor winding axis and the stator winding axis. The value of this inductance for phase $$a$$ can be calculated with the expression $$\mathcal{L}_{af} = \mathcal{L}_{fa} = L_{af}\cos(\theta_{me})$$, while the same expression can be applied for phase $$b$$ and $$c$$ but replacing $$\theta_{me}$$ with $$\theta_{me} - 120º$$ and $$\theta_{me} + 120º$$ respectively. This angle can be calculated as a function of the rotor position angle expression seen before as $$\theta_{me} = \frac{p_f}{2}\theta_{shaft} = \omega_e t + \theta_{e0}$$.
-
-For a balanced system and considering $$t=0$$ the instant where $$i_a$$ is maximum, a sinusoidal field distribution over time and a 120º separation between, we have:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$i_a = I_m\cos(\omega_e t) \quad (9)$$
-
-$$i_b = I_m\cos(\omega_e t - \frac{2\pi}{3}) \quad (10)$$
-
-$$i_c = I_m\cos(\omega_e t + \frac{2\pi}{3}) \quad (11)$$
-
-$$i_a + i_b + i_c = 0 \quad (12)$$
-</div>
-
-where $$I_m$$ corresponds to the peak intensity.
-
-The flux expression for phase $$a$$ can be rewritten as:
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-\begin{equation}
-\psi_a = (L_{aa0} + L_{al}) i_a - \frac{1}{2} L_{aa0} (i_b + i_c) + \psi_{af} = (\frac{3}{2} L_{aa0} + L_{al}) i_a + \psi_{af} \quad (13)
-\end{equation}
-</div>
-
-We can define the synchronous inductance as $$L_s = \frac{3}{2} L_{aa0} + L_{al}$$, and then substitute the flux expression, as well as $$i_b + i_c = -i_a$$ using equation (12),  in the terminal voltage equation (3):
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-\begin{equation}
-v_a = R_a i_a + \frac{d\psi_a}{dt} =  R_a i_a + L_s \frac{di_a}{dt} + \frac{d\psi_{af}}{dt} \quad (14)
-\end{equation}
-</div>
-
-Since the excitation of the rotor winding comes from a DC source, the current $$i_f$$ is independent of time. 
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-\begin{equation}
-e_{af} = \frac{d\psi_{af}}{dt} = \frac{d\mathcal{L}_{af}}{dt} i_f = L_{af} \omega_e I_f \sin(\theta_{me}) \quad (15)
-\end{equation}
-</div>
-
-Where $$e_{af}$$ stands for the electromotive force that is induced in the stator due to this change of flux. The differential equation for the current of phase $$a$$ can be expressed as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-\begin{equation}
-v_a = R_a i_a + L_s \frac{di_a}{dt} + e_{af} \quad (16)
-\end{equation}
-</div>
-
-The same procedure can be applied to the other two phases.
-
-This equivalent circuit of the round-rotor synchronous machine is [[2]](#2):
-
-<p align="center">
-<img src="{{'/pages/models/generations/SM1/SM1equiv.svg' | relative_url }}"
-     alt="Operation of a Synchronous Machine schematic"
-     style="float: center; width: 400px;" />
-</p>
-<div style="text-align:center">
-Figure 3: Equivalent circuit of a round-rotor synchronous machine
-</div>
-<br>
-
-with the phasorial expression being[[4]](#4): 
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$v_a =  R_a i_a + j X_s i_a + e_{af} \quad (17)$$
-</div>
-
-where $$v_a$$ is the voltage at the terminals of the stator winding $$a$$, $$e_f$$ is the induced electromotive force by the magnetic field rotation, $$X_s = X_a + X_l = \omega_e L_s$$ is the total reactance of the generator, which is obtained by adding the armature and the leakage inductance as shown before and multiplied by the electrical rotation speed, $$R_a$$ is the series resistance, and $$i_a$$ is the current through the $$a$$ winding.
-
-This phasorial equation corresponds to the differential equation obtained previously.
-
-#### Salient poles synchronous machine in *dq0* reference representation
-
-The previous section contains the differential equations that completely model a round-rotor synchronous machine in the *abc* reference frame. As explained, some simplifications over the values of the inductances could be made by assuming an uniform air gap.
-In machines with salient poles rotors, the magnetic flux will have a preferred direction which will correspond to the salient part of the rotor. In the *abc* system, this preferred direction will be rotating alongside the rotor. This would translate in all the inductance values to be dependant on the position of the rotor as follows:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$\mathcal{L}_{aa} = L_{al} + L_{aa0} + L_{g2}\cos(2\theta_{me}) $$
-$$\mathcal{L}_{ab} = -\frac{1}{2}L_{aa0} + L_{g2}\cos(2\theta_{me}) $$
-</div>
-
-with the expressions for the other phases displaced by 120º for the trigonometric part, and the value of the rotor-stator inductance defined as for the round-rotor synchronous machine. Applying this new inductance values to the flux equations yield a much more complicated form that cannot be simplified (the complete flux equations can be seen in Kundur's book [[1]](#1)).
-
-In order to have simpler equations for the salient poles machines (and simplify even more the previous round-rotor model) there is a transformation to a reference frame that rotates with the rotor called the *dq0 reference frame*, also called the *Park transformation*. This reference frame is formed by the *direct axis (d)*, which is the polar axis in which the permeance to the magnetic field is greater than the permeance along the interpolar axis, called *quadrature axis (q)*. In this reference frame, inductance expressions no longer are a function of the rotor position, yielding much simpler flux expressions.
-
-The following diagram shows the convention for the reference frame as described in [[6]](#6), which is the most common convention used.
-
-<p align="center">
-<img src="{{'/pages/models/generations/SM1/SMSalientPoleScheme.svg' | relative_url }}"
-     alt="Operation of a Synchronous Machine schematic"
-     style="float: center; width: 400px;" />
-</p>
-<div style="text-align:center">
-Figure 4: Salient pole synchronous machine schematic
-</div>
-<br>
-
-As it can be seen, in addition to the field winding, the model considers three more windings $$(1d, 1q, 2q)$$ that act as dampers, and do not have electrical connections. The transformation for stator currents is the following:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$\begin{bmatrix} i_d \\\ i_q \\\ i_0 \end{bmatrix} = \frac{2}{3} \begin{bmatrix} \cos(\theta_{me}) & \cos(\theta_{me} - \frac{2\pi}{3}) & \cos(\theta_{me} + \frac{2\pi}{3}) \\\ -\sin(\theta_{me}) & -\sin(\theta_{me} - \frac{2\pi}{3}) & -\sin(\theta_{me} + \frac{2\pi}{3}) \\\ \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{bmatrix} \times \begin{bmatrix} i_a \\\ i_b \\\ i_c \end{bmatrix}$$
+$$\psi_f = \mathcal{L}_{fa} i_a + \mathcal{L}_{fb} i_b +\mathcal{L}_{fc} i_c + \mathcal{L}_{ff} i_f + \mathcal{L}_{f1d} i_{1d}$$
+$$\psi_{1d} = \mathcal{L}_{1da} i_a + \mathcal{L}_{1db} i_b +\mathcal{L}_{1dc} i_c + \mathcal{L}_{1df} i_f + \mathcal{L}_{1dqd} i_{1d}$$
+$$\psi_{1q} = \mathcal{L}_{1qa} i_a + \mathcal{L}_{1qb} i_b +\mathcal{L}_{1qc} i_c + \mathcal{L}_{1q1q} i_{1q} + \mathcal{L}_{1q2q} i_{2q}$$
+$$\psi_{2q} = \mathcal{L}_{2qa} i_a + \mathcal{L}_{2qb} i_b +\mathcal{L}_{2qc} i_c + \mathcal{L}_{2q1q} i_{1q} + \mathcal{L}_{2q2q} i_{2q}$$
 
 </div>
 
-an expression that is applicable to all the stator quantities such as voltage or flux. The *zero-sequence* current is always 0 in three-phase balanced conditions.
+with $$\mathcal{L}_{pp}$$ being the self inductance of the winding and $$\mathcal{L}_{pp'}$$ the mutual inductance between winding $$p$$ and winding $$p'$$, both in $$H$$. As it can be seen, the *q* axis damper windings and the *d* axis damper and rotor windings do not interact since they are perpendicular. the rest of inductances 
 
-The transformation can be applied to the stator currents and fluxes in equations (7) and (8) while using the new inductance values. This derivation is omitted as it is laborious (it can be consulted in [[1]](#1) or [[5]](#5)). The flux expressions in the dq0 reference frame are:
+The inductance values expressed using the notation $$\mathcal{L}$$ express a general dependency with respect to the rotor position $$\theta_{shaft} = \omega t + \theta_0$$ [[4]](#4). It is modelled as a sinusoidal dependency with respect to the electrical angle $$\theta_{me}$$. This angle can be calculated as a function of the rotor position angle expression seen before as $$\theta_{me} = \frac{p_f}{2}\theta_{shaft} = \omega_{me} t + \theta_{e0}$$. 
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+The general expression for mutual inductance would be $$\mathcal{L}_{pp} = L_{pp} = L_{pp0} + L_{pl} + L_{g2}\cos(2\theta_{me})$$ where the first term corresponds to the portion of the inductance due to the air gap, and the second term corresponds to the leakage flux. The mutual inductances, considering a perfect 120º separation between windings, and having $$\cos(120º) = -1/2$$ take the values $$\mathcal{L}_{pp'} = -\frac{1}{2} L_{pp0} + L_{g2}\cos(2\theta_{me})$$.
 
-$$\psi_d = L_d i_d + L_{af} i_f $$
-$$\psi_q = L_q i_q $$
-$$\psi_f = \frac{3}{2} L_{af} i_d + L_{ff} i_f $$
-$$\psi_0 = L_0 i_0 $$
+Considering that all the windings are assumed to have the same characteristics, the inductances for the different phases will only differ in the angular term of the rotor position, which will have additional phase terms of $$(0º, 120º, -120º)$$ for phases $$(a, b, c)$$ respectively.
 
-</div>
+The stator-rotor inductance also depends on the electrical angle $$\theta_{me}$$ between the rotor winding axis and the stator winding axis. The value of this inductance for phase $$a$$ can be calculated with the expression $$\mathcal{L}_{af} = \mathcal{L}_{fa} = L_{af}\cos(\theta_{me})$$, while the same expression can be applied for phase $$b$$ and $$c$$ but replacing $$\theta_{me}$$ with $$\theta_{me} - 120º$$ and $$\theta_{me} + 120º$$ respectively.
 
-with new inductance terms $$L_d = L_{al} + \frac{3}{2}(L_{aa0} + L_{g2})$$,  $$L_q = L_{al} + \frac{3}{2}(L_{aa0} - L_{g2})$$ and  $$L_0 = L_{al}$$, all of them independent from the rotor position in this reference frame. 
-
-Now, the voltage equations for the dq0 reference frame are also transformed into:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$v_d = R_a i_d + \frac{d\psi_d}{dt} - \omega_{me} \psi_q $$
-$$v_q = R_a i_q + \frac{d\psi_q}{dt} + \omega_{me} \psi_d $$
-$$v_0 = R_a i_0 + \frac{d\psi_0}{dt}$$
-$$v_f = R_f i_f + \frac{d\psi_f}{dt}$$
-$$v_{1d} = R_{1d} i_{1d} + \frac{d\psi_{1d}}{dt}$$
-$$v_{1q} = R_{1q} i_{1q} + \frac{d\psi_{1q}}{dt}$$
-$$v_{2q} = R_{2q} i_{2q} + \frac{d\psi_{2q}}{dt}$$
-</div>
-
-The expressions for instantaneous power and torque in this reference frame are [[1]](#1):
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$p_s (t) = \frac{3}{2}(v_d i_d + v_q i_q + 2v_0 i_0)$$
-$$T_{mech} = \frac{3}{2}(\psi_d i_q + \psi_q i_d)\frac{p_f}{2}$$
-</div>
-
-The full model of the synchronous generation can be written in a per-unit system as defined in Sauer and Pai book [[6]](#6). Firstly, the displacement with respect to the synchronous speed is defined as $$\delta = \frac{p_f}{2} \theta_{shaft} - \omega_s t$$, where $$\omega_s = 2\pi f$$ is the synchronous speed. If the rotor is rotating at the same speed as the grid, this angle will be constant. The displacement is:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$\frac{d\delta}{dt} = \omega_m - \omega_s$$
-</div>
 
 ### Operational limits
 
@@ -348,22 +266,23 @@ The left chart shows the $$P$$ and $$Q$$ maximum values for different limit curv
 
 ## Open source implementations
 
-This model has been successfully implemented in :
+This model has been successfully implemented in:
+
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-| Dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 23/04/2024 | no comment |
+|Dynawo|[Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 23/04/2024 | no comment |
 
 ## Table of references
 
-<a id="1">[1]</a>  Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill.
+<a id="1">[1]</a> Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill.
 
-<a id="2">[2]</a>  Kothari, D. P.; Nagrath, I. J. "Modern Power System Analysis", 4th ed., New Delhi, India, 2011, Tata McGraw-Hill.
+<a id="2">[2]</a> Kothari, D. P.; Nagrath, I. J. "Modern Power System Analysis", 4th ed., New Delhi, India, 2011, Tata McGraw-Hill.
 
-<a id="3">[3]</a>  PowerWorld Corporation. "ECE 310 Synchronous Machine Modeling".
+<a id="3">[3]</a> PowerWorld Corporation. "ECE 310 Synchronous Machine Modeling".
 
-<a id="4">[4]</a>  Fitzgerald, A. E.; Kingsley, C.; Umans, S. D. "Electric Machinery", New York, USA, 6th ed., 2002, McGraw-Hill.
+<a id="4">[4]</a> Fitzgerald, A. E.; Kingsley, C.; Umans, S. D. "Electric Machinery", New York, USA, 6th ed., 2002, McGraw-Hill.
 
-<a id="5">[5]</a>  Krause, P.; Wasynczuk, O.; Sudhoff, S.; Pekarek, S. "Analysis of Electric Machinery and Drive Systems", 3rd ed., New Jersey, USA, 2013, Wiley.
+<a id="5">[5]</a> Krause, P.; Wasynczuk, O.; Sudhoff, S.; Pekarek, S. "Analysis of Electric Machinery and Drive Systems", 3rd ed., New Jersey, USA, 2013, Wiley.
 
-<a id="6">[6]</a>  Sauer, P.W.; Pai, M. A. "Power System Dynamics and Stability", Urbana, IL, USA, 2006.
+<a id="6">[6]</a> Sauer, P.W.; Pai, M. A. "Power System Dynamics and Stability", Urbana, IL, USA, 2006.
