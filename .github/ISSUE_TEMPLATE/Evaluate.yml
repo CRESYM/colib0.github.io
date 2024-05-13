@@ -1,0 +1,49 @@
+name: Evaluate Model/Test case Template
+description: Evaluate a model or a Testcase
+title: "[Name/ID of the model/ test case to be evaluated]: "
+labels: ["enhancement", "bug", "evaluate component"]
+projects: ["Colib0"]
+assignees:
+  - GJCRESYM, matoubongrain
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report!
+  - type: checkboxes
+    attributes:
+      label: Specify the model/test case you evaluated
+      options:
+        - label: Model
+        - label: Testcase
+    validations:
+      required: true  
+  - type: input
+    id: Name
+    attributes:
+      label: Name the model/test case ID, you would like to evaluate
+      placeholder: ex. ID- 64
+    validations:
+      required: true   
+  - type: checkboxes
+    attributes:
+      label: What is the impact to the model or testcase?
+      options:
+        - label: minor
+        - label: moderate
+        - label: major
+    validations:
+      required: true  
+  - type: textarea
+    id: Expected-Behaviour
+    attributes:
+      label: Briefly describe your opinion about the model/testcase
+      placeholder: Tell us what you see!
+      value: |
+        Provide your feedback here!
+
+        Please upload your models/ test case template:
+    validations:
+      required: true
+
+
