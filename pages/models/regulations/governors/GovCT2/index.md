@@ -1,12 +1,12 @@
 ---
 layout: page
 title: GovCT2 / GGOV2 (Synchronous Machine Governor)
-tags: ["regulations", "governor", "controller", "synchronus machine"]
+tags: [regulations, governor, controller, synchronus machine, Opensource, CIMDynamic, RMS, modelica, dynawo]
 author: Martin Franke
 date: 23/04/2024
-version: version-1.0.0
+last-updated: 15/05/2024
+id: #53
 ---
-
 # GovCT2 / GGOV2 (Synchronous Machine Governor)
 
 ## Context
@@ -16,15 +16,22 @@ torque ($$T_m$$) delivered from the turbine to the electrical generator.
 This governor model includes the turbine dynamics, i.e. it takes a
 reference power and generator speed and outputs the mechanical torque.
 
-This governor model is part of the CIM/CGMES standard \[1\]. CIM is
-developed by ENTSO-E and aims at ensuring the reliability of grid models
-and market information exchanges. ENTSO-E developed CGMES as a superset
-of the IEC CIM standards (belonging to IEC CIM16) in 2013 to fulfill the
+This GovCT2 is a modification of the GovCT1 in order to represent the
+frequency-dependent fuel flow limit of a specific gas turbine
+manufacturer. Both are based on *Rowen’s model* from 1983 [1].
+
+When comparing to older standards: GovCT2 is identical to GGOV2 and
+GovCT1 is identical to GGOV1.
+
+GovCT2 is part of the CIM/CGMES standard [2]. CIM is developed by
+ENTSO-E and aims at ensuring the reliability of grid models and market
+information exchanges. ENTSO-E developed CGMES as a superset of the IEC
+CIM standards (belonging to IEC CIM16) in 2013 to fulfill the
 requirements of transmission system operators and their data exchanges.
 
 ## Model use, assumptions, validity domain and limitations
 
-The following information has been gathered from \[1\].
+The following information has been gathered from [2].
 
 General model for any prime mover with a PID governor.
 
@@ -34,7 +41,7 @@ Can be used to represent a variety of prime movers controlled by PID
 governors, such as:
 
 - Single shaft combined cycle turbines and Gas turbines
-- Diesel engines (with modern digital or electronic governors
+- Diesel engines (with modern digital or electronic governors)
 - Steam turbines with
   - steam supplied from a large boiler drum
   - or steam supplied from a large header with approximately constant
@@ -43,20 +50,30 @@ governors, such as:
   - short water column length
   - and minimal water inertia effects
 
+The model is a positive-sequence RMS model, hence it assumes symmetrical
+operating conditions and neglects high-frequency dynamics. This type of
+model is often used in large-scale stability studies, for which it
+reflects the relevant phenomena. It is not a detailed physical model of
+the unit. Also for some stability phenomena (e.g. resonance stability)
+this model is not sufficient and EMT models or other approaches may be
+necessary.
+
 ## Model description
 
-This model is based on Rowen’s model from 1983 \[2\].
+### Model schema
 
-This GovCT2 is a modification of the GovCT1 in order to represent the
-frequency-dependent fuel flow limit of a specific gas turbine
-manufacturer.
 
-When comparing to older standards: GovCT2 is identical to GGOV2 and
-GovCT1 is identical to GGOV1.
+![](drawings/GovCT2.drawio.svg)
+
+<div id="fig-modelSchema">
+
+Figure 1: Model schema, based on [2]
+
+</div>
 
 ### Major control paths
 
-The following section is based on \[2\] (p. 517f).
+The following section is based on [1] (p. 517f).
 
 The model has three major control paths (speed/load, acceleration,
 temperature) associated with the dynamic response during disturbances.
@@ -72,11 +89,11 @@ $$\omega$$ and automatic generation control power $$P_\mathrm{MWSet}$$.
 
 The resulting signal is then passed through a deadband, limits and a
 PID-controller. To represent a specific governor, some elements can be
-deactivated by setting parameters to zero (examples in \[2\]).
+deactivated by setting parameters to zero (examples in [1]).
 
 ##### Supervisory load controller
 
-In \[1\] the $$P_\mathrm{MWSet}$$ path is described as an optional
+In [2] the $$P_\mathrm{MWSet}$$ path is described as an optional
 additional outer loop associated with a power plant control (supervisory
 load controller). This is active when $$K_\mathrm{I\,MW}$$ is not equal to
 zero. It is a slow acting reset control and it adjusts the speed/load
@@ -84,24 +101,24 @@ reference of the turbine governor to maintain the electrical power of
 the unit at the value which it has been initialized with. That value is
 stored in $$P_\mathrm{MW\,set}$$ when the model is initialized, and can be
 changed during simulation. The load controller is expected to have a
-slow reaction compared to the speed governor. \[1\]
+slow reaction compared to the speed governor. [2]
 
 A value $$K_\mathrm{I\,MW}$$ = to 0.01 corresponds to a time constant of
-100 s; 0.001 corresponds to 1000 s (relatively slow acting) \[1\].
+100 s; 0.001 corresponds to 1000 s (relatively slow acting) [2].
 
-#### Acceleration (fsra)
+##### Acceleration (fsra)
 
-> \[…\] for studies of large power systems, \[the acceleration control
-> loop\] can be ignored. It is important for islanding studies and
+> […] for studies of large power systems, [the acceleration control
+> loop] can be ignored. It is important for islanding studies and
 > smaller power systems with large frequency variations. If the
 > generating unit begins to accelerate at a rate over
-> \[$$a_\mathrm{set}$$\] (pu/s^2) then this control loop acts to limit
-> fuel flow. \[2\]
+> [$$a_\mathrm{set}$$] (pu/s^2) then this control loop acts to limit
+> fuel flow. [1]
 
 It can be disabled by setting $$a_\mathrm{set}$$ to a large value, such
-as 1. \[1\]
+as 1. [2]
 
-#### Temperature (fsrt) / load limit
+##### Temperature (fsrt) / load limit
 
 The load limiter module allows to set a maximum output limit
 $$P_\mathrm{ldref}$$. This can also model an exhaust temperature limit, in
@@ -111,76 +128,76 @@ constant for temperature (or power or which ever signal is being
 modelled). Additionally, the gains of the limiter, $$K_\mathrm{P\,load}$$
 and $$K_\mathrm{I\,load}$$, should be set to achieve fast and stable
 control when the limit $$P_\mathrm{ldref}$$ is reached. To deactivate the
-load limit, set the parameter $$P_\mathrm{ldref}$$ to a high value \[1\].
+load limit, set the parameter $$P_\mathrm{ldref}$$ to a high value [2].
 
 The lead-lag block with $$T_\mathrm{sa}$$ and $$T_\mathrm{sb}$$ can be used
 to model the exhaust gas temperature measurement system in gas turbines.
 A “radiation shield” component of larger gas turbines can be modeled by
 setting $$T_\mathrm{sa}=4\,\mathrm{s}$$ and $$T_\mathrm{sb}=5\,\mathrm{s}$$,
-for example \[1\].
+for example [2].
 
-> The temperature limit \[tlim\] in pu corresponds to the fuel flow
-> required for 1 pu turbine power. \[2\]
+> The temperature limit [tlim] in pu corresponds to the fuel flow
+> required for 1 pu turbine power. [1]
 
-### Turbine/engine model
+#### Turbine/engine model
 
 The output from the low value select block is given to the first order
-lag element representing the fuel or gate system (Valve). \[2\]
+lag element representing the fuel or gate system (Valve). [1]
 
 $$V_\mathrm{max}$$ and $$V_\mathrm{min}$$ represent the maximum and minimum
 fuel valve opening. $$W_\mathrm{fspd}$$ is the fuel flow multiplyer.
 
-$$W_\mathrm{fnl}$$ is the fuel required to run the compensator \[2\].
+$$W_\mathrm{fnl}$$ is the fuel required to run the compensator [1].
 
 The range of fuel valve travel and of fuel flow is unity, so the limits
 lie between 0 pu and 1 pu. $$V_\mathrm{max}$$ can be reduced below 1, for
 example to model a load limit defined by the operator or supervisory
-controller \[1\]. Additionally there is a dynamic frequency dependent
+controller [2]. Additionally there is a dynamic frequency dependent
 limit reduction, see
-<a href="#sec-freqDepLimit" class="quarto-xref">Section 1.3.3</a>.
+<a href="#sec-freqDepLimit" class="quarto-xref">Section 3.2.3</a>.
 
 For a gas turbine, in the presence of a minimum firing limit,
 $$V_\mathrm{min}$$ normally is set greater than zero and less than
-$$W_\mathrm{fnl}$$ \[1\].
+$$W_\mathrm{fnl}$$ [2].
 
 The value of the fuel flow at maximum power shall be $$\leq 1$$, depending
-on the value of $$K_\mathrm{turb}$$ \[1\]. It translates the fuel
-consumption (or water flow) to mechanical power output \[2\].
+on the value of $$K_\mathrm{turb}$$ [2]. It translates the fuel
+consumption (or water flow) to mechanical power output [1].
 
 The time delay $$e^{-sT_\mathrm{eng}}$$ is used in representing diesel
 engines where there is a small but measurable transport delay between a
 change in fuel flow setting and the development of torque.
 $$T_\mathrm{eng}$$ should be zero in all but special cases where this
-transport delay is of particular concern \[1\].
+transport delay is of particular concern [2].
 
 The switch $$W_\mathrm{fspd}$$ is responsible for recognizing whether fuel
 flow, for a given fuel valve stroke, is be proportional to engine speed
-\[1\]. If True, fuel flow is proportional to speed. This is applicable
+[2]. If True, fuel flow is proportional to speed. This is applicable
 for some gas turbines and diesel engines with positive displacement fuel
 injectors. If false, the fuel control system keeps fuel flow independent
 of engine speed.
 
-#### Speed sensitivity / Damping
+##### Speed sensitivity / Damping
 
-If $$D_\mathrm{m}=0$$, the speed sensitivity paths are not active. \[1\]
+If $$D_\mathrm{m}=0$$, the speed sensitivity paths are not active. [2]
 
 If $$D_\mathrm{m}>0$$, it models friction losses (variation of the engine
 power with the shaft speed; slightly increasing losses with increasing
 speed are characteristic for reciprocating engines and some
-aeroderivative turbines \[1\]).
+aeroderivative turbines [2]).
 
 If $$D_\mathrm{m}=<0$$, it can model an influence of rotation speed on
 exhaust temperature using an exponential characteristic determined by
 $$D_\mathrm{m}$$. The maximum permissible fuel flow falls with falling
 speed (typical for single-shaft industrial turbines due to exhaust
-temperature limits) \[1\]. The authors suspect that this could represent
+temperature limits) [2]. The authors suspect that this could represent
 fan cooling.
 
-### Frequency dependent (valve) limit
+#### Frequency dependent (valve) limit
 
 The frequency-dependent limit block outputs the upper limit for valve
 position / the fuel flow signal fsr. It is shown in
-<a href="#fig-frequencyDependentLimit" class="quarto-xref">Figure 1</a>.
+<a href="#fig-frequencyDependentLimit" class="quarto-xref">Figure 2</a>.
 
 In normal operation, the limit is
 $$V_\mathrm{max\,\omega} = V_\mathrm{max}$$ and the there is no frequency
@@ -201,29 +218,18 @@ $$V_\mathrm{max\,omega} = (P_\mathrm{lim} / K_\mathrm{turb} + W_\mathrm{fnl})$$.
 
 $$P_\mathrm{lim}$$ will then change with frequency. If f rises above
 $$P_\mathrm{lim\,1}$$ again, $$V_\mathrm{max\,\omega}$$ ramps back to
-$$V_\mathrm{max}$$ \[1\].
+$$V_\mathrm{max}$$ [2].
 
 
 ![](drawings/GovCT2.frequencylimit.drawio.svg)
 
 <div id="fig-frequencyDependentLimit">
 
-Figure 1: Frequency dependent valve limit as described in [1]
+Figure 2: Frequency dependent valve limit as described in [2]
 
 </div>
 
-## Model schema
-
-
-![](drawings/GovCT2.drawio.svg)
-
-<div id="fig-modelSchema">
-
-Figure 2: model schema, based on \[1\]
-
-</div>
-
-## Parameters
+### Parameters
 
 Per-unit parameters are on base of $$P_\mathrm{base}$$, which is normally
 the capability of the turbine in MW.
@@ -237,11 +243,11 @@ Table 1: Parameters
 | name                        | type  | unit | modelica name     | IEC name   | description                                                                                                | typical value |
 |:----------------------------|:------|:-----|:------------------|:-----------|:-----------------------------------------------------------------------------------------------------------|:--------------|
 | $$a_\mathrm{set}$$            | float | pu/s | aSetPu            | Aset       | Acceleration limiter setpoint                                                                              | 10            |
-| $$\Delta\omega_\mathrm{db}$$  | float | pu   | DeltaOmegaDbPu    | db         | Frequency error deadband. Recommended to be =0 in most applications [1]                                  | 0             |
+| $$\Delta\omega_\mathrm{db}$$  | float | pu   | DeltaOmegaDbPu    | db         | Frequency error deadband. Recommended to be =0 in most applications [2]                                  | 0             |
 | $$\Delta\omega_\mathrm{max}$$ | float | pu   | DeltaOmegaMaxPu   | Maxerr     | Maximum value for frequency error                                                                          | 1             |
 | $$\Delta\omega_\mathrm{min}$$ | float | pu   | DeltaOmegaMinPu   | Minerr     | Minimum value for frequency error                                                                          | -1            |
 | $$\Delta t$$                  | float | s    | DeltaTSeconds     | $$\Delta t$$ | Correction factor to adapt the unit of $$K_\mathrm{a}$$ from pu/s to pu                                      | 1             |
-| $$D_\mathrm{m}$$              | float | pu   | DmPu              | dm         | Speed sensitivity coefficient, see <a href="#sec-speedSensitivity" class="quarto-xref">Section 1.3.2.1</a> | 0             |
+| $$D_\mathrm{m}$$              | float | pu   | DmPu              | dm         | Speed sensitivity coefficient, see <a href="#sec-speedSensitivity" class="quarto-xref">Section 3.2.2.1</a> | 0             |
 | $$f_\mathrm{lim\,1}$$         | float | Hz   | fLim1             | flim1      | Frequency threshold 1                                                                                      | 59            |
 | $$f_\mathrm{lim\,10}$$        | float | Hz   | fLim1             | flim10     | Frequency threshold 10                                                                                     | 0             |
 | $$f_\mathrm{lim\,2}$$         | float | Hz   | fLim1             | flim2      | Frequency threshold 2                                                                                      | 0             |
@@ -260,7 +266,7 @@ Table 1: Parameters
 | $$K_\mathrm{P\,gov}$$         | float | pu   | KPGovPu           | Kpgov      | Governor proportional gain                                                                                 | 4             |
 | $$K_\mathrm{P\,load}$$        | float | pu   | KPLoadPu          | Kpload     | Load limiter proportional                                                                                  | 1             |
 | $$K_\mathrm{turb}$$           | float | pu   | KTurbPu           | Kturb      | Turbine gain (translates from fuel flow to power)                                                          | 1.9168        |
-| $$P_\mathrm{base}$$           | float | MW   | PBaseMw           | Mwbase     | Base for power values (> 0)                                                                               |               |
+| $$P_\mathrm{base}$$           | float | MW   | PBaseMw           | Mwbase     | Base for power values (\> 0)                                                                               |               |
 | $$P_\mathrm{ldref}$$          | float | pu   | PLdRefPu          | Ldref      | Load limiter reference value                                                                               | 1             |
 | $$P_\mathrm{lim\,1}$$         | float | pu   | PLim1Pu           | plim1      | Power limit 1                                                                                              | 0.8325        |
 | $$P_\mathrm{lim\,10}$$        | float | pu   | PLim10Pu          | plim10     | Power limit 10                                                                                             | 0             |
@@ -297,9 +303,9 @@ Table 1: Parameters
 | $$W_\mathrm{fspd}$$           | bool  | \-   | WFSpdBool         | Wfspd      | Switch for fuel source characteristic                                                                      | false         |
 
 
-## Variables
+### Variables
 
-### Inputs
+#### Inputs
 
 <div id="tbl-inputs">
 
@@ -315,18 +321,7 @@ Table 2: Inputs
 | $$P_\mathrm{e}$$     | float | pu   | PElecPu       | Pe       | measured electric power generation                                   |
 
 
-- **assumption:** In the CGMES standard \[1\], there are two
-  inconsistencies:
-  - The input $$\omega$$ is passed into the summation point while it
-    should be $$\Delta \omega$$. In \[3\], $$\omega - 1$$ is used as input,
-    which supports this claim. In
-    <a href="#fig-modelSchema" class="quarto-xref">Figure 2</a>,
-    $$\omega$$ is still used as the input, but $$\Delta \omega = \omega -1$$
-    is then calculated.
-  - The input *speed* on the bottom right in \[1\] (Fig. 48) should be
-    the same as $$\omega$$, which is also backed by \[3\].
-
-## Outputs
+### Outputs
 
 <div id="tbl-outputs">
 
@@ -339,18 +334,22 @@ Table 3: Outputs
 | $$P_\mathrm{m}$$ | float | pu   | PMechPu       | Pm       | mechanical power |
 
 
-
-## Equations & algorithm  
+### Equations & algorithm  
 
 –
 
-## Initial equations / boundary conditions (optional)
+### Initial equations / boundary conditions (optional)
 
 The initial values for the system’s states are calculated from the
 initial mechanical power $$P_\mathrm{m\,0}$$ and rotation speed
 $$\omega_\mathrm{0}$$.
 
-### Helper variables
+#### Helper variables
+
+The following “helper variables” are defined to avoid repetition in the
+definitions of initial states below. They are the initial values of
+signals at certain points in
+<a href="#fig-modelSchema" class="quarto-xref">Figure 1</a>.
 
 <span id="eq-initPmnoloss">$$
 P_\mathrm{m\,noloss\,0} = 
@@ -388,7 +387,7 @@ V_\mathrm{0} =
 F_\mathrm{srt\,0} = (P_\mathrm{ldref}/K_\mathrm{turb} + W_\mathrm{fnl} - \vartheta_\mathrm{ex\,0}) \cdot K_\mathrm{P\,load} + x_\mathrm{I\,load}
  \qquad(5)$$</span>
 
-### Initial states
+#### Initial states
 
 <span id="eq-initXiload">$$
 x_\mathrm{I\,load\,0} = 1
@@ -438,152 +437,37 @@ x_\mathrm{last\,value\,0} = V_\mathrm{0}
 x_\mathrm{fsra\,0} = 0
  \qquad(17)$$</span>
 
-## Assumptions in modelica implementation (Open source implementations)
+## Open source implementations
 
-### Integrator anti-windup and integrator limits
+This model has been successfully implemented in :
 
-#### Limits
+| Software               | URL                                        | Language | Open-Source License                                | Last consulted date | Comments                                                                                              |
+| ---------------------- | ------------------------------------------ | -------- | -------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------- |
+| Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 15/05/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
 
-In \[1\] (page 45) it is stated that generally *“limited integrators are
-of the non-windup type”*. A concrete implementation is not specified. On
-p. 244 IEEE 421.5-2005 anti windup is referenced, but related to an AVR
-model. Since in \[1\] (Fig. 48) there is an explicitly limited
-integrator (`Kimw`), it was assumed that the integrators `Kigov` and
-`Kiload` are not *limited* in that sense, they are merely integrators
-with limits after them. Hence, they do not have a limit.
 
-#### Anti-windup
-
-In \[1\] (Fig. 47) it is shown for the GovCT1 model that the
-$$K_\mathrm{I\,gov}$$ and $$K_\mathrm{I\,load}$$ integrators have a
-so-colled *tracking logic*, i.e. anti-windup logic, implemented.
-
-For GovCT2, there are two statements:
-
-1)  In \[1\] (p. 139) it is stated that \> The Kpgov/Kigov and
-    Kpload/Kiload controllers include tracking logic to ensure smooth
-    transfer between active controllers. This logic is not shown on the
-    GovCT2 diagram.
-
-2)  Just above that, the following is written: \> Aside from the
-    frequency-dependent limit, GovCT2 is identical to GovCT1, except
-    that the temperature fuel command fsrt does not track fsr when it is
-    not in control. Instead, it stays at its upper limit (1).
-
-Statement 2. contradicts in two ways:
-
-- it says that there is no tracking logic for the $$K_\mathrm{I\,load}$$
-  integrator, while statement 1) says the opposite.
-- it says that there is an upper limit on the $$K_\mathrm{I\,load}$$
-  controller, which contradicts
-  <a href="#sec-assumptionLimits" class="quarto-xref">Section 1.10.1.1</a>.
-
-#### Resulting assumptions
-
-The validation reference model in DIgSILENT PowerFactory does not
-include the tracking logic. Because of this and the contradicting
-informaton in the standard:
-
-- No tracking logic has been implemented
-- Integrator limits are only implemented if explicitly shown in \[1\]
-  (Fig. 48)
-
-### Ramp rate limiters
-
-As ramp rate limiter, the Modelica library block
-`Modelica.Blocks.Nonlinear.SlewRateLimiter` is used.
-
-> The SlewRateLimiter block limits the slew rate of its input signal in
-> the range of \[Falling, Rising\]. To ensure this for arbitrary inputs
-> and in order to produce a differential output, the input is
-> numerically differentiated with derivative time constant Td. Smaller
-> time constant Td means nearer ideal derivative. Note: The user has to
-> choose the derivative time constant according to the nature of the
-> input signal.
-
-*Documentation of the Modelica block*
-
-- The default value of $$T_\mathrm{D\,ratelim}=1 \mathrm{ms}$$ is used.
-- The same value is used for each ramp rate limiter block.
-
-### Input signals $$\omega$$ and $$P_\mathrm{ref}$$
-
-#### Power setpoint $$P_\mathrm{ref}$$
-
-Since the power feedback gets passed through the droop $$R$$, so for the
-power difference to make sense, the reference power needs to be
-multiplied by $$R$$ as well. This has historical reasons, see \[2\]
-section 2.3.3.5 (before digital times it used to be a mechanical lever
-that is moved, it did not matter what the lever positions meant).
-
-- **assumption:** In this implementation the reference power input needs
-  to be multiplied by $$R$$ before entering the governor model.
-
-The same is done in *DIgSILENT PowerFactory* GovCT2 at initialization:
-`inc(Pref) = R*Pfdbck + w`. ()
-
-#### Rotor speed $$\omega$$
-
-In *DIgSILENT PowerFactory*, different implementations for the speed
-signal are used. For example,
-
-- In the PSS/E compatible GGOV1 model, the reference speed is explicitly
-  subtracted from the measured speed to calculate `dw`, which is then
-  subtracted at the control error summation point. Here, the reference
-  power input is initialized to `inc(Pref) = R*Pfdbck+dw`.
-- In the GovCT2 model, the speed `w` is directly subtracted at the
-  control error summation point. Here, the reference power input is
-  initialized to `inc(Pref) = R*Pfdbck+w`.
-
-So in both cases the initial speed value that is subtracted from the
-control error summation point is – implicitly! – being added to that
-summation point through the `Pref` input. The effect is that in both
-cases $$\Delta \omega$$ is subtracted at the summation point.
-
-- **assumption:** In this model, this subtraction is being done
-  explicitly by calculating $$\Delta \omega$$ (see
-  <a href="#fig-modelSchema" class="quarto-xref">Figure 2</a>) and
-  **not** adding anything speed related to the power reference input.
-
-### Frequency-dependent limit
-
-The mapping between frequency and maximum valve position is implemented
-via a lookup table. The table consists of 10 pairs of values. Successive
-values need to decrease in frequency and max. power. If e.g. only 5
-pairs shall be used instead of all 10, only define pairs 1 to 5 and set
-all following pairs with fLim=0 and PLim = PLim5, resuling in a straight
-line in the lookup table. **This is implemented slightly different
-compared to \[1\] (p. 139).**
-
-### Governor output feedback delay
-
-To prevent an algebraic loop when using the governor output feedback, a
-first-order lag block with time constant $$T_\mathrm{last\,value}$$ has
-been added to the governor output feedback loop. The use of a unit delay
-block (1/z) has been found impractical.
-
-## Table of references
+## Table of references & license
 
 <div id="refs" class="references csl-bib-body" entry-spacing="0">
 
-<div id="ref-iec61970-3022023" class="csl-entry">
-
-<span class="csl-left-margin">[1]
-</span><span class="csl-right-inline">IEC61970-302, “DIN EN IEC
-61970-302 – Schnittstelle für Anwendungsprogramme für
-Energiemanagementsysteme (EMS­API) Teil 302: Allgemeines
-Informationsmodell (CIM) Dynamik.” Jun. 2023.</span>
-
-</div>
-
 <div id="ref-machowski2020" class="csl-entry">
 
-<span class="csl-left-margin">[2]
+<span class="csl-left-margin">[1]
 </span><span class="csl-right-inline">J. Machowski, Z. Lubosny, J. W.
 Bialek, and J. R. Bumby, *Power System Dynamics: Stability and Control,
 3rd Edition*. Wiley, 2020. Accessed: Nov. 22, 2022. [Online].
 Available:
 <https://www.wiley.com/en-us/Power+System+Dynamics%3A+Stability+and+Control%2C+3rd+Edition-p-9781119526360></span>
+
+</div>
+
+<div id="ref-iec61970-3022023" class="csl-entry">
+
+<span class="csl-left-margin">[2]
+</span><span class="csl-right-inline">IEC61970-302, “DIN EN IEC
+61970-302 – Schnittstelle für Anwendungsprogramme für
+Energiemanagementsysteme (EMS­API) Teil 302: Allgemeines
+Informationsmodell (CIM) Dynamik.” Jun. 2023.</span>
 
 </div>
 
@@ -598,4 +482,3 @@ Analysis Tool.” 2015. Available:
 </div>
 
 </div>
-
