@@ -446,7 +446,7 @@ This model has been successfully implemented in :
 | Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 15/05/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
 
 
-## Table of references & license
+## Table of references
 
 <div id="refs" class="references csl-bib-body" entry-spacing="0">
 
