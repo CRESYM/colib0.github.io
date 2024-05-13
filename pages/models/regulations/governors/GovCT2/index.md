@@ -1,13 +1,13 @@
 ---
 layout: page
-title: GovCT2 (Synchronous Machine Governor)
+title: GovCT2 / GGOV2 (Synchronous Machine Governor)
 tags: ["regulations", "governor", "controller", "synchronus machine"]
 author: Martin Franke
 date: 23/04/2024
 version: version-1.0.0
 ---
 
-# GovCT2 (Synchronous Machine Governor)
+# GovCT2 / GGOV2 (Synchronous Machine Governor)
 
 ## Context
 
@@ -203,21 +203,41 @@ $$P_\mathrm{lim}$$ will then change with frequency. If f rises above
 $$P_\mathrm{lim\,1}$$ again, $$V_\mathrm{max\,\omega}$$ ramps back to
 $$V_\mathrm{max}$$ \[1\].
 
-![](drawings/GovCT2.frequencylimit.drawio.png)
+
+![](drawings/GovCT2.frequencylimit.drawio.svg)
+
+<div id="fig-frequencyDependentLimit">
+
+Figure 1: Frequency dependent valve limit as described in [1]
+
+</div>
 
 ## Model schema
 
-![](drawings/GovCT2.drawio.png)
+
+![](drawings/GovCT2.drawio.svg)
+
+<div id="fig-modelSchema">
+
+Figure 2: model schema, based on \[1\]
+
+</div>
 
 ## Parameters
 
 Per-unit parameters are on base of $$P_\mathrm{base}$$, which is normally
 the capability of the turbine in MW.
 
+<div id="tbl-parameters">
+
+Table 1: Parameters
+
+</div>
+
 | name                        | type  | unit | modelica name     | IEC name   | description                                                                                                | typical value |
 |:----------------------------|:------|:-----|:------------------|:-----------|:-----------------------------------------------------------------------------------------------------------|:--------------|
 | $$a_\mathrm{set}$$            | float | pu/s | aSetPu            | Aset       | Acceleration limiter setpoint                                                                              | 10            |
-| $$\Delta\omega_\mathrm{db}$$  | float | pu   | DeltaOmegaDbPu    | db         | Frequency error deadband. Recommended to be =0 in most applications \[1\]                                  | 0             |
+| $$\Delta\omega_\mathrm{db}$$  | float | pu   | DeltaOmegaDbPu    | db         | Frequency error deadband. Recommended to be =0 in most applications [1]                                  | 0             |
 | $$\Delta\omega_\mathrm{max}$$ | float | pu   | DeltaOmegaMaxPu   | Maxerr     | Maximum value for frequency error                                                                          | 1             |
 | $$\Delta\omega_\mathrm{min}$$ | float | pu   | DeltaOmegaMinPu   | Minerr     | Minimum value for frequency error                                                                          | -1            |
 | $$\Delta t$$                  | float | s    | DeltaTSeconds     | $$\Delta t$$ | Correction factor to adapt the unit of $$K_\mathrm{a}$$ from pu/s to pu                                      | 1             |
@@ -240,7 +260,7 @@ the capability of the turbine in MW.
 | $$K_\mathrm{P\,gov}$$         | float | pu   | KPGovPu           | Kpgov      | Governor proportional gain                                                                                 | 4             |
 | $$K_\mathrm{P\,load}$$        | float | pu   | KPLoadPu          | Kpload     | Load limiter proportional                                                                                  | 1             |
 | $$K_\mathrm{turb}$$           | float | pu   | KTurbPu           | Kturb      | Turbine gain (translates from fuel flow to power)                                                          | 1.9168        |
-| $$P_\mathrm{base}$$           | float | MW   | PBaseMw           | Mwbase     | Base for power values (\> 0)                                                                               |               |
+| $$P_\mathrm{base}$$           | float | MW   | PBaseMw           | Mwbase     | Base for power values (> 0)                                                                               |               |
 | $$P_\mathrm{ldref}$$          | float | pu   | PLdRefPu          | Ldref      | Load limiter reference value                                                                               | 1             |
 | $$P_\mathrm{lim\,1}$$         | float | pu   | PLim1Pu           | plim1      | Power limit 1                                                                                              | 0.8325        |
 | $$P_\mathrm{lim\,10}$$        | float | pu   | PLim10Pu          | plim10     | Power limit 10                                                                                             | 0             |
@@ -276,9 +296,16 @@ the capability of the turbine in MW.
 | $$W_\mathrm{fnl}$$            | float | pu   | WFnlPu            | Wfnl       | fuel flow with no load                                                                                     | 0.187         |
 | $$W_\mathrm{fspd}$$           | bool  | \-   | WFSpdBool         | Wfspd      | Switch for fuel source characteristic                                                                      | false         |
 
+
 ## Variables
 
 ### Inputs
+
+<div id="tbl-inputs">
+
+Table 2: Inputs
+
+</div>
 
 | name               | type  | unit | modelica name | IEC name | description                                                          |
 |--------------------|-------|------|---------------|----------|----------------------------------------------------------------------|
@@ -286,6 +313,7 @@ the capability of the turbine in MW.
 | $$P_\mathrm{ref}$$   | float | pu   | PRefPu        | Pref     | load setpoint                                                        |
 | $$P_\mathrm{MWSet}$$ | float | pu   | PMwSetPu      | Pmwset   | Supervisory power controller setpoint (automatic generation control) |
 | $$P_\mathrm{e}$$     | float | pu   | PElecPu       | Pe       | measured electric power generation                                   |
+
 
 - **assumption:** In the CGMES standard \[1\], there are two
   inconsistencies:
@@ -300,9 +328,17 @@ the capability of the turbine in MW.
 
 ## Outputs
 
+<div id="tbl-outputs">
+
+Table 3: Outputs
+
+</div>
+
 | name           | type  | unit | modelica name | IEC name | description      |
 |----------------|-------|------|---------------|----------|------------------|
 | $$P_\mathrm{m}$$ | float | pu   | PMechPu       | Pm       | mechanical power |
+
+
 
 ## Equations & algorithm  
 
@@ -526,13 +562,13 @@ first-order lag block with time constant $$T_\mathrm{last\,value}$$ has
 been added to the governor output feedback loop. The use of a unit delay
 block (1/z) has been found impractical.
 
-## Table of references & license
+## Table of references
 
 <div id="refs" class="references csl-bib-body" entry-spacing="0">
 
 <div id="ref-iec61970-3022023" class="csl-entry">
 
-<span class="csl-left-margin">\[1\]
+<span class="csl-left-margin">[1]
 </span><span class="csl-right-inline">IEC61970-302, “DIN EN IEC
 61970-302 – Schnittstelle für Anwendungsprogramme für
 Energiemanagementsysteme (EMS­API) Teil 302: Allgemeines
@@ -542,10 +578,10 @@ Informationsmodell (CIM) Dynamik.” Jun. 2023.</span>
 
 <div id="ref-machowski2020" class="csl-entry">
 
-<span class="csl-left-margin">\[2\]
+<span class="csl-left-margin">[2]
 </span><span class="csl-right-inline">J. Machowski, Z. Lubosny, J. W.
 Bialek, and J. R. Bumby, *Power System Dynamics: Stability and Control,
-3rd Edition*. Wiley, 2020. Accessed: Nov. 22, 2022.
+3rd Edition*. Wiley, 2020. Accessed: Nov. 22, 2022. [Online].
 Available:
 <https://www.wiley.com/en-us/Power+System+Dynamics%3A+Stability+and+Control%2C+3rd+Edition-p-9781119526360></span>
 
@@ -553,7 +589,7 @@ Available:
 
 <div id="ref-neplan2015" class="csl-entry">
 
-<span class="csl-left-margin">\[3\]
+<span class="csl-left-margin">[3]
 </span><span class="csl-right-inline">Neplan, “TURBINE-GOVERNOR MODELS –
 Standard Dynamic Turbine-Governor Systems in NEPLAN Power System
 Analysis Tool.” 2015. Available:
@@ -563,4 +599,3 @@ Analysis Tool.” 2015. Available:
 
 </div>
 
-- [ ] TODO license
