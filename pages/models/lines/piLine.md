@@ -113,3 +113,11 @@ The resulting system of equations can be solved providing the value of 2 out of 
 <br>
 [Dynawo public library](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Lines/Line.mo).
 </details>
+
+## References 
+
+<a id="1">[1]</a> Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill.
+
+<a id="2">[2]</a> Kothari, D. P.; Nagrath, I. J. "Modern Power System Analysis", 4th ed., New Delhi, India, 2011, Tata McGraw-Hill.
+
+<a id="3">[3]</a> Salam, A. "Fundamentals of Electrical Power Systems Analysis", Singapore, 2020, Springer.
