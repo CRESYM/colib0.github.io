@@ -1,7 +1,7 @@
 ---
 layout: page
 title: GovCT2 / GGOV2 (Synchronous Machine Governor)
-tags: [regulations, governor, controller, synchronus machine, Opensource, CIMDynamic, RMS, modelica, dynawo]
+tags: [regulations, governor, controller, synchronous machine, Opensource, IEC, CIMDynamic, RMS, modelica, dynawo]
 author: Martin Franke
 date: 23/04/2024
 last-updated: 15/05/2024
@@ -61,7 +61,6 @@ necessary.
 ## Model description
 
 ### Model schema
-
 
 ![](drawings/GovCT2.drawio.svg)
 
@@ -220,7 +219,6 @@ $$P_\mathrm{lim}$$ will then change with frequency. If f rises above
 $$P_\mathrm{lim\,1}$$ again, $$V_\mathrm{max\,\omega}$$ ramps back to
 $$V_\mathrm{max}$$ [2].
 
-
 ![](drawings/GovCT2.frequencylimit.drawio.svg)
 
 <div id="fig-frequencyDependentLimit">
@@ -240,68 +238,67 @@ Table 1: Parameters
 
 </div>
 
-| name                        | type  | unit | modelica name     | IEC name   | description                                                                                                | typical value |
-|:----------------------------|:------|:-----|:------------------|:-----------|:-----------------------------------------------------------------------------------------------------------|:--------------|
-| $$a_\mathrm{set}$$            | float | pu/s | aSetPu            | Aset       | Acceleration limiter setpoint                                                                              | 10            |
-| $$\Delta\omega_\mathrm{db}$$  | float | pu   | DeltaOmegaDbPu    | db         | Frequency error deadband. Recommended to be =0 in most applications [2]                                  | 0             |
-| $$\Delta\omega_\mathrm{max}$$ | float | pu   | DeltaOmegaMaxPu   | Maxerr     | Maximum value for frequency error                                                                          | 1             |
-| $$\Delta\omega_\mathrm{min}$$ | float | pu   | DeltaOmegaMinPu   | Minerr     | Minimum value for frequency error                                                                          | -1            |
-| $$\Delta t$$                  | float | s    | DeltaTSeconds     | $$\Delta t$$ | Correction factor to adapt the unit of $$K_\mathrm{a}$$ from pu/s to pu                                      | 1             |
-| $$D_\mathrm{m}$$              | float | pu   | DmPu              | dm         | Speed sensitivity coefficient, see <a href="#sec-speedSensitivity" class="quarto-xref">Section 3.2.2.1</a> | 0             |
-| $$f_\mathrm{lim\,1}$$         | float | Hz   | fLim1             | flim1      | Frequency threshold 1                                                                                      | 59            |
-| $$f_\mathrm{lim\,10}$$        | float | Hz   | fLim1             | flim10     | Frequency threshold 10                                                                                     | 0             |
-| $$f_\mathrm{lim\,2}$$         | float | Hz   | fLim1             | flim2      | Frequency threshold 2                                                                                      | 0             |
-| $$f_\mathrm{lim\,3}$$         | float | Hz   | fLim1             | flim3      | Frequency threshold 3                                                                                      | 0             |
-| $$f_\mathrm{lim\,4}$$         | float | Hz   | fLim1             | flim4      | Frequency threshold 4                                                                                      | 0             |
-| $$f_\mathrm{lim\,5}$$         | float | Hz   | fLim1             | flim5      | Frequency threshold 5                                                                                      | 0             |
-| $$f_\mathrm{lim\,6}$$         | float | Hz   | fLim1             | flim6      | Frequency threshold 6                                                                                      | 0             |
-| $$f_\mathrm{lim\,7}$$         | float | Hz   | fLim1             | flim7      | Frequency threshold 7                                                                                      | 0             |
-| $$f_\mathrm{lim\,8}$$         | float | Hz   | fLim1             | flim8      | Frequency threshold 8                                                                                      | 0             |
-| $$f_\mathrm{lim\,9}$$         | float | Hz   | fLim1             | flim9      | Frequency threshold 9                                                                                      | 0             |
-| $$K_\mathrm{a}$$              | float | pu   | KAPu              | Ka         | Acceleration limiter gain                                                                                  | 10            |
-| $$K_\mathrm{D\,gov}$$         | float | pu   | KDGovPu           | Kdgov      | Governor derivative gain                                                                                   | 0             |
-| $$K_\mathrm{I\,gov}$$         | float | pu   | KIGovPu           | Kigov      | Governor integral gain                                                                                     | 0.45          |
-| $$K_\mathrm{I\,load}$$        | float | pu   | KILoadPu          | Kiload     | Load limiter integral gain                                                                                 | 1             |
-| $$K_\mathrm{I\,MW}$$          | float | pu   | KIMwPu            | Kimw       | Supervisory load controller integral gain                                                                  | 0             |
-| $$K_\mathrm{P\,gov}$$         | float | pu   | KPGovPu           | Kpgov      | Governor proportional gain                                                                                 | 4             |
-| $$K_\mathrm{P\,load}$$        | float | pu   | KPLoadPu          | Kpload     | Load limiter proportional                                                                                  | 1             |
-| $$K_\mathrm{turb}$$           | float | pu   | KTurbPu           | Kturb      | Turbine gain (translates from fuel flow to power)                                                          | 1.9168        |
-| $$P_\mathrm{base}$$           | float | MW   | PBaseMw           | Mwbase     | Base for power values (\> 0)                                                                               |               |
-| $$P_\mathrm{ldref}$$          | float | pu   | PLdRefPu          | Ldref      | Load limiter reference value                                                                               | 1             |
-| $$P_\mathrm{lim\,1}$$         | float | pu   | PLim1Pu           | plim1      | Power limit 1                                                                                              | 0.8325        |
-| $$P_\mathrm{lim\,10}$$        | float | pu   | PLim10Pu          | plim10     | Power limit 10                                                                                             | 0             |
-| $$P_\mathrm{lim\,2}$$         | float | pu   | PLim2Pu           | plim2      | Power limit 2                                                                                              | 0             |
-| $$P_\mathrm{lim\,3}$$         | float | pu   | PLim3Pu           | plim3      | Power limit 3                                                                                              | 0             |
-| $$P_\mathrm{lim\,4}$$         | float | pu   | PLim4Pu           | plim4      | Power limit 4                                                                                              | 0             |
-| $$P_\mathrm{lim\,5}$$         | float | pu   | PLim5Pu           | plim5      | Power limit 5                                                                                              | 0             |
-| $$P_\mathrm{lim\,6}$$         | float | pu   | PLim6Pu           | plim6      | Power limit 6                                                                                              | 0             |
-| $$P_\mathrm{lim\,7}$$         | float | pu   | PLim7Pu           | plim7      | Power limit 7                                                                                              | 0             |
-| $$P_\mathrm{lim\,8}$$         | float | pu   | PLim8Pu           | plim8      | Power limit 8                                                                                              | 0             |
-| $$P_\mathrm{lim\,9}$$         | float | pu   | PLim9Pu           | plim9      | Power Limit 9                                                                                              | 0             |
-| $$P_\mathrm{rate}$$           | float | pu   | PRatePu           | prate      | Ramp rate for frequency-dependent power limit                                                              | 0.017         |
-| $$R$$                         | float | pu   | RPu               | R          | Droop (frequency/power)                                                                                    | 0.05          |
-| $$R_\mathrm{close}$$          | float | pu/s | RClosePu          | Rclose     | Minimum rate for valve closing                                                                             | -99           |
-| $$R_\mathrm{down}$$           | float | pu   | RDownPu           | Rdown      | temperature/load limit path output decrease rate limit                                                     | -99           |
-| $$R_\mathrm{open}$$           | float | pu/s | ROpenPu           | Ropen      | Maximum rate for valve closing                                                                             | 99            |
-| $$R_\mathrm{select}$$         | int   | \-   | RSelectInt        | Rselect    | governor controller feedback mode switch                                                                   |               |
-| $$R_\mathrm{up}$$             | float | pu   | RUpPu             | Rup        | temperature/load limit path output increase rate limit                                                     | 99            |
-| $$T_\mathrm{a}$$              | float | s    | tASeconds         | Ta         | Acceleration limiter time constant                                                                         | 1             |
-| $$T_\mathrm{act}$$            | float | s    | tActuatorSeconds  | Tact       | actuator (valve) reaction time constant                                                                    | 0.4           |
-| $$T_\mathrm{b}$$              | float | s    | tBSeconds         | Tb         | Turbine lag time constant                                                                                  | 0.1           |
-| $$T_\mathrm{c}$$              | float | s    | tCSeconds         | Tc         | Turbine lead time constant                                                                                 | 0             |
-| $$T_\mathrm{dgov}$$           | float | s    | tDGovSeconds      | Tdgov      | Governor controller derivative time constant                                                               | 1             |
-| $$T_\mathrm{D\,ratelim}$$     | float | s    | tDRatelimSeconds  | \-         | Ramp rate limter derivative time constant in s                                                             | 0.001         |
-| $$T_\mathrm{eng}$$            | float | s    | tEngineSeconds    | Teng       | Transport time delay for diesel engine                                                                     | 0             |
-| $$T_\mathrm{f\,load}$$        | float | s    | tFLoadSeconds     | Tfload     | Load limiter time constant                                                                                 | 3             |
-| $$T_\mathrm{last\,value}$$    | float | s    | tLastValueSeconds | \-         | Time constant of very fast first order block to prevent algebraic loop                                     | 1e-9          |
-| $$T_\mathrm{p\,elec}$$        | float | s    | tPElecSeconds     | Tpelec     | Electrical power measurement time constant                                                                 | 2.5           |
-| $$T_\mathrm{sa}$$             | float | s    | tSASeconds        | Tsa        | lead time constant of temperature detection                                                                | 0             |
-| $$T_\mathrm{sb}$$             | float | s    | tSBSeconds        | Tsb        | lag time constant of temperature detection                                                                 | 50            |
-| $$V_\mathrm{max}$$            | float | pu   | ValveMaxPu        | Vmax       | Maximum valve position limit                                                                               | 1             |
-| $$V_\mathrm{min}$$            | float | pu   | ValveMinPu        | Vmin       | Minimum valve position limit                                                                               | 0.175         |
-| $$W_\mathrm{fnl}$$            | float | pu   | WFnlPu            | Wfnl       | fuel flow with no load                                                                                     | 0.187         |
-| $$W_\mathrm{fspd}$$           | bool  | \-   | WFSpdBool         | Wfspd      | Switch for fuel source characteristic                                                                      | false         |
-
+| name                        | type  | unit  | IEC name   | description                                                                                                | typical value |
+|:----------------------------|:------|:-----|:-----------|:-----------------------------------------------------------------------------------------------------------|:--------------|
+| $$a_\mathrm{set}$$            | float | pu/s |  Aset       | Acceleration limiter setpoint                                                                              | 10            |
+| $$\Delta\omega_\mathrm{db}$$  | float | pu   |  db         | Frequency error deadband. Recommended to be =0 in most applications [2]                                  | 0             |
+| $$\Delta\omega_\mathrm{max}$$ | float | pu   |  Maxerr     | Maximum value for frequency error                                                                          | 1             |
+| $$\Delta\omega_\mathrm{min}$$ | float | pu   |  Minerr     | Minimum value for frequency error                                                                          | -1            |
+| $$\Delta t$$                  | float | s    |  $$\Delta t$$ | Correction factor to adapt the unit of $$K_\mathrm{a}$$ from pu/s to pu                                      | 1             |
+| $$D_\mathrm{m}$$              | float | pu   |  dm         | Speed sensitivity coefficient, see <a href="#sec-speedSensitivity" class="quarto-xref">Section 3.2.2.1</a> | 0             |
+| $$f_\mathrm{lim\,1}$$         | float | Hz   |  flim1      | Frequency threshold 1                                                                                      | 59            |
+| $$f_\mathrm{lim\,10}$$        | float | Hz   |  flim10     | Frequency threshold 10                                                                                     | 0             |
+| $$f_\mathrm{lim\,2}$$         | float | Hz   |  flim2      | Frequency threshold 2                                                                                      | 0             |
+| $$f_\mathrm{lim\,3}$$         | float | Hz   |  flim3      | Frequency threshold 3                                                                                      | 0             |
+| $$f_\mathrm{lim\,4}$$         | float | Hz   |  flim4      | Frequency threshold 4                                                                                      | 0             |
+| $$f_\mathrm{lim\,5}$$         | float | Hz   |  flim5      | Frequency threshold 5                                                                                      | 0             |
+| $$f_\mathrm{lim\,6}$$         | float | Hz   |  flim6      | Frequency threshold 6                                                                                      | 0             |
+| $$f_\mathrm{lim\,7}$$         | float | Hz   |  flim7      | Frequency threshold 7                                                                                      | 0             |
+| $$f_\mathrm{lim\,8}$$         | float | Hz   |  flim8      | Frequency threshold 8                                                                                      | 0             |
+| $$f_\mathrm{lim\,9}$$         | float | Hz   |  flim9      | Frequency threshold 9                                                                                      | 0             |
+| $$K_\mathrm{a}$$              | float | pu   |  Ka         | Acceleration limiter gain                                                                                  | 10            |
+| $$K_\mathrm{D\,gov}$$         | float | pu   |  Kdgov      | Governor derivative gain                                                                                   | 0             |
+| $$K_\mathrm{I\,gov}$$         | float | pu   |  Kigov      | Governor integral gain                                                                                     | 0.45          |
+| $$K_\mathrm{I\,load}$$        | float | pu   |  Kiload     | Load limiter integral gain                                                                                 | 1             |
+| $$K_\mathrm{I\,MW}$$          | float | pu   |  Kimw       | Supervisory load controller integral gain                                                                  | 0             |
+| $$K_\mathrm{P\,gov}$$         | float | pu   |  Kpgov      | Governor proportional gain                                                                                 | 4             |
+| $$K_\mathrm{P\,load}$$        | float | pu   |  Kpload     | Load limiter proportional                                                                                  | 1             |
+| $$K_\mathrm{turb}$$           | float | pu   |  Kturb      | Turbine gain (translates from fuel flow to power)                                                          | 1.9168        |
+| $$P_\mathrm{base}$$           | float | MW   |  Mwbase     | Base for power values (\> 0)                                                                               |               |
+| $$P_\mathrm{ldref}$$          | float | pu   |  Ldref      | Load limiter reference value                                                                               | 1             |
+| $$P_\mathrm{lim\,1}$$         | float | pu   |  plim1      | Power limit 1                                                                                              | 0.8325        |
+| $$P_\mathrm{lim\,10}$$        | float | pu   |  plim10     | Power limit 10                                                                                             | 0             |
+| $$P_\mathrm{lim\,2}$$         | float | pu   |  plim2      | Power limit 2                                                                                              | 0             |
+| $$P_\mathrm{lim\,3}$$         | float | pu   |  plim3      | Power limit 3                                                                                              | 0             |
+| $$P_\mathrm{lim\,4}$$         | float | pu   |  plim4      | Power limit 4                                                                                              | 0             |
+| $$P_\mathrm{lim\,5}$$         | float | pu   |  plim5      | Power limit 5                                                                                              | 0             |
+| $$P_\mathrm{lim\,6}$$         | float | pu   |  plim6      | Power limit 6                                                                                              | 0             |
+| $$P_\mathrm{lim\,7}$$         | float | pu   |  plim7      | Power limit 7                                                                                              | 0             |
+| $$P_\mathrm{lim\,8}$$         | float | pu   |  plim8      | Power limit 8                                                                                              | 0             |
+| $$P_\mathrm{lim\,9}$$         | float | pu   |  plim9      | Power Limit 9                                                                                              | 0             |
+| $$P_\mathrm{rate}$$           | float | pu   |  prate      | Ramp rate for frequency-dependent power limit                                                              | 0.017         |
+| $$R$$                         | float | pu   |  R          | Droop (frequency/power)                                                                                    | 0.05          |
+| $$R_\mathrm{close}$$          | float | pu/s |  Rclose     | Minimum rate for valve closing                                                                             | -99           |
+| $$R_\mathrm{down}$$           | float | pu   |  Rdown      | temperature/load limit path output decrease rate limit                                                     | -99           |
+| $$R_\mathrm{open}$$           | float | pu/s |  Ropen      | Maximum rate for valve closing                                                                             | 99            |
+| $$R_\mathrm{select}$$         | int   | \-   |  Rselect    | governor controller feedback mode switch                                                                   |               |
+| $$R_\mathrm{up}$$             | float | pu   |  Rup        | temperature/load limit path output increase rate limit                                                     | 99            |
+| $$T_\mathrm{a}$$              | float | s    |  Ta         | Acceleration limiter time constant                                                                         | 1             |
+| $$T_\mathrm{act}$$            | float | s    |  Tact       | actuator (valve) reaction time constant                                                                    | 0.4           |
+| $$T_\mathrm{b}$$              | float | s    |  Tb         | Turbine lag time constant                                                                                  | 0.1           |
+| $$T_\mathrm{c}$$              | float | s    |  Tc         | Turbine lead time constant                                                                                 | 0             |
+| $$T_\mathrm{dgov}$$           | float | s    |  Tdgov      | Governor controller derivative time constant                                                               | 1             |
+| $$T_\mathrm{D\,ratelim}$$     | float | s    |  \-         | Ramp rate limter derivative time constant in s                                                             | 0.001         |
+| $$T_\mathrm{eng}$$            | float | s    |  Teng       | Transport time delay for diesel engine                                                                     | 0             |
+| $$T_\mathrm{f\,load}$$        | float | s    |  Tfload     | Load limiter time constant                                                                                 | 3             |
+| $$T_\mathrm{last\,value}$$    | float | s    |  \-         | Time constant of very fast first order block to prevent algebraic loop                                     | 1e-9          |
+| $$T_\mathrm{p\,elec}$$        | float | s    |  Tpelec     | Electrical power measurement time constant                                                                 | 2.5           |
+| $$T_\mathrm{sa}$$             | float | s    |  Tsa        | lead time constant of temperature detection                                                                | 0             |
+| $$T_\mathrm{sb}$$             | float | s    |  Tsb        | lag time constant of temperature detection                                                                 | 50            |
+| $$V_\mathrm{max}$$            | float | pu   |  Vmax       | Maximum valve position limit                                                                               | 1             |
+| $$V_\mathrm{min}$$            | float | pu   |  Vmin       | Minimum valve position limit                                                                               | 0.175         |
+| $$W_\mathrm{fnl}$$            | float | pu   |  Wfnl       | fuel flow with no load                                                                                     | 0.187         |
+| $$W_\mathrm{fspd}$$           | bool  | \-   |  Wfspd      | Switch for fuel source characteristic                                                                      | false         |
 
 ### Variables
 
@@ -320,7 +317,6 @@ Table 2: Inputs
 | $$P_\mathrm{MWSet}$$ | float | pu   | PMwSetPu      | Pmwset   | Supervisory power controller setpoint (automatic generation control) |
 | $$P_\mathrm{e}$$     | float | pu   | PElecPu       | Pe       | measured electric power generation                                   |
 
-
 ### Outputs
 
 <div id="tbl-outputs">
@@ -332,7 +328,6 @@ Table 3: Outputs
 | name           | type  | unit | modelica name | IEC name | description      |
 |----------------|-------|------|---------------|----------|------------------|
 | $$P_\mathrm{m}$$ | float | pu   | PMechPu       | Pm       | mechanical power |
-
 
 ### Equations & algorithm  
 
@@ -444,7 +439,6 @@ This model has been successfully implemented in :
 | Software               | URL                                        | Language | Open-Source License                                | Last consulted date | Comments                                                                                              |
 | ---------------------- | ------------------------------------------ | -------- | -------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------- |
 | Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 15/05/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
-
 
 ## Table of references
 
