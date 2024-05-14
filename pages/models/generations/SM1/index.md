@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Synchronous Machine Model
-tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
+tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasor", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
 last-updated: 23/04/2024
 ---
@@ -10,17 +10,17 @@ last-updated: 23/04/2024
 
 ## Context
 
-The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in most power plants (thermal, hydro, and some wind) as an interface between the mechanical energy and electrical energy. The mathematical model presented in this article develops the dynamic equations of synchronous machines.[[1]](#1) It only covers the physical part of the machine not the regulations nor protections schemes. Variants of the classical model are listed in a dedicated section below.
+The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in most power plants (thermal, hydro, and some wind) as an interface between the mechanical energy and electrical energy. The mathematical model presented in this article develops the dynamic equations of synchronous machines.[[1]](#1) It only covers the physical part of the machine not the regulations nor protections schemes. Variants of the classical model are listed in a dedicated section [Derived models](#derived-models)  below.
 
 ## Model use, assumptions, validity domain and limitations
 
 The model presents the general expressions in *abc* reference frame of the differential equations that model a general synchronous machine with the following assumptions:
 
-* There are three stator windings ($a, b, c$) distributed 120º apart one from each other, each of them with equal parameters (i.e. same resistance, inductance...).
+* There are three stator windings ($$a, b, c$$) distributed 120º apart one from each other, each of them with equal parameters (i.e. same resistance, inductance...).
 * The three phases are balanced, meaning the power is shared equally.
-* The rotor has one winding with a field ($e_f$) applied and three damper windings, with no power source, one of them with the axis parallel to the field winding ($1d$) and the other two with a perpendicular axis ($1q, 2q$).
+* The rotor has one winding with a field ($$e_f$$) applied and three damper windings, with no power source, one of them with the axis parallel to the field winding ($$1d$$) and the other two with a perpendicular axis ($$1q, 2q$$).
 * The magnetic field produced by the rotor winding oscillates sinusoidally.
-* The machine may have 2 or more poles, noted as $p_f$.
+* The machine may have 2 or more poles, noted as $$p_f$$.
 
 The general model can be solved by detailed models that make further assumptions about the rotor structure and the expressions of some of its parameters as functions of some variables, in particular the interaction between rotor and stator due to magnetic saturation. Each particular model is listed, and its additional assumptions are explained before transforming the set of equations. A per-unit system is also proposed.
 
@@ -68,7 +68,7 @@ shows the structure of the synchronous machine, including the windings.
      style="float: center; width: 400px;" />
 </p>
 <div style="text-align:center">
-Figure 2: Synchronous machine part diagram
+Figure 2: Synchronous machine static part diagram
 </div>
 
 #### Governor
@@ -79,8 +79,6 @@ Since it is connected to the prime mover of the generator (generally a turbine),
 ### Synchronous machine equations
 
 #### Variables
-
-Move here all the variables that you use in your final set of equations.
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
@@ -96,10 +94,7 @@ Move here all the variables that you use in your final set of equations.
 | $$v_f$$ | Field voltage | $$V$$ |
 | $$\mathcal{L}_{ww'}$$ | Total inductance between two windings (can be itself) | $$H$$ |
 
-
 #### Parameters
-
-Move here all the parameters that you use in your final set of equations.
 
 | Parameter | Description | Unit |
 | --- | --- | --- |
@@ -111,7 +106,6 @@ Move here all the parameters that you use in your final set of equations.
 | $$L_{wl}$$ | Leakage inductance of a winding | $$H$$ |
 | $$L_{wg2}$$ | Mutual inductance between windings | $$H$$ |
 | $$L_{af}$$ | Mutual inductance between stator and rotor | $$H$$ |
-
 
 #### System of equations
 
@@ -132,14 +126,14 @@ $$v_c = R_c i_c + \frac{d\psi_c}{dt}$$
 
 <div style="font-weight: bold;">Rotor dynamic equations:</div>
 
-$$v_f = R_f i_f + \frac{d\psi_f}{dt} \quad (6) $$
+$$v_f = R_f i_f + \frac{d\psi_f}{dt} $$
 $$0 = R_{1d} i_{1d} + \frac{d\psi_{1d}}{dt} $$
 $$0 = R_{1q} i_{1q} + \frac{d\psi_{1q}}{dt} $$
 $$0 = R_{2q} i_{2q} + \frac{d\psi_{2q}}{dt} $$
 
 </div>
 
-With the general flux expressions as follows: 
+With the general flux expressions as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -226,7 +220,7 @@ $$\psi_{2q} = \mathcal{L}_{2qa} i_a + \mathcal{L}_{2qb} i_b +\mathcal{L}_{2qc} i
 
 </div>
 
-with $$\mathcal{L}_{pp}$$ being the self inductance of the winding and $$\mathcal{L}_{pp'}$$ the mutual inductance between winding $$p$$ and winding $$p'$$, both in $$H$$. As it can be seen, the *q* axis damper windings and the *d* axis damper and rotor windings do not interact since they are perpendicular. the rest of inductances 
+with $$\mathcal{L}_{pp}$$ being the self inductance of the winding and $$\mathcal{L}_{pp'}$$ the mutual inductance between winding $$p$$ and winding $$p'$$, both in $$H$$. As it can be seen, the *q* axis damper windings and the *d* axis damper and rotor windings do not interact since they are perpendicular.
 
 The inductance values expressed using the notation $$\mathcal{L}$$ express a general dependency with respect to the rotor position $$\theta_{shaft} = \omega t + \theta_0$$ [[4]](#4). It is modelled as a sinusoidal dependency with respect to the electrical angle $$\theta_{me}$$. This angle can be calculated as a function of the rotor position angle expression seen before as $$\theta_{me} = \frac{p_f}{2}\theta_{shaft} = \omega_{me} t + \theta_{e0}$$. 
 
@@ -236,14 +230,13 @@ Considering that all the windings are assumed to have the same characteristics, 
 
 The stator-rotor inductance also depends on the electrical angle $$\theta_{me}$$ between the rotor winding axis and the stator winding axis. The value of this inductance for phase $$a$$ can be calculated with the expression $$\mathcal{L}_{af} = \mathcal{L}_{fa} = L_{af}\cos(\theta_{me})$$, while the same expression can be applied for phase $$b$$ and $$c$$ but replacing $$\theta_{me}$$ with $$\theta_{me} - 120º$$ and $$\theta_{me} + 120º$$ respectively.
 
-
 ### Operational limits
 
 Depending on the difference in phase between the rotor and grid rotation, the power transferred will be composed of active ($$P$$) and reactive ($$Q$$) power.
 
 These generated powers are limited by the heat limits of the components of the generator. The limits considered are the Armature and field current limit, due to Joule effect heating of both windings, and end region heating limit, which occurs due to currents in the structure of the stator when the field is underexcited.
 
-The following charts show the capability and compound curves for different power factors[[1]](#1). 
+The following charts show the capability and compound curves for different power factors[[1]](#1).
 
 <p float="center">
 <img src="{{'/pages/models/generations/SM1/SM_CapCurve.svg' | relative_url }}"
@@ -267,7 +260,6 @@ The left chart shows the $$P$$ and $$Q$$ maximum values for different limit curv
 ## Open source implementations
 
 This model has been successfully implemented in:
-
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |

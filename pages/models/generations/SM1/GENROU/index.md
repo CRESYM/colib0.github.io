@@ -6,11 +6,11 @@ date: 10/04/2024
 last-updated: 23/04/2024
 ---
 
-# Salient-pole Synchronous Machine
+# Salient-pole Synchronous Machine - GENROU
 
 ## Context
 
-As explained in the general Synchronous Machine model, the particular systems that can be derived by making some additional assumptions yield systems of equations that can be easily solved computationally. The GENROU model in *abc* reference frame is one of the simplest models, considering the uniformity of the air gap between the stator and rotor to be able to simplify the equations. 
+As explained in the general [Synchronous Machine model](../), the particular systems that can be derived by making some additional assumptions yield systems of equations that can be easily solved computationally. The GENROU model in *abc* reference frame is one of the simplest models, considering the uniformity of the air gap between the stator and rotor to be able to simplify the equations.
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -35,7 +35,7 @@ It cannot be used to simulate machines with a non-uniform air gap such as the sa
 | Variable | Description | Unit |
 | --- | --- | --- |
 
-### Equations
+### System of Equations
 
 ## Operational principles
 
@@ -113,3 +113,17 @@ $$v_a =  R_a i_a + j X_s i_a + e_{af}$$
 where $$v_a$$ is the voltage at the terminals of the stator winding $$a$$, $$e_f$$ is the induced electromotive force by the magnetic field rotation, $$X_s = X_a + X_l = \omega_e L_s$$ is the total reactance of the generator, which is obtained by adding the armature and the leakage inductance as shown before and multiplied by the electrical rotation speed, $$R_a$$ is the series resistance, and $$i_a$$ is the current through the $$a$$ winding.
 
 This phasorial equation corresponds to the differential equation obtained previously.
+
+## Open source implementations
+
+This model has been successfully implemented in:
+
+TO BE COMPLETED
+
+| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
+| --------------| --- | --------- | ------------------- |------------------- | -------- |
+|XX|[Link](XX)| XX | [MPL v2.0](XX)  | XX | no comment |
+
+## Table of references
+
+TO BE COMPLETED

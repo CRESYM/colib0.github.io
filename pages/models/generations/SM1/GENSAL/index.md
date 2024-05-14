@@ -6,11 +6,11 @@ date: 10/04/2024
 last-updated: 23/04/2024
 ---
 
-# Salient-pole Synchronous Machine
+# Salient-pole Synchronous Machine - GENSAL
 
 ## Context
 
-The model presented is derived from the general model for Synchronous Machine
+The model presented is derived from the general model [Synchronous Machine model](../) .
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -207,7 +207,15 @@ $$ \Psi_0 = -X_{ls} I_0$$
 
 </div>
 
+## Open source implementations
 
+This model has been successfully implemented in:
+
+TO BE COMPLETED
+
+| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
+| --------------| --- | --------- | ------------------- |------------------- | -------- |
+|XX|[Link](XX)| XX | [MPL v2.0](XX)  | XX | no comment |
 
 ## Table of references
 
