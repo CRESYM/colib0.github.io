@@ -29,8 +29,8 @@ The model is valid to dimension capacitor bank for a given condition, or to calc
 
 | Parameter | Description | Unit | 
 | --- | --- | --- |
-| $$|V_S|$$ | Voltage level at the sending end | $$kV$$ |
-| $$|V_R|$$ | Voltage level at the receiving end | $$kV$$ |
+| $$\|\|V_S\|\|$$ | Voltage level at the sending end | $$kV$$ |
+| $$\|\|V_R\|\|$$ | Voltage level at the receiving end | $$kV$$ |
 | $$X$$ | Reactance of the transmission line | $$\Omega$$ |
 | $$Q_D$$ | Reactive power consumed by the load | $$MVAr$$ |
 
@@ -46,8 +46,8 @@ The model is valid to dimension capacitor bank for a given condition, or to calc
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$|V_R| = \frac{1}{2} |V_S| + \frac{1}{2} |V_S| \sqrt(1 - \frac{4 X Q_R}{|V_S|^2}) $$
-$$Q_C = \frac{|V_R|^2}{X_C}$$
+$$\|V_R\| = \frac{1}{2} \|V_S\| + \frac{1}{2} \|V_S\| \sqrt(1 - \frac{4 X Q_R}{\|V_S\|^2}) $$
+$$Q_C = \frac{\|V_R\|^2}{X_C}$$
 $$Q_C = Q_R - Q_D$$
 
 </div>
@@ -56,26 +56,26 @@ $$Q_C = Q_R - Q_D$$
 
 ### Voltage control of a line
 
-Consider a line where the power goes from a node with voltage $$|V_S|e^{j\delta}$$, to a node with voltage $$|V_R|e^{j0}$$. The line is assumed to only have reactance component, disregarding the resistive part of the impedance. The power received at the end of the line is given by:
+Consider a line where the power goes from a node with voltage $$\|V_S\|e^{j\delta}$$, to a node with voltage $$\|V_R\|e^{j0}$$. The line is assumed to only have reactance component, disregarding the resistive part of the impedance. The power received at the end of the line is given by:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ P_R = \frac{|V_S||V_R|}{X} \sin(\delta)$$
-$$ Q_R = \frac{|V_R|}{X}(|V_S| - |V_R|)$$
+$$ P_R = \frac{\|V_S\|\|V_R\|}{X} \sin(\delta)$$
+$$ Q_R = \frac{\|V_R\|}{X}(\|V_S\| - \|V_R\|)$$
 
 </div>
 
-where $$X$$ is the reactance of the line. This received power is consumed by the load at the receiving end. If the active power consumption changes, the torque angle between the two nodes will change accordingly to match the power without varying the voltage level. But if the reactive power consumption changes, the only way to keep the voltage level constant is to inject or absorb reactive power by the means of a shunt element. If the voltage level is too low, a capacitor bank is connected to the end of the line to inject reactive power, increasing the voltage level. The relationship between voltage level and reactive power can be obtained from the $$Q_R$$ equation solving the second equation for $$|V_R|$$:
+where $$X$$ is the reactance of the line. This received power is consumed by the load at the receiving end. If the active power consumption changes, the torque angle between the two nodes will change accordingly to match the power without varying the voltage level. But if the reactive power consumption changes, the only way to keep the voltage level constant is to inject or absorb reactive power by the means of a shunt element. If the voltage level is too low, a capacitor bank is connected to the end of the line to inject reactive power, increasing the voltage level. The relationship between voltage level and reactive power can be obtained from the $$Q_R$$ equation solving the second equation for $$\|V_R\|$$:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$|V_R| = \frac{1}{2} |V_S| + \frac{1}{2} |V_S| \sqrt(1 - \frac{4 X Q_R}{|V_S|^2}) $$
+$$\|V_R\| = \frac{1}{2} \|V_S\| + \frac{1}{2} \|V_S\| \sqrt(1 - \frac{4 X Q_R}{\|V_S\|^2}) $$
 </div>
        
-To maintain the level of voltage, the shunt element has to maintain the same $Q_R$$ by absorbing or injecting the reactive power to compensate the load fluctuations: $$Q_C = Q_R - Q_D$$. If the load is higher than $$Q_R$$, then the shunt element will need to absorb reactive power, which means it will have to be inductive. If the load is lower than $$Q_R$$, then the shunt element will need to inject reactive power, which means it will have to be capacitive. The model studies the second case.
+To maintain the level of voltage, the shunt element has to maintain the same $$Q_R$$ by absorbing or injecting the reactive power to compensate the load fluctuations: $$Q_C = Q_R - Q_D$$. If the load is higher than $$Q_R$$, then the shunt element will need to absorb reactive power, which means it will have to be inductive. If the load is lower than $$Q_R$$, then the shunt element will need to inject reactive power, which means it will have to be capacitive. The model studies the second case.
 
 ### Capacitor bank dimensioning
 
-The capacitor bank is considered to be connected to the end of a transmission line at its voltage level $$V_R$$. The following schematic represents the simplified circuit:
+The capacitor bank is considered to be connected to the end of a transmission line at its voltage level $$\|V_R\|$$. The following schematic represents the simplified circuit:
 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
@@ -88,7 +88,7 @@ In this circuit, the current passing through the capacitor bank is given by:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$I_C = j \frac{|V_R|}{\sqrt(3) X_C}$$
+$$I_C = j \frac{\|V_R\|}{\sqrt(3) X_C}$$
 
 </div>
 
@@ -96,8 +96,8 @@ where $$X_C$$ is the capacitive reactance of the capacitor bank. To calculate th
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$jQ_C = 3 \frac{|V_R|}{\sqrt(3)} (-I_C^*)$$
-$$Q_C = \frac{|V_R|^2}{X_C}$$
+$$jQ_C = 3 \frac{\|V_R\|}{\sqrt(3)} (-I_C^*)$$
+$$Q_C = \frac{\|V_R\|^2}{X_C}$$
 
 </div>
 
