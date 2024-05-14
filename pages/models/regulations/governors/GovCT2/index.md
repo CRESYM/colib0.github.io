@@ -229,8 +229,7 @@ Figure 2: Frequency dependent valve limit as described in [2]
 
 ### Parameters
 
-Per-unit parameters are on base of $$P_\mathrm{base}$$, which is normally
-the capability of the turbine in MW.
+Per-unit power parameters are based on $$P_\mathrm{base}$$, which is normally the capability of the turbine in MW. Per-unit frequency or acceleration parameters are based on the nominal frequency of the grid (e.g. 50 Hz in Europe).
 
 <div id="tbl-parameters">
 
