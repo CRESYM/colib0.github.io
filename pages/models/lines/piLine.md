@@ -64,7 +64,7 @@ $$ Z = zl = (r + jx) l = (r + j\omega l_{ind})l $$
 $$ Y = yl = (g + jb)l = (g + j\omega c)l $$
 </div>
 
-where $$r$$ is the resistance in $$\Omega m^{-1}$$, $$x$$ is the reactance in $$\Omega m^{-1}$$, $$z$$ is the impedance in $$\Omega m^{-1}$$, $$g$$ is the conductance in $$\Omega^{-1} m^{-1}$$, $$b$$ is the susceptance in $$\Omega^{-1} m^{-1}$$, $$l_{ind}$$ is the inductance in $$H m^{-1}$$, $$c$$ is the capacitance in $$F m^{-1}, $$\omega$$ is the angular frequency of the system in $$rad/s$$ and $$l$$ is the length of the line in $$m$$.
+where $$r$$ is the resistance in $$\Omega m^{-1}$$, $$x$$ is the reactance in $$\Omega m^{-1}$$, $$z$$ is the impedance in $$\Omega m^{-1}$$, $$g$$ is the conductance in $$\Omega^{-1} m^{-1}$$, $$b$$ is the susceptance in $$\Omega^{-1} m^{-1}$$, $$l_{ind}$$ is the inductance in $$H m^{-1}$$, $$c$$ is the capacitance in $$F m^{-1}$$, $$\omega$$ is the angular frequency of the system in $$rad/s$$ and $$l$$ is the length of the line in $$m$$.
 
 #### Resistance
 
@@ -86,19 +86,59 @@ $$ R = R_0 (1 + \alpha (T - T_0)) $$
 
 where $$R_0$$ is the resistance at a reference temperature $$T_0$$, $$\alpha$$ is the temperature coefficient of the material in $$K^{-1}$$ and $$T$$ is the temperature in $$K$$.
 
+Some other possible sources of losses are due to the skin effect, which is the tendency of the current to flow on the surface of the conductor, and the corona effect, which is the ionization of the air surrounding the conductor due to the high voltage gradients. 
+
 #### Inductance
 
 Inductive effects dominate the behavior of the transmission lines, and arise from the interaction between the parallel conductors (considered to be infinite for the purpose of this subsection) due to the magnetic flux linkages. The inductance of the line can be calculated using different methods depending on the geometry and configuration of the transmission lines.
-#### Capacitance
+
+For a single-phase line, the inductance of one of its phases can be calculated using the expression:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+$$ L_p = 2 \cdot 10^{-7} \ln \left( \frac{D_{eq}}{r_p} \right)  $$
+</div>
+
+where $$\mu$$ is the permeability of the medium in $$H m^{-1}$$, $$D$$ is the distance between the conductors in $$m$$, and $$r$$ is the radius of the conductor in $$m$$. The inductance of the line is calculated as the product of the inductance per unit length and the length of the line. The total inductance can be done by adding the inductances of the phases as $$L_1 + L_2 = L$$.
+
+For three-phase lines, the inductance of a phase can be calculated using the expression:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+$$ L_p = 2 \cdot 10^{-7} \ln \left( \frac{D}{r_p} \right)  $$
+</div>
+
+where $$D_{eq}$$ is the equivalent distance between the conductors in $$m$$, calculated as $$D_{eq} = (D_{12}D_{23}D_{31})^{\frac{1}{2}}$$ using the distances between conductors. The total inductance can be found again by adding all the inductances.
 
 #### Conductance
 
+Conductance is present in the transmission lines in the form of a shunt admittance, being result of the leakage of current over the surface of the insulators. It is negligible in comparison to the conductive effects, which are also a form of shunt admittance of the line.
+
+#### Capacitance
+
+Capacitive effects are the most relevant form of shunt admittance of transmission lines. They are a result of the electric fields between different conductors and between conductors and ground, creating a charging current that is present even when there are no loads in the line. It is specially relevant for longer lines (it starts to be important around 100 km).
+
+For three-phase unsymetrical spaced lines, which is the more general case, and assuming uniform charge distribution in the surface of the conductors, the line to neutral capacitance can be calculated as:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ C = \frac{0.0242}{\log \left( \frac{D_{eq}}{r} \right)} $$
+</div>
+
+in $$\mu F/km$$, where $$D_{eq}$$ is the equivalent distance between the conductors in $$m$$ calculated as $$D_{eq} = (D_{12}D_{23}D_{31})^{\frac{1}{2}}$$ using the distances between conductors, and $$r$$ is the radius of the conductor in $$m$$. The capacitance of the line is calculated as the product of the capacitance per unit length and the length of the line.
+
+Considering the conductor to earth capacitance, the expression can be expanded to:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ C = \frac{0.0242}{\log \left( \frac{D_{eq}}{r} \right) - \log \left( \frac{(h_{12}h_{23}h_{31})^{\frac{1}{3}}}{(h_1h_2h_3)^{\frac{1}{3}}}\right)} $$
+</div>
+
+with $$h_{ij}$$ being the distance between the conductor $$i$$ to the image reflection with respect to the ground of conductor $$j$$ in $$m$$, and $$h_i$$ being the distance of the conductor $$i$$ to its ground reflection.
 
 ### Distributed parameters line model
 
 The distributed parameters line model is a more complex model that considers the distribution of the impedance along the line. The model is based on the transmission line equations, which are a set of partial differential equations that describe the behavior of the line. It is used to obtain the accurate values of the impedance, admittance, and other parameters of the line at any point of the line. Equivalent circuits such as the $$\pi$$-equivalent are used to describe the performance as seen from the terminals.
 
-Suppose a line with its circuit parameters $$z = R + jX_L$$ and $$ y = G + jB_L$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following circuit:
+Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following circuit:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/lines/piLine/distparam_equiv.svg' | relative_url }}"
@@ -242,35 +282,35 @@ $$
 For long-range transmission lines, the exact solution has already been derived, and it can be represented as a $$\pi$$-equivalent by finding the equivalent values of its impedance and lumped admittance. To obtain the equivalence, the following relationship have to hold:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ Z' = Z_C sinh(\gamma l) $$
-$$ 1 + \frac{1}{2}Y'Z' = cosh(\gamma l) $$
+$$ Z' = Z_C \sinh(\gamma l) $$
+$$ 1 + \frac{1}{2}Y'Z' = \cosh(\gamma l) $$
 
 </div>
 
 Developing the first expression:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ Z' = Z_C sinh(\gamma l) = \sqrt{\frac{z}{y}}  sinh(\gamma l) = zl \frac{sinh(\gamma l)}{\gamma l} = Z(\frac{sinh(\gamma l)}{\gamma l})$$
+$$ Z' = Z_C \sinh(\gamma l) = \sqrt{\frac{z}{y}}  \sinh(\gamma l) = zl \frac{\sinh(\gamma l)}{\gamma l} = Z(\frac{\sinh(\gamma l)}{\gamma l})$$
 
 </div>
 
-where $$Z$$ is the series impedance of the line, and $$\frac{sinh(\gamma l)}{\gamma l} is the factor to obtain the $$Z'$$ for the $$\pi$$-equivalent circuit. The second expression can be developed as:
+where $$Z$$ is the series impedance of the line, and $$\frac{sinh(\gamma l)}{\gamma l}$$ is the factor to obtain the $$Z'$$ for the $$\pi$$-equivalent circuit. The second expression can be developed as:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ 1 + \frac{1}{2}Y'Z_C sinh(\gamma l) = cosh(\gamma l) $$
-$$ \frac{1}{2}Y' = \frac{1}{Z_C} \frac{cosh(\gamma l) - 1}{sinh(\gamma l)} = \sqrt{\frac{y}{z}} tanh(\frac{\gamma l}{2}) $$
-$$ \frac{1}{2}Y' = \frac{Y}{2} \frac{tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}} = 2\sqrt{yz} tanh(\frac{\sqrt{yz}l}{2}) $$
+$$ 1 + \frac{1}{2}Y'Z_C \sinh(\gamma l) = \cosh(\gamma l) $$
+$$ \frac{1}{2}Y' = \frac{1}{Z_C} \frac{\cosh(\gamma l) - 1}{\sinh(\gamma l)} = \sqrt{\frac{y}{z}} \tanh(\frac{\gamma l}{2}) $$
+$$ \frac{1}{2}Y' = \frac{Y}{2} \frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}} = 2\sqrt{yz} \tanh(\frac{\sqrt{yz}l}{2}) $$
 
 </div>
 
-where $$Y$$ is the shunt admittance of the line and $$\frac{tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}}$$ is the factor to obtain the $$Y'$$ for the $$\pi$$-equivalent circuit.
+where $$Y$$ is the shunt admittance of the line and $$\frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}}$$ is the factor to obtain the $$Y'$$ for the $$\pi$$-equivalent circuit.
 
-The expression $$Y'(1 + \frac{1}{4}Y'Z') = \frac{1}{Z_C}sinh(\gamma l)$$ is consistent with the values for $$Z'$$ and $$Y'$$ obtained. 
+The expression $$Y'(1 + \frac{1}{4}Y'Z') = \frac{1}{Z_C}\sinh(\gamma l)$$ is consistent with the values for $$Z'$$ and $$Y'$$ obtained. 
 
 #### Medium and short range transmission lines
 
-For lower values of $$l$$, $$\frac{sinh(\gamma l)}{\gamma l} \approx 1$$ and $$\frac{tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}} \approx 1$$. In this case, the direct expression of the $$\pi$$-equivalent circuit can be used substituting by the series and shunt values for impedance and capacitance respectively, with $$Z' = Z$$ and $$Y' = Y$$.
+For lower values of $$l$$, $$\frac{\sinh(\gamma l)}{\gamma l} \approx 1$$ and $$\frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}} \approx 1$$. In this case, the direct expression of the $$\pi$$-equivalent circuit can be used substituting by the series and shunt values for impedance and capacitance respectively, with $$Z' = Z$$ and $$Y' = Y$$.
 
 ## Open-source implementations
 
