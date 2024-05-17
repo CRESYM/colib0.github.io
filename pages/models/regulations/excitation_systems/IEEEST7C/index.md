@@ -48,8 +48,6 @@ gate that could be used to represent a takeover overexcitation limiter.
 
 
 
-
-
 ### Model schema
 
 ![](drawings/GovCT2.drawio.svg)
