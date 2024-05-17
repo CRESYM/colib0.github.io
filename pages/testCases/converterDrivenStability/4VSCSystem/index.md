@@ -1,38 +1,45 @@
 ---
 layout: page
-title: Four VSC benchmark system
+title: Four VSC benchmark system 
+tags: [opensource, small, TCRL2, converter driven stability, HVDC, cable, WTG, EMTP, STEPSS, dynawo] 
+date: 02/01/2024  
+last-updated: 08/03/2024 
 ---
 
 # Four VSC benchmark System
 
-## Use case purpose: ​
-This 100% power electronics small test system conbines VSC and wind turbines technologies, grid following and grid forming controls. 
+## Use case purpose
+
+This 100% power electronics small test system conbines VSC and wind turbines technologies, grid following and grid forming controls.
 It aims at showing the limitations of the phasor approximation while being small and easily tractable but realistic. Hence, an EMT and RMS version of this system exist for the benchmark.
 
-This case is typical of the converter driven stability slow interactions problem. 
+This case is typical of the converter driven stability slow interactions problem.
 
-## References:
+## References
+
 This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université de Liège, Belgium) in the view of showing the limitations of the phasor approximation, and use several network components developed by Prof. Xavier Guillaud (Ecole Centrale de Lille, France).
+As part of the BiGER project (CRESYM), this test system has been implemented in dynawo and EMTP.
 
+## Network ​description
 
-## Network ​description:
 The network is described by the following figure:
 <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png' | relative_url }}"
      alt="Four VSC system"
      style="float: center; margin-right: 10px;" />
 
 ## Dynamic models​
-This test case includes: 
-- two generic [HVDC VSC lines](/models/HVDC/VSC/HVDCVSCPhasor)
+
+This test case includes:
+
+- two generic HVDC VSC lines
 - two wind turbines generators (equivalent for a Wind park)
 - two sets of 6 cables in parallel (225kV)
 - seven 400kV overhead lines
 - six two windings transformers
-- two shunt reactors 
-- one RL load 
+- two shunt reactors
+- one RL load
 
-
-## Data 
+## Data
 
 | Line/Cable  | Nominal Voltage |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
 |   | (V) | ($$\Omega$$) | ($$\Omega$$)  | ($$\mu S$$) | (km) | (MVA) |
@@ -55,15 +62,14 @@ This test case includes:
 | WP1-E*      | 66/225          |    0.5   |   12.0      | 105           | 2400       |
 | WP2-F*      | 66/225          |    0.5   |   12.0      | 104           | 2400       |
 
-* 6 transformers in parallel 400MVA each 
+* 6 transformers in parallel 400MVA each
 
-| Converter   | Snom (MVA) |  Pnom (MVA)  | 
-| ----------- | ---------- | ------ | 
-| WP1         | 2400       |   2300 | 
+| Converter   | Snom (MVA) |  Pnom (MVA)  |
+| ----------- | ---------- | ------ |
+| WP1         | 2400       |   2300 |
 | WP2         | 2400       |   2300 |
-| HVDC1       | 1200       |   1150 |    
+| HVDC1       | 1200       |   1150 |
 | HVDC2       | 1700       |   1630 |  
-
 
 ## Scenarios
 
@@ -84,7 +90,6 @@ HVDC2 is in grid forming mode.
 
 ### Scenario No. 2: No export to transmission grid and mild disturbance
 
-
 **Operating point No. 2**
 <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point2.png' | relative_url }}"
      alt="Four VSC system"
@@ -100,20 +105,19 @@ WP1, WP2, HVDC1 and HVDC2 are all in grid following mode. WP1 in reactive power 
 
 **Variant B:** A variant of this case is to switch the grid following control of the WP2 by a following forming control.
 
-
 **Event** : A circuit breaker opens the line between A and B after 1 second.
 Several simulations with various values of the short-circuit power Ssc of the external equivalent grid [from 5500 MVA up to 20 000 MVA] are performed.
-
-
 ​
 ## Simulation parameters
-The system is an hybrid stiff DAE, the solver should be compatible with this type of problem. 
-A fixed time step is applied for both phasor and EMT simualtions: 50 ms for EMT, 
+
+The system is an hybrid stiff DAE, the solver should be compatible with this type of problem.
+A fixed time step is applied for both phasor and EMT simualtions: 50 ms for EMT,
 The duration of simulation is of 1 second in the first scenario (event at 150ms), and of 3 seconds in the second scenario (event at 1 second).
 
 ## Outputs: ​
 
 ### First scenario:  Full export to transmission grid and large disturbance
+
 The disturbance is seen at bus A, B and C with highest impact on bus A voltage as expected.
 <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_bus_voltages.png' | relative_url }}"
      alt="Scenario 1 bus voltages"
@@ -147,13 +151,11 @@ On the EMT simulation (left figure) we can see that the system becomes unstable 
      alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
      style="float: left; margin-right: 10px;" />
 
-
 **Variant A:** When the C bus is unload and full power is taken by the external network, the difference between voltages curves is significant with the EMT simulation, with the phasor approximation, the difference is bearly noticable. 
 The damping effect of the constant admittance load isn't properly captured. 
 <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png' | relative_url }}"
      alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
      style="float: left; margin-right: 10px;" />
-
 
 **Variant B:** When WP2 grid following control is changed by a grid forming one, the grid-forming control has such a strong stabilizing effect that both response remains stable even if the short-circuit power is as low as 300 MVA. Both simulation has comparable results.
 <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png' | relative_url }}"
@@ -161,12 +163,12 @@ The damping effect of the constant admittance load isn't properly captured.
      style="float: left; margin-right: 10px;" />
 
 ## Open source implementations
+
 Some open source implementations of this use case are available in the following software solutions:
 
-| Software   | Phasor/EMT  |   URL |
-| --------------- | --- | ----------- |
-| Dynawo        | Phasor | [Link](https://github.com/dynawo/dynawo/tree/master/examples/DynaSwing/GridForming_GridFollowing) |
-| STEPSS  | Phasor | ... |
-| EMTP-RV | EMT | ...   |
-| PSCAD   | EMT | ...   |
-| SimPowerSystem | EMT | ... |
+| Software      | URL | Language  | Open-Source License | Last consulted date | Comments |
+| --------------| --- | --------- | -------------------| ------------------- |
+| Dynawo | [Link](https://github.com/dynawo/dynawo/tree/3093_GFL_VSC) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 17/05/2024 | - |
+| STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testSystems/4vsc_system/STEPPS) | .dat, .dst | to be completed | 17/05/2024 | - |
+| EMTP-RV | to be completed | .ecf   | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | - |
+| SimPowerSystem | to be completed | Matlab | to be completed | - |
