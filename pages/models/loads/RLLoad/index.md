@@ -11,7 +11,7 @@ id: 133
 
 ## Context
 
-This RL load model also called constant impedance load model, is an resistor-inductor circuit (RL circuit) composed of a resistor and an inductor in serie driven by a voltage source. It is the simplest model that can represent a static load.
+This RL load model also called constant impedance load model, is an resistor-inductor circuit (RL circuit) composed of a resistor and an inductor in serie or in parallel driven by a voltage source. It is the simplest model that can represent a static load.
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -40,6 +40,11 @@ where:
 Equations can also be written as:
 $$P = G V^2 = P_0 \frac{V}{V_0}^2 $$
 $$Q = -B V^2 = Q_0 \frac{V}{V_0}^2 $$
+
+where:
+
+- G and B are respectively the conductance and susceptance in siemens
+- V_0, P_0 and Q_0 are initial values
 
 ## Open source implementations
 
