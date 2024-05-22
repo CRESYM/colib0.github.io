@@ -10,10 +10,10 @@ last-updated: 08/03/2024
 
 ## Use case purpose
 
-This 100% power electronics small test system conbines VSC and wind turbines technologies, grid following and grid forming controls.
-It aims at showing the limitations of the phasor approximation while being small and easily tractable but realistic. Hence, an EMT and RMS version of this system exist for the benchmark.
+This **100% power electronics small test system** conbines VSC and wind turbines technologies, grid following and grid forming controls.
+It aims at **showing the limitations of the phasor approximation while being small and easily tractable but realistic**. Hence, an EMT and RMS version of this system exist for the benchmark.
 
-This case is typical of the converter driven stability slow interactions problem.
+This case is typical of the **converter driven stability slow interactions** problem.
 
 ## References
 
@@ -31,13 +31,13 @@ The network is described by the following figure:
 
 This test case includes:
 
-- two generic HVDC VSC lines
-- two wind turbines generators (equivalent for a Wind park)
-- two sets of 6 cables in parallel (225kV)
-- seven 400kV overhead lines
-- six two windings transformers
-- two shunt reactors
-- one RL load
+- two generic [HVDC VSC lines](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md)
+- two [wind turbines generators](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md) (equivalent for a Wind park)
+- two sets of 6 cables in parallel (225kV) modelled in RMS as a [pi-line](/pages/models/lines/piLine/index.md)
+- seven 400kV [overhead lines](/pages/models/lines/piLine/index.md)
+- six [two windings step-up transformers](/pages/models/Transformers/Transformer/index.md)
+- two [shunt reactors](/pages/models/compensators/shunts/shuntReactor/index.md)
+- one [RL load](/pages/models/loads/RLLoad/index.md)
 
 ## Data
 
