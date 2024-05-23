@@ -48,7 +48,12 @@ Please follow the prerequisites to begin the project.
   
 - Refer to [Author's guidelines](/pages/about/authorGuidelines) and [Electrical, Electronics and Control notations and conventions](/pages/about/notationAndConventions) before creating a post.
 
-- You can see the how your changes impact the website by running locally a static site generator such as Jekyll (for more information, see [testing-your-github-pages-site-locally-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) ) or refer to [README file](https://github.com/CRESYM/colib0.github.io#) for setting up the website locally.
+- You can see the how your changes impact the website 
+    - by running locally a static site generator such as Jekyll (for more information, see [testing-your-github-pages-site-locally-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) ) 
+  
+    - or refer to [README file](https://github.com/CRESYM/colib0.github.io#) for setting up the website locally.
+  
+- To emulate markdown behavior and correct your markdown page, you can download a markdown extension in your IDE (such as Markdown All in One for VSCode, or Markdown plugin for intelliJ)
 
 - Verify your changes: 
     - `git status`: Check the status of your local repository to see what files have been modified, staged, or are untracked.
