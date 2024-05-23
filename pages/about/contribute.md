@@ -26,13 +26,17 @@ Please follow the prerequisites to begin the project.
         - Debian/Ubuntu: `sudo apt update && sudo apt install git`
     - Verify installation: Open a terminal window and type `git --version`.
 
-- Refer to the [README file](https://github.com/CRESYM/colib0.github.io#) to follow the installation guide and steps for setting up the website locally.
+- Clone the project : `git clone https://github.com/CRESYM/colib0.github.io.git`
+  
+- Refer to the [README file](https://github.com/CRESYM/colib0.github.io#) to follow the installation guide.
 
 ## Create an issue and related branch: <a id="create-an-issue-and-related-branch"></a>
 
 - Create an issue before making any changes as it helps in tracking and managing contributions. 
   
 - For any [post creation](https://github.com/CRESYM/colib0.github.io/issues/new?assignees=GJCRESYM%2C+matoubongrain&labels=enhancement%2Cnew+component&projects=Colib0&template=Add_Model_TestCases.yml&title=%5BModel%2F+Test+case+Name%5D%3A+), [modification](https://github.com/CRESYM/colib0.github.io/issues/new?assignees=GJCRESYM%2C+matoubongrain&labels=enhancement%2Cmodify+component&projects=Colib0&template=Modify_Model_TestCases.yml&title=%5BName%2FID+of+the+model%2F+test+case+to+be+improved%5D%3A+), [evaluation](https://github.com/CRESYM/colib0.github.io/issues/new?assignees=GJCRESYM%2C+matoubongrain&labels=enhancement%2Cbug%2Cevaluate+component&projects=Colib0&template=Evaluate.yml&title=%5BName%2FID+of+the+model%2F+test+case+to+be+evaluated%5D%3A+) or [reporting a bug](https://github.com/CRESYM/colib0.github.io/issues/new?assignees=GJCRESYM%2C+matoubongrain&labels=bug%2Ctriage&projects=Colib0&template=Report_Bug.yml&title=%5BBug%5D%3A+), please create an issue on the github space of the Colib project. A dedicated issue template should be proposed to you depending on the type of issue.
+  
+- While creating an issue, one can directly upload the pre-filled [model](/pages/templates/modelTemplate) or [test case](/pages/templates/testCaseTemplate) template.
     
 - Create a new branch with a naming convention: `issue_number_name_of_new_branch` (e.g- 116_modify_how_to_contribute)
   
