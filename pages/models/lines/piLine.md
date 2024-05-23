@@ -14,13 +14,35 @@ Transmission lines carry the electric power from one substation of the grid to a
 
 ## Model use, assumptions and validity
 
-The model described is intended to be used in transmission lines for middle range, considering a distance of between 100 and 250 kilometers. For lower distances, more simplifications can be made without loosing precision. For longer distances, the equivalent circuit proposed can be used, but its parameters will need to be obtained considering the distribution of impedance across the whole line, instead of the simplifications proposed.
+The model described is intended to be used in transmission lines for any range, making appropriate assumptions depending on their length. For lower distances, more simplifications can be made without loosing precision. For longer distances, the equivalent circuit proposed can be used, but its parameters will need to be obtained considering the distribution of impedance across the whole line, instead of the grouped admittance proposed for middle range lines.
+
+The derivation of the equations has been done starting from the distributed parameter model as in references [[1]](#1), [[2]](#2), [[3]](#3) and [[4]](#4). It then is transformed into a $$\pi$$-equivalent circuit for the general case of transmission lines.
 
 The assumptions made are the following:
 
 * The line is represented phase by phase with a series impedance and two parallel capacitors, distributing the total capacitance of the line in two equal blocks situated at each end of the line. The resulting circuit is named after the $$\pi$$-shape it has.
 
+* In the case of three-phase transmission lines, the currents are assumed to be balanced (no neutral cable), and there exists transposition of phases in order to mitigate the inductive unbalanced due to unsymmetrical disposition. This allows the description of the line as a set of three single-phase lines.
+
+* The conductance effects are neglected in front of the inductive and capacitive effects of the line.
+
+* Skin effect and corona effect are not considered in the model.
+
 * The model does not consider the dependency on the temperature for its impedance values.
+
+* The frequency of the system is considered constant.
+
+To determine the equivalent parameters of the line, the user may provide their values calculated according to the characteristics of the line. Depending on the distance of the line, some simplifications can be made. There is no consensus on the distance ranges in which each model should be used, the values provided are the ones stated in reference [1].
+
+* Depending on the number of phases, conductors per phase and geometry of the lines, the values for capacitance and inductance can be calculated differently. The three-phase calculations for asymmetrical disposition are developed in the model description as it is a more general case.
+
+* For long range transmission lines (over 200 kilometers of length), the equivalent parameters calculated from the exact solutions should be used.
+
+* For medium range transmission lines (between 80 and 200 kilometers of length), the direct calculation of the $$\pi$$-equivalent values using the total series and shunt impedance and admittance can be used.
+
+* For short range transmission lines (below 80 kilometers of length), the shunt admittance can be neglected, and the model assumes that all the current travels from the source to the receiver, only having heat losses.
+
+Its validity is for steady-state analysis of transmission lines in any configuration, given the appropriate values for the line parameters. It does not consider the transient behavior of the lines. For such analysis, the Constant Parameters Line Model and the Frequency Dependent Line Model should be used.
 
 ## Model description
 
@@ -28,36 +50,48 @@ The assumptions made are the following:
 
 | Parameters    | details  | Unit |
 | --------------| ------ | ----- |
-|$$R$$ | Resistance of the line | $$\Omega$$ |
-|$$X$$ | Reactance of the line | $$\Omega$$ |
-|$$Z$$ | Impedance of the line $$Z = R + jX$$ | $$\Omega$$ |
-|$$G$$ | Conductance of the line | $$\Omega^{-1}$$ |
-|$$B$$ | Susceptance of the line | $$\Omega^{-1}$$ |
-|$$Y$$ | Admittance of the line $$Y = G + jB$$ | $$\Omega^{-1}$$ |
+|$$l$$ | Length of the line | $$m$$ |
+|$$r$$ | Resistance of the line per meter | $$\Omega m^{-1}$$ |
+|$$x_L$$ | Reactance of the line per meter | $$\Omega m^{-1}$$ |
+|$$z$$ | Impedance of the line per meter $$z = r + jx_L$$ | $$\Omega m^{-1}$$ |
+|$$Z$$ | Total impedance of the line $$Z = zl$$ | $$\Omega$$ |
+|$$Z'$$ | Equivalent impedance of the line | $$\Omega$$ |
+|$$g$$ | Conductance of the line per meter | $$\Omega^{-1} m^{-1}$$ |
+|$$b$$ | Susceptance of the line per meter | $$\Omega^{-1} m^{-1}$$ |
+|$$y$$ | Equivalent admittance of the line per meter $$y = g + jb$$ | $$\Omega^{-1} m^{-1}$$ |
+|$$Y$$ | Total admittance of the line $$Y = yl$$ | $$\Omega^{-1}$$ |
+|$$Y'$$ | Equivalent admittance of the line | $$\Omega^{-1}$$ |
+|$$Z_C$$ | Characteristic impedance of the line $$Z_C = \sqrt(\frac{z}{y})$$ | $$\Omega$$ |
+|$$\gamma$$ | Propagation constant of the line $$Z_C = \sqrt(zy)$$ | $$m^{-1}$$ |
+
 
 ### Line variables
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
-| $$V_{S}$$ | Complex voltage of the source terminal | $$V$$ |
+| $$V_{S}$$ | RMS phase-to-ground voltage of the source terminal | $$V$$ |
 | $$I_{S}$$ | Complex current of the source terminal | $$A$$ |
-| $$V_{R}$$ | Complex voltage of the receiver terminal | $$V$$ |
+| $$V_{R}$$ | RMS phase-to-ground voltage of the receiver terminal | $$V$$ |
 | $$I_{R}$$ | Complex current of the receiver terminal | $$A$$ |
 
 ### Equations
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_S = (1 + \frac{1}{2}YZ)V_R + Z I_R $$
-$$ I_S = Y(1 + \frac{1}{4}YZ)V_R + (1 + \frac{1}{2}YZ) I_R $$
+$$ V_S = (1 + \frac{1}{2}Y'Z')V_R + Z' I_R $$
+$$ I_S = Y'(1 + \frac{1}{4}Y'Z')V_R + (1 + \frac{1}{2}Y'Z') I_R $$
 
 </div>
+
+where $$Z'= Z$$ and $$Y' = 0$$ for short-range lines, $$Z' = Z$$ and $$Y' = Y$$ for medium-range lines, and $$ Z'= Z(\frac{\sinh(\gamma l)}{\gamma l})$$, $$ Y' = Y \frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}}$$ for long-range lines.
+
 
 ## Operational principles
 
 ### Line parameters
 
-The line parameters are obtained from the per-unit length values of resistance, inductance, capacitance and conductance. The total series impedance and shunt admittance of the line are calculated as:
+The line parameters are obtained from the per-unit length values of resistance, inductance, capacitance and conductance, as described in references [[2]](#2) and [[4]](#4). The total series impedance and shunt admittance of the line are calculated as:
+
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ Z = zl = (r + jx) l = (r + j\omega l_{ind})l $$
@@ -106,7 +140,7 @@ For three-phase lines, the inductance of a phase can be calculated using the exp
 $$ L_p = 2 \cdot 10^{-7} \ln \left( \frac{D}{r_p} \right)  $$
 </div>
 
-where $$D_{eq}$$ is the equivalent distance between the conductors in $$m$$, calculated as $$D_{eq} = (D_{12}D_{23}D_{31})^{\frac{1}{2}}$$ using the distances between conductors. The total inductance can be found again by adding all the inductances.
+where $$D_{eq}$$ is the equivalent distance between the conductors in $$m$$, calculated as $$D_{eq} = (D_{12}D_{23}D_{31})^{\frac{1}{3}}$$ using the distances between conductors. The total inductance can be found again by adding all the inductances.
 
 #### Conductance
 
@@ -116,7 +150,7 @@ Conductance is present in the transmission lines in the form of a shunt admittan
 
 Capacitive effects are the most relevant form of shunt admittance of transmission lines. They are a result of the electric fields between different conductors and between conductors and ground, creating a charging current that is present even when there are no loads in the line. It is specially relevant for longer lines (it starts to be important around 100 km).
 
-For three-phase unsymetrical spaced lines, which is the more general case, and assuming uniform charge distribution in the surface of the conductors, the line to neutral capacitance can be calculated as:
+For three-phase unsymmetrical spaced lines, which is the more general case, and assuming uniform charge distribution in the surface of the conductors, the line to neutral capacitance can be calculated as:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -136,12 +170,12 @@ with $$h_{ij}$$ being the distance between the conductor $$i$$ to the image refl
 
 ### Distributed parameters line model
 
-The distributed parameters line model is a more complex model that considers the distribution of the impedance along the line. The model is based on the transmission line equations, which are a set of partial differential equations that describe the behavior of the line. It is used to obtain the accurate values of the impedance, admittance, and other parameters of the line at any point of the line. Equivalent circuits such as the $$\pi$$-equivalent are used to describe the performance as seen from the terminals.
+The distributed parameters line model considers the distribution of the impedance along the line. The model is based on the transmission line equations, which are a set of partial differential equations that describe the behavior of the line. It is used to obtain the accurate values of the impedance, admittance, and other parameters of the line at any point of the line. Equivalent circuits such as the $$\pi$$-equivalent are used to describe the performance as seen from the terminals.
 
 Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following circuit:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/piLine/distparam_equiv.svg' | relative_url }}"
+<img src="{{ '/pages/models/lines/piLine/distLine.svg' | relative_url }}"
      alt="pi-equivalent circuit of a transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
@@ -300,7 +334,7 @@ where $$Z$$ is the series impedance of the line, and $$\frac{sinh(\gamma l)}{\ga
 
 $$ 1 + \frac{1}{2}Y'Z_C \sinh(\gamma l) = \cosh(\gamma l) $$
 $$ \frac{1}{2}Y' = \frac{1}{Z_C} \frac{\cosh(\gamma l) - 1}{\sinh(\gamma l)} = \sqrt{\frac{y}{z}} \tanh(\frac{\gamma l}{2}) $$
-$$ \frac{1}{2}Y' = \frac{Y}{2} \frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}} = 2\sqrt{yz} \tanh(\frac{\sqrt{yz}l}{2}) $$
+$$ \frac{1}{2}Y' = \frac{Y}{2} \frac{\tanh(\frac{\gamma l}{2})}{\frac{\gamma l}{2}}$$
 
 </div>
 
@@ -327,3 +361,5 @@ For lower values of $$l$$, $$\frac{\sinh(\gamma l)}{\gamma l} \approx 1$$ and $$
 <a id="2">[2]</a> Kothari, D. P.; Nagrath, I. J. "Modern Power System Analysis", 4th ed., New Delhi, India, 2011, Tata McGraw-Hill.
 
 <a id="3">[3]</a> Salam, A. "Fundamentals of Electrical Power Systems Analysis", Singapore, 2020, Springer.
+
+<a id="4">[4]</a> Duncan Glover, J.; Overbye, T. J.; Sarma, M. "Power System Analysis and Design", 6th ed., 2015, USA, Cengage Learning.
