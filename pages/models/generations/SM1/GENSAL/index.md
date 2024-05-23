@@ -1,6 +1,6 @@
 ---
 layout: page
-title: GENSAL
+title: GENROU/GENSAL
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
 last-updated: 23/04/2024
@@ -14,7 +14,7 @@ The model presented is derived from the general model for Synchronous Machine
 
 ## Model use, assumptions, validity domain and limitations
 
-The model can be used to perform dynamic studies for salient-pole synchronous machines in the *dq0* reference frame. It is also valid for the round-rotor synchronous machine mode, as it is a particular case of the salient-pole model.
+The model can be used to perform transient stability analysis for both salient-pole and round-rotor synchronous machines in the *dq0* reference frame. 
 
 The assumptions made in this model are:
 
@@ -22,7 +22,9 @@ The assumptions made in this model are:
 * The air gap between the stator and rotor is non-uniform, but the relationships between the flux linkages and currents are independent of the position of the rotor when expressed in the *dq0* reference frame.
 * The magnetic circuit is considered to be linear, neglecting saturation effects.
 
-The model does not consider saturation of the magnetic circuit. A more detailed model is required to consider such effects.
+The model is exactly the same for round-rotor and salient-pole in this case with no magnetic saturation. A more detailed model is required to consider such effects, which are different in salient-pole machines (there is saturation in *d*-axis) and in round-rotor machines (the saturation is considered both in *d* and *q* axis, as there is no preferred direction for the flux).
+
+It is not suitable for EMT studies as it does not consider the fast dynamics of the machine. 
 
 ## Model Description
 
