@@ -10,15 +10,29 @@ last-updated: 13/05/2024
 
 ## Context
 
+Fast-transient phenomena of transmission lines have been a matter of study in order to describe its behavior during non-normal operation. To mitigate possible unwanted effects and correctly protect transmission line, there is a need of accurate models that correctly predict the performance during these events. Since the introduction of the computer as a tool for power system analysis, many works have tried to solve numerically the complex differential equations that describe the physics of transmission lines, being the one of the first relevant H. W. Dommel's work [[1]](#1). His work did not cover the dependence of the line parameters with respect to the frequency of the system, which added more complexity to the problem. Later works have been developed until reaching a really accurate model developed by José R. Martí [[2]](#2) and [[3]](#3), which is still used to perform fast-transient analysis of transmission lines.
 
 ## Model use, assumptions and validity
 
-The model can be used to perform fast-transient analysis of transmission lines. It is derived from the work of José R. Marti [[1]](#1) and [[2]](#2).
+The model can be used to perform EMT analysis of transmission lines as described in Martí's approach in [[2]](#2) and [[3]](#3). 
 
 The assumptions are:
 
-* -
-* -
+* The line parameters are in general dependent on the frequency of the system.
+
+* The relation between voltages and current at both ends of the transmission line in the frequency-domain are described by the distributed parameter transmission line equations as developed in the $$\pi$$-equivalent model.
+
+* The description in the time-domain considers that voltage (or current) oscillations can be modelled as traveling waves along the line with a certain propagation speed, having a forward traveling component and backwards traveling component. 
+
+* There is a time delay between the pulses at each end of the line. 
+
+* In the approach described, there is an equivalent network at both ends of the line that matches the frequency response of the characteristic impedance of the line.
+
+* The model considers two weight functions that are related to the voltage response of the line at each end for a given voltage impulse. For the model with the equivalent networks matching the characteristic impedance behavior, the weight functions are a formed by a single spike for the receiving end, while for the source end equals to 0, since there is no wave reflections.
+
+The model is valid to perform EMT studies, able to predict the behavior in studies involving high frequencies and long-range transmission lines. 
+
+It is not recommended for lower frequencies, shorter range transmission lines, or for studies where the frequency dependence of the line parameters is not relevant, as it involves a higher computational cost than other models. It is also not recommended when the physical characteristics of the line are not well detailed for a wide range of frequencies, since the model needs to model the frequency response of the impedance of the line.
 
 
 ## Model description
@@ -201,8 +215,10 @@ No open-source implementations found.
 
 ## References 
 
-<a id="1">[1]</a> Marti, J.R. "Accurate Modelling of Frequency Dependent Transmission Lines in Electromagnetic Transient Simulations" Vancouver, B.C., IEEE Transactions on Power Apparatus and Systems, Vol. PAS-101, No. I January 1982.
+<a id="1">[1]</a> Dommel, H.W. “Digital computer solution of Electromagnetic Transiens in single and multiphase networks”, IEEE Transactions, Vol. PAS-88, pages 388-399, April 1969.
 
-<a id="2">[2]</a> Marti, J.R. "The Problem of Frequency Dependence in Transmission Line Modelling" Vancouver, B.C., 1981, PhD Thesis.
+<a id="2">[2]</a> Marti, J.R. "Accurate Modelling of Frequency Dependent Transmission Lines in Electromagnetic Transient Simulations" Vancouver, B.C., IEEE Transactions on Power Apparatus and Systems, Vol. PAS-101, No. I January 1982.
 
-<a id="3">[3]</a> [PSCAD FD Line Model Documentation](https://www.pscad.com/webhelp/ol-help.htm#EMTDC/Transmission_Lines/EMTDC_Distributed_Branch_Interface.htm#Method%20of%20Characteristics)
+<a id="3">[3]</a> Marti, J.R. "The Problem of Frequency Dependence in Transmission Line Modelling" Vancouver, B.C., 1981, PhD Thesis.
+
+<a id="4">[4]</a> [PSCAD FD Line Model Documentation](https://www.pscad.com/webhelp/ol-help.htm#EMTDC/Transmission_Lines/EMTDC_Distributed_Branch_Interface.htm#Method%20of%20Characteristics)
