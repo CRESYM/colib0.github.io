@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Transformer
-tags: ["#114", "Transformer", "Single-phase", "Cantilever equivalent", "Leakage flux", "Steady-state", "Phasorial", "Dynawo", "Modelica"]
+tags: ["#114", "Transformer", "Single-phase", "Cantilever equivalent", "Leakage flux", "Steady-state", "Phasorial", "Dynawo", "Modelica", "RMS"]
 date: 02/05/2024 
 last-updated: 02/05/2024
 ---
 
-# Transformer model
+# Cantilever Transformer model
 
 ## Context
 
@@ -14,7 +14,7 @@ Transformers are essential parts of the grid as two-port devices that change the
 
 ## Model use, assumptions, validity domain and limitations
 
-The model is developed for the single-phase transformer. It describes the *cantilever equivalent circuit* of the transformers, which consider a non-ideal model of the transformer with some simplifications that allow to perform the steady-state analysis of transformers.
+The model is developed for the single-phase transformer, considering a non-ideal model with some simplifications that allow to perform the steady-state analysis of transformers. Starting from the *T-equivalent model* described as a semi-ideal transformer in references [[1]](#1), [[2]](#2) and [[3]](#3), it describes an approximation by grouping the impedance of the primary and secondary windings. In reference [[1]](#1), it is referred to as *cantilever equivalent circuit*.
 
 The assumptions are: 
 
@@ -24,15 +24,26 @@ The assumptions are:
 * In practice, not all the turns of the coils are affected by the leakage flux, and not all the magnetizing flux produced by one winding affects all the turns of the other winding. For that reason, the number of turns of each winding ($$N_i$$) is assumed to be an equivalent number of turns, which differs from the actual number of turns.
 * The final equivalent model neglects the voltage drop produced by the exciting current in the secondary leakage impedance.
 
-The model does replicate exactly the theoretical value of the voltage at the secondary winding calculated with full information, as the equivalent impedance is a simplified approach of the losses. Since the leakage reactances are not easily measured, this approach is preferred as there are short-circuit and open-circuit tests that can be used to determine these equivalent values. 
+The model does replicate exactly the theoretical value of the voltage at the secondary winding calculated with full information, as the equivalent impedance is a simplified approach of the losses. Since the leakage reactances are not easily measured in practice, the *cantilever model* approach is preferred rather than the *T-equivalent* approach, as there are short-circuit and open-circuit tests that can be used to determine these equivalent values. Nevertheless, the *T-equivalent* model is described and can be used if the primary and secondary leakage reactances are known. It also reduces the computations needed to perform the analysis.
 
-Steady-state analysis of three-phase transformers can be performed by using this single-phase model in one of the phases and then considering the phase shift for the rest of the phases. Depending on the configuration of the sides of the three-phase transformers (Delta-Delta, Star-Star, Delta-Star, Star-Delta), some rescaling of the impedances may be needed. Chapter 2.7 and Appendix A of [1](#1) discuss the details of this analysis.
+Steady-state analysis of balanced three-phase transformers can be performed by using this single-phase model in one of the phases and then considering the phase shift for the rest of the phases. Depending on the configuration of the sides of the three-phase transformers (Delta-Delta, Star-Star, Delta-Star, Star-Delta), some rescaling of the impedances may be needed. Chapter 2.7 and Appendix A of [1](#1) discuss the details of this analysis.
+
+It cannot be used to perform transient analysis, as it does not consider the time-dependent behavior of the transformer. It is also not suitable for the analysis of transformers with a high degree of saturation, as it does not consider the non-linear behavior of the magnetic circuit.
 
 ## Model description
 
 ### Parts of the transformers
 
-There are two physical parts of the transformers relevant for the model described:
+There are two physical parts of the transformers relevant for the model described, as seen in the following schematic representation [[3]](#3):
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/Transformers/Transformer/Trafo_scheme.svg' | relative_url }}"
+     alt="Transformer schematic representation"
+     style="float: center; margin-right: 10px; width: 500px" />
+</div>
+<div align='center'>
+Figure 1. Transformer schematic representation
+</div>
 
 #### Windings
 
@@ -51,23 +62,23 @@ The core has two primary functions. The more obvious one, it acts as the support
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
-| $$v^H$$ | HV side terminal voltage | $$p.u.$$ |
-| $$v^L$$ | LV side terminal voltage | $$p.u.$$ |
-| $$i^H$$ | HV side current | $$p.u.$$ |
-| $$i^L$$ | LV side current | $$p.u.$$ |
-| $$P^H$$ | HV side active power | $$p.u.$$ |
-| $$P^L$$ | LV side active power | $$p.u.$$ |
-| $$Q^H$$ | HV side reactive power | $$p.u.$$ |
-| $$Q^L$$ | LV side reactive power | $$p.u.$$ |
+| $$v^H$$ | HV side terminal phase-to-ground voltage phasor | $$pu$$ |
+| $$v^L$$ | LV side terminal phase-to-ground voltage phasor | $$pu$$ |
+| $$i^H$$ | HV side current phasor | $$pu$$ |
+| $$i^L$$ | LV side current phasor | $$pu$$ |
+| $$P^H$$ | HV side active power | $$pu$$ |
+| $$P^L$$ | LV side active power | $$pu$$ |
+| $$Q^H$$ | HV side reactive power | $$pu$$ |
+| $$Q^L$$ | LV side reactive power | $$pu$$ |
 
 
 #### Parameters
 
 | Parameter    | details  | Unit |
 | --------------| ------ | ----- |
-| $$N_1$$ | Number of turns of the primary winding | $$u.$$ |
-| $$N_2$$ | Number of turns of the secondary winding | $$u.$$ |
-| $$a$$| Transformation ratio $$a = \frac{N_1}{N_2}$$ | $$p.u.$$ |
+| $$N_1$$ | Number of turns of the primary winding | unitless |
+| $$N_2$$ | Number of turns of the secondary winding | unitless |
+| $$a$$| Transformation ratio $$a = \frac{N_1}{N_2}$$ | $$pu$$ |
 | $$S_{base}$$ | Transformer rated power | $$VA$$ |
 | $$V_{base, L}$$ | LV side rated voltage | $$V$$ |
 | $$V_{base, H}$$ | HV side rated voltage | $$V$$ |
@@ -169,7 +180,21 @@ showing that the input power equals the output power. This is a result of the se
 
 #### Equivalent-T circuit for non-ideal transformers
 
-Considering a non-ideal transformer, the relationship between currents and voltages for the windings can be written as follows:
+The transformer can now be described with the following equivalent circuit, normally referred to as *equivalent-T circuit*, as an ideal transformer with external impedances that model all the losses:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/Transformers/Transformer/Tequiv_trafo.svg' | relative_url }}"
+     alt="T-equivalent circuit of a transformer"
+     style="float: center; margin-right: 10px; width: 500px" />
+</div>
+<div align='center'>
+Figure 2. T-equivalent circuit of a transformer
+</div>
+<br>
+
+The transformer has been omitted, and it can be thought as if it was at the right-most or the left-most part of the equivalent circuit, depending on the reference winding chosen.
+
+Considering this non-ideal transformer, the relationship between currents and voltages for the windings can be written as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 \begin{equation}
@@ -194,19 +219,7 @@ from where it can be extracted that $$i_{2'} = \frac{N_2}{N_1} i_2$$, which woul
 
 The exciting current is split into a core-loss component $$i_c$$ in phase with the electromotive force produced by the primary circuit, and a magnetizing component $$i_m$$ lagging the electromotive force by 90º. These two components can be represented by the means of a core-loss resistance $$R_c$$ and a magnetizing inductance $$L_m$$, which can be represented as a reactance as $$X_m = 2\pi f L_m$$.
 
-The transformer can now be seen as an ideal transformer with external impedances that model all the losses. The following equivalent circuit, which can be referred to as *equivalent-T circuit*, includes all the elements of the transformer model:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/Transformers/Transformer/Tequiv_trafo.svg' | relative_url }}"
-     alt="T-equivalent circuit of a transformer"
-     style="float: center; margin-right: 10px;" />
-</div>
-<div align='center'>
-Figure 1. T-equivalent circuit of a transformer
-</div>
-<br>
-
-The transformer has been omitted, and it can be thought as if it was at the right-most or the left-most part of the equivalent circuit, depending on the reference winding chosen. In the equivalent circuit shown in the previous figure, the reference winding is the primary, and all the secondary quantities (those with a $$'$$ on top) are referred from the primary. To recover the actual value of these secondary quantities, the following transformation can be applied as done with the current earlier:
+ In the equivalent circuit shown in Figure 2, the reference winding is the primary, and all the secondary quantities (those with a $$'$$ on top) are referred from the primary. To recover the actual value of these secondary quantities, the following transformation can be applied as done with the current earlier:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ X_{l_2}' = (\frac{N_1}{N_2})^2 X_{l_2} $$ 
@@ -221,10 +234,10 @@ The equivalent-T circuit can be simplified by moving the shunt impedance to befo
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/Transformers/Transformer/cantilever.svg' | relative_url }}"
      alt="Cantilever equivalent circuit of a transformer"
-     style="float: center; margin-right: 10px;" />
+     style="float: center; margin-right: 10px; width: 450px" />
 </div>
 <div align='center'>
-Figure 2. Cantilever equivalent circuit of a transformer
+Figure 3. Cantilever equivalent circuit of a transformer
 </div>
 <br>
 
@@ -298,3 +311,6 @@ This model has been successfully implemented in:
 <a id="1">[1]</a> Fitzgerald, A. E.; Kingsley, C.; Umans, S. D. "Electric Machinery", New York, USA, 6th ed., 2002, McGraw-Hill.
 
 <a id="2">[2]</a> Matsch, L.W.; Morgan, J.D. "Electromagnetic and Electromechanical Machines", New York, USA, 6th ed., 2002, McGraw-Hill.
+
+<a id="3">[3]</a> Kothari D.P.; Nagrath I.J. "Electric Machines", New Delhi, India, 4th ed., 2010, Tata McGraw-Hill.
+
