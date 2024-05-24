@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Pi-equivalent Line Model
-tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo"]
+tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo", opensource]
 date: 09/05/2025 
 last-updated: 13/05/2024
 ---
@@ -348,13 +348,13 @@ For lower values of $$l$$, $$\frac{\sinh(\gamma l)}{\gamma l} \approx 1$$ and $$
 
 ## Open-source implementations
 
-<details>
-<summary>Modelica</summary>
-<br>
-[Dynawo public library](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Lines/Line.mo).
-</details>
+This model has been successfully implemented in :
 
-## References 
+| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
+| --------------| --- | --------- | ------------------- |------------------- | -------- |
+| dynawo | [Dynawo public library](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Lines/Line.mo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 | - |
+
+## References
 
 <a id="1">[1]</a> Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill.
 

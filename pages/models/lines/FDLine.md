@@ -63,13 +63,10 @@ $$ I_S(\omega) = \frac{1}{Z_C(\omega)} \sinh(\gamma (\omega) l)V_R(\omega) - \co
 
 </div>
 
-where the propagation constant $$\gamma = \sqrt(z(\omega)y(\omega)) = \alpha(\omega) + j\beta(\omega)$$ and the characteristic impedance $$Z_C = \sqrt(\frac{z(\omega)}{y(\omega)})$$ are frequency-dependent. These equations correspond to the solution in frequency domain for the general transmission line. Transforming these equations to the time domain allows to perform transient analysis of the transmission line, but it is not trivial since the equations for wave propagations obtained in the Constant Parameter Line Model are obtained by assuming independence of the line parameters with respect to the gird frequency. To do so, the model proposed will convert the frequency-domain equations to the time-domain numerically. 
+where the propagation constant $$\gamma = \sqrt(z(\omega)y(\omega)) = \alpha(\omega) + j\beta(\omega)$$ and the characteristic impedance $$Z_C = \sqrt(\frac{z(\omega)}{y(\omega)})$$ are frequency-dependent. These equations correspond to the solution in frequency domain for the general transmission line. Transforming these equations to the time domain allows to perform transient analysis of the transmission line, but it is not trivial since the equations for wave propagations obtained in the Constant Parameter Line Model are obtained by assuming independence of the line parameters with respect to the grid frequency. To do so, the model proposed will convert the frequency-domain equations to the time-domain numerically. 
 
 The developed model assumes the following equivalent circuit:
-
-
-
-
+TO BE COMPLETED
 
 The proposed equations for the travelling waves in this equivalent circuit are the following:
 

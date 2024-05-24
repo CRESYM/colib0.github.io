@@ -89,13 +89,9 @@ which allows for iterative solutions for simulations with time steps sized as $$
 
 ## Open-source implementations
 
-<details>
-<summary>Modelica</summary>
-<br>
-[Dynawo public library](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Lines/Line.mo).
-</details>
+No open source implementation found.
 
-## References 
+## References
 
 <a id="1">[1]</a> Dommel, H.W. “Digital computer solution of Electromagnetic Transiens in single and multiphase networks”, IEEE Transactions, Vol. PAS-88, pages 388-399, April 1969.
 
