@@ -353,6 +353,7 @@ This model has been successfully implemented in :
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 | dynawo | [Dynawo public library](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Lines/Line.mo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 | - |
+| OpenIPSL | [Link](https://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Branches/PwLine.mohttps://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Branches/PwLine.mo ) | modelica | [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause) | 24/05/2024 | - |
 
 ## References
 
