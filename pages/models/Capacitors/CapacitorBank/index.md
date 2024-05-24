@@ -117,7 +117,7 @@ This model has been successfully implemented in :
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 | dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Shunts/ShuntB.mo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 | - |
 | Andes | [Link](https://github.com/CURENT/andes/blob/master/andes/models/shunt/shunt.py) | python | [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)  | 24/05/2024 | - |
-| Andes | [Link](https://github.com/e2nIEE/pandapower/blob/develop/pandapower/converter/cim/cim2pp/converter_classes/shunts/linearShuntCompensatorCim16.py) | python | [3-clause BSD](https://pandapower.readthedocs.io/en/v2.0.1/about/license.html)  | 24/05/2024 | - |
+| Pandapower | [Link](https://github.com/e2nIEE/pandapower/blob/develop/pandapower/converter/cim/cim2pp/converter_classes/shunts/linearShuntCompensatorCim16.py) | python | [3-clause BSD](https://pandapower.readthedocs.io/en/v2.0.1/about/license.html)  | 24/05/2024 | - |
 
 ## Table of references
 
