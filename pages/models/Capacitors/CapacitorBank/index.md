@@ -79,10 +79,14 @@ The capacitor bank is considered to be connected to the end of a transmission li
 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/Capacitors/CapacitorBank/capacitor_scheme.svg' | relative_url }}"
-     alt="calculation of the reference reactive current by the U AC control of the VSC"
+<img src="{{ '/pages/models/Capacitors/CapacitorBank/CapBank_scheme.svg' | relative_url }}"
+     alt="Capacitor bank scheme"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align = 'center'>
+Figure 1: Capacitor bank scheme
+</div>
+<br>
 
 In this circuit, the current passing through the capacitor bank is given by:
 
@@ -111,6 +115,9 @@ This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
+| dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Shunts/ShuntB.mo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 24/05/2024 | - |
+| Andes | [Link](https://github.com/CURENT/andes/blob/master/andes/models/shunt/shunt.py) | python | [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)  | 24/05/2024 | - |
+| Andes | [Link](https://github.com/e2nIEE/pandapower/blob/develop/pandapower/converter/cim/cim2pp/converter_classes/shunts/linearShuntCompensatorCim16.py) | python | [3-clause BSD](https://pandapower.readthedocs.io/en/v2.0.1/about/license.html)  | 24/05/2024 | - |
 
 ## Table of references
 
