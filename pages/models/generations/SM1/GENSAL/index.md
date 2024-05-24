@@ -6,11 +6,11 @@ date: 10/04/2024
 last-updated: 24/05/2024
 ---
 
-# Salient-pole Synchronous Machine
+# Salient-pole Synchronous Machine - GENSAL
 
 ## Context
 
-The model presented is derived from the general model for Synchronous Machine, transforming the equations to the *dq0* reference frame. It describes the dynamic behavior of synchronous machines with no aturation effects. The model is suitable for transient stability analysis.
+The model presented is derived from the general model [Synchronous Machine model](../), transforming the equations to the *dq0* reference frame. It describes the dynamic behavior of synchronous machines with no aturation effects. The model is suitable for transient stability analysis.
 
 ## Model use, assumptions, validity domain and limitations
 
