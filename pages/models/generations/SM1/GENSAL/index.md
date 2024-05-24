@@ -3,14 +3,14 @@ layout: page
 title: GENROU/GENSAL
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
-last-updated: 23/04/2024
+last-updated: 24/05/2024
 ---
 
 # Salient-pole Synchronous Machine
 
 ## Context
 
-The model presented is derived from the general model for Synchronous Machine
+The model presented is derived from the general model for Synchronous Machine, transforming the equations to the *dq0* reference frame. It describes the dynamic behavior of synchronous machines with no aturation effects. The model is suitable for transient stability analysis.
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -209,7 +209,15 @@ $$ \Psi_0 = -X_{ls} I_0$$
 
 </div>
 
+## Open source implementations
 
+This model has been successfully implemented in:
+
+
+| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
+| --------------| --- | --------- | ------------------- |------------------- | -------- |
+|Dynawo|[Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 23/04/2024 | no comment |
+|DP Sim|[Link](https://github.com/sogno-platform/dpsim/blob/master/dpsim-models/src/DP/DP_Ph1_SynchronGenerator6OrderPCM.cpp) | C++ | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 24/05/2024 | no comment |
 
 ## Table of references
 

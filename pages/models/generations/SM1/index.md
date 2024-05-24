@@ -3,7 +3,7 @@ layout: page
 title: Synchronous Machine Model
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
-last-updated: 23/04/2024
+last-updated: 24/05/2024
 ---
 
 # Synchronous Machine Model
