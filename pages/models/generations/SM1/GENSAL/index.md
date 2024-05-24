@@ -218,6 +218,8 @@ This model has been successfully implemented in:
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 |Dynawo|[Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 23/04/2024 | no comment |
 |DP Sim|[Link](https://github.com/sogno-platform/dpsim/blob/master/dpsim-models/src/DP/DP_Ph1_SynchronGenerator6OrderPCM.cpp) | C++ | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 24/05/2024 | no comment |
+|OpenIPSL|[Link](https://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Machines/PSSE/GENCLS.mo) | modelica | [3-clause-BSD](https://opensource.org/license/BSD-3-Clause) | 24/05/2024 | no comment |
+
 
 ## Table of references
 

@@ -255,6 +255,16 @@ The left chart shows the $$P$$ and $$Q$$ maximum values for different limit curv
 
 ## Derived models
 
+The model can be solved by performing some additional assumptions and transformations. Here some submodels that have arised from different works are listed, with its particularities:
+
+- GENSAL/GENROU without saturation: This model is described in Sauer and Pai formulation [[6]](#6), and is valid for both round-rotor and salient-poles synchronous machine.
+
+- GENROU with saturation: This model is an extension of the previous one, considering the saturation of the magnetic circuit. 
+
+- GENSAL with saturtion: Same as the previous model, but in this case it is treated slightly different due to the saturation occuring onnly in the salient-poles axis only, while the previous model considers saturation along both *d* and *q* axis.
+
+- GENTPF/GENTPJ: It models the saturation in a different way, including the saturation in the network interface equations, something that the GENSAL/GENROU models do not consider, and it reflects better the saturation effects in the whole machine.
+
 {% include subfolderNav.html %}
 
 ## Open source implementations
@@ -264,7 +274,8 @@ This model has been successfully implemented in:
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 |Dynawo|[Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Machines/OmegaRef/GeneratorSynchronous.mo)| modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 23/04/2024 | no comment |
-
+|OpenIPSL|[Link](https://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Machines/PSSE/BaseClasses/baseMachine.mo) | modelica | [3-clause-BSD](https://opensource.org/license/BSD-3-Clause) | 24/05/2024 | no comment |
+|Pandapower|[Link](https://github.com/e2nIEE/pandapower/blob/develop/pandapower/converter/cim/cim2pp/converter_classes/generators/synchronousMachinesCim16.py) | python | [3-clause_BSD](https://opensource.org/license/BSD-3-Clause) | 24/05/2024 | no comment |
 ## Table of references
 
 <a id="1">[1]</a> Kundur, Prabha. "Power System Stability and Control" New York, USA, 1994, McGraw-Hill.
