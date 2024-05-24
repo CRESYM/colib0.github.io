@@ -41,16 +41,32 @@ It is not recommended for lower frequencies, shorter range transmission lines, o
 
 | Parameters    | details  | Unit |
 | --------------| ------ | ----- |
-
+| $$Z_C$$ | Characteristic impedance of the grid at a given frequency |$$\Omega$$ |
+| $$e_{R_h}(t)$$ | History term of the phase to ground voltage of the receiving end| $$V$$ |
+| $$e_{S_h}(t)$$ | History term of the phase to ground voltage of the sending end | $$V$$ |
 
 ### Line variables
 
 | Variable    | details  | Unit |
-| --------------| ------ | ----- |
+| --- | --- | --- |
+| $$v_S(t)$$ | Phase to ground voltage at the sending end at time $$t$$ | $$V$$ |
+| $$e_S(t)$$ | Phase to ground voltage across the characteristic impedance at the sending end at time $$t$$ | $$V$$ |
+| $$v_R(t)$$ | Phase to ground voltage at the receiving end at time $$t$$ | $$V$$ |
+| $$e_R(t)$$ |  Phase to ground voltage across the characteristic impedance at the receiving end at time $$t$$ | $$V$$ |
+
 
 
 ### Equations
 
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$v_S(t) = e_S(t) + e_{S_h}(t)$$
+$$v_R(t) = e_R(t) + e_{R_h}(t)$$
+
+</div>
+
+where $$e_S(t) = Z_C i_S(t)$$ and $$e_R(t) = Z_C i_R(t)$$ are the voltages across the equivalent network due to the currents at each respective end of the line. and $$e_{S_h}(t)$$ and $$e_{R_h}(t)$$ are the historical terms, which can be computed using convolution products, or simply using the previous values $$v_S(t-\tau)$$ and $$v_R(t-\tau)$$ provided that the integration step $$\Delta t \leq \tau$$. 
 
 ## Operational principles
 
@@ -66,7 +82,18 @@ $$ I_S(\omega) = \frac{1}{Z_C(\omega)} \sinh(\gamma (\omega) l)V_R(\omega) - \co
 where the propagation constant $$\gamma = \sqrt(z(\omega)y(\omega)) = \alpha(\omega) + j\beta(\omega)$$ and the characteristic impedance $$Z_C = \sqrt(\frac{z(\omega)}{y(\omega)})$$ are frequency-dependent. These equations correspond to the solution in frequency domain for the general transmission line. Transforming these equations to the time domain allows to perform transient analysis of the transmission line, but it is not trivial since the equations for wave propagations obtained in the Constant Parameter Line Model are obtained by assuming independence of the line parameters with respect to the grid frequency. To do so, the model proposed will convert the frequency-domain equations to the time-domain numerically. 
 
 The developed model assumes the following equivalent circuit:
-TO BE COMPLETED
+
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/lines/FDLine/FD_scheme.svg' | relative_url }}"
+     alt="Equivalent circuit of the frequency dependent line"
+     style="float: center; margin-right: 10px;" />
+</div>
+<div align = 'center'>
+     Figure 1: Equivalent circuit of the frequency dependent line.
+</div>
+<br>
+
 
 The proposed equations for the travelling waves in this equivalent circuit are the following:
 
@@ -123,9 +150,14 @@ Since the terms $$b_S$$ and $$b_R$$ are obtained from historical values of volta
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/lines/FDLine/FDLine_ThevEquiv.svg' | relative_url }}"
-     alt="pi-equivalent circuit of a transmission line"
+     alt="FD Thevenin Equivalent Circuit of a transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align = 'center'>
+     Figure 2: Thevenin equivalent circuit of the frequency dependent line with history terms.
+</div>
+<br>
+
 
 which has the following circuit equations:
 
@@ -141,9 +173,13 @@ It can be converted into its Norton equivalent, as shown in the following schema
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/lines/FDLine/FDLine_NortonEquiv.svg' | relative_url }}"
-     alt="pi-equivalent circuit of a transmission line"
+     alt="Norton Equivalent Circuit of a transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align = 'center'>
+     Figure 3: Norton equivalent circuit of the frequency dependent line with history terms.
+</div>
+<br>
     
 where the equivalent current sources are calculated as:
 
@@ -153,8 +189,6 @@ $$i_S(t) = \frac{v_S(t)}{Z_C} - i_{S_h}(t)$$
 $$i_R(t) = \frac{v_R(t)}{Z_C} - i_{R_h}(t)$$
 
 </div>
-
-
 
 ### Rational approximation of $$Z_C$$ and $$a_1$$
 
