@@ -1,7 +1,7 @@
 ---
 layout: page
 title: FD Line Model 
-tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo"]
+tags: ["#120", "pi-equivalent", "Frequency Dependent", "Martí", "EMT", "transient",  "transmission"]
 date: 09/05/2025 
 last-updated: 13/05/2024
 ---
@@ -49,6 +49,7 @@ It is not recommended for lower frequencies, shorter range transmission lines, o
 
 | Variable    | details  | Unit |
 | --- | --- | --- |
+| $$Z_C(\omega)$$ | Characteristic impedance of the grid at a given frequency |$$\Omega$$ |
 | $$v_S(t)$$ | Phase to ground voltage at the sending end at time $$t$$ | $$V$$ |
 | $$e_S(t)$$ | Phase to ground voltage across the characteristic impedance at the sending end at time $$t$$ | $$V$$ |
 | $$v_R(t)$$ | Phase to ground voltage at the receiving end at time $$t$$ | $$V$$ |
@@ -200,21 +201,39 @@ The general form of the rational function used to simulate the characteristic im
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$Z_C(s) = H \frac{(s + z_1)(s + z_2)...(s+z_n)}{(s + p_1)(s + p_2)...(s + p_n)}$$
+$$Z_C(s) = H \frac{(s + z_1)(s + z_2)...(s+z_n)}{(s + \alpha_1)(s + \alpha_2)...(s + \alpha_n)}$$
 
 </div>
 
-with $$s = j\omega$$, $$H$$ being a real and positive constant, $$z_i$$ and $$p_i$$ being real and negative zeros and poles of the function, respectively. The values of the zeros and poles can be obtained by fitting the characteristic impedance values at different frequencies to the rational function, which can be done using the least squares method. 
+with $$s = j\omega$$, $$H$$ being a real and positive constant, $$z_i$$ and $$\alpha_i$$ being real and negative zeros and poles of the function, respectively. The values of the zeros and poles can be obtained by fitting the characteristic impedance values at different frequencies to the rational function, which can be done using the least squares method. 
+
+This rational expression can be expanded into partial functions when considering an R-C synthesis over the equivalent impedance (see [[5]](#5)):
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$Z_C(s) = k_0 + \frac{k_1}{s + \alpha_1} + ... + \frac{k_n}{s + \alpha_n}$$
+
+</div>
+
+where  $$k_0 = \lim\limits{s \to \infty} Z_C(S) = H$$ and $$k_i = (s + \alpha_i)Z_C(S)\|_{s = -\alpha_i}$$. The first term corresponds to a resistance, $$R_0$$, and the following terms to a R-C parallel elements with $$R_i = \frac{k_i}{\alpha_i}$$ and $$C_i = \frac{1}{k_i}$$. It can be expressed in time-domain applying inverse Fourier transformation:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$z_C(t) = [k_0 \delta(t) + \sum_{i=1}^{n} k_i e^{-\alpha_i t}] u(t)$$
+
+</div>
+
+This form will ease introducing the frequency dependence of the characteristic impedance in the model equations.
 
 #### Weight function rational approximation
 
 Considering the convolution integral at time step $$t$$ as in the equations for $$b_{S}$$ and $$b_{R}$$, the convolution can be evaluated much easily if the weight function is approximated by a sum of exponential terms, having the following general convolution form:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$s(t) = \int_{\tau}^{\infty} f(t - u)ke^{-\alpha (u - \tau)} du$$
+$$s(t) = \int_{\tau}^{\infty} f(t - u)ke^{-\beta (u - \tau)} du$$
 </div>
 
-With this expression, $$s(t)$$ can be directly computed using its previous values and the history of the funciton used to calculate it:
+With this expression, $$s(t)$$ can be directly computed using its previous values and the history of the function used to calculate it:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -222,23 +241,76 @@ $$s(t) = ms(t - \Delta t) + p f(t - \tau) + q f(t - \tau - \Delta t)$$
 
 </div>
 
-where $$m$$, $$p$$ and $$q$$ are constants depending on $$k$$ and $$\alpha$$ and the integration step $$\Delta t$$.
+where $$m$$, $$p$$ and $$q$$ are constants depending on $$k$$ and $$\beta$$ and the integration step $$\Delta t$$.
 
 Using similar procedure, the following equation can be used to approximate the weight function. Firstly, the weight function is displaced from $$t$$ to $$t-\tau$$ as $$A_1(\omega) = P(\omega)e^{-j \omega \tau}$$. Then, $$P(\omega)$$ can be approximated by a rational function as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$P(s) = H \frac{(s + z_1)(s + z_2)...(s+z_n)}{(s + p_1)(s + p_2)...(s + p_m)}$$
+$$P(s) = H \frac{(s + z_1)(s + z_2)...(s+z_n)}{(s + \beta_1)(s + \beta_2)...(s + \beta_m)}$$
 </div>
 
 where the number of zeros is smaller than the number of poles, since it is a passive element and its response tends to 0 for infinite frequency. Expanding this expression and transforming into time-domain, a final expression for the weight function can be obtained:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$a_{1a}(t) = [k_1 e^{p_1 t} + k_2 e^{p_2 t} + ... + k_m e^{p_m t}]u(t-\tau)$$
+$$a_{1a}(t) = [k_1' e^{\beta_1 t} + k_2' e^{\beta_2 t} + ... + k_m' e^{\beta_m t}]u(t-\tau)$$
 
 </div>
 
 which can be used to obtain recursively the convolution terms.
+
+### R-C equivalent circuit and historical terms calculation
+
+The final equivalent circuit is the proposed by Dommel's work [[1]](#1), with the difference that the impedance terms model the frequency dependence of the parameters. Detailed descriptions on the difference by the model proposed by Dommel and the frequency dependent model proposed by Martí can be found in [[3]](#3). The equivalent circuit is shown in the following figure:
+
+
+In frequency domain, we have:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$E_S(\omega) = I_S(\omega) Z_C(\omega)$$
+
+</div>
+
+which can be then expressed in time domain as the convolution product:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$e_S(t) = i_S(t) * Z_C(t) = \int_{-\infty}^{\infty} i_S(t - u) Z_C(u) du$$
+
+</div>
+
+Since $$Z_C$$ has been expressed as a sum of exponential functions in time-domain, the convolution can be split in a sum of convolutions:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ e_S(t) = e_{S_1} + e_{S_2} + ... + e_{S_n}$$
+$$ e_{S_i}(t) = i_S(t) * e^{-\alpha_i t} = \int_{-\infty}^{\infty} i_S(t - u) e^{-\alpha_i u} du$$
+
+</div>
+
+
+
+
+
+
+The history terms that have to be calculated at each step are:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ e_{S_{hc}}(t) = q i_S(t - \tau) $$
+$$ e_{R_{hc}}(t) = q i_R(t - \tau) $$
+$$ e_{S_{hv}}(t) = \sum^{n}_{1} e_{S_i}(t - \tau) $$
+
+
+
+
+
+
+
+</div>
+
+
 
 ## Open-source implementations
 
@@ -246,10 +318,12 @@ No open-source implementations found.
 
 ## References 
 
-<a id="1">[1]</a> Dommel, H.W. “Digital computer solution of Electromagnetic Transiens in single and multiphase networks”, IEEE Transactions, Vol. PAS-88, pages 388-399, April 1969.
+<a id="1">[1]</a> Dommel, H. W. “Digital computer solution of Electromagnetic Transients in single and multiphase networks”, IEEE Transactions, Vol. PAS-88, pages 388-399, April 1969.
 
-<a id="2">[2]</a> Marti, J.R. "Accurate Modelling of Frequency Dependent Transmission Lines in Electromagnetic Transient Simulations" Vancouver, B.C., IEEE Transactions on Power Apparatus and Systems, Vol. PAS-101, No. I January 1982.
+<a id="2">[2]</a> Marti, J. R. "Accurate Modelling of Frequency Dependent Transmission Lines in Electromagnetic Transient Simulations" Vancouver, B.C., IEEE Transactions on Power Apparatus and Systems, Vol. PAS-101, No. I January 1982.
 
-<a id="3">[3]</a> Marti, J.R. "The Problem of Frequency Dependence in Transmission Line Modelling" Vancouver, B.C., 1981, PhD Thesis.
+<a id="3">[3]</a> Marti, J. R. "The Problem of Frequency Dependence in Transmission Line Modelling" Vancouver, B.C., 1981, PhD Thesis.
 
 <a id="4">[4]</a> [PSCAD FD Line Model Documentation](https://www.pscad.com/webhelp/ol-help.htm#EMTDC/Transmission_Lines/EMTDC_Distributed_Branch_Interface.htm#Method%20of%20Characteristics)
+
+<a id="5">[5]</a> Karni, S. "Network Theory: Analysis and Synthesis", Allyn and Bacon, Boston, 1966.
