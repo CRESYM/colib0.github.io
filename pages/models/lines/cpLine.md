@@ -1,7 +1,7 @@
 ---
 layout: page
 title: CP Line Model 
-tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo"]
+tags: ["#120", "pi-equivalent", "EMT", "Bergeron", "Constant Parameter", "transient", "transmission", "Dynawo"]
 date: 09/05/2025 
 last-updated: 13/05/2024
 ---
@@ -10,10 +10,23 @@ last-updated: 13/05/2024
 
 ## Context
 
+When performing time-domain analysis of a transmission line, the physics of the waves that propagate through the line have to be considered. During the early stages of the development of the analysis techniques, the work of Dommel [[1]](#1) was one of the first to describe the time response of electromagnetic transients in the transmission lines. His model is based on the method of characteristics or Bergeron model for distributed parameter lines, being useful to describe electromagnetic transients at a given grid frequency. 
 
 ## Model use, assumptions and validity
 
+The model can be used to perform EMT studies of transmission lines considering constant grid frequency. The following assumptions are considered for the model:
 
+* The frequency is constant, and thus the line parameters are constant along the line.
+
+* The effects of resistance and conductance are neglected in front of the inductive and capacitive effects of the line.
+
+* The relationship between the voltages and currents at the source and receiver terminals is obtained as in the $$\pi$$-equivalent model for long-range lines, considering an equal distribution of the capacitance and inductance over the line.
+
+* The voltage (and currents) are waves that travel through the transmission line according to the telegrapher's equations, with a constant propagation velocity of the wave along the line.
+
+* The solution of these equations considers a forward and a backward traveling wave.
+
+It is valid when dealing with constant grid frequency and when the line parameters are constant along the line. For grid frequency variations, the assumptions made over the impedance are not valid and thus more complex models are required, such as the frequency-dependent line model.
 
 ## Model description
 
@@ -21,18 +34,48 @@ last-updated: 13/05/2024
 
 | Parameters    | details  | Unit |
 | --------------| ------ | ----- |
-
+| $$l$$ | Length of the line | $$m$$ |
+| $$L$$ | Inductance of the line per meter | $$H m^{-1}$$ |
+| $$C$$ | Capacitance of the line per meter | $$F m^{-1}$$ |
+| $$r$$ | Resistance of the line per meter | $$\Omega m^{-1}$$ |
+| $$x_L$$ | Reactance of the line per meter | $$\Omega m^{-1}$$ |
+| $$z$$ | Impedance of the line per meter $$z = r + jx_L$$ | $$\Omega m^{-1}$$ |
+| $$g$$ | Conductance of the line per meter | $$\Omega^{-1} m^{-1}$$ |
+| $$b$$ | Susceptance of the line per meter | $$\Omega^{-1} m^{-1}$$ |
+| $$y$$ | Equivalent admittance of the line per meter $$y = g + jb$$ | $$\Omega^{-1} m^{-1}$$ |
+| $$\tau$$ | Time delay representing the propagation delay or travel time of a wave $$\tau = l\sqrt(LC)$$| $$s$$ |
+| $$Z_C$$ | Characteristic impedance of the transmission line $$Z_C = \sqrt(\frac{z(\omega)}{y(\omega)})$$ | $$\Omega$$ |
+| $$i_{R_h}(t - \tau)$$| History term for the complex current at the receiving end | $$A$$ |
+| $$i_{S_h}(t - \tau)$$ | History term for the complex current at the sending end | $$A$$ |
 
 
 ### Line variables
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
+| Variable/Parameter | Description | Unit |
+| --- | --- | --- |
+| $$v_S(t)$$ | Complex phase-to-ground voltage at the sending end at time $$t$$ | $$V$$ |
+| $$i_S(t)$$ | Complex current at the sending end at time $$t$$ | $$A$$ |
+| $$v_R(t)$$ | Complex phase-to-ground voltage at the receiving end at time $$t$$ | $$V$$ |
+| $$i_R(t)$$ | Complex current at the receiving end at time $$t$$ | $$A$$ |
 
 
 ### Equations
 
+The system of equations to solve at each time step is:
 
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+$$ v_S(t) - Z_C i_S(t) = Z_C i_{S_h}(t-\tau)$$
+$$ v_R(t) - Z_C i_R(t) = Z_C i_{R_h}(t-\tau)$$
+</div>
+
+with the history terms computed as:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+$$ i_{S_h}(t - \tau) = v_R(t - \tau) + Z_C i_R(t - \tau)$$
+$$ i_{R_h}(t - \tau) = v_S(t - \tau) + Z_C i_S(t - \tau)$$
+</div>
 
 ## Operational principles
 
@@ -79,8 +122,7 @@ We can perform the following operation over the voltage and current solutions:
 $$v(x,t) + Z_C i(x,t) = v_f(x - \gamma t) + v_b(x + \gamma t) + (v_f(x - \gamma t) - v_b(x + \gamma t)) = 2v_f(x - \gamma t)$$
 </div>
 
-
-
+which is the basic relationship of the Bergeron's *Method of Characteristics*, 
 Recovering the $$\pi$$-equivalent model equations, the relationship between the voltages and currents at the source and receiver terminals for the distributed parameters line model can be transformed into time-domain:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
