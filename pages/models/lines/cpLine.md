@@ -71,7 +71,17 @@ $$i(x,t) = \frac{v_f(x - \gamma t)}{Z_C} - \frac{v_b(x + \gamma t)}{Z_C} = i_f(x
 
 </div>
 
-where $$Z_C = \sqrt{\frac{L}{C}}$$ is the characteristic impedance of the line approximated for the case were only $$L$$ and $$C$$ are considered. Recovering the $$\pi$$-equivalent model equations, the relationship between the voltages and currents at the source and receiver terminals for the distributed parameters line model can be transformed into time-domain:
+where $$Z_C = \sqrt{\frac{L}{C}}$$ is the characteristic impedance of the line approximated for the case were only $$L$$ and $$C$$ are considered. 
+
+We can perform the following operation over the voltage and current solutions:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+$$v(x,t) + Z_C i(x,t) = v_f(x - \gamma t) + v_b(x + \gamma t) + (v_f(x - \gamma t) - v_b(x + \gamma t)) = 2v_f(x - \gamma t)$$
+</div>
+
+
+
+Recovering the $$\pi$$-equivalent model equations, the relationship between the voltages and currents at the source and receiver terminals for the distributed parameters line model can be transformed into time-domain:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ v_S(t) - Z_C i_S(t) = Z_C i_{S_h}(t-\tau)$$
