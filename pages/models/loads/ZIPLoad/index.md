@@ -28,9 +28,9 @@ The model does not take into account the time-response performance of the load, 
 
 | Parameter|Description | Unit |
 | ---| ---  | --- |
-| $$V_0$$ | Reference voltage | $$V$$ |
-| $$P_0$$ | Reference active power | $$W$$ |
-| $$Q_0$$ | Reference reactive power | $$VAR$$ |
+| $$V_0$$ | Load Nominal voltage | $$V$$ |
+| $$P_0$$ | Load Nominal active power | $$W$$ |
+| $$Q_0$$ | Load Nominal reactive power | $$VAR$$ |
 | $$a_1$$ | Coefficient for active power quadratic term (Constant impedance load) | Unitless |
 | $$a_2$$ | Coefficient for active power linear term (Constant current load) | Unitless |
 | $$a_3$$ | Coefficient for active power constant term (Constant power load) | Unitless | 
@@ -42,9 +42,9 @@ The model does not take into account the time-response performance of the load, 
 
 | Variable | Description | Unit |
 | --- | --- | --- |
-| $$V$$ | Voltage | $$V$$ |
-| $$P$$ | Active power | $$W$$ |
-| $$Q$$ | Reactive power | $$VAR$$ |
+| $$V$$ | Phase-to-ground Bus Voltage | $$V$$ |
+| $$P$$ | Load Active power | $$W$$ |
+| $$Q$$ | Load Reactive power | $$VAR$$ |
 
 
 ### System of equations
