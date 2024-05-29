@@ -9,33 +9,46 @@ last-updated: 24/05/2024
 
 ## Context
 
+This ac rotating exciter with non-controlled rectifiers has been presented in details in {% cite Ferguson1960 %} and {% cite Gayek1964 %}.
+
 This model is included in the type AC (alternator-supplied rectifier) voltage regulator models described in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}, specifically those named AC.C (AC1C, AC6C, etc.). Compared to the first standard version (1992), the models AC.B (introduced in the second standard version of 2005) and AC.C have a variable upper limit for the limited integrator.
 
 ## Model use, assumptions, validity domain and limitations
 
-To be completed
+This model is satisfactory for large scale simulations. However, if this model is used to design phase lead networks for power system stabilizers, and the local mode is close to 3 Hz or higher, a more detailed treatment of the ac rotating exciter may be needed.
+Saturation is taken into account with $$S_E(V_E)$$
+
+The demagnetizing effect of load current $$I_{FD}$$ on the exciter alternator output voltage $$V_E$$ is accounted for in the feedback path that includes the demagnetization constant $$K_D$$. This constant depends on of the exciter alternator synchronous and transient reactances.
 
 ## Model inputs and outputs
 
 The input variables are :
-- EfePu : output voltage of voltage regulator in pu (user-selected base voltage)
-- IrPu : rotor current in pu (base SNom, user-selected base voltage)
+
+| Variable | Description | units |
+|-----------|--------------| ------|
+| EfePu | output voltage of voltage regulator | pu (user-selected base voltage)|
+| IrPu | rotor current | pu (base SNom, user-selected base voltage)|
 
 The output variables are :
-- EfdPu : excitation voltage in pu (user-selected base voltage)
-- VfePu : field current signal in pu (user-selected base voltage)
+
+| Variable | Description | units |
+|-----------|--------------| ------|
+| EfdPu | excitation voltage | pu (user-selected base voltage)|
+| VfePu | field current signal | pu (user-selected base voltage)|
 
 ## Model parameters
 
-AEx : Gain of saturation function in pu
-BEx : Exponential coefficient of saturation function
-Kc : Rectifier loading factor proportional to commutating reactance, in pu
-Kd : Demagnetizing factor, function of exciter alternator reactances, in pu
-Ke : Exciter field resistance constant in pu
-tE : Exciter field time constant in s
-TolLi : Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator in pu
-VeMinPu : Minimum exciter output voltage in pu (user-selected base voltage)
-VfeMaxPu : Maximum exciter field current signal in pu (user-selected base voltage)
+| Parameter | Description | units |
+|-----------|--------------| ------|
+|AEx | Gain of saturation function | pu|
+|BEx | Exponential coefficient of saturation function|-|
+|Kc | Rectifier loading factor proportional to commutating reactance, | pu|
+|Kd | Demagnetizing factor, function of exciter alternator reactances, | pu|
+|Ke | Exciter field resistance constant |pu|
+|tE | Exciter field time constant | s|
+|TolLi | Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator | pu|
+|VeMinPu | Minimum exciter output voltage | pu (user-selected base voltage)|
+|VfeMaxPu | Maximum exciter field current signal | pu (user-selected base voltage)|
 
 ## Model diagram
 

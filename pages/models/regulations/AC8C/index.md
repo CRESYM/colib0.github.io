@@ -9,73 +9,86 @@ last-updated: 24/05/2024
 
 ## Context
 
+This model is used to represent static voltage regulators applied to brushless excitation systems. Digitally based voltage regulators feeding dc rotating main exciters could also be represented with the AC8C model with the parameters $$K_C$$ and $$K_D$$ set to zero.
+
 This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
 In the previous standard version (2005), its predecessor model was called AC7B. Compared to AC8B, AC8C has additional options for connecting OEL and UEL inputs, and additional flexibility for the representation of the controlled rectifier power source.
 
 ## Model use, assumptions, validity domain and limitations
 
-To be completed
+It takes into account loading effects. It can't allow the supply of negative field current. it takes into account saturation.
+
+This model is satisfactory for large scale simulations. However, if this model is used to design phase lead networks for power system stabilizers, and the local mode is close to 3 Hz or higher, a more detailed treatment of the ac rotating exciter may be needed.
+
+Excitation systems incorporating rotating machines produce a field voltage output ($$E_{FD}$$) which is proportional to the rotating speed of the machine. Since this effect is negligible when speed deviations are small which is the case of dynamic studies of large interconnected power systems, the effect of speed deviations on the output of the dc rotating exciter models is not represented in this latest version of the standard. However, some commercial software may have implemented such speed dependency in their model.
 
 ## Model inputs and output
 
 The input variables are :
-- IrPu : rotor current in pu (base SNom, user-selected base voltage)
-- itPu : complex current at the terminal in pu (base SNom, UNom)
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- utPu : complex voltage at the terminal in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- USclOelPu (optional) : output voltage of stator current overexcitation limiter in pu (base UNom)
-- USclUelPu (optional) : output voltage of stator current underexcitation limiter in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+
+| Variable | Description | units |
+|-----------|--------------| ------|
+|IrPu | rotor current | pu (base SNom, user-selected base voltage)|
+|itPu |complex current at the terminal |pu (base SNom, UNom)|
+|UsPu |measured stator voltage |pu (base UNom)|
+|UsRefPu |reference stator voltage |pu (base UNom)|
+|utPu |complex voltage at the terminal |pu (base UNom)|
+|UOelPu (optional) |output voltage of overexcitation limiter |pu (base UNom)|
+|UPssPu (optional) |output voltage of power system stabilizer |pu (base UNom)|
+|USclOelPu (optional) |output voltage of stator current overexcitation limiter |pu (base UNom)|
+|USclUelPu (optional) |output voltage of stator current underexcitation limiter |pu (base UNom)|
+|UUelPu (optional) |output voltage of underexcitation limiter |pu (base UNom)|
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-AEx : Gain of saturation function in pu
-BEx : Exponential coefficient of saturation function
-Ka : Voltage regulator gain in pu
-Kc : Rectifier loading factor proportional to commutating reactance, in pu
-Kc1 : Rectifier loading factor proportional to commutating reactance (exciter), in pu
-Kd : Demagnetizing factor, function of exciter alternator reactances, in pu
-Kdr : Regulator derivative gain in pu
-Ke : Exciter field resistance constant in pu
-Kf1 : Generator field voltage feedback gain in pu
-Kf2 : Exciter field current feedback gain in pu
-Kf3 : Rate feedback gain in pu
-Ki : Potential circuit (current) gain coefficient in pu
-Kia : Amplifier integral gain in pu
-Kir : Regulator integral gain in pu
-Kl : Exciter field current limiter gain in pu
-Kp : Potential source gain in pu
-Kpa : Amplifier proportional gain in pu
-Kpr : Regulator proportional gain in pu
-PositionOel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-PositionPss : Input location : (0) none, (1) voltage error summation, (2) after take-over UEL
-PositionScl : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-PositionUel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-Sw1 : If true, power source derived from terminal voltage, if false, independent from terminal voltage
-tA : Voltage regulator time constant in s
-tDr : Derivative gain washout time constant in s
-tE : Exciter field time constant in s
-tF : Rate feedback time constant in s
-Thetap : Potential circuit phase angle in rad
-TolLi : Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator in pu
-tR : Stator voltage filter time constant in s
-VaMaxPu : Maximum output voltage of limited PI in pu (user-selected base voltage)
-VaMinPu : Minimum output voltage of limited PI in pu (user-selected base voltage)
-VbMaxPu : Maximum available exciter field voltage in pu (base UNom)
-VeMinPu : Minimum exciter output voltage in pu (user-selected base voltage)
-VfeMaxPu : Maximum exciter field current signal in pu (user-selected base voltage)
-VrMaxPu : Maximum output voltage of limited PID in pu (user-selected base voltage)
-VrMinPu : Minimum output voltage of limited PID in pu (user-selected base voltage)
-XlPu : Reactance associated with potential source in pu (base SNom, UNom)
+| Parameter | Description | units |
+|-----------|--------------| ------|
+|AEx |Gain of saturation function | pu|
+|BEx |Exponential coefficient of saturation function|
+|Ka |Voltage regulator gain|pu|
+|Kc |Rectifier loading factor proportional to commutating reactance, |pu|
+|Kc1 |Rectifier loading factor proportional to commutating reactance (exciter), |pu|
+|Kd |Demagnetizing factor, function of exciter alternator reactances, |pu|
+|Kdr |Regulator derivative gain|pu|
+|Ke |Exciter field resistance constant |pu|
+|Kf1 |Generator field voltage feedback gain|pu|
+|Kf2 |Exciter field current feedback gain|pu|
+|Kf3 |Rate feedback gain|pu|
+|Ki |Potential circuit (current) gaincoefficient |pu|
+|Kia |Amplifier integral gain|pu|
+|Kir |Regulator integral gain|pu|
+|Kl |Exciter field current limiter gain|pu|
+|Kp |Potential source gain|pu|
+|Kpa |Amplifier proportional gain|pu|
+|Kpr |Regulator proportional gain|pu|
+|PositionOel |Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|PositionPss |Input location : (0) none, (1) voltage error summation, (2) after take-over UEL|-|
+|PositionScl |Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|PositionUel |Input location :(0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|Sw1 |If true, power source derived from terminal voltage, if false, independent from terminal voltage|-|
+|tA | Voltage regulator time constant |s|
+|tDr |Derivative gainwashout time constant |s|
+|tE |Exciter field time constant |s|
+|tF |Rate feedback time constant |s|
+|Thetap |Potential circuit phase angle |rad|
+|TolLi |Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator |pu|
+|tR |Stator voltage filter time constant |s|
+|VaMaxPu |Maximum output voltage of limited PI |pu (user-selected base voltage)|
+|VaMinPu |Minimum output voltage of limited PI |pu (user-selected base voltage)|
+|VbMaxPu |Maximum available exciter field voltage |pu (base UNom)|
+|VeMinPu |Minimum exciter output voltage |pu (user-selected base voltage)|
+|VfeMaxPu |Maximum exciter field current signal |pu (user-selected base voltage)|
+|VrMaxPu |Maximum output voltage of limited PID |pu (user-selected base voltage)|
+|VrMinPu |Minimum output voltage of limited PID |pu (user-selected base voltage)|
+|XlPu |Reactance associated with potential source |pu (base SNom, UNom)|
 
 ## Model diagram
 
 <img src="/pages/models/regulations/AC8C/AC8C.drawio.svg" alt="AC8C diagram">
+
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
 
 ## Model variant
 

@@ -12,47 +12,54 @@ last-updated: 24/05/2024
 This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
 In the previous standard versions (1992, 2005), its predecessor model was called DC1A. Compared to DC1A, DC1C has additional options for connecting OEL limits and an additional limit EfdMinPu.
 
+It conludes a DC type rotating exciters's model, which can be self-excited (buck-boost) or separately excited (as discussed in 1981 IEEE Committe Report). This type of rotating exciter's system tend to disapear in new synchronous machines. It includes a DC excitation system model as described in {% cite IECCIMForDynamics2024 %}.
+
 ## Model use, assumptions, validity domain and limitations
 
-To be completed
+This particular model is used represent field controlled dc commutator exciters with continuously acting voltage regulators (especially direct-acting rheostatic, rotating amplifier, and magnetic amplifier types).
+As other standard DC excitation models, it includes the loading effects by using a loaded saturation curve ($$S_E(E_{FD})$$ is the saturation block).
+Excitation systems incorporating rotating machines produce a field voltage output ($$E_{FD}$$) which is proportional to the rotating speed of the machine. Since this effect is negligible when speed deviations are small which is the case of dynamic studies of large interconnected power systems, the effect of speed deviations on the output of the dc rotating exciter models is not represented in this latest version of the standard. However, some commercial software may have implemented such speed dependency in their model.
 
 ## Model inputs and output
 
 The input variables are :
 
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- USclOelPu (optional) : output voltage of stator current overexcitation limiter in pu (base UNom)
-- USclUelPu (optional) : output voltage of stator current underexcitation limiter in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+EX
+| UsPu | measured stator voltage | pu (base UNom) |
+| UsRefPu | reference stator voltage | pu (base UNom) |
+| UOelPu (optional) | output voltage of overexcitation limiter | pu (base UNom) |
+| UPssPu (optional) | output voltage of power system stabilizer | pu (base UNom) |
+| USclOelPu (optional) | output voltage of stator current overexcitation limiter | pu (base UNom) |
+| USclUelPu (optional) | output voltage of stator current underexcitation limiter | pu (base UNom) |
+| UUelPu (optional) | output voltage of underexcitation limiter | pu (base UNom) |
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-AEx : Gain of saturation function in pu
-BEx : Exponential coefficient of saturation function
-EfdMinPu : Minimum excitation voltage in pu (user-selected base voltage)
-Ka : Voltage regulator gain in pu
-Ke : Exciter field proportional constant in pu
-Kf : Exciter rate feedback gain in pu
-PositionOel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-PositionScl : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-PositionUel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-tA : Voltage regulator time constant in s
-tB : Voltage regulator lag time constant in s
-tC : Voltage regulator lead time constant in s
-tE : Exciter time constant in s
-tF : Exciter rate feedback time constant in s
-tR : Stator voltage filter time constant in s
-VrMaxPu : Maximum field voltage in pu (user-selected base voltage)
-VrMinPu : Minimum field voltage in pu (user-selected base voltage)
+| Parameter | Description | units |
+|-----------|--------------| ------|
+| AEx | Gain of saturation function | pu |
+| BEx | Exponential coefficient of saturation function | - |
+| EfdMinPu | Minimum excitation voltage | pu (user-selected base voltage)|
+| Ka | Voltage regulator gain | pu |
+|Ke | Exciter field proportional constant | pu |
+|Kf | Exciter rate feedback gain | pu |
+|PositionOel | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output | -|
+|PositionScl | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output | -|
+|PositionUel | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output | -|
+|tA | Voltage regulator time constant | s  |
+|tB | Voltage regulator lag time constant | s |
+|tC | Voltage regulator lead time constant | s |
+|tE | Exciter time constant | s |
+|tF | Exciter rate feedback time constant | s |
+|tR | Stator voltage filter time constant | s |
+|VrMaxPu | Maximum field voltage  | pu (user-selected base voltage) |
+|VrMinPu | Minimum field voltage | pu (user-selected base voltage)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/DC1C/DC1C.drawio.svg" alt="DC1C diagram">
+![DC1C](/pages/models/regulations/DC1C/DC1C.drawio.svg)
 
 ## Model variant
 

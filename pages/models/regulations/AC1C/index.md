@@ -12,54 +12,69 @@ last-updated: 24/05/2024
 This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
 In previous standard versions (1992, 2005), its predecessor model was called AC1A. Compared to AC1A, AC1C has additional options for connecting OEL and UEL inputs and limits on the rotating exciter model.
 
+This model is part of the alternator supplied rectifier excitation systems that use an ac alternator and stationary or rotating rectifies to produce generator field requirements.
+
 ## Model use, assumptions, validity domain and limitations
 
-To be completed
+These excitation systems consist of an alternator main exciter feeding its output via non-controlled rectifiers. The exciter does not employ self-excitation, and the voltage regulator power is taken from a source that is not affected by external transients.
+
+It takes into account loading effects. It can't allow the supply of negative field current. it takes into account saturation.
+
+This model is satisfactory for large scale simulations. However, if this model is used to design phase lead networks for power system stabilizers, and the local mode is close to 3 Hz or higher, a more detailed treatment of the ac rotating exciter may be needed.
+
+Excitation systems incorporating rotating machines produce a field voltage output ($$E_{FD}$$) which is proportional to the rotating speed of the machine. Since this effect is negligible when speed deviations are small which is the case of dynamic studies of large interconnected power systems, the effect of speed deviations on the output of the dc rotating exciter models is not represented in this latest version of the standard. However, some commercial software may have implemented such speed dependency in their model.
 
 ## Model inputs and output
 
 The input variables are :
 
-- IrPu : rotor current in pu (base SNom, user-selected base voltage)
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- USclOelPu (optional) : output voltage of stator current overexcitation limiter in pu (base UNom)
-- USclUelPu (optional) : output voltage of stator current underexcitation limiter in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+| Variable | Description | units |
+|-----------|--------------| ------|
+| IrPu | rotor current | pu (base SNom, user-selected base voltage) |
+| UsPu | measured stator voltage | pu (base UNom) |
+| UsRefPu | reference stator voltage | pu (base UNom)|
+| UOelPu (optional) | output voltage of overexcitation limiter | pu (base UNom)|
+| UPssPu (optional) | output voltage of power system stabilizer | pu (base UNom)|
+| USclOelPu (optional) | output voltage of stator current overexcitation limiter | pu (base UNom)|
+| USclUelPu (optional) | output voltage of stator current underexcitation limiter | pu (base UNom)|
+| UUelPu (optional) | output voltage of underexcitation limiter | pu (base UNom)|
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-- AEx : Gain of saturation function in pu
-- BEx : Exponential coefficient of saturation function
-- EfeMaxPu : Maximum exciter field voltage in pu (user-selected base voltage)
-- EfeMinPu : Minimum exciter field voltage in pu (user-selected base voltage)
-- Ka : Voltage regulator gain in pu
-- Kc : Rectifier loading factor proportional to commutating reactance, in pu
-- Kd : Demagnetizing factor, function of exciter alternator reactances, in pu
-- Ke : Exciter field resistance constant in pu
-- Kf : Exciter rate feedback gain in pu
-- PositionOel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-- PositionScl : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-- PositionUel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output
-- tA : Voltage regulator time constant in s
-- tB : Voltage regulator lag time constant in s
-- tC : Voltage regulator lead time constant in s
-- tE : Exciter field time constant in s
-- tF : Exciter rate feedback time constant in s
-- TolLi : Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator in pu
-- tR : Stator voltage filter time constant in s
-- VaMaxPu : Maximum output voltage of voltage regulator in pu (user-selected base voltage)
-- VaMinPu : Minimum output voltage of voltage regulator in pu (user-selected base voltage)
-- VeMinPu : Minimum exciter output voltage in pu (user-selected base voltage)
-- VfeMaxPu : Maximum exciter field current signal in pu (user-selected base voltage)
+| Parameter | Description | units |
+|-----------|--------------| ------|
+| AEx | Gain of saturation function | pu|
+| BEx | Exponential coefficient of saturation function| -|
+| EfeMaxPu | Maximum exciter field voltage | pu (user-selected base voltage)|
+| EfeMinPu | Minimum exciter field voltage | pu (user-selected base voltage)|
+| Ka | Voltage regulator gain | pu|
+| Kc | Rectifier loading factor proportional to commutating reactance, | pu|
+| Kd | Demagnetizing factor, function of exciter alternator reactances | pu|
+| Ke | Exciter field resistance constant | pu|
+| Kf | Exciter rate feedback gain | pu|
+| PositionOel | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output |-|
+| PositionScl | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output |-|
+| PositionUel | Input location : (0) none, (1) voltage error summation, (2) take-over at AVR output |-|
+| tA | Voltage regulator time constant | s|
+| tB | Voltage regulator lag time constant | s|
+| tC | Voltage regulator lead time constant | s|
+| tE | Exciter field time constant | s|
+| tF | Exciter rate feedback time constant | s|
+| TolLi | Tolerance on limit crossing as a fraction of the difference between initial limits of limited integrator | pu|
+| tR | Stator voltage filter time constant | s|
+| VaMaxPu | Maximum output voltage of voltage regulator | pu (user-selected base voltage)|
+| VaMinPu | Minimum output voltage of voltage regulator | pu (user-selected base voltage)|
+| VeMinPu | Minimum exciter output voltage | pu (user-selected base voltage)|
+| VfeMaxPu | Maximum exciter field current signal | pu (user-selected base voltage)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AC1C/AC1C.drawio.svg" alt="AC1C diagram">
+![AC1C](/pages/models/regulations/AC1C/AC1C.drawio.svg)
+
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
+
 
 ## Model variant
 

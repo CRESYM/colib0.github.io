@@ -13,27 +13,31 @@ This governor model appears under the name GovHydroIEEE0 in the Common Informati
 
 ## Model use, assumptions, validity domain and limitations
 
-To be completed
+IEEE simplified hydro governor-turbine model. Used for mechanical-hydraulic and electrohydraulic turbine governors, with or without steam feedback
 
 ## Model inputs and output
 
 The input variables are :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PmRefPu : reference mechanical power in pu (base PNomTurb)
+| Variable | Description | units |
+|-----------|--------------| ------|
+|omegaPu |measured angular frequency | pu (base omegaNom)|
+|omegaRefPu |reference angular frequency |pu (base omegaNom)|
+|PmRefPu |reference mechanical power |pu (base PNomTurb)|
 
 The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-K : Governor gain (reciprocal of droop) in pu
-PMaxPu : Maximum mechanical power in pu (base PNomTurb)
-PMinPu : Minimum mechanical power in pu (base PNomTurb)
-t1 : Governor mechanism time constant in s
-t2 : Turbine power time constant in s
-t3 : Turbine exhaust temperature time constant in s
-t4 : Governor lead-lag time constant in s
+| Variable | Description | units |
+|-----------|--------------| ------|
+|K |Governor gain (reciprocal of droop) |pu|
+|PMaxPu |Maximum mechanical power |pu (base PNomTurb)|
+|PMinPu |Minimum mechanical power |pu (base PNomTurb)|
+|t1 |Governor mechanism time constant |s|
+|t2 |Turbine power time constant |s|
+|t3 |Turbine exhaust temperature time constant |s|
+|t4 |Governor lead-lag time constant |s|
 
 ## Model diagram
 
