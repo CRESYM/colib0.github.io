@@ -15,7 +15,7 @@ This governor model appears under the name GovSteam1 in the Common Information M
 
 ## Model use, assumptions, validity domain and limitations
 
- It includes the rate limits on the main control valve (Uo and Uc) as well as four steam‐stages and the ability to model cross‐compound units.
+ It includes the rate limits on the main control valve (Uo and Uc) as well as four steam‐stages and the ability to model cross‐compound Units.
  There are a number of key assumptions behind this model:
 
 - steam pressure and temperature remain constant under all conditions,
@@ -29,7 +29,7 @@ These assumptions are quite simplistic and not truly indicative of the physics o
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |omegaPu | measured angular frequency |pu (base omegaNom)|
 |omegaRefPu |reference angular frequency |pu (base omegaNom)|
@@ -39,7 +39,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |K |Governor gain (reciprocal of droop) |pu|
 |K1 |Fraction of HP shaft power after first boiler pass|-|

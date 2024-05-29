@@ -21,7 +21,7 @@ This voltage regulator model appears under the name ExcDC2A in {% cite IEEEExcit
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |UsPu |measured stator voltage |pu (base UNom)|
 |UsRefPu |reference stator voltage |pu (base UNom)|
@@ -33,10 +33,10 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
-|AEx |Ga|of saturation function |pu|
--BEx |Exponential coefficient of saturation function|
+|AEx |Gain of saturation function |pu|
+|BEx |Exponential coefficient of saturation function |-|
 |EfdMinPu |Minimum excitation voltage |pu (user-selected base voltage)|
 |Ka |Voltage regulator gain |pu|
 |Ke |Exciter field proportional constant |pu|

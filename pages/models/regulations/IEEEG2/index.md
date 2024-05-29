@@ -19,7 +19,7 @@ IEEE simplified hydro governor-turbine model. Used for mechanical-hydraulic and 
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |omegaPu |measured angular frequency | pu (base omegaNom)|
 |omegaRefPu |reference angular frequency |pu (base omegaNom)|
@@ -29,7 +29,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |K |Governor gain (reciprocal of droop) |pu|
 |PMaxPu |Maximum mechanical power |pu (base PNomTurb)|

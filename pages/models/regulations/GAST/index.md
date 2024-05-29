@@ -19,13 +19,13 @@ This models is considered obsolete and should not be used for representing new g
 
 This model is constituted of a simple droop control, constant load limit (rating of turbine), only three time constants (fuel valve response, turbine response, and load limit response), and neglects all aspects of the physics of heavy-duty gas turbines.
 
-NERC {% cite NERC2017 %} and WECC recommends that generator owners and transmission planners to transition to using the GGOV1 model for generating units currently modeled using these models. It has been removed from the NERC and WECC list of acceptable models.
+NERC {% cite NERC2017 %} and WECC recommends that generator owners and transmission planners to transition to using the GGOV1 model for generating Units currently modeled using these models. It has been removed from the NERC and WECC list of acceptable models.
 
 ## Model inputs and output
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 | omegaPu | measured angular frequency | pu (base omegaNom)|
 | omegaRefPu | reference angular frequency | pu (base omegaNom)|
@@ -35,7 +35,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
 | At |Ambient temperature load limit | pu|
 |DTurb |Turbine damping coefficient |pu|

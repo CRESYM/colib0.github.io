@@ -22,7 +22,7 @@ Linear models of a hydro penstock and water column should not be used for genera
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 | omegaPu | measured angular frequency |pu (base omegaNom)|
 | omegaRefPu | reference angular frequency |pu (base omegaNom)|

@@ -16,7 +16,7 @@ In the previous standard version (2005), its predecessor model was called AC7B. 
 
 ## Model use, assumptions, validity domain and limitations
 
-It takes into account loading effects. It can't allow the supply of negative field current. it takes into account saturation.
+It takes into account loading effects. It can't allow the supply of negative field current. It takes into account saturation.
 
 This model is satisfactory for large scale simulations. However, if this model is used to design phase lead networks for power system stabilizers, and the local mode is close to 3 Hz or higher, a more detailed treatment of the ac rotating exciter may be needed.
 
@@ -26,7 +26,7 @@ Excitation systems incorporating rotating machines produce a field voltage outpu
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 |IrPu | rotor current | pu (base SNom, user-selected base voltage)|
 |itPu |complex current at the terminal |pu (base SNom, UNom)|
@@ -43,7 +43,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
 |AEx |Gain of saturation function | pu|
 |BEx |Exponential coefficient of saturation function|

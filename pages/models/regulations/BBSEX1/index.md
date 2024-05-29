@@ -21,7 +21,7 @@ To be completed
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 | UsPu | measured stator voltage |pu (base UNom)|
 | UsRefPu | reference stator voltage |pu (base UNom)|
@@ -33,7 +33,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
 |EfdMaxPu | Maximum excitation voltage | pu (user-selected base voltage)|
 |EfdMinPu | Minimum excitation voltage |pu (user-selected base voltage)|

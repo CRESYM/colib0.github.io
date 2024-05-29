@@ -24,21 +24,21 @@ The demagnetizing effect of load current $$I_{FD}$$ on the exciter alternator ou
 
 The input variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 | EfePu | output voltage of voltage regulator | pu (user-selected base voltage)|
 | IrPu | rotor current | pu (base SNom, user-selected base voltage)|
 
 The output variables are :
 
-| Variable | Description | units |
+| Variable | Description | Units |
 |-----------|--------------| ------|
 | EfdPu | excitation voltage | pu (user-selected base voltage)|
 | VfePu | field current signal | pu (user-selected base voltage)|
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
 |AEx | Gain of saturation function | pu|
 |BEx | Exponential coefficient of saturation function|-|

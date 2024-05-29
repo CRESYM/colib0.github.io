@@ -37,7 +37,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model parameters
 
-| Parameter | Description | units |
+| Parameter | Description | Units |
 |-----------|--------------| ------|
 | AEx | Gain of saturation function | pu |
 | BEx | Exponential coefficient of saturation function | - |
