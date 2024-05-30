@@ -10,14 +10,14 @@ last-updated: 29/05/2024
 
 ## Context
 
-Loads are the consumer side of an electrical power system, draining energy from a given bus. Since a load can be a bundle of elements such as shunt elements, regulators, transformers, and many other devices, it is tough to describe accurately how it behaves as a group, and there are many models that try to provide an accurate representation. It is necessary to be able to simulate the behavior of the system under different conditions. The model proposed in this page describes the *Frequency Dependent Load Model*, which is used in addition to a static load model to describe the behavior of the load under frequency changes.
+Loads are the consumer side of an electrical power system, draining energy from a given bus. Since a load can be a bundle of elements such as shunt elements, regulators, transformers, and many other devices, it is tough to describe accurately how it behaves as a group, and there are many models that try to provide an accurate representation. It is necessary to be able to simulate the behavior of the system under different conditions. The model proposed in this page describes the *Frequency Dependent Load Model* [[1]](#1) [[2]](#3), which is used in addition to a static load model to describe the behavior of the load under frequency changes.
 
 ## Model use, assumptions, validity domain and limitations
 
 The frequency dependent load model can be used for static analysis considering variations on frequency with respect to the nominal grid frequency. The assumptions made for this model are:
 
 * The load static value is modeled using a ZIP or exponential model.
-* The variation of the load when the frequency changes is modeled using a factor dependent on the frequency deviation
+* The variation of the load when the frequency changes are modeled using a factor dependent on the frequency deviation
 * The load is balanced 
 
 The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
@@ -55,7 +55,7 @@ $$Q(V, f) = Q(V) (1 + k_q \Delta f) $$
 
 ## Operational principles
 
-The model considers the load as a general function of voltage for both active and reactive power $$P(V)$$ and $$Q(V)$$, typically using either the exponential or the ZIP Load Model.
+The model considers the load as a general function of voltage for both active and reactive power $$P(V)$$ and $$Q(V)$$, typically using either the exponential or the ZIP Load Model [[2]](#2).
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
