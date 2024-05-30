@@ -1,7 +1,7 @@
 ---
 layout: base
-title: Regulations
-tags: [Regulations]
+title: GovCT2
+tags: [GovCT2]
 ---
 
 {% include folderNav.html %}

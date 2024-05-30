@@ -14,6 +14,7 @@ title: Models-search
         "url": "{{ page.url }}",
         "title": "{{ page.title | xml_escape }}",
         "content": {{ page.content | strip_html | jsonify }},
+        "tags": {{ page.tags | jsonify }}
     },
     {% endif %}
     {% endfor %}

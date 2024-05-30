@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Lines
+title: Capacitors 
 tags: []
 ---
 
