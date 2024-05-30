@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # PSS6C model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This power system stabilizer model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -19,46 +21,49 @@ To be completed
 
 The input variables are :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PGenPu : active power in pu (base SnRef)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+|omegaPu |measured angular frequency |pu (base omegaNom)|
+|omegaRefPu |reference angular frequency |pu (base omegaNom)|
+|PGenPu |active power |pu (base SnRef)|
 
 The output signal is VPssPu in pu (base UNom).
 
 ## Model parameters
 
-KOmega : Coefficient applied to angular frequency
-KOmegaRef : Coefficient applied to reference angular frequency
-K0 : Gain of first integrator input in pu
-K1 : Gain of first integrator output in pu
-K2 : Gain of second integrator output in pu
-K3 : Gain of third integrator output in pu
-K4 : Gain of fourth integrator output in pu
-Ki3 : Gain of third integrator in pu
-Ki4 : Gain of fourth integrator in pu
-Ks : Gain of power system stabilizer in pu
-Ks1 : Gain of active power branch in pu
-Ks2 : Gain of angular frequency branch in pu
-MAcc : Gain of angular velocity in pu
-OmegaMaxPu : Maximum angular velocity in pu (base omegaNom)
-OmegaMinPu : Minimum angular velocity in pu (base omegaNom)
-PGenMaxPu : Maximum active power in pu (base SNom) (generator convention)
-PGenMinPu : Minimum active power in pu (base SNom) (generator convention)
-PPssOffPu : Lower active power threshold for PSS activation in pu (base SNom) (generator convention)
-PPssOnPu : Higher active power threshold for PSS activation in pu (base SNom) (generator convention)
-t1 : Transducer time constant (active power branch) in s
-t2 : Transducer time constant (angular frequency branch) in s
-t3 : First order time constant (active power branch) in s
-t4 : Derivative time constant (angular frequency branch) in s
-tD : Washout time constant in s
-tI1 : Time constant of first integrator, in s
-tI2 : Time constant of second integrator, in s
-tI3 : Time constant of third integrator, in s
-tI4 : Time constant of fourth integrator, in s
-VPssMaxPu : Maximum output voltage of power system stabilizer in pu (base UNom)
-VPssMinPu : Minimum output voltage of power system stabilizer in pu (base UNom)
-
-SNom : Nominal apparent power in MVA
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+KOmega |Coefficient applied to angular frequency|-|
+KOmegaRef |Coefficient applied to reference angular frequency|-|
+K0 |Gain of first integrator input |pu|
+K1 |Gain of first integrator output |pu|
+K2 |Gain of second integrator output |pu|
+K3 |Gain of third integrator output |pu|
+K4 |Gain of fourth integrator output |pu|
+Ki3 |Gain of third integrator |pu|
+Ki4 |Gain of fourth integrator |pu|
+Ks |Gain of power system stabilizer |pu|
+Ks1 |Gain of active power branch |pu|
+Ks2 |Gain of angular frequency branch |pu|
+MAcc |Gain of angular velocity |pu|
+OmegaMaxPu |Maximum angular velocity |pu (base omegaNom)|
+OmegaMinPu |Minimum angular velocity |pu (base omegaNom)|
+PGenMaxPu |Maximum active power |pu (base SNom) (generator convention)|
+PGenMinPu |Minimum active power |pu (base SNom) (generator convention)|
+PPssOffPu |Lower active power threshold for PSS activation |pu (base SNom) (generator convention)|
+PPssOnPu |Higher active power threshold for PSS activation |pu (base SNom) (generator convention)|
+t1 |Transducer time constant (active power branch) |s|
+t2 |Transducer time constant (angular frequency branch) |s|
+t3 |First order time constant (active power branch) |s|
+t4 |Derivative time constant (angular frequency branch) |s|
+tD |Washout time constant |s|
+tI1 |Time constant of first integrator, |s|
+tI2 |Time constant of second integrator, |s|
+tI3 |Time constant of third integrator, |s|
+tI4 |Time constant of fourth integrator, |s|
+VPssMaxPu |Maximum output voltage of power system stabilizer |pu (base UNom)|
+VPssMinPu |Minimum output voltage of power system stabilizer |pu (base UNom)|
+|SNom |Nominal apparent power |MVA|
 
 ## Model diagram
 

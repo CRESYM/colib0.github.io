@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # PSS1A model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This power system stabilizer model appears in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -20,25 +22,28 @@ To be completed
 
 The input variables are either :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- PGenPu : active power in pu (base SnRef)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+| omegaPu | measured angular frequency | pu (base omegaNom)|
+| PGenPu |active power|pu (base SnRef)|
 
 The output signal is VPssPu in pu (base UNom).
 
 ## Model parameters
 
-A1 : First coefficient of notch filter in s
-A2 : Second coefficient of notch filter in s ^ 2
-Ks : Gain of power system stabilizer in pu
-t1 : First lead time constant in s
-t2 : First lag time constant in s
-t4 : Second lag time constant in s
-t5 : Washout time constant in s
-t6 : Transducer time constant in s
-VPssMaxPu : Maximum voltage output of power system stabilizer in pu (base UNom)
-VPssMinPu : Minimum voltage output of power system stabilizer in pu (base UNom)
-
-SNom : Nominal apparent power in MVA (only if PGenPu is the input signal)
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+A1 |First coefficient of notch filter|s|
+A2 |Second coefficient of notch filter|$$s ^ 2$$|
+Ks |Gain of power system stabilizer|pu|
+t1 |First lead time constant|s|
+t2 |First lag time constant|s|
+t4 |Second lag time constant|s|
+t5 |Washout time constant|s|
+t6 |Transducer time constant|s|
+VPssMaxPu |Maximum voltage output of power system stabilizer|pu (base UNom)|
+VPssMinPu |Minimum voltage output of power system stabilizer|pu (base UNom)|
+SNom |Nominal apparent power|MVA (only if PGenPu is the input signal)|
 
 ## Model diagram
 

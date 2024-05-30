@@ -24,7 +24,8 @@ Excitation systems incorporating rotating machines produce a field voltage outpu
 
 The input variables are :
 
-EX
+| Variable | Description | Units |
+|-----------|--------------| ------|
 | UsPu | measured stator voltage | pu (base UNom) |
 | UsRefPu | reference stator voltage | pu (base UNom) |
 | UOelPu (optional) | output voltage of overexcitation limiter | pu (base UNom) |

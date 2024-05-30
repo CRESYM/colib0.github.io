@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # IEEEX2 model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This modified IEEE DC2A direct current commutator exciter with speed input, one more leg block in feedback loop and without underexcitation limiters (UEL) inputs. DC type 2 excitation system model with added speed multiplier, added lead-lag, and voltage-dependent limits. D2CA model represents represent field-controlled dc commutator exciters with continuously acting voltage regulators having supplies obtained from the generator or auxiliary bus. It differs from the Type DC1A model only in the voltage regulator output limits, which are now proportional to terminal voltage $$V_T$$. It is representative of solid-state replacements for various forms of older mechanical and rotating amplifier regulating equipment connected to dc commutator exciters.
@@ -15,7 +17,7 @@ This voltage regulator model appears under the name ExcDC2A in {% cite IEEEExcit
 
 ## Model use, assumptions, validity domain and limitations
 
-
+to be completed
 
 ## Model inputs and output
 

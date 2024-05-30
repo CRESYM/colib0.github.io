@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # PSS2C model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This power system stabilizer model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -20,47 +22,50 @@ To be completed
 
 The input variables are :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PGenPu : active power in pu (base SnRef)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+|omegaPu |measured angular frequency | pu (base omegaNom)|
+| omegaRefPu |reference angular frequency|pu (base omegaNom)|
+| PGenPu |active power|pu (base SnRef)|
 
 The output signal is VPssPu in pu (base UNom).
 
 ## Model parameters
 
-KOmega : Coefficient applied to angular frequency
-KOmegaRef : Coefficient applied to reference angular frequency
-Ks1 : Gain of power system stabilizer in pu
-Ks2 : Gain of transducer (active power branch) in pu
-Ks3 : Washouts coupling factor in pu
-M : Lag order of ramp-tracking filter
-N : Order of ramp-tracking filter
-OmegaMaxPu : Maximum angular frequency input of power system stabilizer in pu (base omegaNom)
-OmegaMinPu : Minimum angular frequency input of power system stabilizer in pu (base omegaNom)
-PGenMaxPu : Maximum active power input of power system stabilizer in pu (base SNom) (generator convention)
-PGenMinPu : Minimum active power input of power system stabilizer in pu (base SNom) (generator convention)
-PPssOffPu : Active power threshold for PSS deactivation in pu (base SNom) (generator convention)
-PPssOnPu : Active power threshold for PSS activation in pu (base SNom) (generator convention)
-t1 : First lead time constant in s
-t2 : First lag time constant in s
-t3 : Second lead time constant in s
-t4 : Second lag time constant in s
-t6 : Transducer time constant of angular frequency branch in s
-t7 : Transducer time constant of active power branch in s
-t8 : Ramp-tracking filter lead time constant in s
-t9 : Ramp-tracking filter lag time constant in s
-t10 : Third lead time constant in s
-t11 : Third lag time constant in s
-t12 : Fourth lead time constant in s
-t13 : Fourth lag time constant in s
-tW1 : First washout time constant (angular frequency branch) in s
-tW2 : Second washout time constant (angular frequency branch) in s
-tW3 : First washout time constant (active power branch) in s
-tW4 : Second washout time constant (active power branch) in s
-VPssMaxPu : Maximum voltage output of power system stabilizer in pu (base UNom)
-VPssMinPu : Minimum voltage output of power system stabilizer in pu (base UNom)
-
-SNom : Nominal apparent power in MVA
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+KOmega |Coefficient applied to angular frequency|-|
+KOmegaRef |Coefficient applied to reference angular frequency|-|
+Ks1 |Gain of power system stabilizer|pu|
+Ks2 |Gain of transducer (active power branch)|pu|
+Ks3 |Washouts coupling factor|pu|
+M |Lag order of ramp-tracking filter|-|
+N |Order of ramp-tracking filter|-|
+OmegaMaxPu |Maximum angular frequency input of power system stabilizer|pu (base omegaNom)|
+OmegaMinPu |Minimum angular frequency input of power system stabilizer|pu (base omegaNom)|
+PGenMaxPu |Maximum active power input of power system stabilizer|pu (base SNom) (generator convention)|
+PGenMinPu |Minimum active power input of power system stabilizer|pu (base SNom) (generator convention)|
+PPssOffPu |Active power threshold for PSS deactivation|pu (base SNom) (generator convention)|
+PPssOnPu |Active power threshold for PSS activation|pu (base SNom) (generator convention)|
+t1 |First lead time constant|s|
+t2 |First lag time constant|s|
+t3 |Second lead time constant|s|
+t4 |Second lag time constant|s|
+t6 |Transducer time constant of angular frequency branch|s|
+t7 |Transducer time constant of active power branch|s|
+t8 |Ramp-tracking filter lead time constant|s|
+t9 |Ramp-tracking filter lag time constant|s|
+t10 |Third lead time constant|s|
+t11 |Third lag time constant|s|
+t12 |Fourth lead time constant|s|
+t13 |Fourth lag time constant|s|
+tW1 |First washout time constant (angular frequency branch)|s|
+tW2 |Second washout time constant (angular frequency branch)|s|
+tW3 |First washout time constant (active power branch)|s|
+tW4 |Second washout time constant (active power branch)|s|
+VPssMaxPu |Maximum voltage output of power system stabilizer|pu (base UNom)|
+VPssMinPu |Minimum voltage output of power system stabilizer|pu (base UNom)|
+SNom |Nominal apparent power|MVA|
 
 ## Model diagram
 

@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # PSS3C model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This power system stabilizer model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -20,35 +22,38 @@ To be completed
 
 The input variables are :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PGenPu : active power in pu (base SnRef)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+| omegaPu |measured angular frequency|pu (base omegaNom)|
+| omegaRefPu |reference angular frequency|pu (base omegaNom)|
+| PGenPu |active power|pu (base SnRef)|
 
 The output signal is VPssPu in pu (base UNom).
 
 ## Model parameters
 
-A1 : First numerator coefficient of first notch filter in s
-A2 : Second numerator coefficient of first notch filter in s ^ 2
-A3 : First denominator coefficient of first notch filter in s
-A4 : Second denominator coefficient of first notch filter in s ^ 2
-A5 : First numerator coefficient of second notch filter in s
-A6 : Second numerator coefficient of second notch filter in s ^ 2
-A7 : First denominator coefficient of second notch filter in s
-A8 : Second denominator coefficient of second notch filter in s ^ 2
-KOmega : Coefficient applied to angular frequency
-KOmegaRef : Coefficient applied to reference angular frequency
-Ks1 : Gain of active power branch in pu
-Ks2 : Gain of angular frequency branch in pu
-t1 : Transducer time constant (active power branch) in s
-t2 : Transducer time constant (angular frequency branch) in s
-tW1 : Washout time constant (active power branch) in s
-tW2 : Washout time constant (angular frequency branch) in s
-tW3 : Washout time constant (main branch) in s
-VPssMaxPu : Maximum voltage output of power system stabilizer in pu (base UNom)
-VPssMinPu : Minimum voltage output of power system stabilizer in pu (base UNom)
-
-SNom : Nominal apparent power in MVA
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+A1 |First numerator coefficient of first notch filter|s|
+A2 |Second numerator coefficient of first notch filter|$$s ^ 2$$|
+A3 |First denominator coefficient of first notch filter|s|
+A4 |Second denominator coefficient of first notch filter|$$s ^ 2$$|
+A5 |First numerator coefficient of second notch filter|s|
+A6 |Second numerator coefficient of second notch filter|$$s ^ 2$$|
+A7 |First denominator coefficient of second notch filter|s|
+A8 |Second denominator coefficient of second notch filter|$$s ^ 2$$|
+KOmega |Coefficient applied to angular frequency|-|
+KOmegaRef |Coefficient applied to reference angular frequency|-|
+Ks1 |Gain of active power branch|pu|
+Ks2 |Gain of angular frequency branch|pu|
+t1 |Transducer time constant (active power branch)|s|
+t2 |Transducer time constant (angular frequency branch)|s|
+tW1 |Washout time constant (active power branch)|s|
+tW2 |Washout time constant (angular frequency branch)|s|
+tW3 |Washout time constant (main branch)|s|
+VPssMaxPu |Maximum voltage output of power system stabilizer|pu (base UNom)|
+VPssMinPu |Minimum voltage output of power system stabilizer|pu (base UNom)|
+SNom |Nominal apparent power|MVA|
 
 ## Model diagram
 
@@ -56,7 +61,7 @@ SNom : Nominal apparent power in MVA
 
 ## Model variant
 
-In the PSS3B model, the PSS deactivation for low active power values is absent (PPssOffPu = -1000, PPssOnPu = -999.
+In the PSS3B model, the PSS deactivation for low active power values is absent $$PPssOffPu = -1000, PPssOnPu = -999$$.
 
 ## Open source implementations
 
@@ -69,4 +74,3 @@ This model has been successfully implemented in :
 ## References
 
 {% bibliography --cited --file references  %}
-

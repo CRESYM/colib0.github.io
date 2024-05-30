@@ -7,9 +7,11 @@ last-updated: 24/05/2024
 ---
 # IEEX2A model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
-This voltage regulator model has been developed by RTE.
+To be completed
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -19,30 +21,34 @@ To be completed
 
 The input variables are :
 
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+|UsPu |measured stator voltage | pu (base UNom)|
+|UsRefPu |reference stator voltage|pu (base UNom)|
+|UOelPu (optional) |output voltage of overexcitation limiter|pu (base UNom)|
+|UPssPu (optional) |output voltage of power system stabilizer|pu (base UNom)|
+|UUelPu (optional) |output voltage of underexcitation limiter|pu (base UNom)|
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-AEx : Gain of saturation function in pu
-BEx : Exponential coefficient of saturation function
-EfdMinPu : Minimum excitation voltage in pu (user-selected base voltage)
-Ka : Voltage regulator gain in pu
-Ke : Exciter field proportional constant in pu
-Kf : Exciter rate feedback gain in pu
-tA : Voltage regulator time constant in s
-tB : Voltage regulator lag time constant in s
-tC : Voltage regulator lead time constant in s
-tE : Exciter field time constant in s
-tF1 : Feedback lead time constant in s
-tR : Stator voltage filter time constant in s
-VrMaxPu : Maximum field voltage in pu (user-selected base voltage)
-VrMinPu : Minimum field voltage in pu (user-selected base voltage)
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+AEx |Gain of saturation function|pu|
+BEx |Exponential coefficient of saturation function|-|
+EfdMinPu |Minimum excitation voltage|pu (user-selected base voltage)|
+Ka |Voltage regulator gain|pu|
+Ke |Exciter field proportional constant|pu|
+Kf |Exciter rate feedback gain|pu|
+tA |Voltage regulator time constant|s|
+tB |Voltage regulator lag time constant|s|
+tC |Voltage regulator lead time constant|s|
+tE |Exciter field time constant|s|
+tF1 |Feedback lead time constant|s|
+tR |Stator voltage filter time constant|s|
+VrMaxPu |Maximum field voltage|pu (user-selected base voltage)|
+VrMinPu |Minimum field voltage|pu (user-selected base voltage)|
 
 ## Model diagram
 

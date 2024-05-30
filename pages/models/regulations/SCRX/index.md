@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # SCRX model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This voltage regulator model appears under the name ExcSCRX in the Common Information Model for Dynamics - Standard Models (2012) {% cite CIMStandardModels2012 %} and in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -19,26 +21,30 @@ To be completed
 
 The input variables are :
 
-- IrPu : rotor current in pu (base SNom, user-selected base voltage)
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+|IrPu |rotor current |pu (base SNom, user-selected base voltage)|
+|UsPu |measured stator voltage |pu (base UNom)|
+|UsRefPu |reference stator voltage |pu (base UNom)|
+|UOelPu (optional) |output voltage of overexcitation limiter |pu (base UNom)|
+|UPssPu (optional) |output voltage of power system stabilizer |pu (base UNom)|
+|UUelPu (optional) |output voltage of underexcitation limiter |pu (base UNom)|
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-CSwitch : If true, exciter is solid-fed, if false, exciter is bus-fed
-IrThresholdOn : If true, rotor current threshold applies
-K : Voltage regulator gain in pu
-RcToRfd : Ratio of field discharge resistance to field winding resistance
-tA : Transient gain reduction lead time constant in s
-tB : Transient gain reduction lag time constant in s
-tE : Voltage regulator time constant in s
-VrMaxPu : Maximum output voltage of voltage regulator in pu (user-selected base voltage)
-VrMinPu : Minimum output voltage of voltage regulator in pu (user-selected base voltage)
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+CSwitch |If true, exciter is solid-fed, if false, exciter is bus-fed|-|
+IrThresholdOn |If true, rotor current threshold applies|-|
+K |Voltage regulator gain |pu|
+RcToRfd |Ratio of field discharge resistance to field winding resistance|-|
+tA |Transient gain reduction lead time constant |s|
+tB |Transient gain reduction lag time constant |s|
+tE |Voltage regulator time constant |s|
+VrMaxPu |Maximum output voltage of voltage regulator |pu (user-selected base voltage)|
+VrMinPu |Minimum output voltage of voltage regulator |pu (user-selected base voltage)|
 
 ## Model diagram
 

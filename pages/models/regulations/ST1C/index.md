@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # Exc IEEE ST1C model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -20,41 +22,45 @@ To be completed
 
 The input variables are :
 
-- IrPu : rotor current in pu (base SNom, user-selected base voltage)
-- UsPu : measured stator voltage in pu (base UNom)
-- UsRefPu : reference stator voltage in pu (base UNom)
-- UOelPu (optional) : output voltage of overexcitation limiter in pu (base UNom)
-- UPssPu (optional) : output voltage of power system stabilizer in pu (base UNom)
-- USclOelPu (optional) : output voltage of stator current overexcitation limiter in pu (base UNom)
-- USclUelPu (optional) : output voltage of stator current underexcitation limiter in pu (base UNom)
-- UUelPu (optional) : output voltage of underexcitation limiter in pu (base UNom)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+| IrPu | rotor current |pu (base SNom, user-selected base voltage)|
+|UsPu |measured stator voltage |pu (base UNom)|
+|UsRefPu |reference stator voltage |pu (base UNom)|
+|UOelPu (optional) |output voltage of overexcitation limiter |pu (base UNom)|
+|UPssPu (optional) |output voltage of power system stabilizer |pu (base UNom)|
+|USclOelPu (optional) |output voltage of stator current overexcitation limiter |pu (base UNom)|
+|USclUelPu (optional) |output voltage of stator current underexcitation limiter |pu (base UNom)|
+|UUelPu (optional) |output voltage of underexcitation limiter |pu (base UNom)|
 
 The output signal is EfdPu, the excitation voltage in pu (user-selected base voltage).
 
 ## Model parameters
 
-IlrPu : Exciter output current limit reference in pu (base SNom, user-selected base voltage)
-Ka : Voltage regulator gain in pu
-Kc : Rectifier loading factor proportional to commutating reactance, in pu
-Kf : Exciter rate feedback gain in pu
-Klr : Gain of field current limiter in pu
-PositionOel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-PositionPss : Input location : (0) none, (1) voltage error summation, (2) summation at AVR output
-PositionScl : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-PositionUel : Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output
-tA : Voltage regulator time constant in s
-tB : Voltage regulator lag time constant in s
-tB1 : Voltage regulator second lag time constant in s
-tC : Voltage regulator lead time constant in s
-tC1 : Voltage regulator second lead time constant in s
-tF : Exciter rate feedback time constant in s
-tR : Stator voltage filter time constant in s
-VaMaxPu : Maximum output voltage of voltage regulator in pu (user-selected base voltage)
-VaMinPu : Minimum output voltage of voltage regulator in pu (user-selected base voltage)
-ViMaxPu : Maximum input voltage of voltage regulator in pu (user-selected base voltage)
-ViMinPu : Minimum input voltage of voltage regulator in pu (user-selected base voltage)
-VrMaxPu : Maximum field voltage in pu (user-selected base voltage)
-VrMinPu : Minimum field voltage in pu (user-selected base voltage)
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+|IlrPu |Exciter output current limit reference |pu (base SNom, user-selected base voltage)|
+|Ka |Voltage regulator gain |pu|
+|Kc |Rectifier loading factor proportional to commutating reactance, |pu|
+|Kf |Exciter rate feedback gain |pu|
+|Klr |Gain of field current limiter |pu|
+|PositionOel |Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|PositionPss |Input location : (0) none, (1) voltage error summation, (2) summation at AVR output|-|
+|PositionScl |Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|PositionUel |Input location : (0) none, (1) voltage error summation, (2) take-over at AVR input, (3) take-over at AVR output|-|
+|tA |Voltage regulator time constant |s|
+|tB |Voltage regulator lag time constant |s|
+|tB1 |Voltage regulator second lag time constant |s|
+|tC |Voltage regulator lead time constant |s|
+|tC1 |Voltage regulator second lead time constant |s|
+|tF |Exciter rate feedback time constant |s|
+|tR |Stator voltage filter time constant |s|
+|VaMaxPu |Maximum output voltage of voltage regulator |pu (user-selected base voltage)|
+|VaMinPu |Minimum output voltage of voltage regulator |pu (user-selected base voltage)|
+|ViMaxPu |Maximum input voltage of voltage regulator |pu (user-selected base voltage)|
+|ViMinPu |Minimum input voltage of voltage regulator |pu (user-selected base voltage)|
+|VrMaxPu |Maximum field voltage |pu (user-selected base voltage)|
+|VrMinPu |Minimum field voltage |pu (user-selected base voltage)|
 
 ## Model diagram
 

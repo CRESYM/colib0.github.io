@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # TGOV3 model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This governor model appears under the name GovSteamFV3 in the Common Information Model for Dynamics - Standard Models (2012) {% cite CIMStandardModels2012 %} and in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -19,33 +21,37 @@ To be completed
 
 The input variables are :
 
-- fastValving : a Boolean which, if true, initiates the fast valving
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PmRefPu : reference mechanical power in pu (base PNomTurb)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+|fastValving |a Boolean which, if true, initiates the fast valving|-|
+|omegaPu |measured angular frequency | pu (base omegaNom)|
+|omegaRefPu |reference angular frequency | pu (base omegaNom)|
+|PmRefPu |reference mechanical power | pu (base PNomTurb)|
 
 The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-K : Governor gain (reciprocal of droop) in pu
-K1 : Fraction of HP shaft power after first boiler pass
-K2 : Fraction of LP shaft power after first boiler pass
-K3 : Fraction of HP shaft power after second boiler pass
-PMaxPu : Maximum valve opening in pu (base PNomTurb)
-PMinPu : Minimum valve opening in pu (base PNomTurb)
-PrMaxPu : Maximum pressure in reheater in pu (base PNomTurb)
-t1 : Governor lag time constant in s
-t2 : Governor lead time constant in s
-t3 : Valve positioner time constant in s
-t4 : Inlet piping / steam bowl time constant in s
-t5 : Time constant of second boiler pass (reheater) in s
-t6 : Time constant of crossover of third boiler pass in s
-tA : Time to close intercept valve in s
-tB : Time until intercept valve starts to reopen in s
-tC : Time until intercept valve is fully open in s
-Uo : Maximum valve opening velocity in pu/s
-Uc : Maximum valve closing velocity in pu/s
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+K |Governor gain(reciprocal of droop) |pu|
+K1 |Fraction of HP shaft power after first boiler pass|-|
+K2 |Fraction of LP shaft power after first boiler pass|-|
+K3 |Fraction of HP shaft power after second boiler pass|-|
+PMaxPu |Maximum valve opening |pu (base PNomTurb)|
+PMinPu |Minimum valve opening |pu (base PNomTurb)|
+PrMaxPu |Maximum pressure in reheater |pu (base PNomTurb)|
+t1 |Governor lag time constant |s |
+t2 |Governor lead time constant |s|
+t3 |Valve positioner time constant |s|
+t4 |Inlet piping / steam bowl time constant |s|
+t5 |Time constant of second boiler pass (reheater) |s|
+t6 |Time constant of crossover of third boiler pass |s|
+tA |Time to close intercept valve |s|
+tB |Time until intercept valve starts to reopen |s|
+tC |Time until intercept valve is fully open |s|
+Uo |Maximum valve opening velocity |pu/s|
+Uc |Maximum valve closing velocity |pu/s|
 
 ## Model diagram
 

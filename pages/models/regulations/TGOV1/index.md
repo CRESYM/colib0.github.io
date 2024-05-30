@@ -7,6 +7,8 @@ last-updated: 24/05/2024
 ---
 # TGOV1 model
 
+This article is incomplete, some sections must be written.
+
 ## Context
 
 This governor model appears under the name GovSteam0 in the Common Information Model for Dynamics - Standard Models (2012) {% cite CIMStandardModels2012 %} and in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
@@ -19,21 +21,25 @@ To be completed
 
 The input variables are :
 
-- omegaPu : measured angular frequency in pu (base omegaNom)
-- omegaRefPu : reference angular frequency in pu (base omegaNom)
-- PmRefPu : reference mechanical power in pu (base PNomTurb)
+| Variable | Description | Units |
+|-----------|--------------| ------|
+| omegaPu |measured angular frequency |pu (base omegaNom)|
+| omegaRefPu |reference angular frequency |pu (base omegaNom)|
+| PmRefPu |reference mechanical power |pu (base PNomTurb)|
 
 The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model parameters
 
-Dt : Turbine damping coefficient in pu
-R : Permanent droop in pu
-t1 : Steam bowl time constant in s
-t2 : Reheater lead time constant in s
-t3 : Reheater lag time constant in s
-VMax : Maximum valve position in pu
-VMin : Minimum valve position in pu
+| Parameter | Description | Units |
+|-----------|--------------| ------|
+|Dt |Turbine damping coefficient |pu|
+|R |Permanent droop |pu|
+|t1 |Steam bowl time constant |s|
+|t2 |Reheater lead time constant |s|
+|t3 |Reheater lag time constant |s|
+|VMax |Maximum valve position |pu|
+|VMin |Minimum valve position |pu|
 
 ## Model diagram
 
