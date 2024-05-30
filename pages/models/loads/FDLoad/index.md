@@ -18,7 +18,7 @@ The frequency dependent load model can be used for static analysis considering v
 
 * The load static value is modeled using a ZIP or exponential model.
 * The variation of the load when the frequency changes is modeled using a factor dependent on the frequency deviation
-* The load is balanced 
+* The load is balanced
 
 The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
 
