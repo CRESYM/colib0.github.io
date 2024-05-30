@@ -191,6 +191,11 @@ figure {
   margin: 0 0 1rem;
 }
 
+figure figcaption {
+  border : 1px dotted blue;
+  text-align: center;
+}
+
 img {
   vertical-align: middle;
   border-style: none;

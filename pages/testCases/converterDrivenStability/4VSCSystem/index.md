@@ -8,61 +8,61 @@ last-updated: 08/03/2024
 
 # Four VSC benchmark System
 
-## Use case purpose
+## Use case features
 
-This **100% power electronics small test system** conbines VSC and wind turbines technologies, grid following and grid forming controls.
-It aims at **showing the limitations of the phasor approximation while being small and easily tractable but realistic**. Hence, an EMT and RMS version of this system exist for the benchmark.
+This 100% power electronics small test system relies on Voltage Source Converters (VSC) operating in grid following mode. It aims at showing the limitations of the phasor approximation. Hence, there is an EMT and an RMS version of this system.
 
-This case is typical of the **converter driven stability slow interactions** problem.
+The system was designed to offer the following features:
+
+- being small enough for its stability margins to be easily assessed
+- involving several VSCs electrically rather close to each other (to contemplate possible interactions)
+- being connected to an external grid of adjustable strength in terms of short-circuit power
+- relying on generic models
+- being freely available.
 
 ## References
 
-This benchmark was originally proposed by Prof. Thierry Van Cutsem (Université de Liège, Belgium) in the view of showing the limitations of the phasor approximation, and use several network components developed by Prof. Xavier Guillaud (Ecole Centrale de Lille, France).
-As part of the BiGER project (CRESYM), this test system has been implemented in dynawo and EMTP.
+This benchmark was originally proposed by Prof. Thierry Van Cutsem (formerly with University of Liège, Belgium, acting as consultant for CRESYM). The VSC dynamic model was developed and validated by the team of Prof. Xavier Guillaud (Ecole Centrale de Lille, France). As part of the BiGER project (CRESYM), this test system has been implemented in Dynawo and EMTP.
 
 ## Network ​description
 
-The network is described by the following figure:
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCsystem.png' | relative_url }}"
+The one-line diagram is shown in the following figure (Fig.1):
+
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/oneline.png' | relative_url }}"
      alt="Four VSC system"
-     style="float: center; margin-right: 10px;" />
+     style="float: center; margin-right: 10px;"/>
+     <p style='text-align: center; font-family: Serif;'><b> Fig.1. one line diagram </b></p>
+</figure>
 
-## Dynamic models​
+The system hosts two wind parks (WP1 and WP2) and the terminal converters of two HVDC links (HVDC1 and HVDC2). The remote converter of each HVDC link is not modelled, the DC voltage being assumed constant. WP1 and WP2 are aggregated equivalents of a large number of generators. The connection transformers of all four VSCs are represented explicitly.
 
-This test case includes:
+The connection to an external system is considered through the Thévenin equivalent attached to bus C. Since the Thévenin voltage source forces the system frequency to return to its nominal value in steady state, this 100% power-electronics based system is clearly not meant to address frequency issues.
 
-- two generic [HVDC VSC lines](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md)
-- two [wind turbines generators](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md) (equivalent for a Wind park)
-- two sets of 6 cables in parallel (225kV) modelled in RMS as a [pi-line](/pages/models/lines/piLine/index.md)
-- seven 400kV [overhead lines](/pages/models/lines/piLine/index.md)
-- six [two windings step-up transformers](/pages/models/Transformers/Transformer/index.md)
-- two [shunt reactors](/pages/models/compensators/shunts/shuntReactor/index.md)
-- one [RL load](/pages/models/loads/RLLoad/index.md)
+The 400-kV part of the transmission grid is meshed, allowing to simulate the outage of one or two circuits without disconnection from the external system. The line lenghts are given in Fig. 1. Each wind park is radially connected to the grid through six 225-kV cables and six transformers in parallel to cope with the maximum production of each park. The cables are 50 km long and correspond to the AC connection of an offshore wind farm. The shunt reactors at buses E and F aim at absorbing the excess reactive power produced by the cables.
+The line, cable, transformer and VSC parameters are given in Table 1, 2 and 3, respectively.
 
-## Data
 
-| Line/Cable  | Nominal Voltage |  R  |  X  | $$\omega *\frac{C}{2}$$ | length | Snom  |
-|   | (V) | ($$\Omega$$) | ($$\Omega$$)  | ($$\mu S$$) | (km) | (MVA) |
-| ----------- | --------------- | --------- | ---------- | -------------------- | ----------- | -----------|
-| A-C*        | 400             |    1.04   |   20.80    | 98                   | 65          | 3000       |
-| A-B*        | 400             |    0.51   |   10.24    | 48                   | 32          | 3000       |
-| B-C*        | 400             |    1.12   |   22.40    | 105                  | 70          | 3000       |
-| A2-E**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
-| B2-F**      | 225             |    0.42   |   0.83     | 9000                 | 50          | 2400       |
+| |  R ($$\Omega/km$$) |  X ($$\Omega/km$$) | $$\omega *\frac{C}{2}$$ ($$\nu S/km$$)| Snom ($$MVA$$)  |
+| -- | --------------- | ------------------ | ------------------------------------ | ----------------|
+| 400-kV*         |    0.016   |   0.320    | 1.5                   | 1300          |
+| 225-kV** | 0.0084 | 0.017 | 180.0 | 2400 |
 
-* data for a single circuit
-** data for a 6 cables in parallel
+<p style='text-align: center; font-family: Serif;'><b> Table 1: line and cable data </b></p>
 
-| Transformer | Nominal Voltage (V) |  R (%)    |  X (%)     | ratio (%)     | Snom (MVA) |
+\* pertain to each circuit
+** pertain to 6 cables in parallel
+
+| Transformer | Nominal Voltage (V) |  R (pu)    |  X (pu)     | $$n$$     | Snom (MVA) |
 | ----------- | --------------- | --------- | ---------- | ------------- | -----------|
-| A1-A        | 320/400         |    0.5   |   15.0      | 102           | 1200       |
-| B1-A        | 320/400         |    0.5   |   15.0      | 104           | 1700       |
-| A2-A        | 225/400         |    0.5   |   15.0      | 102           | 2400       |
-| B2-B        | 225/400         |    0.5   |   15.0      | 105           | 2400       |
-| WP1-E*      | 66/225          |    0.5   |   12.0      | 105           | 2400       |
-| WP2-F*      | 66/225          |    0.5   |   12.0      | 104           | 2400       |
+| A1-A        | 320/400         |    0.005   |   0.15      | 1.02           | 1200       |
+| B1-A        | 320/400         |    0.005   |   0.15      | 1.04           | 1700       |
+| A2-A        | 225/400         |    0.005   |   0.15      | 1.02           | 2400       |
+| B2-B        | 225/400         |    0.005   |   0.15      | 1.05           | 2400       |
+| WP1-E*      | 66/225          |    0.005   |   12.0      | 1.05           | 2400       |
+| WP2-F*      | 66/225          |    0.005   |   12.0      | 1.04           | 2400       |
 
-* 6 transformers in parallel 400MVA each
+<p style='text-align: center; font-family: Serif;'><b> Table 2: Transformer data </b></p>
 
 | Converter   | Snom (MVA) |  Pnom (MVA)  |
 | ----------- | ---------- | ------ |
@@ -71,96 +71,125 @@ This test case includes:
 | HVDC1       | 1200       |   1150 |
 | HVDC2       | 1700       |   1630 |  
 
-## Scenarios
+<p style='text-align: center; font-family: Serif;'><b> Table 3: Converter data </b></p>
 
-### Scenario No. 1: Full export to transmission grid and large disturbance
+## Dynamic models​
 
-**Operating point No. 1**
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point1.png' | relative_url }}"
-     alt="Four VSC system"
-     style="float: left; margin-right: 10px;" />
- 
-In this scenario, the power injected by the wind power plants WP1 and WP2 and by the HVDC links HVDC1 and HVDC2 is exported to the external system. The network is heavily loaded, and the active power of the load is equal to zero. 
+A single dynamic model is used for all four [converters](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md) (though with a control variant for WP1 with respect to the other VSCs).
 
-**Control modes**
-WP1, WP2 and HVDC1 are in grid following mode. WP1 in reactive power control, WP2 and HVDC1 are in voltage control mode, and the dynamic voltage support is disabled.
-HVDC2 is in grid forming mode.
+## Operating points
 
-**Event** : A solid three phase fault is applied on the first of the two lines A-C, next to bus A at 100ms. The fault is cleared after 150ms by opening the line.  
+Two operating points were considered in the simulations, as detailed in Table 4.
 
-### Scenario No. 2: No export to transmission grid and mild disturbance
+| operating point #   | power (MW) injected by |||  |  power (MW) into equiv.  | load (MW) at bus C | power (Mvar) of shunt reactors |
+|                     | WP1 | WP2 | HVDC1 | HVDC2   |                          |                    |                                |
+| ------------------- | ------------------------ | ------------------ | -------------------------------|
+| 1                   | 2000 | 2000 | 1150  | 1400  | 6374                     |   0                |     160                        |
+| 2                   | 2000 | 2000 | -1120 | -1600 | 0                      |   1169             |     500                        |
 
-**Operating point No. 2**
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_operating_point2.png' | relative_url }}"
-     alt="Four VSC system"
-     style="float: left; margin-right: 10px;" />
+<p style='text-align: center; font-family: Serif;'><b> Table 4: Operating points </b></p>
 
-In this scenario, the power injected by the wind power plants WP1 and WP2 are exported by HVDC links, there is no export to the external network and the network is lightly loaded.
-The load at bus C is withdrawing active power, and the shunt reactors are withdrawing reactive power.
+The first operating conditions result in a heavily loaded network, both wind parks and both HVDC links injecting active power into the grid. Nevertheless, the system is N-1 secure with respect to the outage of any 400-kV circuit. No load is present. Hence, the whole production (minus the network losses) is exported to the external system represented by the Thévenin equivalent at bus C, whose short-circuit power has been set to 10 GVA. The operating point is shown in detail in Fig. 2.
 
-**Variant A:** A first variant of this case consists in unloading the C bus and export the full power to external equivalent.
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/OP1.jpg' | relative_url }}"
+     alt="Four VSC system OP 1"
+     style="float: center; align: center;"/>
+</figure>
 
-**Control modes**
-WP1, WP2, HVDC1 and HVDC2 are all in grid following mode. WP1 in reactive power control, WP2 and HVDC1 are in voltage control mode, and the dynamic voltage support is disabled.
+<p style='text-align: center; font-family: Serif;'><b> Fig. 2: Operating point #1 </b></p>  
 
-**Variant B:** A variant of this case is to switch the grid following control of the WP2 by a following forming control.
+In the second operating point, the wind parks inject the same power, a large fraction of which is evacuated
+by the HDVC links. This results in a lightly loaded network with larger shunt reactors connected. At
+this operating point, stability is assessed in terms of minimal short-circuit power of the external system.
+The corresponding Thévenin reactance is varied. The net power injection of the VSCs (minus the network
+losses) is taken by the load at bus C, which results in no power flowing into the Th´evenin equivalent. Hence,
+the initial state remains unchanged while the reactance is varied and there is no risk of reaching the (static)
+loadability limit of the equivalent (for large values of its reactance). The operating point is shown in detail
+in Fig. 3.  
 
-**Event** : A circuit breaker opens the line between A and B after 1 second.
-Several simulations with various values of the short-circuit power Ssc of the external equivalent grid [from 5500 MVA up to 20 000 MVA] are performed.
-​
-## Simulation parameters
+<figure>
+<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/OP2.jpg' | relative_url }}"
+     alt="Four VSC system operating point 2"
+     style="float: center; align:center;" />
+</figure>
 
-The system is an hybrid stiff DAE, the solver should be compatible with this type of problem.
-A fixed time step is applied for both phasor and EMT simualtions: 50 ms for EMT,
-The duration of simulation is of 1 second in the first scenario (event at 150ms), and of 3 seconds in the second scenario (event at 1 second).
+<p style='text-align: center; font-family: Serif;'><b> Fig. 3: Operating point #2 </b></p>
 
-## Outputs: ​
 
-### First scenario:  Full export to transmission grid and large disturbance
+## Scenarios and example of simulation results
 
-The disturbance is seen at bus A, B and C with highest impact on bus A voltage as expected.
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_bus_voltages.png' | relative_url }}"
-     alt="Scenario 1 bus voltages"
-     style="float: left; margin-right: 10px;" />
+### Scenario No. 1
 
-On the grid following converters' responses, we can see the grid voltage support from WP2 and HVDC1 due to their voltage control support, whereas WP1 is in reactive power control.
+Scenario # 1 relates to Operating point #1. The event is a solid three-phase fault on one of the two circuits
+of line A-C, next to bus A. The fault is cleared after 150 ms by opening the line, which remains open. The
+purpose of the simulation is to test the response to a large disturbance leading to current limitation in the
+VSCs.
 
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gf.png' | relative_url }}"
-     alt="Scenario 1 grid following converters' responses: active powers and currents"
-     style="float: left; margin-right: 10px;" />
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_Gfollowing_Q_iq.png' | relative_url }}"
-     alt="Scenario 1 grid following converters' responses : reactive powers and currents"
-     style="float: left; margin-right: 10px;" />
+The voltage evolutions are given in Fig. 4. During the fault, the voltage at bus A drops to zero, due to
+the proximity to the fault. The residual voltages at buses B and C are easily explained by their electrical
+distances from bus A. Voltages quickly recover after fault clearing but they undergo a peak, due to the
+large injection of reactive power (large value of $$i_q$$ component of current) during the fault with the aim of
+supporting voltages. It is of interest to check the value of that peak with EMT simulation.
 
-On the grid forming converter's response (HVDC2), the injected current increases after fault up to its maximum value. When the fault is cleared (250ms), the injected current falls down quickly before slowly returning to a steady state value.
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/volt.jpg' | relative_url }}"
+     alt="Four VSC system OP1 voltages"
+     style="float: center; margin-right: 10px;"/>
+</figure>
+<p style='text-align: center; font-family: Serif;'><b> Fig. 4: Operating point #1: voltages </b></p>
 
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming.png' | relative_url }}"
-     alt="Scenario 1 grid forming converter's response: injected total current and voltages"
-     style="float: left; margin-right: 10px;" />
 
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario1_converter_response_GForming2.png' | relative_url }}"
-     alt="Scenario 1 grid forming converter's response: injected active power (P) and angle's difference (deltam)"
-     style="float: left; margin-right: 10px;" />
+The evolution of the VSC active powers is shown in Fig. 5 (left part). During the fault, the active power
+of HVDC1 drops to zero owing to the zero voltage at bus A. The other three VSCs undergo a severe drop
+of their active power, owing to the priority given to reactive power. After fault clearing, the active powers
+regain their pre-disturbance values but with the imposed maximum rate of recovery. The latter is faster for
+the two HVDC links than for the two wind parks. The right part of the figure shows the corresponding
+setpoint values of the id components. These setpoints are the input the fact current control loops.
 
-### Scenario No. 2: No export to transmission grid and mild disturbance
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/P.jpg' | relative_url }}"
+     alt="Four VSC system OP 1 active and id current"
+     style="float: center; margin-right: 10px;"/>
+</figure>
+<p style='text-align: center; font-family: Serif;'><b> Fig. 5: Operating point #1: : active powers and id current setpoints </b></p>
 
-In this second scenario, we can see that the response of the system to a mild disturbance very much depends on the short-circuit power of the connected equivalent grid. More importantly, this response is different if the system is simulated with a phasor simulator or an EMT one.
+The evolution of the reactive powers is shown in the left part of Fig. 6 while the setpoint values of the iq components are shown in the right part. During the fault, all VSCs have their reactive power increased but their $$i_q$$ components evolve differently:
 
-On the EMT simulation (left figure) we can see that the system becomes unstable if the short-circuit power is lower than 16 GVA. On the phasor simulation (right figure), the system is stable even if the short-circuit power is lower than 16 GVA (5.5 GVA). It seems that the phasor is underestimating the stability of the system in this very specific case.
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2_converter_response_Gfollowing.png' | relative_url }}"
-     alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
-     style="float: left; margin-right: 10px;" />
+- WP2, HVDC1 and HVDC2 control their voltages (on the converter side of the connection transformer).
+The severe voltage drop caused by the fault is counteracted by a quick decrease of $$i_q$$, which corresponds to maximum injection of reactive power. iq hits the -1 limit, which corresponds to the whole current being taken by the iq component ($$i_d = 0$$), in accordance with the reactive power priority;
+- WP1 is under reactive power control. During the fault, $$i_q$$ increases in order to counteract the reactive power increase, before regaining its pre-disturbance value.
 
-**Variant A:** When the C bus is unload and full power is taken by the external network, the difference between voltages curves is significant with the EMT simulation, with the phasor approximation, the difference is bearly noticable. 
-The damping effect of the constant admittance load isn't properly captured. 
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2A_converter_response_Gfollowing_voltage_WP2.png' | relative_url }}"
-     alt="Scenario 2 grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage response"
-     style="float: left; margin-right: 10px;" />
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/Q.jpg' | relative_url }}"
+     alt="Four VSC system OP 1 active and id current"
+     style="float: center; margin-right: 10px;"/>
+</figure>
+<p style='text-align: center; font-family: Serif;'><b> Fig.6 Scenario #1 : reactive powers and iq current setpoints</b></p>
 
-**Variant B:** When WP2 grid following control is changed by a grid forming one, the grid-forming control has such a strong stabilizing effect that both response remains stable even if the short-circuit power is as low as 300 MVA. Both simulation has comparable results.
-<img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/4VSCSystem_results_scenario2B_converter_response_Gforming_voltage_WP2.png' | relative_url }}"
-     alt="Scenario 2 variant A:  grid following converter's response for various short circuit powers, EMT and Phasor WP2's voltage responses"
-     style="float: left; margin-right: 10px;" />
+## Scenario #2
+
+Scenario #2 relies on Operating point #2. The event is the opening of one circuit of the line between buses A and B. This 400-kV circuit carrying only 90 MW, the disturbance can be considered small; the purpose of the simulation is to test the small-disturbance stability of the resulting operating point.
+
+In order to find the stability limit of the system, the short-circuit power of the external system (connected to bus C) is progressively decreased, until the response to the disturbance becomes unacceptable, owing to undamped oscillations.
+
+The limit value of the short-circuit power obtained with respectively EMT and phasor simulations have been compared. The marginal cases are shown in Fig. 7 for the EMT simulation and Fig. 8 for the phasor-mode simulation. It can be seen that in EMT simulations the system becomes unstable for a short-circuit power around 16 GVA, while in phasor-mode simulations it becomes unacceptable at 5.5 GVA. There is thus a very significant difference. This scenario is very appropriate for future analysis in the BiGER (CRESYM) project.
+
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/stab_limit_EMT.jpg' | relative_url }}"
+     alt="EMT simulation cases in marginal case"
+     style="float: center;"/>
+</figure>
+
+<p style='text-align: center; font-family: Serif;'><b> Fig.7 Scenario #2 : EMT simulations in marginal cases </b></p>
+
+<figure>
+     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/stab_limit_phasor.jpg' | relative_url }}"
+     alt="phasor-mode simulation in marginal cases"
+     style="float: center;"/>
+     </figure>
+
+<p style='text-align: center; font-family: Serif;'><b> Fig.8 Scenario #2: Phasor-mode simulation in marginal cases</b></p>
 
 ## Open source implementations
 
@@ -169,6 +198,6 @@ Some open source implementations of this use case are available in the following
 | Software      | URL | Language  | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | -------------------| ------------------- |
 | Dynawo | [Link](https://github.com/dynawo/dynawo/tree/3093_GFL_VSC) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 17/05/2024 | - |
-| STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testSystems/4vsc_system/STEPPS) | .dat, .dst | to be completed | 17/05/2024 | - |
+| STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testSystems/4vsc_system/STEPPS) | own modelling language | models in open source | 17/05/2024 | - |
 | EMTP-RV | to be completed | .ecf   | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | - |
 | SimPowerSystem | to be completed | Matlab | to be completed | - |
