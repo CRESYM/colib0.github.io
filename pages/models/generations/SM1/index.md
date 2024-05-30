@@ -257,13 +257,15 @@ The left chart shows the $$P$$ and $$Q$$ maximum values for different limit curv
 
 The model can be solved by performing some additional assumptions and transformations. Here some submodels that have arised from different works are listed, with its particularities:
 
-- GENSAL/GENROU without saturation: This model is described in Sauer and Pai formulation [[6]](#6), and is valid for both round-rotor and salient-poles synchronous machine.
+- **GENSAL/GENROU without saturation**: This model is described in Sauer and Pai formulation [[6]](#6), and is valid for both round-rotor and salient-poles synchronous machine.
 
-- GENROU with saturation: This model is an extension of the previous one, considering the saturation of the magnetic circuit. 
+- **GENROU with saturation**: This model is an extension of the previous one, considering the saturation of the magnetic circuit.
 
-- GENSAL with saturtion: Same as the previous model, but in this case it is treated slightly different due to the saturation occuring onnly in the salient-poles axis only, while the previous model considers saturation along both *d* and *q* axis.
+- **GENSAL with saturation**: Same as the previous model, but in this case it is treated slightly different due to the saturation occuring only in the salient-poles axis only, while the previous model considers saturation along both *d* and *q* axis.
 
-- GENTPF/GENTPJ: It models the saturation in a different way, including the saturation in the network interface equations, something that the GENSAL/GENROU models do not consider, and it reflects better the saturation effects in the whole machine.
+- **GENTPF/GENTPJ**: It models the saturation in a different way, including the saturation in the network interface equations, something that the GENSAL/GENROU models do not consider, and it reflects better the saturation effects in the whole machine.
+
+Details can be found here:
 
 {% include subfolderNav.html %}
 

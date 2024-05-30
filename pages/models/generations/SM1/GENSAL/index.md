@@ -1,20 +1,20 @@
 ---
 layout: page
-title: GENROU/GENSAL
+title: GENROU
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
 last-updated: 24/05/2024
 ---
 
-# Salient-pole Synchronous Machine - GENSAL
+# Salient-pole Synchronous Machine - GENSAL 
 
 ## Context
 
-The model presented is derived from the general model [Synchronous Machine model](../), transforming the equations to the *dq0* reference frame. It describes the dynamic behavior of synchronous machines with no aturation effects. The model is suitable for transient stability analysis.
+The model presented is derived from the general model [Synchronous Machine model](../), transforming the equations to the *dq0* reference frame. It describes the dynamic behavior of synchronous machines with no saturation effects. The model is suitable for transient stability analysis.
 
 ## Model use, assumptions, validity domain and limitations
 
-The model can be used to perform transient stability analysis for both salient-pole and round-rotor synchronous machines in the *dq0* reference frame. 
+The model can be used to perform transient stability analysis for both salient-pole and round-rotor synchronous machines in the *dq0* reference frame.
 
 The assumptions made in this model are:
 
@@ -24,7 +24,7 @@ The assumptions made in this model are:
 
 The model is exactly the same for round-rotor and salient-pole in this case with no magnetic saturation. A more detailed model is required to consider such effects, which are different in salient-pole machines (there is saturation in *d*-axis) and in round-rotor machines (the saturation is considered both in *d* and *q* axis, as there is no preferred direction for the flux).
 
-It is not suitable for EMT studies as it does not consider the fast dynamics of the machine. 
+It is not suitable for EMT studies as it does not consider the fast dynamics of the machine.
 
 ## Model Description
 
@@ -91,7 +91,7 @@ $$ \Psi_0 = -X_{ls} I_0$$
 
 ## Operational principles
 
-The general synchronous machine model contains the differential equations that completely model a round-rotor synchronous machine in the *abc* reference frame. 
+The general synchronous machine model contains the differential equations that completely model a round-rotor synchronous machine in the *abc* reference frame.
 In machines with salient poles rotors, the magnetic flux will have a preferred direction which will correspond to the salient part of the rotor. In the *abc* system, this preferred direction will be rotating alongside the rotor. This would translate in all the inductance values to be dependent on the position of the rotor as follows:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
@@ -103,7 +103,7 @@ $$\mathcal{L}_{pf} = \mathcal{L}_{fp} = L_{pf}\cos(\frac{p_f}{2}\theta_{shaft} +
 
 with $$p$$ and $$p'$$ being two differen phases, and $$\phi_p$$ being the associated displacement for each phase. Applying these new inductance values to the flux equations yield a much more complicated form that cannot be simplified (the complete flux equations can be seen in Kundur's book [[1]](#1)).
 
-In order to have simpler equations for the salient poles machines (and simplify even more the previous round-rotor model) there is a transformation to a reference frame that rotates with the rotor called the *dq0 reference frame*, also called the *Park transformation*. This reference frame is formed by the *direct axis (d)*, which is the polar axis in which the permeance to the magnetic field is greater than the permeance along the interpolar axis, called *quadrature axis (q)*. In this reference frame, inductance expressions no longer are a function of the rotor position, yielding much simpler flux expressions.
+In order to have simpler equations for the salient poles machines (and simplify even more the previous round-rotor model), there is a transformation to a reference frame that rotates with the rotor called the *dq0 reference frame*, also called the *Park transformation*. This reference frame is formed by the *direct axis (d)*, which is the polar axis in which the permeance to the magnetic field is greater than the permeance along the interpolar axis, called *quadrature axis (q)*. In this reference frame, inductance expressions no longer are a function of the rotor position, yielding much simpler flux expressions.
 
 The following diagram shows the convention for the reference frame as described in [[6]](#6), which is the most common convention used.
 
@@ -125,7 +125,7 @@ $$\begin{bmatrix} i_d \\\ i_q \\\ i_0 \end{bmatrix} = \frac{2}{3} \begin{bmatrix
 
 </div>
 
-an expression that is applicable to all the stator quantities such as voltage or flux. The *zero-sequence* current is always 0 in three-phase balanced conditions.
+An expression that is applicable to all the stator quantities such as voltage or flux. The *zero-sequence* current is always 0 in three-phase balanced conditions.
 
 The transformation can be applied to the stator currents and fluxes equations from the general model while using the new inductance values. This derivation is omitted as it is laborious (it can be consulted in [[1]](#1) or [[5]](#5)). The flux expressions in the dq0 reference frame are:
 
@@ -138,7 +138,7 @@ $$\psi_0 = L_0 i_0 $$
 
 </div>
 
-with new inductance terms $$L_d = L_{al} + \frac{3}{2}(L_{aa0} + L_{g2})$$,  $$L_q = L_{al} + \frac{3}{2}(L_{aa0} - L_{g2})$$ and  $$L_0 = L_{al}$$, all of them independent from the rotor position in this reference frame. 
+with new inductance terms $$L_d = L_{al} + \frac{3}{2}(L_{aa0} + L_{g2})$$,  $$L_q = L_{al} + \frac{3}{2}(L_{aa0} - L_{g2})$$ and  $$L_0 = L_{al}$$, all of them independent from the rotor position in this reference frame.
 
 Now, the voltage equations for the dq0 reference frame are also transformed into:
 
@@ -177,7 +177,7 @@ $$ I_{dq0} = \frac{-i_{dq0}}{I_{BDQ}}$$
 $$ \Psi_{dq0} = \frac{\psi_{dq0}}{\psi_{BDQ}}$$
 </div>
 
-where V_{BABC} and V_{BDQ} are the rated RMS phase to neutral voltage and peak phase to neutral voltage respectively, $$I_{ABC} = \frac{S_B}{3V_{ABC}}$$, $$ I_{BDQ} = \frac{2S_B}{3V_{BDQ}}$$ with S_{B} the rated three-phase apparent power, and $$\psi_{BABC} = \frac{V_{BABC}}{\omega_B}$$, $$\psi_{BDQ} = \frac{V_{BDQ}}{\omega_B}$$ with $$\omega_B = \omega_s$$.
+where $$V_{BABC}$$ and $$V_{BDQ}$$ are the rated RMS phase to neutral voltage and peak phase to neutral voltage respectively, $$I_{ABC} = \frac{S_B}{3V_{ABC}}$$, $$ I_{BDQ} = \frac{2S_B}{3V_{BDQ}}$$ with $$S_{B}$$ the rated three-phase apparent power, and $$\psi_{BABC} = \frac{V_{BABC}}{\omega_B}$$, $$\psi_{BDQ} = \frac{V_{BDQ}}{\omega_B}$$ with $$\omega_B = \omega_s$$.
 
 The rest of parameters can also be scaled as follows:
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
