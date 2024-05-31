@@ -11,3 +11,6 @@ Gemfile.lock
 # Bundle
 .bundle
 /vendor
+
+# Back-up drawio files
+*.drawio.bkp

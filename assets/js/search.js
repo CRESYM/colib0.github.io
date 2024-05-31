@@ -52,12 +52,14 @@
             this.field('id');
             this.field('title', { boost: 10 });
             this.field('content');
+            this.field('tags');
 
             for (var key in window.store) { // Add the data to lunr
                 this.add({
                     'id': key,
                     'title': window.store[key].title,
-                    'content': window.store[key].content
+                    'content': window.store[key].content,
+                    'tags': (window.store[key].tags || []).join(' ')
                 });
             }
         });
