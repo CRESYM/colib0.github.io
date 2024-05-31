@@ -1,7 +1,6 @@
 ---
 layout: base
-title: Transformers
-tags: []
+title: Models
 ---
 
 {% include folderNav.html %}
