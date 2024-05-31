@@ -144,6 +144,6 @@ This model has been successfully implemented in :
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 | STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testModels/gridFollowing/STEPPS) | txt | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 17/05/2024 | - |
-| dynawo | [Link](https://github.com/dynawo/dynawo/compare/master...3093_GFL_VSC) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 17/05/2024 | - |
+| dynawo | [Link](https://github.com/dynawo/dynawo/) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 17/05/2024 | - |
 
 ## Table of references
