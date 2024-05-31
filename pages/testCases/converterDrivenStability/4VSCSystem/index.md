@@ -75,7 +75,7 @@ The line, cable, transformer and VSC parameters are given in Table 1, 2 and 3, r
 
 ## Dynamic models​
 
-A single dynamic model is used for all four [converters](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/index.md) (though with a control variant for WP1 with respect to the other VSCs).
+A single dynamic model is used for all four [converters](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/) (though with a control variant for WP1 with respect to the other VSCs).
 
 ## Operating points
 
