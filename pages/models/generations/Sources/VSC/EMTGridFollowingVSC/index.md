@@ -3,13 +3,13 @@ layout: page
 title: EMT Grid Following Voltage Source Converter 
 tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
 date: 05/06/2024 
-last-updated: 05/06/2024
+last-updated: 14/06/2024
 id: #163
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# EMT Grid Following Voltage Source Converter
+# EMT Grid Following Voltage Source Converter - UPC
 
 ## Context
 
@@ -311,6 +311,11 @@ The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loo
 
 ### Limitations of current
 
+The technical constraints of the VSC can be included in the controls using saturation blocks. Depending on the desired operation mode, the converter can be set to prioritize one of the current components. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
+
+* **Normal operation**: The converter will prioritize the $$i^q$$ component, then $$i^q_{max} = I_{max}$$ and $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
+* **Transient or fault operation**: The converter will prioritize the $$i^d$$ component, then $$i^d_{max} = I_{max}$$ and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
+
 
 ### Modulation
 
@@ -464,8 +469,10 @@ This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-| STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testModels/gridFollowing/STEPPS) | txt | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 17/05/2024 | - | -->
-<!-- | dynawo | [Link](https://github.com/dynawo/dynawo/) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 17/05/2024 | - | -->
+| NREL | [Link](https://github.com/NREL/PyPSCAD) | PSCAD | - | 17/05/2024 | Described in [10.1109/KPEC51835.2021.9446243](https://doi.org/10.1109/KPEC51835.2021.9446243) | 
+| SimplusGrid| [Link](https://github.com/Future-Power-Networks/Simplus-Grid-Tool/blob/master/%2BSimplusGT/%2BClass/GridFollowingVSI.m) | Matlab | [BSD 3-clause](https://opensource.org/licenses/BSD-3-Clause) | 14/06/2024 | -------- |
+| DPSim | [Link](https://github.com/sogno-platform/dpsim/blob/master/dpsim-models/src/EMT/EMT_Ph3_AvVoltageSourceInverterDQ.cpp) | C++ | [MPL-2.0](https://opensource.org/licenses/MPL-2.0) | 14/06/2024 | -------- |
+
 
 ## Table of references
 
