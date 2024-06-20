@@ -9,7 +9,6 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-#
 
 ## Context
 
@@ -152,7 +151,7 @@ A typical value for the damping ratio is $$\zeta = \frac{1}{\sqrt{2}}$$, PLL nat
 
 ### Current control
 
-The current control is used to determine the converter voltage that has to be applied in order to maintain the current at the setpoint. The model presented uses the Internal Model Control method (IMC), described in [[7]](#7) The control is based on the electric relationship between the variables:
+The current control is used to determine the converter voltage that has to be applied in order to maintain the current at the setpoint. The model presented uses the Internal Model Control method (IMC), described in [[7]](#7), which provides PI controllers tuned in terms of the machine parameters (in this case $$R$$ and $$L$$) with the desired response. The control is based on the electric relationship between the variables:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -186,8 +185,7 @@ Applying the Laplace transformation and reordering, the following relation holds
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{q}(s)}{\hat{v}^{q}(s)} = \frac{1}{R + sL} $$
-$$ \frac{i^{d}(s)}{\hat{v}^{d}(s)} = \frac{1}{R + sL} $$
+$$ \frac{i^{qd}(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
 
 </div>
 
@@ -207,15 +205,15 @@ The transfer function of this block diagram, considering $$G_c = K^{icl}_p + \fr
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{q}(s)}{i^{q*}(s)} = \frac{G_c(s)}{Ls + R + G_c(s)} $$
+$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{G_c(s)}{Ls + R + G_c(s)} $$
 
 </div>
 
-where $$i^{q*}(s)$$ is the reference current, $$i^{q}(s)$$ is the measured current. The controller gains can be selected as $$K^{icl}_p = \frac{L}{\tau_c}$$ and $$K^{icl}_i = \frac{R}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
+where $$i^{qd*}(s)$$ is the reference current for *q* or *d* axis, $$i^{qd}(s)$$ is the measured current. The controller gains can be selected as $$K^{icl}_p = \frac{L}{\tau_c}$$ and $$K^{icl}_i = \frac{R}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{q}(s)}{i^{q*}(s)} = \frac{1}{\tau_c s + 1} $$
+$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{1}{\tau_c s + 1} $$
 </div>
 
 The complete system including the decoupling can be expressed as: 
