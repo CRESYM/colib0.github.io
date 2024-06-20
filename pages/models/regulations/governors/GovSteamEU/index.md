@@ -365,16 +365,6 @@ This model has been successfully implemented in :
 | Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 15/05/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
 
 
-## Open Questions?
-
-- The island mode control signal does not pass thourgh the electro
-  hydraulic transducer. Why?
-- why are the multiplication blocks that model the valve position added
-  **inside** the first order lags (boiler, reheater) and not outside
-  (e.g. just after it)? (it leads to different dynamic behaviour)
-- Are there cases where it makes sense to use grid connected ($$f$$) and
-  island ($$\omega$$) control mode simultaneously or should one of them
-  always be deactivated?
 
 ## Table of references & license
 
