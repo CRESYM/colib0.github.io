@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard governor model IEEEG1 GovSteam 1
+title: IEEEG1 GovSteam 1
 tags: ["Governor", "IEEEG1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovSteam1", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

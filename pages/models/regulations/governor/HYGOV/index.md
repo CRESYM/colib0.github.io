@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard governor model HYGOV
+title: HYGOV
 tags: ["Governor", "HYGOV", "generic", "Opensource", "dynawo", "#106", "WEHGOV", "WPIDHY"]
 date: 05/04/2024
 last-updated: 24/05/2024
