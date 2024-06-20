@@ -1,6 +1,6 @@
 ---
 layout: page 
-title: EMT Grid Following Voltage Source Converter 
+title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
 tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
 date: 05/06/2024 
 last-updated: 14/06/2024
@@ -9,7 +9,7 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# EMT Grid Following Voltage Source Converter - UPC
+#
 
 ## Context
 
@@ -21,14 +21,16 @@ The model described allows performing EMT studies of the dynamics of a grid-foll
 
 The assumptions made are:
 
-* The grid to which the converter is connected is modeled as a Thévenin equivalent, with a three-phase voltage $$v_{g}^{abc}$$. %%%%%%%%%%%%%%%%%%%%%%%
 * The DC side of the converter is considered as an ideal DC voltage source $$E_{DC}$$.
 * The AC-side of the converter is connected to the grid through an AC filter formed by a resistance $$R$$ and an inductance $$L$$. The AC voltage in the converter side is $$v_{c}^{abc}$$.
-
+* The system is considered to be balanced, and the positive and negative sequence are not considered.
+* The synchronization with the grid is controlled by a PLL, and it is done by imposing that the $$v_d = 0$$. This design criteria allows to relate active and reactive power with one of the components of the current.
 <!-- * The switching process of the IGBTs that generate the AC wave from the modulation of the DC voltage is considered.-->
 <!-- * The transformer dynamics have been neglected. -->
 
-Although it can be used for low-frequency phenomena such as transient stability or inter-area oscillations, the number of calculations to capture necessary to capture the dynamics is much greater than Phasor models, resulting in a higher execution time. These Phasor (or RMS) models make some assumptions that reduce the execution times in one or two orders of magnitude by increasing the time step, since they neglect the fast dynamics of the converter. 
+Although it can be used for low-frequency phenomena such as transient stability or inter-area oscillations, the number of calculations to capture necessary to capture the dynamics is much greater than Phasor models, and result in much higher execution times. 
+It is not useful to calculate unbalanced situation as the model is based on the positive sequence. It does not consider harmonics, as it uses a simplified PLL that only takes the fundamental frequency.
+
 
 ## Model description
 
@@ -236,7 +238,7 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
 
 </div>
 
-The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). This modulation will be explained in Section 3.6.
+The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). This modulation will be explained in [Section 3.6](#modulation).
 
 
 ### Active and reactive power control
@@ -261,14 +263,14 @@ $$ P = \Re(S) = \frac{3}{2} (v^q i^q + v^d i^d) $$
 $$ Q = \Im(S) = \frac{3}{2} (v^q i^d - v^d i^q) $$
 </div>
 
-Considering $$v_d = 0$$, the setpoints for current could be extracted substituting in the previous equation and using directly the grid voltage measurement $$v_q$$ obtained from the Park transformation:
+As a design choice of the PLL, $$v_d = 0$$ to track the grid angle. Then, the expressions for current setpoints can be extracted substituting in the previous equation:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ i^{q*} = \frac{2}{3} \frac{P^*}{v^q} $$
-$$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^q} $$
+$$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
 </div>
 
-However, it is not suitable to use this direct calculation under transient conditions or perturbations, and a PI controller is proposed to provide the desired response. The following block diagram shows the current setpoints output using the power setpoints:
+This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram shows the current setpoints output using the power setpoints:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PowerLoopVSC.svg' | relative_url }}"
@@ -463,7 +465,7 @@ Figure 9: Modulation Control Blocks
 </div>
 <br>
 
-## Open source implementations (if any)
+## Open source implementations
 
 This model has been successfully implemented in :
 
