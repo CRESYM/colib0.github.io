@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Pi-equivalent Line Model
-tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo", opensource]
-date: 09/05/2025 
-last-updated: 13/05/2024
+tags: ["#120", "pi-equivalent", "transmission", "steady-state", "Dynawo", "OpenIPSL", "opensource"]
+date: 09/05/2024 
+last-updated: 20/06/2024
 ---
 
 # Pi Line Model
@@ -182,8 +182,10 @@ Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ ca
 <div align='center'>
 
 Figure 1. Schematic of the distributed parameter transmission line.
-
 </div>
+
+<br>
+
 Using the Kirchhoff laws, the following equations can be obtained:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
