@@ -35,7 +35,7 @@ It is not useful to calculate unbalanced situation as the model is based on the 
 
 The model can be described with the following schematic:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/EMT_GF_VSC_scheme.svg' | relative_url }}"
      alt="EMT GF VSC scheme"
      style="float: center; margin-right: 10px; width: 500px;" />
@@ -101,7 +101,7 @@ As it can be seen, the Park transformation is dependent of the angle $$\hat{\the
 
 The goal of the PLL is to track the grid frequency and angle, as it is needed to establish the operating points of the converter using the control loops. The design of this controller is detailed in [[6]](#6). As stated earlier, when the voltage is synchronized with the reference frame (in this case, the grid), $$v_d = 0$$. To perform this tracking, the control applied considers a PI controller, yielding the following control structure:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PLL_ControlDiagram.svg' | relative_url }}"
      alt="PLL Control Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
@@ -113,7 +113,7 @@ Figure 2: PLL Control Diagram <a href="#3">[3]</a>
 
 Using the Park transformation over the grid measured voltages, and assuming a small phase difference between the output of the converter and the grid voltage, the linearization $$ v^g_d = E_m \sin(\delta) \approx E_m \delta $$ can be applied, where $$E_m$$ is the peak value of the grid voltage and $$\delta = \theta - \hat{\theta}$$ is the angle difference between the measured and the reference frame angle. The linearized control structure is the following:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/LinearPLLBlock.svg' | relative_url }}"
      alt="PLL Control Diagram"
      style="float: center; margin-right: 10px; width: 800px;" />
@@ -166,7 +166,19 @@ which can be transformed into the *qd* frame to obtain the following equation:
 $$ v_{c}^{qd} - v_{g}^{qd} =\begin{bmatrix} R & L \omega\\ -L \omega & R \end{bmatrix} i_c^{qd} + L \frac{d}{dt} i_c^{qd} $$
 </div>
 
-where $$\omega$$ is the angular frequency of the grid obtained in the PLL, and $$v_{g}^d = 0$$. As it can be seen, there are couplings between the *q* and *d* components. This coupling can be dealt by the controller by designing a two dimension controller, or by decoupling the components and independently controlling each component. The later approach is the chosen in this model, using the following expression:
+where $$\omega$$ is the angular frequency of the grid obtained in the PLL, and $$v_{g}^d = 0$$. The block diagram associated to this system is the following:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/CurrentControlDiagram.svg' | relative_url }}"
+     alt="Current Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 5: Current Control Diagram <a href="#3">[3]</a>
+</div>
+<br>
+
+As it can be seen, there is a coupling between the *q* and *d* components. This can be dealt by the controller by designing a two dimension controller, or by decoupling the components and independently controlling each component. The later approach is the chosen in this model, using the following expression:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -191,7 +203,7 @@ $$ \frac{i^{qd}(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
 
 The following schematic represents the closed-loop block diagram for the current loop:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/CurrentErrorVSC.svg' | relative_url }}"
      alt="Current Error Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
@@ -216,19 +228,7 @@ where $$i^{qd*}(s)$$ is the reference current for *q* or *d* axis, $$i^{qd}(s)$$
 $$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{1}{\tau_c s + 1} $$
 </div>
 
-The complete system including the decoupling can be expressed as: 
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/CurrentControlDiagram.svg' | relative_url }}"
-     alt="Current Control Diagram"
-     style="float: center; margin-right: 10px; width: 700px;" />
-</div>
-<div align = 'center'>
-Figure 5: Current Control Diagram <a href="#3">[3]</a>
-</div>
-<br>
-
-with the PI controller
+The resulting PI controller is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -270,7 +270,7 @@ $$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
 
 This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram shows the current setpoints output using the power setpoints:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PowerLoopVSC.svg' | relative_url }}"
      alt="Power Control Diagram"
      style="float: center; margin-right: 10px; height: 180px;" />
@@ -280,9 +280,9 @@ Figure 6: Power Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
-To determine the PI controller parameters, we propose the complete power loop computing the error response, including the current loop dynamics with the obtained transfer function. The following block diagram shows the complete power loop:
+To determine the PI controller parameters, we include the current loop as the plant of the power loop, in order to obtain a response that accounts for the inner-loop dynamics. The following block diagram shows the complete power loop:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ErrorPowerLoopVSC.svg' | relative_url }}"
      alt="Power Control Diagram"
      style="float: center; margin-right: 10px; height: 280px;" />
@@ -313,25 +313,60 @@ The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loo
 
 The technical constraints of the VSC can be included in the controls using saturation blocks. Depending on the desired operation mode, the converter can be set to prioritize one of the current components. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
 
-* **Normal operation**: The converter will prioritize the $$i^q$$ component, then $$i^q_{max} = I_{max}$$ and $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
-* **Transient or fault operation**: The converter will prioritize the $$i^d$$ component, then $$i^d_{max} = I_{max}$$ and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
+* **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
+* **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
 
 
 ### Modulation
 
-As explained in the current loop section, the converter voltage setpoint obtained is considered directly the converter voltage. However, this sinusoidal voltage is obtained from a DC source, and to generate the AC voltage, the IGBT switching is modulated using Pulse-Width Modulation (PWM). To determine the position of the IGBTs, the Space Vector PWM (SVPWM) technique is used [[9]](#9). It is based on the projection of the AC side converter voltages in a space vector. Considering the possible configurations of the IGBTs, there are a total of $$2^3 = 8$$ possible states, the resulting voltages of which can be represented in a hexagon in the $$\alpha\beta$$ reference frame:
+As explained in the current loop section, the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The modulation will determine the switching state of the 3 pairs of IGBTs in order to produce a given voltage. To do so, the technique used is the Space Vector Pulse-Width Modulation (SVPWM) [[9]](#9), which can be modelled with the following block diagram:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ModulationVSC.svg' | relative_url }}"
+     alt="Modulation VSC"
+     style="float: center; margin-right: 10px; width: 100%;" />
+</div>
+<div align = 'center'>
+Figure 8: Block diagram of the modulation
+</div>
+<br>
+
+This technique projects the AC voltage that is desired to generate (which is the setpoint obtained from the control loops) into the $$\alpha\beta$$ reference frame. Then, it determines in which of the 6 regions delimited by the voltage vectors of the $$2^3 = 8$$ possible configurations of the IGBTs it is enclosed. Since two of the positions correspond to a short-circuit on all the phases, their output voltage will be 0, and they are at the center of the resulting hexagon, belonging to of all the regions. The complete hexagon with a vector projected into it can be seen in the following figure:
+
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM.svg' | relative_url }}"
      alt="SVPWM Diagram"
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
 <div align = 'center'>
-Figure 8: SVPWM Voltages Vector Space <a href="#9">[9]</a>
+Figure 9: SVPWM Voltages Vector Space <a href="#9">[9]</a>
 </div>
 <br>
 
-The values of the voltages for each switching state can be seen in the following table:
+As it can be seen, the voltage $$v^{\alpha\beta}$$ can be obtained by adding fractions of two of the vectors that delimit the region. The fraction is commonly known as duty cycle $$D_i = \frac{T_i}{T_z}$$. The duty cycle of the zero-voltage states can be calculated using the remaining time of the PWM as $$D_0 = D_7 = \frac{1 - D_i - D_j}{2}$$, while the other duty cicles have their own formulas to be calculated. Considering the symmetry of the regions, the duty cycles can be calculated referring always to the first region. Let $$D_1$$ be the duty cycle of the state with lower angle than $$v^{\alpha\beta}$$, and $$D_2$$ the duty cycle of the state with higher angle, the following calculations are made starting from the decomposition of the setpoint voltage:
+
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ V_{svm} = \sqrt{V_{\alpha}^2 + V_{\beta}^2} $$
+$$ \theta_{svm} = \arctan(\frac{V_{\beta}}{V_{\alpha}}) $$
+$$ \theta_{sec1} = \theta_{svm} - \frac{\pi}{3}(n - 1)$$
+$$ n = \text{floor}(\frac{\theta_{svm}}{\frac{\pi}{3}}) + 1 $$
+</div>
+
+where the floor operation determines the sector of the hexagon depending on the angle of the voltage. The duty cycles can be calculated as:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ D_1 = \frac{\sqrt{3}V_{svm} \sin(\frac{\pi}{3} - \theta_{sec1})}{2E_{DC}} $$
+$$ D_2 = \frac{V_{svm} \sin(\theta_{sec1} - \frac{\pi}{3})}{E_{DC}} $$
+</div>
+
+where $$D_1$$ and $$D_2$$ are the duty cycles of the vectors that limit the sector. Now, $$D_0$$ and $$D_7$$ can be easily calculated. 
+
+The switching order is important, since it is desirable to have a resulting sine-like wave, while minimizing switching losses. A symmetrical pattern that starts and ends at the 0-state is chosen, since it helps to transition between two adjacent periods that have the voltage at two different regions, for instance. To minimize losses, the order of states will be the one that results in a single switch between states. The following table shows all the switching states with their output voltage:
 
 <table style="table-layout: fixed; width: 50%; margin-left: auto; margin-right: auto;">
   <colgroup>
@@ -426,42 +461,21 @@ The values of the voltages for each switching state can be seen in the following
 </tr>
 </table>
 
-To generate the set AC voltage, the modulation block will determine in which region of the hexagon the voltage is, and it will decompose it into the 2 limiting vectors of the region. This will make possible to construct the voltage using the possible switching states. To do so, the module and angle of the voltage in the $$\alpha\beta$$ reference frame are calculated as follows:
+For instance, if the voltage setpoint is located in the region delimited by states $$0/7-1-6$$, the switching order would be $$000 \rightarrow 100 \rightarrow 101 \rightarrow 111 \rightarrow 101 \rightarrow 100 \rightarrow 000$$, or, if we use state identifiers, $$0 \rightarrow 1 \rightarrow 6 \rightarrow 7 \rightarrow 6 \rightarrow 1 \rightarrow 0$$. This means that the duty cycles are split in two for all the states except the 7-state. The following figure represents a switching state of the mentioned pattern:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_{svm} = \sqrt{V_{\alpha}^2 + V_{\beta}^2} $$
-$$ \theta_{svm} = \arctan(\frac{V_{\beta}}{V_{\alpha}}) $$
-</div>
-
-Using the appropiate duty cycle for each vector component, it is possible to reconstruct the setpoint voltage. To minimize the switching losses, each region will have a specific switching order such that only one of the IGBTs is switched at a time. For this reason, it is useful to include two options to represent the 0-valued voltage in the hexagon (vectors $$0$$ and $$7$$), in order to use the most suitable one depending on the switching state. Since all the regions have the same angles, a vector in the n-th sector can be reduced to the first sector for simplicity:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ \theta_{sec1} = \theta_{svm} - \frac{\pi}{3}(n - 1)$$
-$$ n = \text{floor}(\frac{\theta_{svm}}{\frac{\pi}{3}}) + 1 $$
-</div>
-
-where the floor operation determines the sector of the hexagon depending on the angle of the voltage. The duty cycles can be calculated as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ D_1 = \frac{\sqrt{3}V_{svm} \sin(\frac{\pi}{3} - \theta_{sec1})}{2V_{DC}} $$
-$$ D_2 = \frac{V_{svm} \sin(\theta_{sec1} - \frac{\pi}{3})}{V_{DC}} $$
-</div>
-
-where $$D_1$$ and $$D_2$$ are the duty cycles of the vectors that limit the sector. The rest of the duty times will correspond to the zero-valued vectors, which will have their times distributed as $$D_{v0} = D_{v7} = \frac{1 - D_1 - D_2}{2}$$. The total time of the PWM cycle is $$T_{PWM} = \frac{1}{f_{PWM}}$$, where $$f_{PWM}$$ is the frequency of the PWM. The time of each vector is then calculated as $$T_{v} = D_{v}T_{PWM}$$.
-
-The complete block diagram of the modulation block can be seen in the following figure: 
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ModulationVSC.svg' | relative_url }}"
-     alt="Modulation VSC"
-     style="float: center; margin-right: 10px; width: 100%;" />
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM_figs.svg' | relative_url }}"
+     alt="SVPWM Switching State"
+     style="float: center; margin-right: 10px; width: 900px;" />
 </div>
 <div align = 'center'>
-Figure 9: Modulation Control Blocks 
+Figure 10: Schematics of the instantaneous switching state of the VSC 
 </div>
 <br>
+
+As it can be seen in the figure, the pattern needed to generate the given AC voltage changes the state of one of its switches at a time and starts and ends at 0 voltage. The states $$000$$ and $$111$$ are those where all the switches are closed on the same side, short-circuiting the three phases, while for the rest of the cases, there is a voltage division between the isolated phase and the short-circuited couple, as can be seen from the grid equivalent in the right-most scheme.
+
 
 ## Open source implementations
 
