@@ -15,6 +15,13 @@
             <div class="row">
                 <div class="col text-justify">
                     <article id="page" class="markdown-body">
+                        <h1>{{ page.title }}</h1>
+                        {% if page.author %}
+                            <p id="author"><strong>Author:</strong> {{ page.author }}</p>
+                        {% endif %}
+                        {% if page.reviewers %}
+                            <p id="reviewers"><strong>Reviewers:</strong> {{ page.reviewers }}</p>
+                        {% endif %}
                         {{ content }}
                         <a href="https://github.com/CRESYM/colib0.github.io/issues/new?assignees=GJCRESYM%2C+matoubongrain&labels=enhancement%2Cbug%2Cevaluate+component&projects=Colib0&template=Evaluate.yml&title=%5BName%2FID+of+the+model%2F+test+case+to+be+evaluated%5D%3A+" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Evaluate</a>
                       </article>
