@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model IEEX2A
+title: IEEX2A
 tags: ["Voltage regulator", "IEEX2A", "generic"]
 date: 05/04/2024
 last-updated: 24/05/2024

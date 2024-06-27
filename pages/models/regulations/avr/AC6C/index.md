@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model AC6C
+title: AC6C
 tags: ["Voltage regulator", "AC6C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEAC6C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

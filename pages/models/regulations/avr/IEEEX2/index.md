@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model IEEEX2
+title: IEEEX2
 tags: ["Voltage regulator", "IEEEX2", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcDC2A", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

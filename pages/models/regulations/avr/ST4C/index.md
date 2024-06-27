@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model ST4C
+title: ST4C
 tags: ["Voltage regulator", "ST4C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEST4C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

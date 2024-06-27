@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model ST6C
+title: ST6C
 tags: ["Voltage regulator", "ST6C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEST6C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

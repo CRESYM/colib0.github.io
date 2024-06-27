@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard power system stabilizer model PSS1A
+title: PSS1A
 tags: ["Power system stabilizer", "PSS1A", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "PssIEEE1A", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024

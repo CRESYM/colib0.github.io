@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model SCRX
+title: SCRX
 tags: ["Voltage regulator", "SCRX", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcSCRX", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
