@@ -343,7 +343,7 @@ Table 3: Outputs
 
 –
 
-### Initial equations / boundary conditions (optional)
+### Initial equations / boundary conditions
 
 The initial values for the system’s states are calculated from the
 initial mechanical power $$P_\mathrm{m\,0}$$ and rotation speed
@@ -442,6 +442,17 @@ x_\mathrm{last\,value\,0} = V_\mathrm{0}
 x_\mathrm{fsra\,0} = 0
  \qquad(17)$$</span>
 
+
+#### Initial power reference
+
+<span id="eq-initPref">$$
+P_\mathrm{ref\,0} = 
+\begin{cases}
+    0,                         & \text{if } R_\mathrm{select}=0\\
+    R \cdot P_\mathrm{m\,0},   & \text{if } R_\mathrm{select}=1\\
+    R \cdot V_\mathrm{0},      & \text{otherwise}
+\end{cases}
+ \qquad(18)$$</span>
 
 ## Open source implementations
 
