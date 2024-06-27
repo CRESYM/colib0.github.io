@@ -23,11 +23,10 @@ The assumptions made are:
 * The DC side of the converter is considered as an ideal DC voltage source $$E_{DC}$$.
 * The AC-side of the converter is connected to the grid through an AC filter formed by a resistance $$R$$ and an inductance $$L$$. The AC voltage in the converter side is $$v_{c}^{abc}$$.
 * The system is considered to be balanced, and the positive and negative sequence are not considered.
-* The synchronization with the grid is controlled by a PLL, and it is done by imposing that the $$v_d = 0$$. This design criteria allows to relate active and reactive power with one of the components of the current.
-<!-- * The switching process of the IGBTs that generate the AC wave from the modulation of the DC voltage is considered.-->
-<!-- * The transformer dynamics have been neglected. -->
+* The synchronization with the grid is controlled by a PLL, and it is done by imposing that the $$v_d = 0$$. This design criteria allows to relate active and reactive power with one of the components of the current. It only considers the fundamental frequency.
+* The VSC is assumed to be a 2-level converter, meaning that there are 2 IGBTs per phase.
 
-Although it can be used for low-frequency phenomena such as transient stability or inter-area oscillations, the number of calculations to capture necessary to capture the dynamics is much greater than Phasor models, and result in much higher execution times. 
+Although it can be used for low-frequency phenomena such as transient stability or inter-area oscillations, the number of calculations to capture the dynamics is much greater than Phasor models, and result in much higher execution times. 
 It is not useful to calculate unbalanced situation as the model is based on the positive sequence. It does not consider harmonics, as it uses a simplified PLL that only takes the fundamental frequency.
 
 
@@ -111,7 +110,7 @@ Figure 2: PLL Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
-Using the Park transformation over the grid measured voltages, and assuming a small phase difference between the output of the converter and the grid voltage, the linearization $$ v^g_d = E_m \sin(\delta) \approx E_m \delta $$ can be applied, where $$E_m$$ is the peak value of the grid voltage and $$\delta = \theta - \hat{\theta}$$ is the angle difference between the measured and the reference frame angle. The linearized control structure is the following:
+Using the Park transformation over the grid measured voltages, and assuming a small phase difference between the output of the converter and the grid voltage, the linearization $$ v^g_d = E_m \sin(\delta) \approx E_m \delta $$ can be applied in order to simplify the closed-loop transfer function for the tunning of the controller. $$E_m$$ is the peak value of the grid voltage and $$\delta = \theta - \hat{\theta}$$ is the angle difference between the measured and the reference frame angle. The linearized control structure is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/LinearPLLBlock.svg' | relative_url }}"
@@ -268,7 +267,7 @@ $$ i^{q*} = \frac{2}{3} \frac{P^*}{v^q} $$
 $$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
 </div>
 
-This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram shows the current setpoints output using the power setpoints:
+This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram represents the open-loop power control:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PowerLoopVSC.svg' | relative_url }}"
@@ -280,7 +279,7 @@ Figure 6: Power Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
-To determine the PI controller parameters, we include the current loop as the plant of the power loop, in order to obtain a response that accounts for the inner-loop dynamics. The following block diagram shows the complete power loop:
+In order to tune the PI controller parameters, the closed-loop of the system is considered. In order to have the feedback loop, the power output is calculated including the current loop dynamics and the conversion from current to power using the instantaneous power theory. The following block diagram shows the complete power loop:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ErrorPowerLoopVSC.svg' | relative_url }}"
@@ -291,6 +290,8 @@ To determine the PI controller parameters, we include the current loop as the pl
 Figure 7: Closed-Loop Power Control Diagram
 </div>
 <br>
+
+As it can be seen, the peak voltage is used as it assumes that the deviations with respect to the nominal will be small, and this is only to have an appropriate tuning of the controller.
 
 Following a similar procedure to the one of the current loop, the closed-loop transfer function of the power loop can be modelled as a first-order system:
 
@@ -319,7 +320,7 @@ The technical constraints of the VSC can be included in the controls using satur
 
 ### Modulation
 
-As explained in the current loop section, the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The modulation will determine the switching state of the 3 pairs of IGBTs in order to produce a given voltage. To do so, the technique used is the Space Vector Pulse-Width Modulation (SVPWM) [[9]](#9), which can be modelled with the following block diagram:
+As explained in the current loop section, the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The modulation will determine the switching state of the 3 pairs of IGBTs (as it is assumed to be a 2-level VSC) in order to produce a given voltage. To do so, the technique used is the Space Vector Pulse-Width Modulation (SVPWM) [[9]](#9), which can be modelled with the following block diagram:
 
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
@@ -345,7 +346,7 @@ Figure 9: SVPWM Voltages Vector Space <a href="#9">[9]</a>
 </div>
 <br>
 
-As it can be seen, the voltage $$v^{\alpha\beta}$$ can be obtained by adding fractions of two of the vectors that delimit the region. The fraction is commonly known as duty cycle $$D_i = \frac{T_i}{T_z}$$. The duty cycle of the zero-voltage states can be calculated using the remaining time of the PWM as $$D_0 = D_7 = \frac{1 - D_i - D_j}{2}$$, while the other duty cicles have their own formulas to be calculated. Considering the symmetry of the regions, the duty cycles can be calculated referring always to the first region. Let $$D_1$$ be the duty cycle of the state with lower angle than $$v^{\alpha\beta}$$, and $$D_2$$ the duty cycle of the state with higher angle, the following calculations are made starting from the decomposition of the setpoint voltage:
+As it can be seen, the voltage $$v^{\alpha\beta}$$ can be obtained by adding fractions of two of the vectors that delimit the region. The fraction is commonly known as duty cycle $$D_i = \frac{T_i}{T_z}$$. The duty cycle of the zero-voltage states can be calculated using the remaining time of the PWM as $$D_0 = D_7 = \frac{1 - D_i - D_j}{2}$$, while the other duty cycles have their own formulas to be calculated. Considering the symmetry of the regions, the duty cycles can be calculated referring always to the first region. Let $$D_1$$ be the duty cycle of the state with lower angle than $$v^{\alpha\beta}$$, and $$D_2$$ the duty cycle of the state with higher angle, the following calculations are made starting from the decomposition of the setpoint voltage:
 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
