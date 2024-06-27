@@ -1,7 +1,7 @@
 ---
 layout: base
-title: GovCT2
-tags: [GovCT2]
+title: Governors
+tags: [governor]
 ---
 
 {% include folderNav.html %}
