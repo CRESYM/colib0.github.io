@@ -12,11 +12,11 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is the Full-Phasor model of a grid-following VSC, which is a type of VSC that is synchronized with the grid, using its frequency and phase. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying the fast-dynamics of the VSC and its interaction with the grid.
+Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is the Full-Phasor model of a grid-following VSC, which is a type of VSC that is synchronized with the grid, using its frequency and phase. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying low-frequency phenomena of the VSC and its interaction with the grid.
     
 ## Model use, assumptions, validity domain and limitations
 
-The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be tracked, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without loosing precision on these types of phenomena. 
+The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be studied, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without loosing precision on these types of phenomena. 
 
 The assumptions made are:
 
@@ -24,11 +24,11 @@ The assumptions made are:
 * The AC-side of the converter is connected to the grid through an AC filter formed by a resistance $$R$$ and an inductance $$L$$. It is represented as three current sources with magnitude and angle defined by the control system.
 * The system is considered to be balanced, and the positive and negative sequence are not considered.
 * The electrical variables are represented by phasors that rotate at the synchronous frequency of the grid in steady-state or quasi-steady-state.
-* The complete control structure from the EMT Model, apart from the PLL, is preserved. 
+* The complete control structure from the EMT Model, apart from the PLL, is preserved. Further simplifications are made in the models that derive from the Full-Phasor model.
 
 The model has its limitations when performing high-frequency domain phenomena, as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the EMT model. It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
 
-From this model, some approximations can be made to reduce the complexity of the model and its computational cost if the study to be performed does not require to cover some of the dynamics of the converter. These derived models can be consulted in Section [3.6](#derived-models)
+From this model, some approximations can be made to reduce the complexity of the model and speed up the simulation if the study to be performed does not require to cover some dynamics of the converter. These derived models can be consulted in Section [3.6](#derived-models)
 
 ## Model description
 
@@ -54,63 +54,57 @@ A detailed explanation of each block is provided in the following subsections.
 
 ### Transformation blocks
 
-Since we are dealing with phasors that rotate at the grid frequency, instead of instantaneous values, the transformation from the *abc* reference frame to the *qd0* reference frame can be perfromed by cancelling or applying the rotating part of the phasors.
+Since we are dealing with phasors that rotate at the grid frequency, instead of instantaneous values, the transformation from the *abc* reference frame to the *qd0* reference frame can be performed by cancelling or applying the rotation of the phasor.
 
-Assuming we have an electrical variable $$\underline{x} = Xe^{j\theta}$$, where $$X$$ is the amplitude and $$\theta$$ is the angle of the variable, the transformation to the *$$qd0$$ reference can be done by multiplying by $$e^{-j\theta}$$.
+Assuming we have an electrical variable $$\underline{x} = Xe^{j\theta}$$, where $$X$$ is the amplitude and $$\theta$$ is the angle of the variable, the transformation to the *$$qd0$$ reference can be done by multiplying by $$e^{-j\theta_v}$$.
 
 For the *abc* variables, the phasors will be:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ x_{abc} = \begin{bmatrix} x_a \\ x_b \\ x_c \end{bmatrix} = \begin{bmatrix} Xe^{j\theta} \\ Xe^{\theta - \frac{2\pi}{3}} \\ Xe^{\theta + \frac{2\pi}{3}} \end{bmatrix} $$
+$$ x_{abc} = \begin{bmatrix} x_a \\ x_b \\ x_c \end{bmatrix} = \begin{bmatrix} Xe^{j\theta} \\ Xe^{j(\theta - \frac{2\pi}{3})} \\ Xe^{j(\theta + \frac{2\pi}{3})} \end{bmatrix} $$
 
 </div>
 
-where $$X$$ is the amplitude of the voltage or current, $$\theta$$ is the angle of the voltage or current. The Clarke transformation [[4]](#4) is used to convert the three-phase variables into an orthogonal reference frame. The transformation matrix is given by:
+where $$X$$ is the amplitude of the voltage or current, $$\theta$$ is the angle of the voltage or current. Since the system is balanced, the transformation can be calculated using the $$a$$-phase measurement, and $$\theta_v = \theta$$. The real and imaginary parts of the product of $$v_a e^{-j\theta_v}$$ will give the $$v^q$$ and $$v^d$$ components of the voltage, respectively.
+
+In case of unbalance system, the method of symmetrical components would have to be used in order to obtain the positive an negative sequence components.
+
+Inversely, the transformation from *$$dq0$$* reference frame to *abc* can be done by performing the following operation:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ T_{\text{Clarke}} = \frac{1}{3} \begin{bmatrix} 2 & -1 & -1 \\ 0 & \sqrt{3} & -\sqrt{3} \\ 1 & 1 & 1 \end{bmatrix} $$
-</div>
-
-which applied to the *abc* variables in balanced conditions, results in the *$$\alpha\beta0$$* variables:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ x_{\alpha\beta0} = \begin{bmatrix} x_{\alpha} \\ x_{\beta} \\ x_0 \end{bmatrix} = \begin{bmatrix} \sqrt{2} X \cos(\theta) \\ - \sqrt{2}X \sin(\theta)  \\ 0\end{bmatrix} $$
-</div>
-
-noting that $$x_0 = 0$$ since it is a balanced system. The electrical variables in this new reference are still sinusoidal. It is desirable to have constant valued variables to be able to implement typical PI control over the signal more easily. This is done using the Park transformation [[5]](#5), converting the *$$\alpha\beta$$* variables into a rotating reference frame. The transformation matrix is given by:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ T_{\text{Park}}(\hat{\theta}) = \begin{bmatrix} \cos(\hat{\theta}) & -\sin(\hat{\theta}) \\ \sin(\hat{\theta}) & \cos(\hat{\theta}) \end{bmatrix} $$
+$$ v^a = (v^q + j v^d)e^{j\theta_v} $$
+$$ v^b = v^a e^{-j\frac{2\pi}{3}} $$
+$$ v^c = v^a e^{j\frac{2\pi}{3}} $$
 
 </div>
-
-which applied to the *$$\alpha\beta$$* variables, results in the *$$dq0$$* variables:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ x_{qd0} = \begin{bmatrix} x_{q} \\ x_{d} \end{bmatrix} = \begin{bmatrix} \sqrt{2} X \cos(\theta - \hat{\theta})  \\ \sqrt{2} X \sin(\theta - \hat{\theta}) \end{bmatrix} $$
-
-</div>
-
-As it can be seen, the Park transformation is dependent of the angle $$\hat{\theta}$$, which is the angle of the rotating reference frame, and it can be different to the angle of the voltage $$\theta$$. If the electrical variable is synchronized with the rotating reference frame, then $$\theta = \hat{\theta}$$ and $$x_d = 0$$.
 
 ### Angle and frequency tracking
 
-Instead of having a PLL, the direct measurement of the voltage of the grid will provide its angle $$\theta$$. The frequency of the grid is obtained by differentiating the angle, using the previous value of the angle and the current value, as well as the time step:
+Instead of having a PLL, the direct measurement of the voltage of the grid will provide its angle $$\theta$$. The frequency of the grid is obtained by differentiating the angle, using the value of the angle of the previous iteration (or $$\theta_0$$ for the first time step) and the current value, as well as the time step:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ \omega = \frac{\theta_i - \theta_{i-1}}{\Delta t} $$
 </div>
 
+This tracking, alongside the transformations mentioned in the previous section, can be represented by the following block diagram:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/Phasor_qd0_GF.svg' | relative_url }}"
+     alt="Angle Tracking Diagram"
+     style="float: center; margin-right: 10px; width: 500px;" />
+</div>
+<div align = 'center'>
+Figure 2: Angle Tracking and dq0 Transformation Diagram 
+</div>
+<br>
+
 The dynamics of the grid tracking are completely dismissed using this approach, which has led to some developments in order to simulate these dynamics using the closed-loop transfer function [[6]](#6):
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{\theta(s)'}{\theta(s)} = \frac{s \tau_{pll} + 1}{\frac{s^2}{\omega_{pll}^2} + s\tau_{pll} + 1} $$
+$$ \frac{\theta_v(s)'}{\theta_v(s)} = \frac{s \tau_{pll} + 1}{\frac{s^2}{\omega_{pll}^2} + s\tau_{pll} + 1} $$
 
 </div>
 where $$\tau_{pll}$$ is the time constant of the PLL and $$\omega_{pll}$$ is the natural frequency of the PLL. 
@@ -181,12 +175,12 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
 
 </div>
 
-The converter voltage setpoint obtained from this loop ($$v_c^{qd*}$$) can be used to determine the 
+The converter voltage setpoint obtained from this loop ($$v_c^{qd*}$$) can be used to determine the current of the equivalent sources of the converters when used in the relationship for $$\i^{q*}_c$$ and $$\i^{d*}_c$$ (not to be confued with $$i^{qd*}$$, which are the setpoints obtained in the current control loop). <!-- Pending consulting Vinicius and some review, notation is tricky --> 
 
 
 ### Active and reactive power control
 
-The previous section made use of the current setpoints to control the converter. These setpoints can be determined directly by the user, or they can be obtained from the power setpoints (P*, Q*), which would still come from the user. To derive the controls, firstly the instantaneous power theory [[8]](#8) is described briefly for the synchronous frame *dq0*.
+The previous section made use of the current setpoints to control the converter. As in the EMT model, they can be determined directly by the user, or they can be obtained from the power setpoints (P*, Q*), which would still come from the user. To derive the controls, firstly the instantaneous power theory [[8]](#8) is described briefly for the synchronous frame *dq0*.
 
 The voltage and current phasors can be expressed in the *dq0* frame as:
 
@@ -269,7 +263,7 @@ The model presented can have some of its dynamics simplified in order to perform
 
 - **Phasor $$I_0$$**: The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
 
-- **Phasor $$PQ_1$$**: The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_pq$$, similarly to the first case. The current loop is also removed.
+- **Phasor $$PQ_1$$**: The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
 
 The details can be consulted in:
 
@@ -282,9 +276,7 @@ This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-| NREL | [Link](https://github.com/NREL/PyPSCAD) | PSCAD | - | 17/05/2024 | Described in [10.1109/KPEC51835.2021.9446243](https://doi.org/10.1109/KPEC51835.2021.9446243) | 
-| SimplusGrid| [Link](https://github.com/Future-Power-Networks/Simplus-Grid-Tool/blob/master/%2BSimplusGT/%2BClass/GridFollowingVSI.m) | Matlab | [BSD 3-clause](https://opensource.org/licenses/BSD-3-Clause) | 14/06/2024 | -------- |
-| DPSim | [Link](https://github.com/sogno-platform/dpsim/blob/master/dpsim-models/src/EMT/EMT_Ph3_AvVoltageSourceInverterDQ.cpp) | C++ | [MPL-2.0](https://opensource.org/licenses/MPL-2.0) | 14/06/2024 | -------- |
+<!-- Yet to be reviewed -->
 
 
 ## Table of references
@@ -305,5 +297,3 @@ This model has been successfully implemented in :
 <a id="7">[7]</a> Harnefors, L.; Nee, H. P. "Model-Based Current Control of AC Machines Using the Internal Model Control Method". IEEE Transactions on Industrial Applications, Vol. 34, No. 1, January/February 1998, DOI: [10.1109/28.658735](https://doi.org/10.1109/28.658735)
 
 <a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
-
-<a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
