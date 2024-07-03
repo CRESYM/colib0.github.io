@@ -55,28 +55,28 @@ A 10-second-long time domain simulation was carried out with a time step of 1 mi
 The results, provided in the continuation, can be obtained by running any of the three models provided (numerical integration with Matlab, Simulink simulation, Numerical integration with Python).
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig6_CS1.jpg' | relative_url }}"
+     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig1_CS1.jpg' | relative_url }}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.1. Case study #1: electric power system frequency response, obtained with SFRM without UFLS </b></p>
 </figure>
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig7_CS2.jpg' | relative_url }}"
+     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig2_CS2.jpg' | relative_url }}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.2. Case study #2: electric power system frequency response, obtained with SFRM with conventional UFLS </b></p>
 </figure>
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig8_CS3.jpg' | relative_url }}"
+     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig3_CS3.jpg' | relative_url }}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.3. Case study #3: electric power system frequency response, obtained with SFRM and UL (L-shaped threshold function) </b></p>
 </figure>
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig9_CS4.jpg' | relative_url }}"
+     <img src="{{ '/pages/testCases/System_frequency_response_model_with_underfrequency_load_shedding_protection/SFRM_with_UFLS/Fig4_CS4.jpg' | relative_url }}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.4. Case study #4: electric power system frequency response, obtained with SFRM and UL UFLS (ellipse-shaped threshold function) </b></p>
