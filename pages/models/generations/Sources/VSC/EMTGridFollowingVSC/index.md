@@ -367,7 +367,7 @@ $$ D_2 = \frac{V_{svm} \sin(\theta_{sec1} - \frac{\pi}{3})}{E_{DC}} $$
 
 where $$D_1$$ and $$D_2$$ are the duty cycles of the vectors that limit the sector. Now, $$D_0$$ and $$D_7$$ can be easily calculated. 
 
-The switching order is important, since it is desirable to have a resulting sine-like wave, while minimizing switching losses. A symmetrical pattern that starts and ends at the 0-state is chosen, since it helps to transition between two adjacent periods that have the voltage at two different regions, for instance. To minimize losses, the order of states will be the one that results in a single switch between states. The following table shows all the switching states with their output voltage:
+The switching order is important, since it is desirable to have a resulting sine-like wave, while minimizing switching losses. A symmetrical pattern that starts and ends at the ⓪-state is chosen, since it helps to transition between two adjacent periods that have the voltage at two different regions, for instance. To minimize losses, the order of states will be the one that results in a single switch between states, meaning that from the state with switch positions $$000$$, the next state will have $$1$$ in a single switch, and the other two switches at $$0$$. The following table shows all the switching states with their output voltage:
 
 <table style="table-layout: fixed; width: 50%; margin-left: auto; margin-right: auto;">
   <colgroup>
@@ -380,7 +380,7 @@ The switching order is important, since it is desirable to have a resulting sine
     <col style="width: 20%;">
   </colgroup>
 <tr style="border-top:2px solid black;">
-     <th style="border-left:2px solid black; text-align:center;">Vector</th>
+     <th style="border-left:2px solid black; text-align:center;">State ID</th>
      <th style="border-left:2px solid black; text-align:center;">q1</th>
      <th style="text-align:center;">q2</th>
      <th style="text-align:center;">q3</th>
@@ -389,7 +389,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <th style="border-right:2px solid black; text-align:center;">Vc</th>
 </tr>
 <tr style="border-top:2px solid black;">
-     <td style="border-left:2px solid black;">$$0$$</td>
+     <td style="border-left:2px solid black;">$$⓪$$</td>
      <td style="border-left:2px solid black;">$$0$$</td>
      <td>$$0$$</td>
      <td>$$0$$</td>
@@ -398,7 +398,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$0$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$1$$</td>
+     <td style="border-left:2px solid black;">$$①$$</td>
      <td style="border-left:2px solid black;">$$1$$</td>
      <td>$$0$$</td>
      <td>$$0$$</td>
@@ -407,7 +407,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$2$$</td>
+     <td style="border-left:2px solid black;">$$②$$</td>
      <td style="border-left:2px solid black;">$$1$$</td>
      <td>$$1$$</td>
      <td>$$0$$</td>
@@ -416,7 +416,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$-\frac{2E_{DC}}{3}$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$3$$</td>
+     <td style="border-left:2px solid black;">$$③$$</td>
      <td style="border-left:2px solid black;">$$0$$</td>
      <td>$$1$$</td>
      <td>$$0$$</td>
@@ -425,7 +425,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$4$$</td>
+     <td style="border-left:2px solid black;">$$④$$</td>
      <td style="border-left:2px solid black;">$$0$$</td>
      <td>$$1$$</td>
      <td>$$1$$</td>
@@ -434,7 +434,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$5$$</td>
+     <td style="border-left:2px solid black;">$$⑤$$</td>
      <td style="border-left:2px solid black;">$$0$$</td>
      <td>$$0$$</td>
      <td>$$1$$</td>
@@ -443,7 +443,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$\frac{2E_{DC}}{3}$$</td>
 </tr>
 <tr>
-     <td style="border-left:2px solid black;">$$6$$</td>
+     <td style="border-left:2px solid black;">$$⑥$$</td>
      <td style="border-left:2px solid black;">$$1$$</td>
      <td>$$0$$</td>
      <td>$$1$$</td>
@@ -452,7 +452,7 @@ The switching order is important, since it is desirable to have a resulting sine
      <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
 </tr>
 <tr style="border-bottom:2px solid black;">
-     <td style="border-left:2px solid black;">$$7$$</td>
+     <td style="border-left:2px solid black;">$$⑦$$</td>
      <td style="border-left:2px solid black;">$$1$$</td>
      <td>$$1$$</td>
      <td>$$1$$</td>
@@ -462,7 +462,7 @@ The switching order is important, since it is desirable to have a resulting sine
 </tr>
 </table>
 
-For instance, if the voltage setpoint is located in the region delimited by states $$0/7-1-6$$, the switching order would be $$000 \rightarrow 100 \rightarrow 101 \rightarrow 111 \rightarrow 101 \rightarrow 100 \rightarrow 000$$, or, if we use state identifiers, $$0 \rightarrow 1 \rightarrow 6 \rightarrow 7 \rightarrow 6 \rightarrow 1 \rightarrow 0$$. This means that the duty cycles are split in two for all the states except the 7-state. The following figure represents a switching state of the mentioned pattern:
+For instance, if the voltage setpoint is located in the region delimited by states $$⓪/⑦-①-⑥$$ as in Figure 9, the switching order would be $$000 \rightarrow 100 \rightarrow 101 \rightarrow 111 \rightarrow 101 \rightarrow 100 \rightarrow 000$$, or, if we use state identifiers, $$ ⓪ \rightarrow ① \rightarrow  ⑥ \rightarrow  ⑦  \rightarrow  ⑥ \rightarrow  ① \rightarrow  ⓪ $$. This means that the duty cycles are split in two for all the states except the ⑦-state. The following figure represents state ⑥ of the mentioned pattern:
 
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
@@ -471,11 +471,20 @@ For instance, if the voltage setpoint is located in the region delimited by stat
      style="float: center; margin-right: 10px; width: 900px;" />
 </div>
 <div align = 'center'>
-Figure 10: Schematics of the instantaneous switching state of the VSC 
+Figure 10: Schematics of the instantaneous switching state ⑥. (a) shows the positions of the switches, as well as the whole pattern, (b) represents the IGBT pairs and which of them is on, and (c) shows the equivalent grid for the state.
 </div>
 <br>
 
-As it can be seen in the figure, the pattern needed to generate the given AC voltage changes the state of one of its switches at a time and starts and ends at 0 voltage. The states $$000$$ and $$111$$ are those where all the switches are closed on the same side, short-circuiting the three phases, while for the rest of the cases, there is a voltage division between the isolated phase and the short-circuited couple, as can be seen from the grid equivalent in the right-most scheme.
+As it can be seen in Figure 10(a), the pattern needed to generate the $$v^{\alpha\beta}$$ AC voltage shown in Figure 9 will change the state of one of its switches at a time and starts and ends at 0 voltage. The states $$000$$ and $$111$$ are those where all the switches are closed on the same side, short-circuiting the three phases, while for the rest of the cases, there is a voltage division between the isolated phase and the short-circuited couple, as can be seen from the grid equivalent in Figure 10(c).
+
+The result of the algorithm would determine the state of the switches of the converter, and would send to each IGBT the appropiate signal (check Figure 10(b)). This corresponds to the hardware integration, but since the model is used to simulate the system, the averaged output voltage of the converter during a PWM period can be directly calculated using the duty times:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ v_{c}^{\alpha\beta} = D_1 V_1 + D_2 V_2$$
+</div>
+
+where, for the given example, $$V_1 = E_{DC} e^{j0}$$ and $$V_2 = E_{DC} e^{j\frac{\pi}{3}}$$, and $$D_1$$ and $$D_2$$ are the duty cycles calculated for the given voltage setpoint. The output voltage can be then transformed to the *abc* frame.
 
 
 ## Open source implementations
@@ -509,3 +518,6 @@ This model has been successfully implemented in :
 <a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
 
 <a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
+
+
+ ①  ②  ③  ④  ⑤  ⑥  ⑦  ⑧  ⑨  ⓪ 
