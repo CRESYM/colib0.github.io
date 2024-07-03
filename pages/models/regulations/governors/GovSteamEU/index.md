@@ -38,6 +38,26 @@ mechanical losses are negligible, and in steady state condition
 $$P_\mathrm{e} = P_\mathrm{m}$$. This assumes that mechanical losses do
 not have any major effect on dynamic stability [1].
 
+## Model schema
+
+![](./drawings/GovSteamEU.drawio.svg)
+
+<div id="fig-control_diagram">
+
+Figure 1: Model schema, based on [1] and [5]
+
+</div>
+
+
+![](./drawings/SteamTurbineConfig.drawio.svg)
+
+<div id="fig-Steam_turbine_configuration">
+
+Figure 2: Steam turbine with high pressure (HP) and low pressure (LP)
+part
+
+</div>
+
 ## Model description
 
 ### Turbine model
@@ -172,26 +192,6 @@ fast reduction of the intercept valve set-point in case of over speed
 and hence interrupting the steam flow into the LP turbine and quickly
 reducing $$P_\mathrm{m}$$.
 
-## Model schema
-
-
-![](./drawings/GovSteamEU.drawio.svg)
-
-<div id="fig-control_diagram">
-
-Figure 1: Model schema, based on [1] and [5]
-
-</div>
-
-
-![](./drawings/SteamTurbineConfig.drawio.svg)
-
-<div id="fig-Steam_turbine_configuration">
-
-Figure 2: Steam turbine with high pressure (HP) and low pressure (LP)
-part
-
-</div>
 
 ## Parameters:
 
@@ -285,7 +285,7 @@ Table 3: Outputs
 
 The initial values for the system’s states are calculated from the
 initial mechanical power $$P_\mathrm{m\,0}$$, frequency $$f_\mathrm{0}$$ and
-rotation speed $$\omega_\mathrm{0}$$. 
+rotation speed $$\omega_\mathrm{0}$$.
 
 ### Helper variables
 
