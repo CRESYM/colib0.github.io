@@ -3,7 +3,7 @@ layout: page
 title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
 tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
 date: 05/06/2024 
-last-updated: 14/06/2024
+last-updated: 03/07/2024
 id: #163
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
