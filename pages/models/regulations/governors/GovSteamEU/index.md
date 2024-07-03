@@ -3,6 +3,7 @@ layout: page
 title: GovSteamEU
 tags: [regulations, governor, controller, synchronous machine, Opensource, IEC, CIMDynamic, RMS, modelica, dynawo]
 author: Martin Franke, Saikrishna Vallabhaneni
+reviewers: Mathilde Bongrain
 date: 20/06/2024
 last-updated: 20/06/2024
 id: #59
