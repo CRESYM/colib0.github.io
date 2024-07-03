@@ -16,7 +16,7 @@ reviewer: Mathilde Bongrain
 
 ## Network description
 
-All 4 cases are based on the Underfrequency load shedding protection scheme and SSystem frequency response model as described [here](/pages/models/protectionDevices/UFLS/index.md)
+All 4 cases are based on the Underfrequency load shedding protection scheme and SSystem frequency response model as described [here](/pages/models/protectionDevices/UFLS/)
 
 ## Case studies
 
