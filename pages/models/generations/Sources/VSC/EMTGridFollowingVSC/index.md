@@ -518,6 +518,3 @@ This model has been successfully implemented in :
 <a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
 
 <a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
-
-
- ①  ②  ③  ④  ⑤  ⑥  ⑦  ⑧  ⑨  ⓪ 
