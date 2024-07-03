@@ -4,6 +4,9 @@ title: Exponential Load Model
 tags: ["#143", "load", "Exponential", "steady-state", "polynomial"] 
 date: 29/05/2024 
 last-updated: 29/05/2024
+id: #143
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
 # Exponential Load Model

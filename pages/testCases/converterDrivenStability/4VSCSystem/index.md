@@ -4,6 +4,9 @@ title: Four VSC benchmark system
 tags: [opensource, small, TCRL2, converter driven stability, HVDC, cable, WTG, EMTP, STEPSS, dynawo] 
 date: 02/01/2024  
 last-updated: 08/03/2024 
+id: #130
+authors: Thierry Van Cutsem
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 
 # Four VSC benchmark System

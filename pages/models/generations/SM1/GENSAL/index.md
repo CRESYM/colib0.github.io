@@ -4,6 +4,9 @@ title: GENROU/GENSAL without saturation
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasorial", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
 last-updated: 24/05/2024
+id: #110
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
 # Salient-pole/ round-rotor Synchronous Machine without saturation

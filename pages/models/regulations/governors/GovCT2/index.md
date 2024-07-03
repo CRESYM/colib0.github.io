@@ -6,6 +6,8 @@ author: Martin Franke
 date: 23/04/2024
 last-updated: 15/05/2024
 id: #53
+authors: Martin Franke (Fraunhöfer IEE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # GovCT2 / GGOV2 (Synchronous Machine Governor)
 

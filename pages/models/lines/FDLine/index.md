@@ -4,6 +4,9 @@ title: FD Line Model
 tags: ["#120", "pi-equivalent", "Frequency Dependent", "Martí", "EMT", "transient",  "transmission"]
 date: 09/05/2025 
 last-updated: 13/05/2024
+id: #120
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
 # Frequency Dependent Line Model

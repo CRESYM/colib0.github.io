@@ -4,6 +4,9 @@ title: Capacitor Bank
 tags: ["#121","Capacitor", "dynawo"]
 date: 10/05/2024 
 last-updated: 14/05/2024
+id: #121
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
 # Capacitor Bank
