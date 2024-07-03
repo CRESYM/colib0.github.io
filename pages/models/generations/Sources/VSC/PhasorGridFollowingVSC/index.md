@@ -3,7 +3,7 @@ layout: page
 title: Full-Phasor Grid Following Voltage Source Converter 
 tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
 date: 26/06/2024 
-last-updated: 26/06/2024
+last-updated: 01/07/2024
 id: #165
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -37,10 +37,10 @@ The model can be described with the following schematic:
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/FullPhasor_GF_VSC.svg' | relative_url }}"
      alt="EMT GF VSC scheme"
-     style="float: center; margin-right: 10px; width: 500px;" />
+     style="float: center; margin-right: 10px; width: 650px;" />
 </div>
 <div align = 'center'>
-Figure 1: EMT Grid Following VSC scheme <a href="#1">[1]</a>
+Figure 1: Phasor Grid Following VSC scheme <a href="#2">[2]</a>
 </div>
 <br>
 
@@ -56,7 +56,7 @@ A detailed explanation of each block is provided in the following subsections.
 
 Since we are dealing with phasors that rotate at the grid frequency, instead of instantaneous values, the transformation from the *abc* reference frame to the *qd0* reference frame can be performed by cancelling or applying the rotation of the phasor.
 
-Assuming we have an electrical variable $$\underline{x} = Xe^{j\theta}$$, where $$X$$ is the amplitude and $$\theta$$ is the angle of the variable, the transformation to the *$$qd0$$ reference can be done by multiplying by $$e^{-j\theta_v}$$.
+Assuming we have a complex electrical variable $$x = Xe^{j\theta}$$, where $$X$$ is the amplitude and $$\theta$$ is the angle of the variable, the transformation to the *qd0* reference can be done by multiplying by $$e^{-j\theta_v}$$.
 
 For the *abc* variables, the phasors will be:
 
@@ -70,7 +70,7 @@ where $$X$$ is the amplitude of the voltage or current, $$\theta$$ is the angle 
 
 In case of unbalance system, the method of symmetrical components would have to be used in order to obtain the positive an negative sequence components.
 
-Inversely, the transformation from *$$dq0$$* reference frame to *abc* can be done by performing the following operation:
+Inversely, the transformation from *qd0* reference frame to *abc* can be done by performing the following operation:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -132,18 +132,20 @@ $$ i^{d*}_c = \frac{v^{d*}_c - v^{d}_g + \omega_g L i^q_c}{R + sL} = \frac{\hat{
 
 </div>
 
+where $$v^{q*}_c$$ and $$v^{d*}_c$$ are the setpoints of the converter voltage, $$v^{q}_g$$ and $$v^{d}_g$$ are the grid voltage measurements, $$i^{q*}_c$$ and $$i^{d*}_c$$ are the setpoints of the converter current, and $$i^{q}_c$$ and $$i^{d}_c$$ are the converter current measurements. Although $$i^{qd*}_c$$ is directly considered to be the converter current without any modulation, a different notation for its measurement is used ($$i^{qd}_c$$) to differentiate it.
+
 The open-loop transfer function is given by:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
+$$ \frac{i^{qd*}_c(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
 
 </div>
 
 The following schematic represents the closed-loop block diagram for the current loop:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/CurrentErrorVSC.svg' | relative_url }}"
+<img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/CurrentErrorVSC_Phasor.svg' | relative_url }}"
      alt="Current Error Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -156,15 +158,15 @@ The transfer function of this block diagram, considering $$G_c = K^{icl}_p + \fr
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{G_c(s)}{Ls + R + G_c(s)} $$
+$$ \frac{i^{qd*}_c(s)}{i^{qd*}(s)} = \frac{G_c(s)}{Ls + R + G_c(s)} $$
 
 </div>
 
-where $$i^{qd*}(s)$$ is the reference current for *q* or *d* axis, $$i^{qd}(s)$$ is the measured current. The controller gains can be selected as $$K^{icl}_p = \frac{L}{\tau_c}$$ and $$K^{icl}_i = \frac{R}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
+where $$i^{qd*}(s)$$ is the reference current for *q* or *d* axis, $$i^{qd*}_c(s)$$ is the converter current. The controller gains can be selected as $$K^{icl}_p = \frac{L}{\tau_c}$$ and $$K^{icl}_i = \frac{R}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{1}{\tau_c s + 1} $$
+$$ \frac{i^{qd*}_c(s)}{i^{qd*}(s)} = \frac{1}{\tau_c s + 1} $$
 </div>
 
 The resulting PI controller is the following:
@@ -175,8 +177,7 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
 
 </div>
 
-The converter voltage setpoint obtained from this loop ($$v_c^{qd*}$$) can be used to determine the current of the equivalent sources of the converters when used in the relationship for $$\i^{q*}_c$$ and $$\i^{d*}_c$$ (not to be confued with $$i^{qd*}$$, which are the setpoints obtained in the current control loop). <!-- Pending consulting Vinicius and some review, notation is tricky --> 
-
+The converter voltage setpoint obtained from this loop ($$v_c^{qd*}$$) can be used to determine the current of the equivalent sources of the converters when used in the relationship for $$i^{q*}_c$$ and $$i^{d*}_c$$ (not to be confused with $$i^{qd*}$$, which are the setpoints obtained in the current control loop). 
 
 ### Active and reactive power control
 
@@ -204,7 +205,7 @@ As a design choice of the PLL, $$v_d = 0$$ to track the grid angle. Then, the ex
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 $$ i^{q*} = \frac{2}{3} \frac{P^*}{v^q} $$
-$$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
+$$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^q} $$
 </div>
 
 This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram shows the current setpoints output using the power setpoints:
@@ -246,7 +247,7 @@ $$K^{ipl}_p = \frac{2\tau_c}{3V_{peak}\tau_p}$$
 $$K^{ipl}_i = \frac{2}{3V_{peak}\tau_p}$$
 </div>
 
-The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loop is designed to have a slower response than the current loop.
+where $$V_peak$$ is used to tune the controller constant since $$v^q$$ will be close to this value. The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loop is designed to have a slower response than the current loop.
 
 ### Limitations of current
 
@@ -264,6 +265,20 @@ The model presented can have some of its dynamics simplified in order to perform
 - **Phasor $$I_0$$**: The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
 
 - **Phasor $$PQ_1$$**: The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
+
+The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the performance for all these models compared to the EMT model in one particular scenario.:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/ErrorPlot_Phasor.svg' | relative_url }}"
+     alt="Phasor Models Comparison"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 8: Phasor Models Error Comparison <a href="#1">[1]</a>
+</div>
+<br>
+
+As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy, while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Depending on the desired study, one may be more suitable than the other. 
 
 The details can be consulted in:
 
