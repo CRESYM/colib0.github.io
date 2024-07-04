@@ -9,8 +9,6 @@ authors: Thierry Van Cutsem
 reviewers: Mathilde Bongrain (CRESYM)
 ---
 
-# RMS grid following voltage source converter
-
 ## Context
 
 This grid-following voltage source converter is a generic RMS model that encompasses many variants found in the literature. The dynamic model was developed and validated by the team of Professor Xavier Guillaud at Ecole centrale de Lille; The parameters were tuned using time-scale decomposition principles (for instance, current control loops are faster than active power control loop, etc.). The RMS implementation and testing were performed by Prof. Thierry Van Cutsem with a view to building test cases to study the impact of converters on stability of power networks.

@@ -9,8 +9,6 @@ authors: Thierry Van Cutsem
 reviewers: Mathilde Bongrain (CRESYM)
 ---
 
-# Four VSC benchmark System
-
 ## Use case features
 
 This 100% power electronics small test system relies on Voltage Source Converters (VSC) operating in grid following mode. It aims at showing the limitations of the phasor approximation. Hence, there is an EMT and an RMS version of this system.
