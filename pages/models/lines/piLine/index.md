@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Pi-equivalent Line Model
-tags: ["#120", "pi-equivalent", "transmission", "transmission", "Dynawo", opensource]
+tags: ["#120", "pi-equivalent", "transmission", "steady-state", "Dynawo", "OpenIPSL", "opensource"]
 date: 09/05/2024 
-last-updated: 13/05/2024
+last-updated: 20/06/2024
 id: #120
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
