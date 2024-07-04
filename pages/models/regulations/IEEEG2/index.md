@@ -8,7 +8,6 @@ id: #106
 authors: Erwan Guichard (DPS for RTE)
 reviewers: Mathilde Bongrain (CRESYM)
 ---
-# IEEEG2 model
 
 ## Context
 

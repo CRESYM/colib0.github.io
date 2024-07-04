@@ -8,8 +8,6 @@ date: 16/10/2023
 version: version-1.0.0
 ---
 
-# Deadband control block
-
 ## Diagram
 
 ![deadbandDiagram](deadband.svg)

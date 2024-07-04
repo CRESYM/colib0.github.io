@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model DC1C
+title: Standard voltage regulator model Exc IEEE DC1C
 tags: ["Voltage regulator", DC1C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEDC1C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
@@ -8,7 +8,6 @@ id: #106
 authors: Erwan Guichard (DPS for RTE)
 reviewers: Mathilde Bongrain (CRESYM)
 ---
-# Exc IEEE DC1C model
 
 ## Context
 

@@ -8,7 +8,6 @@ id: #106
 authors: Erwan Guichard (DPS for RTE)
 reviewers: Mathilde Bongrain (CRESYM)
 ---
-# IEEX2A model
 
 This article is incomplete, some sections must be written.
 

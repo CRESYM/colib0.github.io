@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator submodel AcRotatingExciter
+title: Standard voltage regulator submodel IEEE AcRotatingExciter
 tags: ["Voltage regulator submodel", "AcRotatingExciter", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
@@ -8,7 +8,6 @@ id: #106
 authors: Erwan Guichard (DPS for RTE)
 reviewers: Mathilde Bongrain (CRESYM)
 ---
-# AcRotatingExciter model
 
 ## Context
 

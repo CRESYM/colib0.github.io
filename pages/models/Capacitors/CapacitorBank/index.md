@@ -9,8 +9,6 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# Capacitor Bank
-
 ## Context
 
 In electrical grids, shunt elements are connected to the end of a transmission line in order to control the voltage level by injecting or absorbing reactive power. This is done to prevent the voltage level to go below or above the desired range, something usual when dealing with long transmission lines or for some specific loads. If the shunt element absorbs reactive power, it is formed by inductances, while if it injects reactive power, it is formed by capacitors. This model presents the steady-state analysis of a capacitor bank.

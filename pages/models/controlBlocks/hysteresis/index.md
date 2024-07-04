@@ -3,12 +3,10 @@ id: hyst1
 layout: page
 title: Hysteresis control block
 tags: ["control block", "hysteresis"]
-author: Mathilde Bongrain
+authors: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
-
-# Hysteresis control block
 
 ## Diagram
 

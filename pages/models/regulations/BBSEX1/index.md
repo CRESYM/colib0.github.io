@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Standard voltage regulator model BBSEX1
+title: Standard voltage regulator model IEC Exc BBSEX1
 tags: ["Voltage regulator", "BBSEX1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcBBC", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
@@ -8,7 +8,6 @@ id: #106
 authors: Erwan Guichard (DPS for RTE)
 reviewers: Mathilde Bongrain (CRESYM)
 ---
-# BBSEX1 model
 
 ## Context
 

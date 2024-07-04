@@ -2,7 +2,7 @@
 layout: page
 title: FD Line Model 
 tags: ["#120", "pi-equivalent", "Frequency Dependent", "Martí", "EMT", "transient",  "transmission"]
-date: 09/05/2025 
+date: 09/05/2024 
 last-updated: 13/05/2024
 id: #120
 authors: Carlos Alegre (eRoots)

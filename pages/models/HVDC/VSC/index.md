@@ -6,7 +6,7 @@ date: 21/06/2023
 last-updated: 29/03/2024
 id: #91
 authors: Mathilde Bongrain (CRESYM)
-reviewers: none
+reviewers: 
 ---
 
 # VSC HVDC model
