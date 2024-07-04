@@ -1,11 +1,10 @@
 ---
 layout: page
-title: Standard voltage regulator model ST9C
+title: Standard voltage regulator model Exc IEEE ST9C
 tags: ["Voltage regulator", "ST9C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEST9C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
 ---
-# Exc IEEE ST9C model
 
 This article is incomplete, some sections must be written.
 

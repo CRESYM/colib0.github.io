@@ -1,11 +1,10 @@
 ---
 layout: page
-title: Standard power system stabilizer model PSS3C
+title: Standard power system stabilizer model IEEE PSS3C
 tags: ["Power system stabilizer", "PSS3C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "PssIEEE3C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
 ---
-# PSS3C model
 
 This article is incomplete, some sections must be written.
 

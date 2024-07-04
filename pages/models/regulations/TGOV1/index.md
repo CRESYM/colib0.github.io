@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Standard governor model TGOV1
+title: Standard governor model IEC TGOV1
 tags: ["Governor", "TGOV1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovSteam0", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-# TGOV1 model
 
 This article is incomplete, some sections must be written.
 
