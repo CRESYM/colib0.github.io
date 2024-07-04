@@ -19,7 +19,8 @@ The exponential load model can be used for steady-state studies. The assumptions
 
 * The load is modeled as a composite load with exponential relationship between the load and the bus voltage. 
 * The exponent value of the function is nearly equal to the slope of the function around the nominal voltage.
-* Although this exponent varies non-linearly as a function of voltage, it is assumed to be constant for static loads. A common combination of exponents is $$a=1$$ for active power and $$b=2$$ for reactive power.
+* Although this exponent varies non-linearly as a function of voltage, it can be assumed to have only time dependence for time-series static analysis. 
+* This time dependency can be omitted, just assuming a constant value for the exponent. A common combination of exponents is $$a=1$$ for active power and $$b=2$$ for reactive power.
 * The frequency is constant, and the load is balanced.
 
 The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
@@ -33,8 +34,6 @@ The model does not take into account the time-response performance of the load, 
 | $$V_0$$ | Load Nominal voltage | $$V$$ |
 | $$P_0$$ | Load Nominal active power | $$W$$ |
 | $$Q_0$$ | Load Nominal reactive power | $$VAR$$ |
-| $$a$$ | Exponent for the load active power function of voltage | Unitless |
-| $$b$$ | Exponent for the load reactive power function of voltage | Unitless |
 
 
 ### Variables 
@@ -44,14 +43,16 @@ The model does not take into account the time-response performance of the load, 
 | $$V$$ | Phase-to-ground Bus Voltage | $$V$$ |
 | $$P$$ | Load Active power | $$W$$ |
 | $$Q$$ | Load Reactive power | $$VAR$$ |
+| $$a(t)$$ | Exponent for the load active power | Unitless |
+| $$b(t)$$ | Exponent for the load reactive power | Unitless |
 
 
 ### System of equations
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$P = P_0 (\frac{V}{V_0})^{a} $$
-$$Q = Q_0 (\frac{V}{V_0})^{b} $$
+$$P(V,t) = P_0 (\frac{V}{V_0})^{a(t)} $$
+$$Q(V,t) = Q_0 (\frac{V}{V_0})^{b(t)} $$
 </div>
 
 ## Operational principles
@@ -60,11 +61,11 @@ The model considers the load as an exponential function of voltage for both acti
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$P = P_0 (\frac{V}{V_0})^{a} $$
-$$Q = Q_0 (\frac{V}{V_0})^{b} $$
+$$P(V, t) = P_0 (\frac{V}{V_0})^{a(t)} $$
+$$Q(V, t) = Q_0 (\frac{V}{V_0})^{b(t)} $$
 </div>
 
-Where $$a$$ and $$b$$ are the exponents of the active and reactive power, respectively. These exponents take values that are similar to the slope of the function around the nominal voltage. If they take values of 0, 1 or 2, the load is considered constant power, constant current, or constant impedance, respectively [[2]](#2) [[3]](#3). 
+Where $$a$$ and $$b$$ are the exponents of the active and reactive power, respectively. These exponents take values that are similar to the slope of the function around the nominal voltage. If they take values of 0, 1 or 2, the load is considered constant power, constant current, or constant impedance, respectively [[2]](#2) [[3]](#3). The exponents can be time-dependent functions for time-series analysis.
 
 
 ## Open source implementations
@@ -75,7 +76,7 @@ This model has been successfully implemented in :
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
 | Dynawo | [Link](https://github.com/dynawo/dynawo/blob/master/dynawo/sources/Models/Modelica/Dynawo/Electrical/Loads/LoadAlphaBeta.mo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/)  | 29/05/2024 | No comment |
-|OpenIPSL | [Link](https://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Loads/PSAT/VoltageDependent.mo) | modelica | [BSD-3-clause](https://opensource.org/licenses/BSD-3-Clause)  | 29/05/2024 | No comment |
+| OpenIPSL | [Link](https://github.com/OpenIPSL/OpenIPSL/blob/master/OpenIPSL/Electrical/Loads/PSAT/VoltageDependent.mo) | modelica | [BSD-3-clause](https://opensource.org/licenses/BSD-3-Clause)  | 29/05/2024 | No comment |
 | PowerSimulationsDynamics | [Link](https://github.com/NREL-Sienna/PowerSimulationsDynamics.jl/blob/main/src/models/load_models.jl) | julia |[BSD-3-clause](https://opensource.org/licenses/BSD-3-Clause)  | 29/05/2024 | No comment |
 
 ## References

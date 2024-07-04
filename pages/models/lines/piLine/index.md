@@ -70,17 +70,17 @@ Its validity is for steady-state analysis of transmission lines in any configura
 
 | Variable    | details  | Unit |
 | --------------| ------ | ----- |
-| $$V_{S}$$ | RMS phase-to-ground voltage of the source terminal | $$V$$ |
-| $$I_{S}$$ | Complex current of the source terminal | $$A$$ |
-| $$V_{R}$$ | RMS phase-to-ground voltage of the receiver terminal | $$V$$ |
-| $$I_{R}$$ | Complex current of the receiver terminal | $$A$$ |
+| $$V_{S}$$ | Complex phase-to-ground voltage of the source terminal | $$V$$ |
+| $$I_{S}$$ | Complex current injected by the source terminal into the line | $$A$$ |
+| $$V_{R}$$ | Complex phase-to-ground voltage of the receiver terminal | $$V$$ |
+| $$I_{R}$$ | Complex current injected by the receiver terminal into the line | $$A$$ |
 
 ### Equations
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_S = (1 + \frac{1}{2}Y'Z')V_R + Z' I_R $$
-$$ I_S = Y'(1 + \frac{1}{4}Y'Z')V_R + (1 + \frac{1}{2}Y'Z') I_R $$
+$$ V_S = (1 + \frac{1}{2}Y'Z')V_R - Z' I_R $$
+$$ I_S = Y'(1 + \frac{1}{4}Y'Z')V_R - (1 + \frac{1}{2}Y'Z') I_R $$
 
 </div>
 
@@ -173,13 +173,19 @@ with $$h_{ij}$$ being the distance between the conductor $$i$$ to the image refl
 
 The distributed parameters line model considers the distribution of the impedance along the line. The model is based on the transmission line equations, which are a set of partial differential equations that describe the behavior of the line. It is used to obtain the accurate values of the impedance, admittance, and other parameters of the line at any point of the line. Equivalent circuits such as the $$\pi$$-equivalent are used to describe the performance as seen from the terminals.
 
-Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following circuit:
+Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/lines/piLine/distLine.svg' | relative_url }}"
-     alt="pi-equivalent circuit of a transmission line"
+     alt="Schematic of the distributed parameter transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
+<div align='center'>
+
+Figure 1. Schematic of the distributed parameter transmission line.
+</div>
+
+<br>
 
 Using the Kirchhoff laws, the following equations can be obtained:
 
@@ -220,30 +226,30 @@ with $$\gamma = \sqrt{yz}$$ being the propagation constant, with $$z$$ and $$y$$
 $$ I(x) = \frac{1}{z} \frac{dV}{dx} = \frac{C_1}{Z_c} e^{\gamma x} - \frac{C_2}{Z_c}e^{-\gamma x} $$
 </div>
 
-with $$Z_c$$ being the characteristic impedance of the line, defined as $$Z_c = \sqrt{\frac{z}{y}}$$. To determine the values of the constants $$C_1$$ and $$C_2$$, the values of the voltages have to be evaluated at the ends of the line, i.e., $$V(0) = V_R$$ and $$I(0) = I_R$$. The resulting expressions are:
+with $$Z_c$$ being the characteristic impedance of the line, defined as $$Z_c = \sqrt{\frac{z}{y}}$$. To determine the values of the constants $$C_1$$ and $$C_2$$, the values of the voltages have to be evaluated at the ends of the line, i.e., $$V(0) = V_R$$ and $$I(0) = - I_R$$, changing the sign of the current to use the positive sign for current injected to the line from the bus. The resulting expressions are:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
 $$ V_R = C_1 + C_2 $$
-$$ I_R = \frac{C_1}{Z_c} - \frac{C_2}{Z_c} $$
-$$ C_1 = \frac{V_R + Z_cI_R}{2} $$
-$$ C_2 = \frac{V_R - Z_cI_R}{2} $$
+$$ -I_R = \frac{C_1}{Z_c} - \frac{C_2}{Z_c} $$
+$$ C_1 = \frac{V_R - Z_cI_R}{2} $$
+$$ C_2 = \frac{V_R + Z_cI_R}{2} $$
 
 </div>
 
 Substituting this in the general expression for the voltage and current and rearranging, the resulting expressions along the line are:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ V(x) = \frac{V_R}{2} \left( e^{\gamma x} + e^{-\gamma x} \right) + \frac{Z_cI_R}{2} \left( e^{\gamma x} - e^{-\gamma x} \right) $$
-$$ I(x) = \frac{V_R}{2Z_c} \left( e^{\gamma x} - e^{-\gamma x} \right) + \frac{I_R}{2} \left( e^{\gamma x} + e^{-\gamma x} \right) $$
+$$ V(x) = \frac{V_R}{2} \left( e^{\gamma x} + e^{-\gamma x} \right) - \frac{Z_cI_R}{2} \left( e^{\gamma x} - e^{-\gamma x} \right) $$
+$$ I(x) = \frac{V_R}{2Z_c} \left( e^{\gamma x} - e^{-\gamma x} \right) - \frac{I_R}{2} \left( e^{\gamma x} + e^{-\gamma x} \right) $$
 
 </div>
 
 Which can be expressed in terms of hyperbolic functions as:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ V(x) = V_R \cosh(\gamma x) + Z_cI_R \sinh(\gamma x) $$
-$$ I(x) = \frac{V_R}{Z_c} \sinh(\gamma x) + I_R \cosh(\gamma x) $$
+$$ V(x) = V_R \cosh(\gamma x) - Z_cI_R \sinh(\gamma x) $$
+$$ I(x) = \frac{V_R}{Z_c} \sinh(\gamma x) - I_R \cosh(\gamma x) $$
 </div>
 
 For $$x=l$$, the matrix relationship between the voltage and currents of the terminals are:
@@ -257,8 +263,8 @@ I_S
 \end{bmatrix}
 =
 \begin{bmatrix}
-\cosh(\gamma l) & Z_c \sinh(\gamma l) \\
-\frac{1}{Z_c} \sinh(\gamma l) & \cosh(\gamma l)
+\cosh(\gamma l) & -Z_c \sinh(\gamma l) \\
+\frac{1}{Z_c} \sinh(\gamma l) & -\cosh(\gamma l)
 \end{bmatrix}
 \begin{bmatrix}
 V_R \\
@@ -274,13 +280,13 @@ The pi-equivalent circuit corresponds to a representation of the line with the l
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/lines/piLine/pi_eq_scheme.svg' | relative_url }}"
-     alt="pi-equivalent circuit of a transmission line"
+     alt="pi-equivalent circuit of the lumped admittance transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
 
 <div align='center'>
 
-Figure 1. Pi-equivalent circuit of a transmission line.
+Figure 2. Pi-equivalent circuit of the lumped admittance transmission line.
 
 </div>
 <br>
@@ -288,8 +294,8 @@ Figure 1. Pi-equivalent circuit of a transmission line.
 In this case, applying the Kirchhoff laws yields the following equations:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ I_S = I_R + \frac{1}{2} V_R Y' + \frac{1}{2} V_S Y' $$
-$$ V_S = V_R + (I_R + \frac{1}{2} V_R Y')Z' = V_R (1 + \frac{1}{2}Y'Z') +I_R Z'  $$
+$$ I_S = -I_R + \frac{1}{2} V_R Y' + \frac{1}{2} V_S Y' $$
+$$ V_S = V_R + (-I_R + \frac{1}{2} V_R Y')Z' = V_R (1 + \frac{1}{2}Y'Z') -I_R Z'  $$
 </div>
  
 which rearranged in matrix form are:
@@ -302,8 +308,8 @@ I_S
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 + \frac{1}{2} Y'Z' & Z' \\
-Y'(1 + \frac{1}{4}Y'Z') & 1 + \frac{1}{2} Y'Z'
+1 + \frac{1}{2} Y'Z' & -Z' \\
+Y'(1 + \frac{1}{4}Y'Z') & -(1 + \frac{1}{2} Y'Z')
 \end{bmatrix}
 \begin{bmatrix}
 V_R \\
