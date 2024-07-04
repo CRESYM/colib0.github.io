@@ -3,7 +3,7 @@ id: db1
 layout: page
 title: Deadband control block
 tags: ["control block", "deadband"]
-author: Mathilde Bongrain
+authors: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---

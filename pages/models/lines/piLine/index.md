@@ -9,8 +9,6 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# Pi Line Model
-
 ## Context
 
 Transmission lines carry the electric power from one substation of the grid to another. There are overhead lines or underground cables, and they can be classified as low-range, middle-range or long-range depending on the distance between the two ends. Modelling precisely their behavior is essential to calculate the voltage drops, the phase shifts due to inductive behavior and the losses that occur when transporting energy from one point to another.

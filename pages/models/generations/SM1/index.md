@@ -9,8 +9,6 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# Synchronous Machine Model
-
 ## Context
 
 The synchronous machine is one of the most studied component of a power system, being its main source of electrical energy. It is the most common type of generators, and it is present in most power plants (thermal, hydro, and some wind) as an interface between the mechanical energy and electrical energy. The mathematical model presented in this article develops the dynamic equations of synchronous machines.[[1]](#1) It only covers the physical part of the machine not the regulations nor protections schemes. Variants of the classical model are listed in a dedicated section [Derived models](#derived-models)  below.

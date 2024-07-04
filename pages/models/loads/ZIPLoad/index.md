@@ -9,8 +9,6 @@ authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
 
-# ZIP Load Model
-
 ## Context
 
 Loads are the consumer side of an electrical power system, draining energy from a given bus. Since a load can be a bundle of elements such as shunt elements, regulators, transformers, and many other devices, it is tough to describe accurately how it behaves as a group, and there are many models that try to provide an accurate representation. It is necessary to be able to simulate the behavior of the system under different conditions. The model proposed in this page describes the *ZIP load model*, also referred to as *polynomial load model* [[1]](#1) [[2]](#2) [[3]](#3), which is useful for steady-state for forecasting studies mainly.

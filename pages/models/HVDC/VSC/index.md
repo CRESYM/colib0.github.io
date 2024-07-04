@@ -1,6 +1,6 @@
 ---
 layout: page
-title: VSC HVDC Model
+title: RTE Average phasor voltage source converter HVDC Model
 tags: ["#24","opensource","phasor", "HVDC", "VSC", "generic", "MRL4", "Single phase", "dynawo"]
 date: 21/06/2023 
 last-updated: 29/03/2024
@@ -8,8 +8,6 @@ id: #91
 authors: Mathilde Bongrain (CRESYM)
 reviewers: 
 ---
-
-# VSC HVDC model
 
 ## Context
 
