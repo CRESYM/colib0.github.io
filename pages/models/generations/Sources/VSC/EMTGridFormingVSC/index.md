@@ -1,10 +1,10 @@
 ---
 layout: page 
-title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
-tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
-date: 05/06/2024 
+title: Generic EMT Grid Forming Voltage Source Converter 
+tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS, grid following] 
+date: 03/07/2024 
 last-updated: 03/07/2024
-id: #163
+id: #175
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
@@ -12,22 +12,12 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is a detailed Electromagnetic Transient (EMT) model of a grid-following VSC, which is a type of VSC that is synchronized with the grid, using its frequency and phase. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying the fast-dynamics of the VSC and its interaction with the grid.
+Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is a detailed Electromagnetic Transient (EMT) model of a grid-forming VSC, which is a type of VSC that generates its own angle and frequency reference. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying the fast-dynamics of the VSC and its interaction with the grid.
     
 ## Model use, assumptions, validity domain and limitations
 
-The model described allows performing EMT studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are fast-transients to be studied, being able to describe phenomena ranging from short-circuits to switching events or even lightning [[1]](#1). 
 
-The assumptions made are:
 
-* The DC side of the converter is considered as an ideal DC voltage source $$E_{DC}$$.
-* The AC-side of the converter is connected to the grid through an AC filter formed by a resistance $$R$$ and an inductance $$L$$. The AC voltage in the converter side is $$v_{c}^{abc}$$.
-* The system is considered to be balanced, and the positive and negative sequence are not considered.
-* The synchronization with the grid is controlled by a PLL, and it is done by imposing that the $$v_d = 0$$. This design criteria allows to relate active and reactive power with one of the components of the current. It only considers the fundamental frequency.
-* The VSC is assumed to be a 2-level converter, meaning that there are 2 IGBTs per phase.
-
-Although it can be used for low-frequency phenomena such as transient stability or inter-area oscillations, the number of calculations to capture the dynamics is much greater than Phasor models, and result in much higher execution times. 
-It is not useful to calculate unbalanced situation as the model is based on the positive sequence. It does not consider harmonics, as it uses a simplified PLL that only takes the fundamental frequency.
 
 
 ## Model description
@@ -35,24 +25,16 @@ It is not useful to calculate unbalanced situation as the model is based on the 
 The model can be described with the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/EMT_GF_VSC_scheme.svg' | relative_url }}"
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/EMT_GFM_VSC_scheme.svg' | relative_url }}"
      alt="EMT GF VSC scheme"
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
 <div align = 'center'>
-Figure 1: EMT Grid Following VSC scheme <a href="#1">[1]</a>
+Figure 1: EMT Grid Forming VSC scheme <a href="#1">[1]</a>
 </div>
 <br>
 
-As it can be seen, there are several control blocks that act over the converter to determine the operating point. For a Grid Following VSC, these are:
 
-* The Clarke/Park transformation blocks, which convert the electrical variables into the *$$\alpha\beta$$* and *qd0* reference frames.
-* The Phase-Lock Loop (commonly referred to as PLL), which tracks the grid voltage and synchronizes the converter with the grid angle.
-* The Outer Loop, which provides active and reactive power control by setting a current reference from a power reference.
-* The Inner Loop, or Current Loop, which corrects the converter voltage to provide the reference current.
-* The modulation block, which models the switching of the IGBTs that create an AC voltage from a DC source using Pulse-Width Modulation (PWM).
-
-A detailed explanation of each block is provided in the following subsections.
 
 ### Clarke and Park transformations
 
@@ -96,56 +78,8 @@ $$ x_{qd0} = \begin{bmatrix} x_{q} \\ x_{d} \end{bmatrix} = \begin{bmatrix} \sqr
 
 As it can be seen, the Park transformation is dependent of the angle $$\hat{\theta}$$, which is the angle of the rotating reference frame, and it can be different to the angle of the voltage $$\theta$$. If the electrical variable is synchronized with the rotating reference frame, then $$\theta = \hat{\theta}$$ and $$x_d = 0$$.
 
-### PLL
+### Angle generation
 
-The goal of the PLL is to track the grid frequency and angle, as it is needed to establish the operating points of the converter using the control loops. The design of this controller is detailed in [[6]](#6). As stated earlier, when the voltage is synchronized with the reference frame (in this case, the grid), $$v_d = 0$$. To perform this tracking, the control applied considers a PI controller, yielding the following control structure:
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PLL_ControlDiagram.svg' | relative_url }}"
-     alt="PLL Control Diagram"
-     style="float: center; margin-right: 10px; width: 700px;" />
-</div>
-<div align = 'center'>
-Figure 2: PLL Control Diagram <a href="#3">[3]</a>
-</div>
-<br>
-
-Using the Park transformation over the grid measured voltages, and assuming a small phase difference between the output of the converter and the grid voltage, the linearization $$ v^g_d = E_m \sin(\delta) \approx E_m \delta $$ can be applied in order to simplify the closed-loop transfer function for the tunning of the controller. $$E_m$$ is the peak value of the grid voltage and $$\delta = \theta - \hat{\theta}$$ is the angle difference between the measured and the reference frame angle. The linearized control structure is the following:
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/LinearPLLBlock.svg' | relative_url }}"
-     alt="PLL Control Diagram"
-     style="float: center; margin-right: 10px; width: 800px;" />
-</div>
-<div align = 'center'>
-Figure 3: Linearized PLL Control Diagram 
-</div>
-<br>
-
-Now, the PI controller needs to be tuned in order to provide the desired response. The following closed-loop transfer function models the response of the PLL:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \frac{\hat{\theta}(s)}{\theta(s)}  = \frac{2 \zeta \omega_n s + \omega_n^2} {s^2 + 2\zeta\omega_n + \omega_n^2} $$
-
-</div>
-
-which corresponds to a second-order response, where $$\hat{\theta}(s)$$ is the estimated grid angle, $$\theta(s)$$ is the voltage angle, $$\zeta$$ is the damping factor, $$\omega_n$$ is the natural frequency. The PI controller block function is given by:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ G_{PI}(s) = K_p + \frac{K_i}{s} = k_p \frac{1 + s\tau_{PLL}}{s\tau_{PLL}} $$
-</div>
-
-where $$k_p$$ and $$\tau_{PLL}$$ denoting the gains of the proportional gain and the PLL time constant, respectively. These parameters can be computed using the following expressions, obtained after working with the expressions of the closed loop transfer functions:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \omega_n = \sqrt{\frac{k_p E_m}{\tau_{PLL}}} $$
-$$ \zeta = \frac{\sqrt{\tau_{PLL} k_p E_m}}{2} $$
-</div>
-
-A typical value for the damping ratio is $$\zeta = \frac{1}{\sqrt{2}}$$, PLL natural frequency could be set to a given frequency (i.e, 50 Hz, or 1 kHz), depending on the desired response (the higher the frequency, the more aggressive). It is a choice of the user to set the desired values of the controller, setting exactly two of the four parameters ($$\omega_n$$, $$\tau_{PLL}$$, $$\zeta$$, $$k_p$$). The peak voltage $$E_m$$ is a parameter given by the utility characteristics.
 
 
 ### Current control
@@ -493,10 +427,6 @@ This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | ------------------- |------------------- | -------- |
-| NREL | [Link](https://github.com/NREL/PyPSCAD) | PSCAD | - | 17/05/2024 | Described in [10.1109/KPEC51835.2021.9446243](https://doi.org/10.1109/KPEC51835.2021.9446243) | 
-| SimplusGrid| [Link](https://github.com/Future-Power-Networks/Simplus-Grid-Tool/blob/master/%2BSimplusGT/%2BClass/GridFollowingVSI.m) | Matlab | [BSD 3-clause](https://opensource.org/licenses/BSD-3-Clause) | 14/06/2024 | -------- |
-| DPSim | [Link](https://github.com/sogno-platform/dpsim/blob/master/dpsim-models/src/EMT/EMT_Ph3_AvVoltageSourceInverterDQ.cpp) | C++ | [MPL-2.0](https://opensource.org/licenses/MPL-2.0) | 14/06/2024 | -------- |
-
 
 ## Table of references
 
