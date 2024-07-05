@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Standard voltage regulator model AC1C
+title: Standard voltage regulator model Exc IEEE AC1C
 tags: ["Voltage regulator", "AC1C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEAC1C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-# Exc IEEE AC1C model
 
 ## Context
 

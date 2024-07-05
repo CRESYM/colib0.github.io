@@ -3,13 +3,10 @@ id: invlim1
 layout: page
 title: Integrator control block with (positive) time constant T and non-windup variable limits on output
 tags: ["control block", "integrator", "limited integrator"]
-author: Mathilde Bongrain
+authors: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
-
-# Integrator control block with (positive) time constant T and non-windup variable limits on output 
-
 ## Diagram
 
 ![integrator diagram](integratorVariableLimits.svg)
