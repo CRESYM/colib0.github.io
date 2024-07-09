@@ -1,9 +1,9 @@
 ---
 layout: page 
 title: Phasor-I1 Grid Following Voltage Source Converter 
-tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
+tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc] 
 date: 26/06/2024 
-last-updated: 01/07/2024
+last-updated: 09/07/2024
 id: #165
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -12,7 +12,7 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-The Phasor-$$I_1$$ Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the Full-Phasor described [here](../). 
+The Phasor-$$I_1$$ Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the [Full-Phasor](../). 
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -24,7 +24,7 @@ The assumptions made starting from the Full-Phasor model are the following:
 
 The model shows a performance close to more accurate models during for slow dynamics such as setpoint tracking or voltage/frequency deviation. It can solve high frequency phenomena with clear limitations, as the results do not capture correctly the dynamics of phenomena like asymmetrical faults.
 
-Although it allows a bigger time step than the Full-Phasor model, it eventually will diverge if it is increased too much, as it still retains some dynamics in an approximate way. The Phasor-I0 model is more suitable as it completely removes the current loop dynamics.
+Although it allows a bigger time step than the Full-Phasor model, it eventually will diverge if it is increased too much, as it still retains some dynamics in an approximate way. The Phasor-$$I_0$$ model is more suitable as it completely removes the current loop dynamics.
 
 ## Model description
 
@@ -36,7 +36,7 @@ The diagram of the complete model is shown in the following figure.
      style="float: center; margin-right: 10px; width: 600px;" />
 </div>
 <div align = 'center'>
-Figure 1: Phasor-$$I_1$$ Model Block Diagram <a href="#1">[1]</a>
+Figure 1: Phasor-I1 Model Block Diagram <a href="#1">[1]</a>
 </div>
 <br>
 
@@ -48,7 +48,7 @@ The differential equations that modelled the behavior of the current loop are su
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i_c^{qd*}}{i^{qd*}} = \frac{1}{1+\tau_c s}$$
+$$ \frac{i_c^{qd*}}{i^{qd*}} = \frac{1}{1 + \tau_c s}$$
 </div>
 
 where $$\tau_c = \frac{1}{w_c}$$ is the time constant of the current loop, being $$w_c$$ the frequency that is set to match the bandwidth of the original  current loop. 
@@ -59,14 +59,9 @@ where $$\tau_c = \frac{1}{w_c}$$ is the time constant of the current loop, being
 No changes are made directly to this outer-loop, although the time constant $$\tau_c$$ will act as a low-pass filter of the current setpoint provided by the outer loop.
 
 
-## Open source implementations
+## Open-source implementations
 
-This model has been successfully implemented in :
-
-| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
-<!-- Yet to be reviewed -->
-
+No open-source implementations have been found.
 
 ## Table of references
 

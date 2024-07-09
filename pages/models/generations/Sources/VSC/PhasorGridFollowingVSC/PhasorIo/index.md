@@ -1,9 +1,9 @@
 ---
 layout: page 
 title: Phasor-I0 Grid Following Voltage Source Converter 
-tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
+tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc] 
 date: 26/06/2024 
-last-updated: 01/07/2024
+last-updated: 09/07/2024
 id: #165
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -12,7 +12,7 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-The Phasor-$$I_0$$ Grid Following Voltage Source Converter (VSC) model is derived from the Full-Phasor described [here](../). 
+The Phasor-$$I_0$$ Grid Following Voltage Source Converter (VSC) model is derived from the [Full-Phasor](../). 
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -71,14 +71,9 @@ $$ K_{pq}(s) = \frac{2}{3V_{peak}} \frac{1}{\tau_{pq}s} $$
 
 </div>
 
-## Open source implementations
+## Open-source implementations
 
-This model has been successfully implemented in :
-
-| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
-<!-- Yet to be reviewed -->
-
+No open-source implementations have been found.
 
 ## Table of references
 

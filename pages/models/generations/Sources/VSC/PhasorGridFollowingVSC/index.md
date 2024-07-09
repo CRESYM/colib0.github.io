@@ -1,9 +1,9 @@
 ---
 layout: page 
 title: Full-Phasor Grid Following Voltage Source Converter 
-tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
+tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc] 
 date: 26/06/2024 
-last-updated: 01/07/2024
+last-updated: 09/07/2024
 id: #165
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -12,7 +12,7 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is the Full-Phasor model of a grid-following VSC, which is a type of VSC that is synchronized with the grid, using its frequency and phase. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying low-frequency phenomena of the VSC and its interaction with the grid.
+Voltage Source Converters (VSC) are widely used in power systems for a variety of applications, such as wind and photovoltaic generation, High Voltage Direct Current (HVDC) transmission, and Flexible AC Transmission Systems (FACTS). The model described here is the Full-Phasor model of a grid-following VSC, which is a type of VSC that is synchronized with the grid, using its frequency and phase. This model, obtained from the many works developed at CITCEA-UPC (Centre d'Innovació Tecnològica en Convertidors Estàtics i Accionaments) such as [[1]](#1), [[2]](#2) and [[3]](#3), is useful for studying medium to low-frequency phenomena of the VSC and its interaction with the grid.
     
 ## Model use, assumptions, validity domain and limitations
 
@@ -26,7 +26,7 @@ The assumptions made are:
 * The electrical variables are represented by phasors that rotate at the synchronous frequency of the grid in steady-state or quasi-steady-state.
 * The complete control structure from the EMT Model, apart from the PLL, is preserved. Further simplifications are made in the models that derive from the Full-Phasor model.
 
-The model has its limitations when performing high-frequency domain phenomena, as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the EMT model. It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
+The model has its limitations when performing high-frequency domain phenomena ($$>1$$ kHz), as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the EMT model. It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
 
 From this model, some approximations can be made to reduce the complexity of the model and speed up the simulation if the study to be performed does not require to cover some dynamics of the converter. These derived models can be consulted in Section [3.6](#derived-models)
 
@@ -261,11 +261,11 @@ The technical constraints of the VSC can be included in the controls using satur
 
 The model presented can have some of its dynamics simplified in order to perform low-frequency domain studies with higher time step (which means, faster execution times). Listed below, ordered from high to low accuracy, some of this models with its assumptions are presented:
 
-- [**Phasor $$I_1$$**](/PhasorI1): The dynamics of the current loop are approximated by a first-order transfer function with a given time constant $$\tau_c$$. 
+- [**Phasor $$I_1$$**](./PhasorI1/): The dynamics of the current loop are approximated by a first-order transfer function with a given time constant $$\tau_c$$. 
 
-- [**Phasor $$I_0$$**](/PhasorIo): The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
+- [**Phasor $$I_0$$**](./PhasorIo/): The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
 
-- [**Phasor $$PQ_1$$**](/PhasorPQ1): The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
+- [**Phasor $$PQ_1$$**](./PhasorPQ1/): The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
 
 The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the performance for all these models compared to the EMT model in one particular scenario, in which the power setpoint tracking for $$P^*, Q^*$$ was studied:
 
@@ -279,7 +279,17 @@ Figure 8: Phasor Models Error Comparison <a href="#1">[1]</a>
 </div>
 <br>
 
-As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy (around $$10^3$$ $$\mu s$$), while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Depending on the desired study, one may be more suitable than the other. 
+As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy (around $$10^3$$ $$\mu s$$), while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Generally, choosing between one or other model depends on the time step size desired to use, rather than the type of study, as all the phasor models can work in a similar range of frequencies, as seen in the following figure:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/Phasor_suitability.svg' | relative_url }}"
+     alt="Phasor Models Suitability"
+     style="float: center; margin-right: 10px; width: 500px;" />
+</div>
+<div align = 'center'>
+Figure 9: Phasor Models Suitability <a href="#1">[1]</a>
+</div>
+<br>
 
 The details can be consulted in:
 
