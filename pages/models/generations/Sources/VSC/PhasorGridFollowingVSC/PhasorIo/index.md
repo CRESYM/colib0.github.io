@@ -12,7 +12,7 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-The Phasor-I0 Grid Following Voltage Source Converter (VSC) model is derived from the Full-Phasor described [here](../). 
+The Phasor-$$I_0$$ Grid Following Voltage Source Converter (VSC) model is derived from the Full-Phasor described [here](../). 
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -21,9 +21,9 @@ The model has uses similar to the $$I_1$$ model, with some improvement in the si
 The assumptions made starting from the Full-Phasor model are the following:
 
 * The current loop is completely removed from the model. The current obtained from the outer loop is directly considered to be provided by the VSC.
-* Since there are no current dynamics, the outer loop is modified to mantain the closed-loop from the Full-Phasor model.
+* Since there are no current dynamics, the outer loop is modified to maintain the closed-loop from the Full-Phasor model.
 
-The model is valid for low-frequency phenomena studies. The high-frequency events are not captured as well as in the Full-Phasor model for instance, as shown in the several Figures of [[1]](#1). 
+The model is valid for low-frequency phenomena studies, similarly to the Phasor-I1 model, but it allows for bigger time-steps (around 2 or 3 times greater time-step size). The medium to high-frequency events ($$>100$$ Hz) are not captured as well as in the Full-Phasor model for instance. 
 
 ## Model description
 

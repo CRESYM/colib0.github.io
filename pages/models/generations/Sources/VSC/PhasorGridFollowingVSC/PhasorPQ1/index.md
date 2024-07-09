@@ -12,11 +12,11 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-The Phasor-PQ1 Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the Full-Phasor described [here](../). 
+The Phasor-$$PQ_1$$ Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the Full-Phasor described [here](../). 
 
 ## Model use, assumptions, validity domain and limitations
 
-The model can be used to fasten the simulations for low-frequency phenomena studies. 
+The model can be used to fasten the simulations for low-frequency phenomena studies, where it can simulate with time steps $$>10^3$$ $$\mu s$$ with half the error that the Phasor-$$I_0$$ model has. 
 
 The assumptions made starting from the Full-Phasor model are the following:
 
@@ -24,9 +24,9 @@ The assumptions made starting from the Full-Phasor model are the following:
 
 * The outer loop is substituted by a first-order transfer function with a given time constant.
 
-The model shows the best performance out of all the models when using big time-steps (the breakpoint is around $$\Delta t = 10^3$$), making it the best alternative for studies with the lowest frequency dynamics or for cases that require the fastest performance. 
+The frequency range of the studies that are suitable for this model overlaps with the Phasor-$$I_1$$ and Phasor-$$I_0$$ models, but its biggest strength is the ability to use this big time steps in order to solve the simulation faster, with the trade-off of a higher error. Models that have their dynamics with time-constants way higher than the time steps (i.e., around 10 to 100 times slower than the time step used) are suitable for this model, such as steady-state power flows, transient stability or interarea oscillations.
 
-The error is considerably higher than any of the more complete models for smaller time steps, which means any other model is preferable.
+The error is considerably higher than any of the more complete models for smaller time steps, which means any other model is preferable in that case.
 
 ## Model description
 
@@ -46,7 +46,7 @@ The following subsections will describe the changes with respect to the Full-Pha
 
 ### Current loop
 
-The current loop is completely removed, which means $$i^{qd*} = i^{qd*}_c $$.
+The current loop is completely removed, which means teh current setpoint obtained from the outer loop is directly considered as the VSC current $$i^{qd*} = i^{qd*}_c $$, as seen in Figure 1. 
 
 ### Outer loop
 
@@ -65,7 +65,9 @@ $$ i^{q*} = \frac{2P^{*}}{3v_g^{q}} $$
 $$ i^{d*} = \frac{2Q^{*}}{3v_g^{q}} $$
 </div>
 
-where $$v_g^{q}$$ can be approximated as $$V_peak$$.
+where $$v_g^{q}$$ can be approximated as $$V_{peak}$$.
+
+As seen in Figure 1, the only input for this control block will be the power setpoints, while its output is the current setpoint.
 
 ## Open source implementations
 

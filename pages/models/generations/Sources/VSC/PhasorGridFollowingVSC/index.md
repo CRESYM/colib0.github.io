@@ -104,10 +104,11 @@ The dynamics of the grid tracking are completely dismissed using this approach, 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{\theta_v(s)'}{\theta_v(s)} = \frac{s \tau_{pll} + 1}{\frac{s^2}{\omega_{pll}^2} + s\tau_{pll} + 1} $$
+$$ \frac{\theta_v'(s)}{\theta_v(s)} = \frac{s \tau_{pll} + 1}{\frac{s^2}{\omega_{pll}^2} + s\tau_{pll} + 1} $$
 
 </div>
-where $$\tau_{pll}$$ is the time constant of the PLL and $$\omega_{pll}$$ is the natural frequency of the PLL. 
+
+where $$\tau_{pll}$$ is the time constant of the PLL and $$\omega_{pll}$$ is the natural frequency of the PLL. This dynamics can be omitted by considering $$\theta_v'(s) = \theta_v(s)$$.
 
 ### Current control
 
@@ -260,13 +261,13 @@ The technical constraints of the VSC can be included in the controls using satur
 
 The model presented can have some of its dynamics simplified in order to perform low-frequency domain studies with higher time step (which means, faster execution times). Listed below, ordered from high to low accuracy, some of this models with its assumptions are presented:
 
-- **Phasor $$I_1$$**: The dynamics of the current loop are approximated by a first-order transfer function with a given time constant $$\tau_c$$
+- [**Phasor $$I_1$$**](/PhasorI1): The dynamics of the current loop are approximated by a first-order transfer function with a given time constant $$\tau_c$$. 
 
-- **Phasor $$I_0$$**: The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
+- [**Phasor $$I_0$$**](/PhasorIo): The current loop is completely removed (as it has the fastest dynamics of the system), which requires a reformulation of the power loop. The output of the later will be directly considered as the converter current.  
 
-- **Phasor $$PQ_1$$**: The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
+- [**Phasor $$PQ_1$$**](/PhasorPQ1): The dynamics of the power loop are approximated by a first-order transfer function with a given time constant $$\tau_{pq}$$, similarly to the first case. The current loop is also removed.
 
-The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the performance for all these models compared to the EMT model in one particular scenario.:
+The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the performance for all these models compared to the EMT model in one particular scenario, in which the power setpoint tracking for $$P^*, Q^*$$ was studied:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFollowingVSC/ErrorPlot_Phasor.svg' | relative_url }}"
@@ -278,7 +279,7 @@ Figure 8: Phasor Models Error Comparison <a href="#1">[1]</a>
 </div>
 <br>
 
-As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy, while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Depending on the desired study, one may be more suitable than the other. 
+As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy (around $$10^3$$ $$\mu s$$), while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Depending on the desired study, one may be more suitable than the other. 
 
 The details can be consulted in:
 

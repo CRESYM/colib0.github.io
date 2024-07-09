@@ -12,17 +12,17 @@ reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 
 ## Context
 
-The Phasor-I1 Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the Full-Phasor described [here](../). 
+The Phasor-$$I_1$$ Grid Following Voltage Source Converter (VSC) model [[1]](#1) is derived from the Full-Phasor described [here](../). 
 
 ## Model use, assumptions, validity domain and limitations
 
-The model can be used to fasten the simulations for low-frequency phenomena studies. If the simulation step size is desired to be close to the dynamics of the current control loop, the Phasor-I1 model performs better than the Full-Phasor model, which will have an important increase of the error (or even divergence) when using these step sizes.
+The model can be used to fasten the simulations for low-frequency phenomena studies. If the simulation step size is desired to be close to the dynamics of the current control loop (around $$10^3$$ $$\mu s$$), the Phasor-$$I_1$$ model performs better than the Full-Phasor model, which will have an important increase of the error (or even divergence) when using these step sizes.
 
 The assumptions made starting from the Full-Phasor model are the following:
 
 * The current loop is substituted by a first-order transfer function with a given time constant.
 
-The model shows a performance close to more accurate models during for slow dynamics such as setpoint tracking or voltage/frequency deviation. It can solve high frequency phenomena with clear limitations, as the results do not capture the dynamics of phenomena like asymmetrical faults.
+The model shows a performance close to more accurate models during for slow dynamics such as setpoint tracking or voltage/frequency deviation. It can solve high frequency phenomena with clear limitations, as the results do not capture correctly the dynamics of phenomena like asymmetrical faults.
 
 Although it allows a bigger time step than the Full-Phasor model, it eventually will diverge if it is increased too much, as it still retains some dynamics in an approximate way. The Phasor-I0 model is more suitable as it completely removes the current loop dynamics.
 
@@ -36,7 +36,7 @@ The diagram of the complete model is shown in the following figure.
      style="float: center; margin-right: 10px; width: 600px;" />
 </div>
 <div align = 'center'>
-Figure 1: Phasor-I1 Model Block Diagram <a href="#1">[1]</a>
+Figure 1: Phasor-$$I_1$$ Model Block Diagram <a href="#1">[1]</a>
 </div>
 <br>
 
