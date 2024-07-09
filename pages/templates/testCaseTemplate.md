@@ -4,7 +4,7 @@ title: Test cases description template
 tags: [] 
 date: 02/01/2024  
 last-updated: 08/03/2024 
-author: 
+authors: 
 reviewers:
 ---
 

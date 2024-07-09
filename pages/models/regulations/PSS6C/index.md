@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Standard power system stabilizer model PSS6C
+title: Standard power system stabilizer model IEEE PSS6C
 tags: ["Power system stabilizer", "PSS6C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "PssIEEE6C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-# PSS6C model
 
 This article is incomplete, some sections must be written.
 

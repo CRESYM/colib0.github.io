@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Standard governor model GAST
+title: Standard governor model IEC GAST
 tags: ["Governor", "GAST", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovGAST", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-# GAST model
 
 ## Context
 This governor is a standard that can apply to gas turbine model. It is a simple representations of a turbine governor control system, developed and introduced as early as the mid-1970s.
