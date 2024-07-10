@@ -16,8 +16,17 @@ Voltage Source Converters (VSC) are widely used in power systems for a variety o
     
 ## Model use, assumptions, validity domain and limitations
 
+The model use is to perform EMT studies involving Grid Forming VSCs. The model is valid for the study of the fast dynamics of the VSC and its interaction with the grid. The model is based on the following assumptions:
 
+* The system is balanced and sinusoidal.
+* The VSC is represented by three equivalent voltage sources. 
+* Frequency and angle reference are obtained using a reference frequency and an active power droop control in order to provide grid support.
+* The voltage setpoint is obtained from the reactive power droop control.
+* The Voltage Controller provides a current reference from a voltage reference.
+* The current controller provides the converter voltage.
+* No modulation is considered, meaning this is an averaged model of the VSC. 
 
+The model is valid for high-frequency phenomena studies, such as short-circuit calculations, energization studies, switching transients, traveling waves or lightning events. Lower frequency studies can be performed, but since there is a limitation over the time-step size due to convergence issues (it has to be a couple of orders of magnitude smaller than the lowest time-constant of all the controllers), they are much slower than using a phasor-based model. The model is not valid for harmonic studies, since it does not consider the switching process, and the output voltage is considered to be sinusoidal.
 
 
 ## Model description
@@ -30,10 +39,9 @@ The model can be described with the following schematic:
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
 <div align = 'center'>
-Figure 1: EMT Grid Forming VSC scheme <a href="#1">[1]</a>
+Figure 1: EMT Grid Forming VSC scheme <a href="#1">[1]</a> 
 </div>
 <br>
-
 
 
 ### Clarke and Park transformations
@@ -78,8 +86,27 @@ $$ x_{qd0} = \begin{bmatrix} x_{q} \\ x_{d} \end{bmatrix} = \begin{bmatrix} \sqr
 
 As it can be seen, the Park transformation is dependent of the angle $$\hat{\theta}$$, which is the angle of the rotating reference frame, and it can be different to the angle of the voltage $$\theta$$. If the electrical variable is synchronized with the rotating reference frame, then $$\theta = \hat{\theta}$$ and $$x_d = 0$$.
 
-### Angle generation
 
+### Synchronization loop
+
+In the present model, the frequency of the VSC is determined using a synchronization loop that involves an active power droop. Considering a reference grid frequency (normally 50 Hz), the converter frequency will be adjusted around this value considering the active power error, since active power and voltage phases are related. The droop equation is given by:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+%% K_{P,droop} = \frac{\Delta \omega}{\Delta P}$$
+
+</div>
+
+where the droop constant $$K_{P, droop}$$ is the slope of the droop curve, normally determined by grid codes. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{P, droop} s + 1}$$, with $$\tau_{P, droop} = \frac{1}{\omega_{P, droop}}$$ and $$\omega_{P, droop}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/SynchronizationLoopVSC.svg' | relative_url }}"
+     alt="Synchronization Loop Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 2: Synchronization Loop Diagram </a>
+</div>
 
 
 ### Current control
@@ -426,25 +453,22 @@ where, for the given example, $$V_1 = E_{DC} e^{j0}$$ and $$V_2 = E_{DC} e^{j\fr
 This model has been successfully implemented in :
 
 | Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
+| PSTess | [Link](https://github.com/sandialabs/snl-pstess/blob/master/pstess/gfma.m) | MATLAB | Copyright 2021 National Technology & Engineering Solutions of Sandia, LLC
+(NTESS) | 09/07/2024 | -------- |
 
 ## Table of references
 
 
-<a id="1">[1]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor Modeling Approaches and Simulation Guidelines of Voltage-Source Converters in Grid-Integration Studies", May 2022, IEEE Access, DOI: [10.1109/ACCESS.2022.3174958](https://doi.org/10.1109/ACCESS.2022.3174958)
+<a id="1">[1]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor and EMT models of grid-following and grid-forming converters for short-circuit simulations.", October 2023, vol. 223, núm. 109662. DOI: [10.1016/j.epsr.2023.109662](https://doi.org/10.1016/j.epsr.2023.109662)
 
-<a id="2">[2]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor and EMT models of grid-following and grid-forming converters for short-circuit simulations.", October 2023, vol. 223, núm. 109662. DOI: [10.1016/j.epsr.2023.109662](https://doi.org/10.1016/j.epsr.2023.109662)
 
-<a id="3">[3]</a> Egea, A.; Junyent-Ferré, A.; Gomis-Bellmunt, O. "Active and reactive power control of grid connected distributed generation systems". Part of: "Modeling and control of sustainable power systems". 2012, p. 47-81. 
 
 <a id="4">[4]</a> Clarke, E., "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
 
 <a id="5">[5]</a> Park, R. H., "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
 
-<a id="6">[6]</a> Chung, Se-Kyo. "A phase tracking system for three phase utility interface inverters". IEEE Transactions on Power Electronics, Vol. 15, No.3, May 2000, DOI: [10.1109/63.844502](https://doi.org/10.1109/63.844502)
-
 <a id="7">[7]</a> Harnefors, L.; Nee, H. P. "Model-Based Current Control of AC Machines Using the Internal Model Control Method". IEEE Transactions on Industrial Applications, Vol. 34, No. 1, January/February 1998, DOI: [10.1109/28.658735](https://doi.org/10.1109/28.658735)
 
 <a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
 
-<a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
+
