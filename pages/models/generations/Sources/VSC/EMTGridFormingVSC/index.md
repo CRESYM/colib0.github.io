@@ -24,7 +24,6 @@ The model use is to perform EMT studies involving Grid Forming VSCs. The model i
 * The voltage setpoint is obtained from the reactive power droop control.
 * The Voltage Controller provides a current reference from a voltage reference.
 * The current controller provides the converter voltage.
-* No modulation is considered, meaning this is an averaged model of the VSC. 
 
 The model is valid for high-frequency phenomena studies, such as short-circuit calculations, energization studies, switching transients, traveling waves or lightning events. Lower frequency studies can be performed, but since there is a limitation over the time-step size due to convergence issues (it has to be a couple of orders of magnitude smaller than the lowest time-constant of all the controllers), they are much slower than using a phasor-based model. The model is not valid for harmonic studies, since it does not consider the switching process, and the output voltage is considered to be sinusoidal.
 
@@ -34,7 +33,7 @@ The model is valid for high-frequency phenomena studies, such as short-circuit c
 The model can be described with the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/EMT_GFM_VSC_scheme.svg' | relative_url }}"
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/EMT_GFM_VSC.svg' | relative_url }}"
      alt="EMT GF VSC scheme"
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
@@ -93,29 +92,115 @@ In the present model, the frequency of the VSC is determined using a synchroniza
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-%% K_{P,droop} = \frac{\Delta \omega}{\Delta P}$$
+$$ K_{\Delta P} = \frac{\Delta \omega}{\Delta P}$$
 
 </div>
 
-where the droop constant $$K_{P, droop}$$ is the slope of the droop curve, normally determined by grid codes. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{P, droop} s + 1}$$, with $$\tau_{P, droop} = \frac{1}{\omega_{P, droop}}$$ and $$\omega_{P, droop}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
+where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/SynchronizationLoopVSC.svg' | relative_url }}"
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/SynchronizationLoopGFM.svg' | relative_url }}"
      alt="Synchronization Loop Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 2: Synchronization Loop Diagram </a>
+Figure 2: Synchronization Loop Diagram
 </div>
+
+
+### Reactive power droop
+
+Similar to the controls applied over the active power, the reactive power output of the converter is related to the voltage magnitude. In this case, the droop equation is given by:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ K_{\Delta Q} = \frac{\Delta Q}{\Delta V} $$
+
+</div>
+
+where the droop constant $$K_{\Delta Q}$$ is the slope of the droop curve. Again, the reactive power measurement is filtered to avoid including high-frequency harmonics, applying a low-pass filter with a bandwidth $$\omega_{\Delta Q}$$, and a time constant $$\tau_{\Delta Q} = \frac{1}{\omega_{\Delta Q}}$$. The block diagram of the reactive power droop control is shown in the following figure:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/ReactiveDroopGFM.svg' | relative_url }}"
+     alt="Reactive Power Droop Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 3: Reactive Power Droop Diagram 
+</div>
+
+Considering the *qd0* reference frame in which $$v^{d*} = 0$$, the voltage setpoint $$v^{q*}$$ is equal to the module obtained from the reactive power droop control. The following section shows the voltage control droops applied to these references.
+
+### Voltage control
+
+The voltage control is used to determine the current setpoints that will be used to control the converter. Using Kirchhoff current law, the differential equations that model the relationship between voltage and currents in the Grid Forming VSC are the following:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ i^{d*}_s - i^d_c = -\omega C_f v^q_f + C_f \frac{dv^d_f}{dt} $$
+$$ i^{q*}_s - i^q_c = \omega C_f v^d_f + C_f \frac{dv^q_f}{dt} $$
+
+</div>
+
+where $$C_f$$ are the capacitance of the filter, $$i^{d*}_s$$ and $$i^{q*}_s$$ are the current setpoints at the source side, $$i^d_c$$ and $$i^q_c$$ are the currents at the grid side after the filter, and $$v^d_f$$ and $$v^q_f$$ are the voltages at the filter. A change of variables can be used to simplify the expressions, as well as using the Laplace transformation:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ \hat{i^d} = i^d_s - i^d_c + \omega C_f v^q_f = sC_f v^d_f $$
+$$ \hat{i^q} = i^q_s - i^q_c - \omega C_f v^d_f = sC_f v^q_f $$
+
+</div>
+
+which leads to the following open-loop transfer function:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ \frac{v^d_f}{\hat{i^d}} = \frac{1}{sC_f} $$
+$$ \frac{v^q_f}{\hat{i^q}} = \frac{1}{sC_f} $$
+
+</div>
+
+With the following block diagram representing the voltage control:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/VoltageControlGFM.svg' | relative_url }}"
+     alt="Voltage Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 4: Voltage Control Diagram
+</div>
+<br>
+
+The closed-loop transfer function of the voltage control can be obtained by adding a PI controller to the open-loop transfer function. The PI controller is designed to have a second-order response, with the following transfer function:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ \frac{v^{qd}_f}{v^{qd*}} = \frac{sK^{vcl}_p + K^{vcl}_i}{s^2 C_f +sK^{vcl}_p + K^{vcl}_i} $$	
+
+</div>
+
+The tuning of the control parameters will be so that the denominator adopts the form $$s^2 + 2\chi \omega_n C_f s + \omega_n^2$$. With this, the values are:
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+
+$$ K^{vcl}_p = 2\chi \omega_n C_f $$
+$$ K^{vcl}_i = \omega_n^2 C_f $$
+
+</div>
+
+with a dampening factor $$\chi$$ often between 0.5 and 1 ($$\frac{\sqrt{2}}{2}$$ is a common value) and a natural frequency $$\omega_n$$. 
+
+Over these current setpoints, a current control equivalent to the one from the grid-following can be applied.
 
 
 ### Current control
 
-The current control is used to determine the converter voltage that has to be applied in order to maintain the current at the setpoint. The model presented uses the Internal Model Control method (IMC), described in [[7]](#7), which provides PI controllers tuned in terms of the machine parameters (in this case $$R$$ and $$L$$) with the desired response. The control is based on the electric relationship between the variables:
+The current control is used to determine the converter voltage that has to be applied in order to maintain the current at the setpoint. The model presented uses the Internal Model Control method (IMC), described in [[7]](#7) as in the Grid Following model, providing PI controllers tuned in terms of the machine parameters (in this case $$R_f + R_c$$ and $$L_f + L_c$$) with the desired response. The control is based on the electric relationship between the variables:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ v_{c}^{abc} - v_{g}^{abc} = R i_c^{abc} + L \frac{d}{dt} i_c^{abc} $$
+$$ v^{abc*} - v_{g}^{abc} = (R_f + R_c) i_c^{abc} + (L_f + L_c) \frac{d}{dt} i_c^{abc} $$
 
 </div>
 
@@ -123,13 +208,13 @@ which can be transformed into the *qd* frame to obtain the following equation:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ v_{c}^{qd} - v_{g}^{qd} =\begin{bmatrix} R & L \omega\\ -L \omega & R \end{bmatrix} i_c^{qd} + L \frac{d}{dt} i_c^{qd} $$
+$$ v^{qd*} - v_{g}^{qd} =\begin{bmatrix} (R_f + R_c) & (L_f + L_c) \omega\\ -(L_f + L_c) \omega & (R_f + R_c) \end{bmatrix} i_c^{qd} + (L_f + L_c) \frac{d}{dt} i_c^{qd} $$
 </div>
 
-where $$\omega$$ is the angular frequency of the grid obtained in the PLL, and $$v_{g}^d = 0$$. The block diagram associated to this system is the following:
+where $$\omega$$ is the angular frequency of the grid obtained in the synchronization loop, and $$v^{d*} = 0$$. The block diagram associated to this system is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/CurrentControlDiagram.svg' | relative_url }}"
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/CurrentControlGFM.svg' | relative_url }}"
      alt="Current Control Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -142,134 +227,50 @@ As it can be seen, there is a coupling between the *q* and *d* components. This 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \begin{bmatrix} \hat{v}^{q} \\ \hat{v}^{d} \end{bmatrix} = \begin{bmatrix} v_{c}^{q} - v_g^{q} + L\omega i_d  \\ v_{c}^{d} - L\omega i_q \end{bmatrix} $$
+$$ \begin{bmatrix} \hat{v}^{q} \\ \hat{v}^{d} \end{bmatrix} = \begin{bmatrix} v^{q*} - v_g^{q} + (L_f + L_c)\omega i^d_s  \\ v^{d*} - (L_f + L_c)\omega i^q_s \end{bmatrix} $$
 
 </div>
 
-where $$\hat{v}^{q}$$ and $$\hat{v}^{d'}$$ are the controller output voltages. The equations are now decoupled using the expression:
+where $$\hat{v}^{q}$$ and $$\hat{v}^{d}$$ are the controller output voltages. The equations are now decoupled using the expression:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \begin{bmatrix} \hat{v}^{q} \\ v^{d} \end{bmatrix} = \begin{bmatrix} R & 0\\ 0 & R \end{bmatrix} \begin{bmatrix} i_q \\ i_d \end{bmatrix} + L \frac{d}{dt} \begin{bmatrix}  i_q \\ i_d \end{bmatrix} $$
+$$ \begin{bmatrix} \hat{v}^{q} \\ v^{d} \end{bmatrix} = \begin{bmatrix} (R_f + R_c) & 0\\ 0 & (R_f + R_c) \end{bmatrix} \begin{bmatrix} i^q_s \\ i^d_s \end{bmatrix} + (L_f + L_c) \frac{d}{dt} \begin{bmatrix}  i^q_s \\ i^d_s \end{bmatrix} $$
 </div>
 
 Applying the Laplace transformation and reordering, the following relation holds:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
+$$ \frac{i^{qd*}_s(s)}{\hat{v}^{qd}(s)} = \frac{1}{(R_f + R_c) + s(L_f + L_c)} $$
 
 </div>
 
-The following schematic represents the closed-loop block diagram for the current loop:
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/CurrentErrorVSC.svg' | relative_url }}"
-     alt="Current Error Diagram"
-     style="float: center; margin-right: 10px; width: 700px;" />
-</div>
-<div align = 'center'>
-Figure 4: Current Error Diagram
-</div>
-<br>
-
-The transfer function of this block diagram, considering $$G_c = K^{icl}_p + \frac{K^{icl}_i}{s}$$ is:
+The closed-loop transfer function, considering $$G_c = K^{icl}_p + \frac{K^{icl}_i}{s}$$ is:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{G_c(s)}{Ls + R + G_c(s)} $$
+$$ \frac{i^{qd}_s(s)}{i^{qd*}_s(s)} = \frac{G_c(s)}{(L_f + L_c)s + (R_f + R_c) + G_c(s)} $$
 
 </div>
 
-where $$i^{qd*}(s)$$ is the reference current for *q* or *d* axis, $$i^{qd}(s)$$ is the measured current. The controller gains can be selected as $$K^{icl}_p = \frac{L}{\tau_c}$$ and $$K^{icl}_i = \frac{R}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
+where $$i^{qd*}_s(s)$$ is the reference current for *q* or *d* axis at the converter side, and $$i^{qd}_s(s)$$ is the measured current. The controller gains can be selected as $$K^{icl}_p = \frac{(L_f + L_c)}{\tau_c}$$ and $$K^{icl}_i = \frac{(R_f + R_c)}{\tau_c}$$, where $$\tau_c$$ is the time constant of the current loop, such that the complete closed-loop transfer function is represented as the following first-order response:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{i^{qd}(s)}{i^{qd*}(s)} = \frac{1}{\tau_c s + 1} $$
+$$ \frac{i^{qd}_s(s)}{i^{qd*}_s(s)} = \frac{1}{\tau_c s + 1} $$
 </div>
 
 The resulting PI controller is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
+$$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{(L_f +L_c)}{\tau_c} + \frac{(R_f + R_c)}{\tau_c s} $$
 
 </div>
 
 The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). This modulation will be explained in [Section 3.6](#modulation).
 
-
-### Active and reactive power control
-
-The previous section made use of the current setpoints to control the converter. These setpoints can be determined directly by the user, or they can be obtained from the power setpoints (P*, Q*), which would still come from the user. To derive the controls, firstly the instantaneous power theory [[8]](#8) is described briefly for the synchronous frame *dq0*.
-
-The voltage and current phasors can be expressed in the *dq0* frame as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ v^{qd} = \frac{v^q - jv^d}{\sqrt{2}} $$
-$$ i^{qd} = \frac{i^q - ji^d}{\sqrt{2}} $$
-
-</div>
-
-The complex power phasor, as well as the active and reactive power values, can now be obtained with:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \underline{S} = 3 v^{qd}(i^{qd})^* = 3 (\frac{v^q - jv^d}{\sqrt{2}})(\frac{i^q + ji^d}{\sqrt{2}})$$
-$$ P = \Re(S) = \frac{3}{2} (v^q i^q + v^d i^d) $$
-$$ Q = \Im(S) = \frac{3}{2} (v^q i^d - v^d i^q) $$
-</div>
-
-As a design choice of the PLL, $$v_d = 0$$ to track the grid angle. Then, the expressions for current setpoints can be extracted substituting in the previous equation:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-$$ i^{q*} = \frac{2}{3} \frac{P^*}{v^q} $$
-$$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
-</div>
-
-This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram represents the open-loop power control:
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PowerLoopVSC.svg' | relative_url }}"
-     alt="Power Control Diagram"
-     style="float: center; margin-right: 10px; height: 180px;" />
-</div>
-<div align = 'center'>
-Figure 6: Power Control Diagram <a href="#3">[3]</a>
-</div>
-<br>
-
-In order to tune the PI controller parameters, the closed-loop of the system is considered. In order to have the feedback loop, the power output is calculated including the current loop dynamics and the conversion from current to power using the instantaneous power theory. The following block diagram shows the complete power loop:
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ErrorPowerLoopVSC.svg' | relative_url }}"
-     alt="Power Control Diagram"
-     style="float: center; margin-right: 10px; height: 280px;" />
-</div>
-<div align = 'center'>
-Figure 7: Closed-Loop Power Control Diagram
-</div>
-<br>
-
-As it can be seen, the peak voltage is used as it assumes that the deviations with respect to the nominal will be small, and this is only to have an appropriate tuning of the controller.
-
-Following a similar procedure to the one of the current loop, the closed-loop transfer function of the power loop can be modelled as a first-order system:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ \frac{P(s)}{P^*(s)} = \frac{Q(s)}{Q^*(s)} = \frac{1}{\tau_p s + 1} $$
-</div>
-
-where $$\tau_p$$ is the time constant of the power loop. The PI controller can be obtained with the use of the time constant of the current loop as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$K^{ipl}_p = \frac{2\tau_c}{3V_{peak}\tau_p}$$ 
-$$K^{ipl}_i = \frac{2}{3V_{peak}\tau_p}$$
-</div>
-
-The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loop is designed to have a slower response than the current loop.
 
 ### Limitations of current
 
