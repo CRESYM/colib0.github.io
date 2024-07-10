@@ -26,7 +26,7 @@ The assumptions made are:
 * The electrical variables are represented by phasors that rotate at the synchronous frequency of the grid in steady-state or quasi-steady-state.
 * The complete control structure from the EMT Model, apart from the PLL, is preserved. Further simplifications are made in the models that derive from the Full-Phasor model.
 
-The model has its limitations when performing high-frequency domain phenomena ($$>1$$ kHz), as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the EMT model. It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
+The model has its limitations when performing high-frequency domain phenomena ($$>1$$ kHz), as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the [EMT model](../EMTGridFollowingVSC/). It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
 
 From this model, some approximations can be made to reduce the complexity of the model and speed up the simulation if the study to be performed does not require to cover some dynamics of the converter. These derived models can be consulted in Section [3.6](#derived-models)
 
