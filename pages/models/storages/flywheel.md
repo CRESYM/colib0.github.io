@@ -4,8 +4,6 @@ title: Flywheel model
 tags: ["flywheel", "FW", "Optimal Power Flow", "storage","optimal design", "DC OPF", "inertia"]
 ---
 
-# Flywheel Model
-
 ## Context and assumptions
 
 This model is used in the following publication: Rigo-Mariani R, Sareni B, Roboam X. Integrated Optimal Design of a Smart Microgrid With Storage. IEEE Trans Smart Grid 2017;8:1762–70. <https://doi.org/10.1109/TSG.2015.2507131>.

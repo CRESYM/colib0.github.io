@@ -3,12 +3,10 @@ id: lim1
 layout: page
 title: Limiter control block with constant bounds
 tags: ["control block", "limiter"]
-author: Mathilde Bongrain
+authors: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
-
-# Limiter control block with constant bounds
 
 ## Diagram
 

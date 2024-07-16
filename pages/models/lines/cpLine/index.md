@@ -1,12 +1,13 @@
 ---
 layout: page
-title: CP Line Model 
+title: Constant parameters Line Model 
 tags: ["#120", "pi-equivalent", "EMT", "Bergeron", "Constant Parameter", "transient", "transmission", "Dynawo"]
-date: 09/05/2025 
+date: 09/05/2024 
 last-updated: 13/05/2024
+id: #120
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
-
-# Constant Parameters Line Model
 
 ## Context
 

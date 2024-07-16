@@ -1,12 +1,13 @@
 ---
 layout: page
-title: Cantilever Transformer
+title: Cantilever Transformer Model
 tags: ["#114", "Transformer", "Single-phase", "Cantilever equivalent", "Leakage flux", "Steady-state", "Phasorial", "Dynawo", "Modelica", "RMS"]
 date: 02/05/2024 
 last-updated: 02/05/2024
+id: #114
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
-
-# Cantilever Transformer model
 
 ## Context
 

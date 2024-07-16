@@ -4,9 +4,10 @@ title: ZIP Load Model
 tags: ["#141", "load", "ZIP", "steady-state", "polynomial"] 
 date: 28/05/2024 
 last-updated: 29/05/2024
+id: #141
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
-
-# ZIP Load Model
 
 ## Context
 

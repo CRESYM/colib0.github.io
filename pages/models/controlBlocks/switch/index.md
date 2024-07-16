@@ -3,12 +3,10 @@ id: switch1
 layout: page
 title: Switch
 tags: ["control block", "switch"]
-author: Mathilde Bongrain
+authors: Mathilde Bongrain
 date: 16/10/2023
 version: version-1.0.0
 ---
-
-# Switch 
 
 Set the output state to one among $$n$$ input states, based on the value of a controlling state.
 
