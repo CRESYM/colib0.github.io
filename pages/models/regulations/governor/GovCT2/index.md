@@ -1,13 +1,13 @@
 ---
 layout: page
 title: GovCT2 / GGOV2
-tags: [regulations, governor, controller, synchronous machine, Opensource, IEC, CIMDynamic, RMS, modelica, dynawo]
-author: Martin Franke
+tags: ["regulations", "governor", "controller", "synchronous machine", "Opensource", "IEC", "CIMDynamic", "RMS", "modelica", "dynawo", "RMS", "#53"]
 date: 23/04/2024
 last-updated: 20/06/2024
+authors: Martin Franke (Fraunhofer IEE)
+reviewers: Mathilde Bongrain (CRESYM), Geethu Joseph (CRESYM)
 id: #53
 ---
-# GovCT2 / GGOV2 (Synchronous Machine Governor)
 
 ## Context
 
