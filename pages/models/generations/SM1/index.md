@@ -4,9 +4,10 @@ title: Synchronous Machine Model
 tags: ["#110","Synchronous machine", "RMS", "EMT", "Phasor", "Rotor", "Stator", "Dynawo", "Opensource", "GENROU", "GENSAL"]
 date: 10/04/2024 
 last-updated: 24/05/2024
+id: #110
+authors: Carlos Alegre (eRoots)
+reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
-
-# Synchronous Machine Model
 
 ## Context
 

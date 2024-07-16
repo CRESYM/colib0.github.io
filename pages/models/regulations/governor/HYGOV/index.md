@@ -4,8 +4,10 @@ title: HYGOV
 tags: ["Governor", "HYGOV", "generic", "Opensource", "dynawo", "#106", "WEHGOV", "WPIDHY"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-# HYGOV model
 
 ## Context
 
