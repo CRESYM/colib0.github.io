@@ -173,7 +173,7 @@ where $$\omega$$ is the angular frequency of the grid obtained in the PLL, and $
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 5: Current Control Diagram <a href="#3">[3]</a>
+Figure 4: Current Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
@@ -208,7 +208,7 @@ The following schematic represents the closed-loop block diagram for the current
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 4: Current Error Diagram
+Figure 5: Current Error Diagram
 </div>
 <br>
 
