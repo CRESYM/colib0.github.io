@@ -1,9 +1,9 @@
 ---
 layout: page 
 title: Generic EMT Grid Forming Voltage Source Converter 
-tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS, grid following] 
+tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hdvc", "Droop Control", "Virtual Synchronous Machine", "grid forming", "PSTess"] 
 date: 03/07/2024 
-last-updated: 03/07/2024
+last-updated: 17/07/2024
 id: #175
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -327,9 +327,9 @@ As in the [EMT Grid Following Model](../EMTGridFollowingVSC/), the converter vol
 
 This model has been successfully implemented in :
 
-| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| PSTess | [Link](https://github.com/sandialabs/snl-pstess/blob/master/pstess/gfma.m) | MATLAB | Copyright 2021 National Technology & Engineering Solutions of Sandia, LLC
-(NTESS) | 09/07/2024 | Droop control version, equivalent to REGFM_A1 from WECC accepted dynamic models|
+| Software | URL | Language | Open-Source License | Last consulted date | Comments |
+|----------|-----|----------|---------------------|---------------------|----------|
+| PSTess   | [Link](https://github.com/sandialabs/snl-pstess/blob/master/pstess/gfma.m) | MATLAB | Copyright 2021 National Technology & Engineering Solutions of Sandia, LLC (NTESS) | 09/07/2024 | Droop control version, equivalent to REGFM_A1 from WECC accepted dynamic models|
 
 ## Table of references
 
