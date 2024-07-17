@@ -1,9 +1,9 @@
 ---
 layout: page 
 title: Phasor-I1 Grid Following Voltage Source Converter 
-tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc] 
+tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hdvc"] 
 date: 26/06/2024 
-last-updated: 09/07/2024
+last-updated: 17/07/2024
 id: #165
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)

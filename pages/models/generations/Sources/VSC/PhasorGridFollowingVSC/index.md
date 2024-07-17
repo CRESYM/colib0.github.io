@@ -1,7 +1,7 @@
 ---
 layout: page 
 title: Full-Phasor Grid Following Voltage Source Converter 
-tags: [Opensource, Phasor, voltage source, converter, wind, pv, hdvc] 
+tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hdvc"] 
 date: 26/06/2024 
 last-updated: 09/07/2024
 id: #165
@@ -28,7 +28,7 @@ The assumptions made are:
 
 The model has its limitations when performing high-frequency domain phenomena ($$>1$$ kHz), as all the fast-dynamics are not considered since it uses algebraic equations instead of the differential equations that are used on the [EMT model](../EMTGridFollowingVSC/). It is not useful either to calculate unbalanced situation as the model is based on the positive sequence.
 
-From this model, some approximations can be made to reduce the complexity of the model and speed up the simulation if the study to be performed does not require to cover some dynamics of the converter. These derived models can be consulted in Section [3.6](#derived-models)
+From this model, some approximations can be made to reduce the complexity of the model and speed up the simulation if the study to be performed does not require to cover some dynamics of the converter. These derived models can be consulted in Section [4](#derived-models)
 
 ## Model description
 
@@ -120,7 +120,7 @@ The same current control as in the EMT model is used to determine the converter 
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 5: Current Control Diagram <a href="#3">[3]</a>
+Figure 3: Current Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
@@ -217,7 +217,7 @@ This relationship can be used to calculate directly the current setpoint for a g
      style="float: center; margin-right: 10px; height: 180px;" />
 </div>
 <div align = 'center'>
-Figure 6: Power Control Diagram <a href="#3">[3]</a>
+Figure 5: Power Control Diagram <a href="#3">[3]</a>
 </div>
 <br>
 
@@ -229,7 +229,7 @@ To determine the PI controller parameters, we include the current loop as the pl
      style="float: center; margin-right: 10px; height: 280px;" />
 </div>
 <div align = 'center'>
-Figure 7: Closed-Loop Power Control Diagram
+Figure 6: Closed-Loop Power Control Diagram
 </div>
 <br>
 
@@ -275,7 +275,7 @@ The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the pe
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 8: Phasor Models Error Comparison <a href="#1">[1]</a>
+Figure 7: Phasor Models Error Comparison <a href="#1">[1]</a>
 </div>
 <br>
 
@@ -287,7 +287,7 @@ As a summary, the Full-Phasor model is proven as a reliable although slower mode
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
 <div align = 'center'>
-Figure 9: Phasor Models Suitability <a href="#1">[1]</a>
+Figure 8: Phasor Models Suitability <a href="#1">[1]</a>
 </div>
 <br>
 
@@ -298,12 +298,7 @@ The details can be consulted in:
 
 ## Open source implementations
 
-This model has been successfully implemented in :
-
-| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
-<!-- Yet to be reviewed -->
-
+No open-source implementations have been found.
 
 ## Table of references
 
