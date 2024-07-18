@@ -1,7 +1,7 @@
 ---
 layout: page 
 title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
-tags: [Opensource, EMT, voltage source, converter, wind, pv, hdvc, dynawo, STEPSS] 
+tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hvdc", "following", "NREL", "PSCAD", "DPSIM", "SimplusGrid", "Matlab"] 
 date: 05/06/2024 
 last-updated: 03/07/2024
 id: #163
