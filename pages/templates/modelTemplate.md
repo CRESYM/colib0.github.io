@@ -4,7 +4,7 @@ title: Model description template
 tags: [Model template] 
 date: 02/01/2024 
 last-updated: 08/03/2024
-author: 
+authors: 
 reviewers: 
 ---
 

@@ -5,9 +5,9 @@ tags: [Opensource, RMS, phasor, TMRL2, voltage source, converter, wind, pv, hdvc
 date: 17/05/2024 
 last-updated: 17/05/2024
 id: #131
+authors: Thierry Van Cutsem
+reviewers: Mathilde Bongrain (CRESYM)
 ---
-
-# RMS grid following voltage source converter
 
 ## Context
 
