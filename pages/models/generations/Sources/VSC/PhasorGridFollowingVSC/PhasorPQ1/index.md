@@ -1,7 +1,7 @@
 ---
 layout: page 
 title: Phasor-PQ1 Grid Following Voltage Source Converter 
-tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hdvc"] 
+tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hvdc"] 
 date: 26/06/2024 
 last-updated: 17/07/2024
 id: #165

@@ -1,7 +1,7 @@
 ---
 layout: page 
 title: Full-Phasor Grid Following Voltage Source Converter 
-tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hdvc"] 
+tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hvdc"] 
 date: 26/06/2024 
 last-updated: 09/07/2024
 id: #165
