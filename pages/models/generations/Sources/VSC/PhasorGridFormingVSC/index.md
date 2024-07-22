@@ -1,10 +1,18 @@
 ---
 layout: page 
+<<<<<<< HEAD:pages/models/generations/Sources/VSC/PhasorGridFormingVSC/index.md
 title: Generic Phasor Grid Forming Voltage Source Converter 
 tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hvdc", "Droop Control", "Virtual Synchronous Machine", "grid forming", "PSTess"] 
 date: 18/07/2024 
 last-updated: 22/07/2024
 id: #180
+=======
+title: Generic EMT Grid Forming Voltage Source Converter 
+tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hvdc", "Droop Control", "Virtual Synchronous Machine", "grid forming", "PSTess"] 
+date: 03/07/2024 
+last-updated: 17/07/2024
+id: #175
+>>>>>>> dev:pages/models/generations/Sources/VSC/EMTGridFormingVSC/index.md
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
@@ -94,7 +102,7 @@ $$ K_{\Delta P} = \frac{\Delta \omega}{\Delta P}$$
 
 </div>
 
-where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
+where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes in terms of the percentual variation of the frequency with respect to a varation of the active power. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFormingVSC/SynchronizationLoopPhasorGFM.svg' | relative_url }}"
