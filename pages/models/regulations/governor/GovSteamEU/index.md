@@ -359,7 +359,7 @@ x_\mathrm{f\,0} = f_\mathrm{0}
 
 ## Open Questions?
 
-- The island mode control signal does not pass thourgh the electro
+- The island mode control signal does not pass through the electro
   hydraulic transducer. Why?
 - why are the multiplication blocks that model the valve position added
   **inside** the first order lags (boiler, reheater) and not outside
