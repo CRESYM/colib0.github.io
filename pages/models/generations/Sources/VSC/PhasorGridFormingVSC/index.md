@@ -1,18 +1,10 @@
 ---
 layout: page 
-<<<<<<< HEAD:pages/models/generations/Sources/VSC/PhasorGridFormingVSC/index.md
 title: Generic Phasor Grid Forming Voltage Source Converter 
 tags: ["Opensource", "Phasor", "voltage source", "converter", "wind", "pv", "hvdc", "Droop Control", "Virtual Synchronous Machine", "grid forming", "PSTess"] 
 date: 18/07/2024 
 last-updated: 22/07/2024
 id: #180
-=======
-title: Generic EMT Grid Forming Voltage Source Converter 
-tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hvdc", "Droop Control", "Virtual Synchronous Machine", "grid forming", "PSTess"] 
-date: 03/07/2024 
-last-updated: 17/07/2024
-id: #175
->>>>>>> dev:pages/models/generations/Sources/VSC/EMTGridFormingVSC/index.md
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
 ---
@@ -72,7 +64,7 @@ $$ x_{abc} = \begin{bmatrix} x_a \\ x_b \\ x_c \end{bmatrix} = \begin{bmatrix} X
 </div>
 
 where $$X$$ is the amplitude of the voltage or current, $$\theta$$ is the angle of the voltage or current. 
-Considering a balanced system, the transformation can be calculated using the deviation of angle of the $$a$$-phase measurement with respect to the phase that it would have operating in nominal frequency, which will be referred as $$theta_s$$. The real and imaginary parts of the product of $$v_a e^{-j\theta_s}$$ will give the $$v^q$$ and $$v^d$$ components of the voltage, respectively.
+Considering a balanced system, the transformation can be calculated using the deviation of angle of the $$a$$-phase measurement with respect to the phase that it would have operating in nominal frequency, which will be referred as $$\theta_s$$. The real and imaginary parts of the product of $$v_a e^{-j\theta_s}$$ will give the $$v^q$$ and $$v^d$$ components of the voltage, respectively.
 
 In case of an unbalanced system, the method of symmetrical components would have to be used in order to obtain the positive an negative sequence components.
 
@@ -80,7 +72,7 @@ Inversely, the transformation from *qd0* reference frame to *abc* can be done by
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ v^a = (v^q + j v^d)e^{j\theta_v} $$
+$$ v^a = (v^q + j v^d)e^{j\theta_s} $$
 $$ v^b = v^a e^{-j\frac{2\pi}{3}} $$
 $$ v^c = v^a e^{j\frac{2\pi}{3}} $$
 
@@ -102,7 +94,7 @@ $$ K_{\Delta P} = \frac{\Delta \omega}{\Delta P}$$
 
 </div>
 
-where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes in terms of the percentual variation of the frequency with respect to a varation of the active power. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
+where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes in terms of the percentual variation of the frequency with respect to a variation of the active power. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFormingVSC/SynchronizationLoopPhasorGFM.svg' | relative_url }}"
