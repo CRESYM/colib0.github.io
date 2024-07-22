@@ -2,7 +2,7 @@
 layout: page
 title: GovSteamEU
 tags: ["regulations", "governor", "controller", "synchronous machine", "Opensource", "IEC", "CIMDynamic", "RMS", "modelica", "dynawo", "#59"]
-authors: Martin Franke (Fraunhofer IEE), Saikrishna Vallabhaneni (Fraunhofer IEE)
+authors: Martin Franke (Fraunhofer IEE), Saikrishna Vallabhaneni (Fraunhofer IEE), Nils Wiese (IEE)
 reviewers: Mathilde Bongrain (CRESYM)
 date: 20/06/2024
 last-updated: 16/07/2024
