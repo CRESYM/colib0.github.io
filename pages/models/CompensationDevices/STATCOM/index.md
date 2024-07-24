@@ -3,7 +3,7 @@ layout: page
 title: EMT STATCOM (Grid Following mode)
 tags: ["Opensource", "EMT", "voltage source", "converter", "STATCOM", "wind", "pv", "hvdc", "following"] 
 date: 22/07/2024 
-last-updated: 22/07/2024
+last-updated: 24/07/2024
 id: #188
 authors: Carlos Alegre (eRoots)
 reviewers: Eduardo Prieto Araujo (UPC), Josep Fanals Batllori (eRoots)
@@ -38,7 +38,7 @@ The following block diagram shows the main components of the STATCOM model:
      style="float: center; margin-right: 10px; width: 900px;" />
 </div>
 <div align = 'center'>
-Figure 1: Schematic of the EMT STATCOM model.
+Figure 1: Schematic of the EMT STATCOM model. <a href="#1">[1]</a>
 </div>
 <br>
 
@@ -46,7 +46,7 @@ Notice how it follows the same structure as the Grid Following model, with the a
 
 ### DC Voltage control
 
-The following control is added to the typical Grid Following control scheme in order to maintain the voltage level at the capacitor. This ensures that it is not being overcharged or discharged. For a capacitor with a capacitance value $$C$$, the following equation relates the power $$P_{dc}$$ and its energy:
+The following control is added to the typical Grid Following control scheme in order to maintain the voltage level at the capacitor [[2]](#2). This ensures that it is not being overcharged or discharged. For a capacitor with a capacitance value $$C$$, the following equation relates the power $$P_{dc}$$ and its energy:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
@@ -94,7 +94,6 @@ Which has the following transfer function:
 $$ \frac{V_{DC}}{V_{DC}^*} = \frac{1}{1 + s \frac{C}{2 G_{DC}(s)}} $$
 </div>
 
-
 There are two main control designs:
 
 * A proportional control $$G_{DC(s)} = K_{DC}$$, tuned as $$K_{pDC} = \frac{C}{2\tau_{DC}}$$, with $$\tau_{DC}$$ being the desired DC voltage response time constant.
@@ -104,29 +103,13 @@ In both cases, the DC voltage loop must be slower than the internal current cont
 
 ## Open source implementations
 
-This model has been successfully implemented in:
-
-| Software      | URL | Language | Open-Source License | Last consulted date | Comments |
-| --------------| --- | --------- | ------------------- |------------------- | -------- |
-
+No open-source implementations found.
 
 ## Table of references
 
 
-<a id="1">[1]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor Modeling Approaches and Simulation Guidelines of Voltage-Source Converters in Grid-Integration Studies", May 2022, IEEE Access, DOI: [10.1109/ACCESS.2022.3174958](https://doi.org/10.1109/ACCESS.2022.3174958)
+<a id="1">[1]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor and EMT models of grid-following and grid-forming converters for short-circuit simulations.", October 2023, vol. 223, núm. 109662. DOI: [10.1016/j.epsr.2023.109662](https://doi.org/10.1016/j.epsr.2023.109662)
 
-<a id="2">[2]</a> Lacerda, V. A.; Prieto-Araujo, E.; Cheah, M.; Gomis-Bellmunt, O. "Phasor and EMT models of grid-following and grid-forming converters for short-circuit simulations.", October 2023, vol. 223, núm. 109662. DOI: [10.1016/j.epsr.2023.109662](https://doi.org/10.1016/j.epsr.2023.109662)
+<a id="2">[2]</a> Egea, A.; Junyent-Ferré, A.; Gomis-Bellmunt, O. "Active and reactive power control of grid connected distributed generation systems". Part of: "Modeling and control of sustainable power systems". 2012, p. 47-81. 
 
-<a id="3">[3]</a> Egea, A.; Junyent-Ferré, A.; Gomis-Bellmunt, O. "Active and reactive power control of grid connected distributed generation systems". Part of: "Modeling and control of sustainable power systems". 2012, p. 47-81. 
 
-<a id="4">[4]</a> Clarke, E., "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
-
-<a id="5">[5]</a> Park, R. H., "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
-
-<a id="6">[6]</a> Chung, Se-Kyo. "A phase tracking system for three phase utility interface inverters". IEEE Transactions on Power Electronics, Vol. 15, No.3, May 2000, DOI: [10.1109/63.844502](https://doi.org/10.1109/63.844502)
-
-<a id="7">[7]</a> Harnefors, L.; Nee, H. P. "Model-Based Current Control of AC Machines Using the Internal Model Control Method". IEEE Transactions on Industrial Applications, Vol. 34, No. 1, January/February 1998, DOI: [10.1109/28.658735](https://doi.org/10.1109/28.658735)
-
-<a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
-
-<a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
