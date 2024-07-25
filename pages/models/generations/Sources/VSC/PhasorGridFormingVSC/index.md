@@ -37,11 +37,11 @@ The model can be described with the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFormingVSC/Phasor_GFM_VSC.svg' | relative_url }}"
-     alt="EMT GF VSC scheme"
+     alt="_Phasor Grid Forming VSC scheme"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 1: EMT Grid Forming VSC scheme <a href="#1">[1]</a> 
+Figure 1: Phasor Grid Forming VSC scheme <a href="#1">[1]</a> 
 </div>
 <br>
 
@@ -104,6 +104,7 @@ where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, norma
 <div align = 'center'>
 Figure 2: Synchronization Loop Diagram
 </div>
+<br>
 
 Notice that, differently to the [EMT Grid Forming model](../EMTGridFormingVSC/), the integration block is applied to the difference of frequency, and not to the whole value. This is due to the phasorial nature of the model, in which the interest lies on the deviation of the angle with respect to the value it would have operating at nominal frequency. Similar to the controls applied over the active power, the reactive power output of the converter is related to the voltage magnitude. In this case, the droop equation is given by:
 
@@ -134,7 +135,7 @@ $$ J \frac{d\omega}{dt} = P_r^* - P_e - P_d$$
 
 </div>
 
-where $$J$$ is the inertia of the machine, $$\omega$$ is the angular frequency of the machine, $$P_r^*$$ is the virtual input power (which emulates the mechanical power), and $$P_e$$ is the electrical power and $$P_d$$ is the damping power of the virtual machine. The input power is calculated as the sum of the setpoint power and the droop power deviation $$P_r^* = P^* + k_{\omega}(\omega^*-\omega)$$, the electrical power is the measure of the active power, and the damping power is obtained from simulating the damping using the relationship $$P_d = k_d (\omega - \omega_g)$$, where $$\omega_g$$ is the measure of the grid frequency, that has to be measured using a PLL, which can be the same as in the [Grid Following model](../EMTGridFollowingVSC/). The full control diagram is shown in the following figure:
+where $$J$$ is the inertia of the machine, $$\omega$$ is the angular frequency of the machine, $$P_r^*$$ is the virtual input power (which emulates the mechanical power), and $$P_e$$ is the electrical power and $$P_d$$ is the damping power of the virtual machine. The input power is calculated as the sum of the setpoint power and the droop power deviation $$P_r^* = P^* + k_{\omega}(\omega^*-\omega)$$, the electrical power is the measure of the active power, and the damping power is obtained from simulating the damping using the relationship $$P_d = k_d (\omega - \omega_g)$$, where $$\omega_g$$ is the measure of the grid frequency, that has to be measured using a PLL, which can be the same as in the [EMT Grid Following model](../EMTGridFollowingVSC/). The full control diagram is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/generations/Sources/VSC/PhasorGridFormingVSC/VSM_PhasorGFM.svg' | relative_url }}"
@@ -152,7 +153,7 @@ Considering the *qd0* reference frame in which $$v^{d*} = 0$$, the voltage setpo
 
 ### Voltage control
 
-The voltage control is used to determine the current setpoints that will be used to control the converter. The tuning of this control has been done using the Internal Model Control method (IMC) [[8]](#8), which provides PI controllers tuned in terms of the machine parameters (in this case $$C_f$$) with the desired response. Using Kirchhoff current law and neglecting the parasite resistance $$R_{cap}$$ of the capacitors, the differential equations that model the relationship between voltage and currents in the Grid Forming VSC are the following:
+The voltage control is used to determine the current setpoints that will be used to control the converter. The tuning of this control has been done using the Internal Model Control method (IMC) [[7]](#7), which provides PI controllers tuned in terms of the machine parameters (in this case $$C_f$$) with the desired response. Using Kirchhoff current law and neglecting the parasite resistance $$R_{cap}$$ of the capacitors, the differential equations that model the relationship between voltage and currents in the Grid Forming VSC are the following:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
