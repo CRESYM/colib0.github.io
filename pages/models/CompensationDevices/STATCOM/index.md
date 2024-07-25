@@ -74,9 +74,9 @@ Figure 2: STATCOM DC Voltage Control open-loop diagram block.
 </div>
 <br>
 
-It is important to note that, in case of an overvoltage, the setpoint obtained will be negative since the capacitor would want to discharge to lower the voltage. Depending on the sign convention used in the AC side, which is typically positive for power injection, a sign change might. It can be added as a gain as in the figure above, but it may not be necessary.
+It is important to note that, in case of an overvoltage, the setpoint obtained will be negative since the capacitor would want to discharge to lower the voltage. Depending on the sign convention used in the AC side, which is typically positive for power injection, a sign change might be necessary. It can be added as a gain as in the figure above (marked in red), but it may not be necessary.
 
- To tune the control, the following closed-loop scheme is obtained by considering the relationship between the DC voltage and the DC power derived above as the plant:
+To tune the control, the following closed-loop scheme is obtained by considering the relationship between the DC voltage and the DC power derived above as the plant:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
 <img src="{{ '/pages/models/CompensationDevices/STATCOM/DCControlErrorSTATCOM.svg' | relative_url }}"
