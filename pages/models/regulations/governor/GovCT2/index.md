@@ -5,7 +5,7 @@ tags: ["regulations", "governor", "controller", "synchronous machine", "Opensour
 date: 23/04/2024
 last-updated: 20/06/2024
 authors: Martin Franke (Fraunhofer IEE)
-reviewers: Mathilde Bongrain (CRESYM), Geethu Joseph (CRESYM)
+reviewers: Mathilde Bongrain (CRESYM)
 id: #53
 ---
 
