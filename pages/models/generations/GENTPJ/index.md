@@ -121,9 +121,9 @@ $$ E_{d2} = -\left( E'_d - E''_d \right) \frac{X_q - X'_q}{X_q - X''_q} - I_q (X
 
 To model the saturation, there are three commonly used functions:
 
-* *Quadratic:* $$ Sat(x) = B(x-A)^2$$. Used in GE PSLF and PowerWorld Simulator. [[7]](#7)
-* *Scaled Quadratic:* $$ Sat(x) = \frac{B(x-A)^2}{x}$$. Used in PTI PSS/E and PowerWorld Simulator. [[8]](#8)
-* *Exponential:* $$ Sat(x) = Bx^A$$. Used in BPA-IPF nad some specific models of PTI PSS/E and PowerWorld Simualtor. [[9]](#9)
+* *Quadratic:* $$ Sat(x) = B(x-A)^2$$. Used in GE PSLF and PowerWorld Simulator. 
+* *Scaled Quadratic:* $$ Sat(x) = \frac{B(x-A)^2}{x}$$. Used in PTI PSS/E and PowerWorld Simulator. 
+* *Exponential:* $$ Sat(x) = Bx^A$$. Used in BPA-IPF nad some specific models of PTI PSS/E and PowerWorld Simualtor.
 
 In this case, the variable will be the magnetic flux and, for the GENTPJ, the currents $$I_d$$ and $$I_q$$.
 
