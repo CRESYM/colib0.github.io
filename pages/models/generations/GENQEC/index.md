@@ -38,8 +38,6 @@ The GENQEC model is suitable for EMT as it models with detail the non-linearitie
 | $$X'_{dsat}$$ | Saturated Direct-axis transient reactance | $$\Omega$$ |
 | $$X_{qsat}$$ | Saturated Quadrature-axis synchronous reactance | $$\Omega$$ |
 | $$X'_{qsat}$$ | Saturated Quadrature-axis transient reactance | $$\Omega$$ |
-| $$X''_{dsat}$$ | Saturated Direct-axis subtransient reactance | $$\Omega$$ |
-| $$X''_{qsat}$$ | Saturated Quadrature-axis subtransient reactance| $$\Omega$$ |
 | $$X''_{dsat}$$ | Saturated Direct-axis subtransient reactance with saturation considered| $$\Omega$$ |
 | $$X''_{qsat}$$ | Saturated Quadrature-axis subtransient reactance with saturation considered| $$\Omega$$ |
 | $$X_{ls}$$ | Stator leakage reactance | $$\Omega$$ |
