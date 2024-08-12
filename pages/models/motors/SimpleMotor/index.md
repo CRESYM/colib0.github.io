@@ -28,7 +28,7 @@ The model does not take into account transient and subtransient phenomena and is
 
 The model is based on the equivalent circuit represented below.
 
-```<img src="{{'pages/models/motors/SimpleMotor/MotorEquivalentCircuit.drawio.svg' | relative_url}}" alt="Equivalent circuit of the induction motor"```
+<img src="{{'/pages/models/motors/SimpleMotor/MotorEquivalentCircuit.drawio.svg' | relative_url}}" alt="Equivalent circuit of the induction motor"/>
 
 ### Parameters
 

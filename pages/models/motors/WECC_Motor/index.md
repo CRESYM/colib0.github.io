@@ -62,7 +62,7 @@ The model takes into account transient and subtransient phenomena and is therefo
 
 The electrical equations are described by the figure below [[1]](#1).
 
-```<img src="{{'pages/models/motors/SimpleMotor/Load Characteristic MOTORW_0001.svg' | relative_url}}" alt="Electrical equations of the induction motor"```
+<img src="{{'pages/models/motors/WECC_Motor/Load Characteristic MOTORW_0001.svg' | relative_url}}" alt="Electrical equations of the induction motor"/>
 
 And is interfaced to the grid with
 
