@@ -86,7 +86,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AC8C/AC8C.drawio.svg" alt="AC8C diagram">
+<img src="/pages/models/regulations/avr/AC8C/AC8C.drawio.svg" alt="AC8C diagram">
 
 Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
 

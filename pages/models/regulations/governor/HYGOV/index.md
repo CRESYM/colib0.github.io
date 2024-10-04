@@ -50,7 +50,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model diagram
 
-<img src="/pages/models/regulations/HYGOV/HYGOV.drawio.svg" alt="HYGOV diagram">
+<img src="/pages/models/regulations/governor/HYGOV/HYGOV.drawio.svg" alt="HYGOV diagram">
 
 ## Open source implementations
 

@@ -63,7 +63,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/ST5C/ST5C.drawio.svg" alt="ST5C diagram">
+<img src="/pages/models/regulations/avr/ST5C/ST5C.drawio.svg" alt="ST5C diagram">
 
 ## Model variant
 
