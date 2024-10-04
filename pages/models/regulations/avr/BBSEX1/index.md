@@ -48,7 +48,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/BBSEX1/BBSEX1.drawio.svg" alt="BBSEX1 diagram">
+<img src="/pages/models/regulations/avr/BBSEX1/BBSEX1.drawio.svg" alt="BBSEX1 diagram">
 
 ## Open source implementations
 
