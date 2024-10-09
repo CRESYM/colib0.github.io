@@ -16,7 +16,7 @@ Voltage Source Converters (VSC) are widely used in power systems for a variety o
     
 ## Model use, assumptions, validity domain and limitations
 
-The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be studied, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without loosing precision on these types of phenomena. 
+The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be studied, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without losing precision on these types of phenomena. 
 
 The assumptions made are:
 
