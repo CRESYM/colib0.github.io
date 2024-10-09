@@ -21,8 +21,6 @@ The ZIP load model can be used for steady-state studies. The assumptions made fo
 * The total load can be represented as a function of the bus voltage by adding the three types of loads in a weighted polynomial.
 * The frequency is constant, and the load is balanced.
 
-The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
-
 ## Model description
 
 ### Parameters
