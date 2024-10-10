@@ -52,7 +52,7 @@ The output variables are :
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AcRotatingExciter/AcRotatingExciter.drawio.svg" alt="AcRotatingExciter diagram">
+<img src="/pages/models/regulations/avr/AcRotatingExciter/AcRotatingExciter.drawio.svg" alt="AcRotatingExciter diagram">
 
 ## Open source implementations
 

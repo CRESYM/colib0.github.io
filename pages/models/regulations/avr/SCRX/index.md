@@ -48,7 +48,7 @@ VrMinPu |Minimum output voltage of voltage regulator |pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/SCRX/SCRX.drawio.svg" alt="SCRX diagram">
+<img src="/pages/models/regulations/avr/SCRX/SCRX.drawio.svg" alt="SCRX diagram">
 
 ## Open source implementations
 

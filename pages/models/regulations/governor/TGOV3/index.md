@@ -55,7 +55,7 @@ Uc |Maximum valve closing velocity |pu/s|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/TGOV3/TGOV3.drawio.svg" alt="TGOV3 diagram">
+<img src="/pages/models/regulations/governor/TGOV3/TGOV3.drawio.svg" alt="TGOV3 diagram">
 
 ## Open source implementations
 

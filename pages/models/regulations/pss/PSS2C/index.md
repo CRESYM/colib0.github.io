@@ -69,7 +69,7 @@ SNom |Nominal apparent power|MVA|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/PSS2C/PSS2C.drawio.svg" alt="PSS2C diagram">
+<img src="/pages/models/regulations/pss/PSS2C/PSS2C.drawio.svg" alt="PSS2C diagram">
 
 ## Model variants
 

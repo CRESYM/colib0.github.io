@@ -47,7 +47,7 @@ SNom |Nominal apparent power|MVA (only if PGenPu is the input signal)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/PSS1A/PSS1A.drawio.svg" alt="PSS1A diagram">
+<img src="/pages/models/regulations/pss/PSS1A/PSS1A.drawio.svg" alt="PSS1A diagram">
 
 ## Open source implementations
 
