@@ -246,7 +246,7 @@ Table 1: Parameters
 > [!NOTE]
 >
 > As stated in [1], to represent a turbine without a reheater, set
-> $$T_\mathrm{rh} =$$ 0 s and $$T_\mathrm{lp} \approx$$ 0.5 s .
+> $$T_\mathrm{rh}$$ to a very small value (e.g. 0 s or 0.001 s) and $$T_\mathrm{lp} \approx$$ 0.5 s.
 
 ## Variables
 
@@ -394,7 +394,7 @@ Informationsmodell (CIM) Dynamik.” Jun. 2023.</span>
 <div id="ref-ieeecommittee1973" class="csl-entry">
 
 <span class="csl-left-margin">[2]
-</span><span class="csl-right-inline">I. Committee, “Dynamic Models for
+</span><span class="csl-right-inline">IEEE, “Dynamic Models for
 Steam and Hydro Turbines in Power System Studies,” *IEEE Transactions on
 Power Apparatus and Systems*, vol. PAS–92, no. 6, pp. 1904–1915, Nov.
 1973, doi:
