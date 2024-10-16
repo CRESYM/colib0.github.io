@@ -131,6 +131,10 @@ $$\omega_\mathrm{ref}$$ to obtain the error signal $$\Delta\omega$$. After
 passing the dead-band $$\Delta \omega_\mathrm{db}$$, it is used as input
 for the proportional $$K_\mathrm{\omega\,cor}$$ [4] [6].
 
+The output of the island mode does not pass through the electrohydraulic 
+transducer because it is an analog/mechanical controller, whereas the 
+output of the PID controller of the grid connected mode is an electric signal. 
+
 #### Grid connected mode ($$f$$-part)
 
 In grid connected mode, the input is the measured electrical frequency
@@ -192,6 +196,17 @@ In combination with the emergency speed control block, this leads to a
 fast reduction of the intercept valve set-point in case of over speed
 and hence interrupting the steam flow into the LP turbine and quickly
 reducing $$P_\mathrm{m}$$.
+
+
+### Boiler set-point and control valve set-point coordination
+
+When the power set-point $$P_\mathrm{set}$$ changes, 
+it influences the feed-forward control of the boiler, which has a slow response time, 
+and the PID controller that manages the control valve, which reacts more quickly. 
+By implementing the control valve signal multiplication within the first-order element 
+representing the boiler, the feed-forward and PID controls work in harmony rather than opposition, 
+allowing the system to reach a steady state that reflects the new $$P_\mathrm{set}$$.
+
 
 ## Parameters:
 
@@ -358,15 +373,11 @@ x_\mathrm{f\,0} = f_\mathrm{0}
  \qquad(14)$$</span>
 
 ## Open Questions?
+- Care should be taken when selecting the island and grid-connected mode 
+  parameters. It did not become clear to the authors if there are physically meaningful 
+  cases with grid connected ($$f$$) and island ($$\omega$$) 
+  modes both active -- or if one of them should always be disabled.
 
-- The island mode control signal does not pass through the electro
-  hydraulic transducer. Why?
-- why are the multiplication blocks that model the valve position added
-  **inside** the first order lags (boiler, reheater) and not outside
-  (e.g. just after it)? (it leads to different dynamic behaviour)
-- Are there cases where it makes sense to use grid connected ($$f$$) and
-  island ($$\omega$$) control mode simultaneously or should one of them
-  always be deactivated?
 
 ## Open source implementations
 
