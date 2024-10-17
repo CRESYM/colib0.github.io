@@ -49,7 +49,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model diagram
 
-<img src="/pages/models/regulations/GAST/GAST.drawio.svg" alt="GAST diagram">
+<img src="/pages/models/regulations/governor/GAST/GAST.drawio.svg" alt="GAST diagram">
 
 ## Open source implementations
 

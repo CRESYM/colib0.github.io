@@ -54,7 +54,7 @@ VrMinPu |Minimum field voltage|pu (user-selected base voltage)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/IEEX2A/IEEX2A.drawio.svg" alt="IEEX2A diagram">
+<img src="/pages/models/regulations/avr/IEEX2A/IEEX2A.drawio.svg" alt="IEEX2A diagram">
 
 ## Open source implementations
 
