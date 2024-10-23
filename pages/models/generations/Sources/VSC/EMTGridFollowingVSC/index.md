@@ -1,6 +1,6 @@
 ---
 layout: page 
-title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
+title: Generic EMT Grid Following Voltage Source Converter
 tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hvdc", "following", "NREL", "PSCAD", "DPSIM", "SimplusGrid", "Matlab"] 
 date: 05/06/2024 
 last-updated: 03/07/2024
@@ -50,7 +50,7 @@ As it can be seen, there are several control blocks that act over the converter 
 * The Phase-Lock Loop (commonly referred to as PLL), which tracks the grid voltage and synchronizes the converter with the grid angle.
 * The Outer Loop, which provides active and reactive power control by setting a current reference from a power reference.
 * The Inner Loop, or Current Loop, which corrects the converter voltage to provide the reference current.
-* The modulation block, which models the switching of the IGBTs that create an AC voltage from a DC source using Pulse-Width Modulation (PWM).
+* The modulation block, which in more simplified models is not applied. In the case of the present model, since other harmonic elements are not considered, it can be omitted.
 
 A detailed explanation of each block is provided in the following subsections.
 
@@ -235,7 +235,7 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
 
 </div>
 
-The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). This modulation will be explained in [Section 3.6](#modulation).
+The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models such as this one, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). 
 
 
 ### Active and reactive power control
@@ -347,174 +347,6 @@ To decide the saturation limits for the current components, the operation mode o
 * **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{(i^q, i^{q*})}^2} $$.
 * **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{(i^d, i^{d*})}^2} $$.
 
-
-### Modulation
-
-As explained in the current loop section, the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The modulation will determine the switching state of the 3 pairs of IGBTs (as it is assumed to be a 2-level VSC) in order to produce a given voltage. To do so, the technique used is the Space Vector Pulse-Width Modulation (SVPWM) [[9]](#9), which can be modelled with the following block diagram:
-
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ModulationVSC.svg' | relative_url }}"
-     alt="Modulation VSC"
-     style="float: center; margin-right: 10px; width: 100%;" />
-</div>
-<div align = 'center'>
-Figure 10: Block diagram of the modulation
-</div>
-<br>
-
-This technique projects the AC voltage that is desired to generate (which is the setpoint obtained from the control loops) into the $$\alpha\beta$$ reference frame. Then, it determines in which of the 6 regions delimited by the voltage vectors of the $$2^3 = 8$$ possible configurations of the IGBTs it is enclosed. Since two of the positions correspond to a short-circuit on all the phases, their output voltage will be 0, and they are at the center of the resulting hexagon, belonging to of all the regions. The complete hexagon with a vector projected into it can be seen in the following figure:
-
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM.svg' | relative_url }}"
-     alt="SVPWM Diagram"
-     style="float: center; margin-right: 10px; width: 500px;" />
-</div>
-<div align = 'center'>
-Figure 11: SVPWM Voltages Vector Space <a href="#9">[9]</a>
-</div>
-<br>
-
-As it can be seen, the voltage $$v^{\alpha\beta}$$ can be obtained by adding fractions of two of the vectors that delimit the region. The fraction is commonly known as duty cycle $$D_i = \frac{T_i}{T_z}$$. The duty cycle of the zero-voltage states can be calculated using the remaining time of the PWM as $$D_0 = D_7 = \frac{1 - D_i - D_j}{2}$$, while the other duty cycles have their own formulas to be calculated. Considering the symmetry of the regions, the duty cycles can be calculated referring always to the first region. Let $$D_1$$ be the duty cycle of the state with lower angle than $$v^{\alpha\beta}$$, and $$D_2$$ the duty cycle of the state with higher angle, the following calculations are made starting from the decomposition of the setpoint voltage:
-
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ V_{svm} = \sqrt{V_{\alpha}^2 + V_{\beta}^2} $$
-$$ \theta_{svm} = \arctan(\frac{V_{\beta}}{V_{\alpha}}) $$
-$$ \theta_{sec1} = \theta_{svm} - \frac{\pi}{3}(n - 1)$$
-$$ n = \text{floor}(\frac{\theta_{svm}}{\frac{\pi}{3}}) + 1 $$
-</div>
-
-where the floor operation determines the sector of the hexagon depending on the angle of the voltage. The duty cycles can be calculated as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ D_1 = \frac{\sqrt{3}V_{svm} \sin(\frac{\pi}{3} - \theta_{sec1})}{2E_{DC}} $$
-$$ D_2 = \frac{V_{svm} \sin(\theta_{sec1} - \frac{\pi}{3})}{E_{DC}} $$
-</div>
-
-where $$D_1$$ and $$D_2$$ are the duty cycles of the vectors that limit the sector. Now, $$D_0$$ and $$D_7$$ can be easily calculated. 
-
-The switching order is important, since it is desirable to have a resulting sine-like wave, while minimizing switching losses. A symmetrical pattern that starts and ends at the ⓪-state is chosen, since it helps to transition between two adjacent periods that have the voltage at two different regions, for instance. To minimize losses, the order of states will be the one that results in a single switch between states, meaning that from the state with switch positions $$000$$, the next state will have $$1$$ in a single switch, and the other two switches at $$0$$. The following table shows all the switching states with their output voltage:
-
-<table style="table-layout: fixed; width: 50%; margin-left: auto; margin-right: auto;">
-  <colgroup>
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-  </colgroup>
-<tr style="border-top:2px solid black;">
-     <th style="border-left:2px solid black; text-align:center;">State ID</th>
-     <th style="border-left:2px solid black; text-align:center;">q1</th>
-     <th style="text-align:center;">q2</th>
-     <th style="text-align:center;">q3</th>
-     <th style="border-left:2px solid black; text-align:center;">Va</th>
-     <th style="text-align:center;">Vb</th>
-     <th style="border-right:2px solid black; text-align:center;">Vc</th>
-</tr>
-<tr style="border-top:2px solid black;">
-     <td style="border-left:2px solid black;">$$⓪$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-right:2px solid black;">$$0$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$①$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$\frac{2E_{DC}}{3}$$</td>
-     <td>$$-\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$②$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$1$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-     <td>$$\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{2E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$③$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$1$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-     <td>$$\frac{2E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$④$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$1$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{2E_{DC}}{3}$$</td>
-     <td>$$\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$⑤$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-     <td>$$-\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{2E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$⑥$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$0$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-     <td>$$-\frac{2E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr style="border-bottom:2px solid black;">
-     <td style="border-left:2px solid black;">$$⑦$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$1$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-right:2px solid black;">$$0$$</td>
-</tr>
-</table>
-
-For instance, if the voltage setpoint is located in the region delimited by states $$⓪/⑦-①-⑥$$ as in Figure 9, the switching order would be $$000 \rightarrow 100 \rightarrow 101 \rightarrow 111 \rightarrow 101 \rightarrow 100 \rightarrow 000$$, or, if we use state identifiers, $$ ⓪ \rightarrow ① \rightarrow  ⑥ \rightarrow  ⑦  \rightarrow  ⑥ \rightarrow  ① \rightarrow  ⓪ $$. This means that the duty cycles are split in two for all the states except the ⑦-state. The following figure represents state ⑥ of the mentioned pattern:
-
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM_figs.svg' | relative_url }}"
-     alt="SVPWM Switching State"
-     style="float: center; margin-right: 10px; width: 900px;" />
-</div>
-<div align = 'center'>
-Figure 12: Schematics of the instantaneous switching state ⑥. (a) shows the positions of the switches, as well as the whole pattern, (b) represents the IGBT pairs and which of them is on, and (c) shows the equivalent grid for the state.
-</div>
-<br>
-
-As it can be seen in Figure 10(a), the pattern needed to generate the $$v^{\alpha\beta}$$ AC voltage shown in Figure 9 will change the state of one of its switches at a time and starts and ends at 0 voltage. The states $$000$$ and $$111$$ are those where all the switches are closed on the same side, short-circuiting the three phases, while for the rest of the cases, there is a voltage division between the isolated phase and the short-circuited couple, as can be seen from the grid equivalent in Figure 10(c).
-
-The result of the algorithm would determine the state of the switches of the converter, and would send to each IGBT the appropiate signal (check Figure 10(b)). This corresponds to the hardware integration, but since the model is used to simulate the system, the averaged output voltage of the converter during a PWM period can be directly calculated using the duty times:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ v_{c}^{\alpha\beta} = D_1 V_1 + D_2 V_2$$
-</div>
-
-where, for the given example, $$V_1 = E_{DC} e^{j0}$$ and $$V_2 = E_{DC} e^{j\frac{\pi}{3}}$$, and $$D_1$$ and $$D_2$$ are the duty cycles calculated for the given voltage setpoint. The output voltage can be then transformed to the *abc* frame.
 
 ## Parameter tunning 
 
