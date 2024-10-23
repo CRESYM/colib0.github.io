@@ -257,6 +257,8 @@ The technical constraints of the VSC can be included in the controls using satur
 * **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
 * **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
 
+More details on how the anti-windup controls are implemented can be found in the [EMT Grid Following page](../EMTGridFollowingVSC/).
+
 ## Derived Models
 
 The model presented can have some of its dynamics simplified in order to perform low-frequency domain studies with higher time step (which means, faster execution times). Listed below, ordered from high to low accuracy, some of this models with its assumptions are presented:
