@@ -310,9 +310,39 @@ $$K^{ipl}_i = \frac{2}{3V_{peak}\tau_p}$$
 
 The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loop is designed to have a slower response than the current loop.
 
-### Limitations of current
+### Limitations of current and anti-windup control
 
-The technical constraints of the VSC can be included in the controls using saturation blocks. Depending on the desired operation mode, the converter can be set to prioritize one of the current components. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
+The physical limitations of the converter have to be included in the modelling, in order to simulate the saturation of current and voltage. This allows the simulation of faults using this model.
+
+To avoid overshooting the current or voltages, an anti-windup control is added to the PI controllers present in the model. The proposed controller is based on the tracking of the difference between the output of the PI controller and the saturation limit [[10]](#10). The control signal is then modified to avoid the overshooting. The block diagram of the anti-windup control is the following:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PI_antiwindup.svg' | relative_url }}"
+     alt="Anti-Windup Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 8: Anti-Windup Control Diagram
+</div>
+<br>
+
+with a gain $$G$$ between 0 and 1.
+
+An alternative approach to implement this anti-windup control is detailed in [[11]](#11), where the integral part of the controller is substituted by a low-pass filter that follows the PI signal. The following block diagram shows the implementation of this alternative anti-windup control:
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PI_antiwindup_alternative.svg' | relative_url }}"
+     alt="Anti-Windup Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
+</div>
+<div align = 'center'>
+Figure 9: Alternative Anti-Windup Control Diagram
+</div>
+<br>
+
+Where $$\tau_{i} = \frac{K_p}{K_i}$$. 
+
+To decide the saturation limits for the current components, the operation mode of the converter has to be considered, which will determine which current component is prioritized. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
 
 * **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{(i^q, i^{q*})}^2} $$.
 * **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{(i^d, i^{d*})}^2} $$.
@@ -329,7 +359,7 @@ As explained in the current loop section, the converter voltage setpoint obtaine
      style="float: center; margin-right: 10px; width: 100%;" />
 </div>
 <div align = 'center'>
-Figure 8: Block diagram of the modulation
+Figure 10: Block diagram of the modulation
 </div>
 <br>
 
@@ -342,7 +372,7 @@ This technique projects the AC voltage that is desired to generate (which is the
      style="float: center; margin-right: 10px; width: 500px;" />
 </div>
 <div align = 'center'>
-Figure 9: SVPWM Voltages Vector Space <a href="#9">[9]</a>
+Figure 11: SVPWM Voltages Vector Space <a href="#9">[9]</a>
 </div>
 <br>
 
@@ -471,7 +501,7 @@ For instance, if the voltage setpoint is located in the region delimited by stat
      style="float: center; margin-right: 10px; width: 900px;" />
 </div>
 <div align = 'center'>
-Figure 10: Schematics of the instantaneous switching state ⑥. (a) shows the positions of the switches, as well as the whole pattern, (b) represents the IGBT pairs and which of them is on, and (c) shows the equivalent grid for the state.
+Figure 12: Schematics of the instantaneous switching state ⑥. (a) shows the positions of the switches, as well as the whole pattern, (b) represents the IGBT pairs and which of them is on, and (c) shows the equivalent grid for the state.
 </div>
 <br>
 
@@ -485,6 +515,27 @@ $$ v_{c}^{\alpha\beta} = D_1 V_1 + D_2 V_2$$
 </div>
 
 where, for the given example, $$V_1 = E_{DC} e^{j0}$$ and $$V_2 = E_{DC} e^{j\frac{\pi}{3}}$$, and $$D_1$$ and $$D_2$$ are the duty cycles calculated for the given voltage setpoint. The output voltage can be then transformed to the *abc* frame.
+
+## Parameter tunning 
+
+The following table shows possible values for the parameters of the controllers using the tunning proposed:
+
+| Parameter | Value | Units |
+| --------- | ----- | ----- |
+| $$V_{peak}$$ | $$2500$$ | V |
+| $$R_{f}$$ | $$0.03$$ | $$\Omega$$ |
+| $$L_{f}$$ | $$0.001$$ | $$H$$ |
+| $$\omega_n^{PLL}$$ | $$2\pi 1000$$ | rad/s |
+| $$\zeta^{PLL}$$ | $$0.707$$ | - |
+| $$K^{PLL}_p$$ | $$3.55$$ | - |
+| $$K^{PLL}_i$$ | $$1.58 \cdot 10^4$$ | - |
+| $$\tau^{PLL}$$ | $$0.225$$ | ms |
+| $$\tau^c$$ | $$1$$ | ms |
+| $$K^{icl}_p$$ | $$1$$ | - |
+| $$K^{icl}_i$$ | $$30$$ | - |
+| $$\tau_p$$ | $$15$$ | ms |
+| $$K^{ipl}_p$$ | $$1.778 \cdot 10^{-5}$$ | - |
+| $$K^{ipl}_i$$ | $$1.778 \cdot 10^{-2}$$ | - |
 
 
 ## Open source implementations
@@ -507,14 +558,18 @@ This model has been successfully implemented in :
 
 <a id="3">[3]</a> Egea, A.; Junyent-Ferré, A.; Gomis-Bellmunt, O. "Active and reactive power control of grid connected distributed generation systems". Part of: "Modeling and control of sustainable power systems". 2012, p. 47-81. 
 
-<a id="4">[4]</a> Clarke, E., "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
+<a id="4">[4]</a> Clarke, E. "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
 
-<a id="5">[5]</a> Park, R. H., "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
+<a id="5">[5]</a> Park, R. H. "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
 
 <a id="6">[6]</a> Chung, Se-Kyo. "A phase tracking system for three phase utility interface inverters". IEEE Transactions on Power Electronics, Vol. 15, No.3, May 2000, DOI: [10.1109/63.844502](https://doi.org/10.1109/63.844502)
 
 <a id="7">[7]</a> Harnefors, L.; Nee, H. P. "Model-Based Current Control of AC Machines Using the Internal Model Control Method". IEEE Transactions on Industrial Applications, Vol. 34, No. 1, January/February 1998, DOI: [10.1109/28.658735](https://doi.org/10.1109/28.658735)
 
-<a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
+<a id="8">[8]</a> Akagi, H.; Watanabe, E.; Aredes, M. "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
 
-<a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
+<a id="9">[9]</a> Kazmierkowski, M.P.; Krishnan, R.; Blaabjerg, F. Control in power electronics. Elsevier, Amsterdam (2002)
+
+<a id="10">[10]</a> Espina, J.; Arias, A.; Balcells, J.; Ortega, C. "Speed Anti-Windup PI strategies review for Field Oriented Control of Permanent Magnet Synchronous Machines"[Link](https://upcommons.upc.edu/bitstream/handle/2117/9767/05156047.pdf)
+
+<a id="11">[11]</a> IEEE. " Std. 421.5-2016: IEEE Recommended Practice for Excitation System Models for Power System Stability Studies" DOI: [10.1109/IEEESTD.2016.7553421](https://doi.org/10.1109/IEEESTD.2016.7553421)
