@@ -16,7 +16,7 @@ Voltage Source Converters (VSC) are widely used in power systems for a variety o
     
 ## Model use, assumptions, validity domain and limitations
 
-The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be studied, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without loosing precision on these types of phenomena. 
+The model described allows performing phasor studies of the dynamics of a grid-following voltage source converter. It is specially useful in applications where there are slow-transients that want to be studied, such as transient stability studies or interarea oscillations [[1]](#1), allowing for fast simulations with bigger time steps than the EMT without losing precision on these types of phenomena. 
 
 The assumptions made are:
 
@@ -256,6 +256,8 @@ The technical constraints of the VSC can be included in the controls using satur
 
 * **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
 * **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
+
+More details on how the anti-windup controls are implemented can be found in the [EMT Grid Following page](../EMTGridFollowingVSC/).
 
 ## Derived Models
 
