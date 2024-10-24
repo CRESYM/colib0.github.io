@@ -201,7 +201,7 @@ As shown in both figures, the DC voltage is correctly tracked by the DC voltage 
 The reactive power exchanged with the grid in the Grid Following side is also shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/testCases/GridFollowing_GridForming_DClink/Qac_GFOL.svg' | relative_url }}"
+<img src="{{ '/pages/testCases/GridFollowing_GridForming_DClink/Qg_GFOL.svg' | relative_url }}"
      alt="Qg_GFOL"
      style="float: center; margin-right: 10px; width: 900px;" />
 </div>
