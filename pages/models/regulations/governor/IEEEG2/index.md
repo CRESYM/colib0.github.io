@@ -43,7 +43,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model diagram
 
-<img src="/pages/models/regulations/IEEEG2/IEEEG2.drawio.svg" alt="IEEEG2 diagram">
+![IEEEG2](/pages/models/regulations/governor/IEEEG2/IEEEG2.drawio.svg)
 
 ## Open source implementations
 

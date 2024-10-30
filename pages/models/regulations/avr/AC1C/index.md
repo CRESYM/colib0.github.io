@@ -71,9 +71,9 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-![AC1C](/pages/models/regulations/AC1C/AC1C.drawio.svg)
+![AC1C](/pages/models/regulations/avr/AC1C/AC1C.drawio.svg)
 
-Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/avr/AcRotatingExciter/)
 
 
 ## Model variant

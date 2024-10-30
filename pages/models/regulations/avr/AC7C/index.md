@@ -86,9 +86,9 @@ XlPu |Reactance associated with potential source |pu (base SNom, UNom)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AC7C/AC7C.drawio.svg" alt="AC7C diagram">
+![AC7C](/pages/models/regulations/avr/AC7C/AC7C.drawio.svg)
 
-Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/avr/AcRotatingExciter/)
 
 ## Model variant
 
