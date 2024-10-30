@@ -158,7 +158,7 @@ the unintentional deadband ($$\Delta P_\mathrm{db}$$). The former is
 intentionally added to the control to prevent continuous adjustment of
 the mechanical power in response to minor frequency deviations. It has a
 fixed region with zero output. The latter implements a hysteresis around
-the operating point, representing clattering of the mechanical actuator.
+the operating point, representing backlash of the mechanical actuator [5].
 
 ## Model schema
 
