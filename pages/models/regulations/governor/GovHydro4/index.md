@@ -9,6 +9,7 @@ reviewers: Lampros Papangelis (CRESYM)
 id: #54
 ---
 
+
 ## Context
 
 The following information has been gathered from [1], [2] and [3].
@@ -16,11 +17,13 @@ The following information has been gathered from [1], [2] and [3].
 In a hydroelectric power plant, the governing system’s main function is
 to control the speed or load of the turbine by the means of gate
 opening. The prime movers convert the kinetic energy of the water into
-mechanical energy, which is then converted into electrcial energy by a
+mechanical energy, which is then converted into electrical energy by a
 synchronous generator. The governor monitors the speed of the turbine
 and adjusts the position of the gates that control the water flow to
 keep the speed steady. It does this by comparing the actual speed with
 the desired speed and making changes accordingly [1].
+
+For more details also see [4] and [5].
 
 ### Types of turbines
 
@@ -73,8 +76,8 @@ following assumptions regarding the stability of the water column [1]:
 
 - The curve defined in <a href="#fig-gate-head-flow-characteristics"
   class="quarto-xref">Figure 1</a> represents the relationship between
-  the power $$q$$ of the turbine and the stroke $$G$$ of the gate actuating
-  servomotor.
+  the flow of water $$q$$ through the turbine and the stroke $$G$$ of the
+  gate actuating servomotor.
 
 ### Gate-opening-to-turbine-power characteristic:
 
@@ -96,28 +99,27 @@ following assumptions regarding the stability of the water column [1]:
 
 ![](drawings/fig-gate-head-flow-characteristics-output-1.png)
 
-
 <div id="fig-gate-head-flow-characteristics">
+
 Figure 1: The gate-head-flow-power characteristics for a kaplan turbine
 model [3]
+
 </div>
-
-
 <div id="tbl-gate-head-flow-characteristics">
+
 Table 1: Gate head flow characteristics
 </div>
 
-
 | $$G_\mathrm{v}$$ | $$P_\mathrm{gv}$$ (Francis) | $$P_\mathrm{gv}$$ (Kaplan) | $$P_\mathrm{gv}$$ (Simple) |
-| :--------------- | :-------------------------- | :------------------------- | :------------------------- |
-| 0                | 0                           | 0                          | 0                          |
-| 0.1              | 0                           | 0                          | 0.1                        |
-| 0.4              | 0.42                        | 0.35                       | 0.4                        |
-| 0.5              | 0.56                        | 0.468                      | 0.5                        |
-| 0.7              | 0.8                         | 0.796                      | 0.7                        |
-| 0.8              | 0.9                         | 0.917                      | 0.8                        |
-| 0.9              | 0.97                        | 0.99                       | 0.9                        |
-| 1                | 1                           | 1                          | 1                          |
+|:---|:---|:---|:---|
+| 0 | 0 | 0 | 0 |
+| 0.1 | 0 | 0 | 0.1 |
+| 0.4 | 0.42 | 0.35 | 0.4 |
+| 0.5 | 0.56 | 0.468 | 0.5 |
+| 0.7 | 0.8 | 0.796 | 0.7 |
+| 0.8 | 0.9 | 0.917 | 0.8 |
+| 0.9 | 0.97 | 0.99 | 0.9 |
+| 1 | 1 | 1 | 1 |
 
 
 > [!NOTE]
@@ -135,9 +137,10 @@ Table 1: Gate head flow characteristics
 
 Hydro power turbines have a unique behavior, where adjusting the gate
 position for controlling water flow results in an immediate but
-temporary change in turbine power output, known as transient droop. To
-address this, a mechanism called transient droop compensation is
-employed. This mechanism, which shown in the upper half of the
+temporary change in turbine power output to the opposite direction,
+known as non-minimum phase behavior. To address this, a mechanism called
+transient droop compensation is employed. This mechanism, which shown in
+the upper half of the
 <a href="#fig-control_diagram" class="quarto-xref">Figure 2</a>,
 involves rate feedback or transient gain reduction, which slows down or
 limits gate movement until water flow and power output have had time to
@@ -145,11 +148,17 @@ adjust. As the system stabilizes, the governor returns to normal
 operation with permanent droop $$R_\mathrm{perm}$$, responding more
 sensitively to speed deviations to maintain steady-state operation. This
 compensation mechanism ensures stable control performance, crucial for
-maintaining consistent power output in hydroelectric power plants [1].
+maintaining the stability of hydroelectric power plants [1].
 
-Note: There is a difference between the intentional deadband and the
-unintentional deadband. The latter has a hysteris around the operating
-point.
+### Dead bands
+
+There is a difference between the intentional deadband
+($$\Delta \omega_\mathrm{db}$$, $$\Delta \omega_\mathrm{\varepsilon}$$) and
+the unintentional deadband ($$\Delta P_\mathrm{db}$$). The former is
+intentionally added to the control to prevent continuous adjustment of
+the mechanical power in response to minor frequency deviations. It has a
+fixed region with zero output. The latter implements a hysteresis around
+the operating point, representing clattering of the mechanical actuator.
 
 ## Model schema
 
@@ -159,8 +168,8 @@ The block diagram of GovHydro4 is depicted in
 
 ![](./drawings/GovHydro4.drawio.svg)
 
-
 <div id="fig-control_diagram">
+
 Figure 2: Control diagram
 
 </div>
@@ -176,39 +185,40 @@ parameters are based on nominal frequency.
 Table 2: Parameters
 </div>
 
-| name                                   | type  | unit | IEC name | description                                                             | typical value         |
-| :------------------------------------- | :---- | :--- | :------- | :---------------------------------------------------------------------- | :-------------------- |
-| $$A_\mathrm{turb}$$                    | float | pu   | at       | Turbine gain                                                            | 1.2                   |
-| $$B_\mathrm{max}$$                     | float | pu   | bmax     | Maximum blade adjustment factor                                         | 0 (1.1276 for Kaplan) |
-| $$\Delta \omega_\mathrm{\varepsilon}$$ | float | pu   | eps      | Intentional deadband discontinuity step size                            | 0                     |
-| $$\Delta \omega_\mathrm{db}$$          | float | pu   | db1      | Intentional deadband width                                              | 0                     |
-| $$\Delta P_\mathrm{db}$$               | float | pu   | db2      | Unintentional dead-band                                                 | 0                     |
-| $$D_\mathrm{turb}$$                    | float | pu   | dturb    | Turbine damping factor                                                  | 0.5                   |
-| $$G_\mathrm{max}$$                     | float | pu   | gmax     | Maximum gate opening                                                    | 1                     |
-| $$G_\mathrm{min}$$                     | float | pu   | gmin     | Minimum gate opening                                                    | 0                     |
-| $$h_\mathrm{dam}$$                     | float | pu   | hdam     | Head available at dam                                                   | 1                     |
-| $$M_\mathrm{set}$$                     | int   | \-   | model    | The kind of model being represented (simple, Francis/Pelton or Kaplan). | \-                    |
-| $$q_\mathrm{nl}$$                      | float | pu   | qnl      | No-load flow at nominal head                                            | 0.08                  |
-| $$R_\mathrm{perm}$$                    | float | pu   | rperm    | Permanent droop                                                         | 0.05                  |
-| $$R_\mathrm{temp}$$                    | float | pu   | rtemp    | Temporary droop                                                         | 0.3                   |
-| $$T_\mathrm{blade}$$                   | float | s    | tblade   | Blade servo time constant                                               | 100                   |
-| $$T_\mathrm{g}$$                       | float | s    | tg       | Gate servo time constant                                                | 0.5                   |
-| $$T_\mathrm{p}$$                       | float | s    | tp       | Pilot servo time constant                                               | 0.1                   |
-| $$T_\mathrm{r}$$                       | float | s    | tr       | Dashpot time constant                                                   | 5                     |
-| $$T_\mathrm{w}$$                       | float | s    | tw       | Water inertia time constant                                             | 1                     |
-| $$U_\mathrm{c}$$                       | float | pu   | uc       | Max gate closing velocity                                               | -0.2                  |
-| $$U_\mathrm{o}$$                       | float | pu   | uo       | Max gate opening velocity                                               | 0.2                   |
+| name                                   | type  | unit | IEC name | description                                                             | typical value                                                      |
+| :------------------------------------- | :---- | :--- | :------- | :---------------------------------------------------------------------- | :----------------------------------------------------------------- |
+| $$A_\mathrm{turb}$$                    | float | pu   | at       | Turbine gain                                                            | 1.2                                                                |
+| $$B_\mathrm{max}$$                     | float | pu   | bmax     | Maximum blade adjustment factor                                         | see <a href="#tbl-turb_parameters" class="quarto-xref">Table 3</a> |
+| $$\Delta \omega_\mathrm{\varepsilon}$$ | float | pu   | eps      | Intentional deadband discontinuity step size                            | 0                                                                  |
+| $$\Delta \omega_\mathrm{db}$$          | float | pu   | db1      | Intentional deadband width                                              | 0                                                                  |
+| $$\Delta P_\mathrm{db}$$               | float | pu   | db2      | Unintentional dead-band                                                 | 0                                                                  |
+| $$D_\mathrm{turb}$$                    | float | pu   | dturb    | Turbine damping factor                                                  | see <a href="#tbl-turb_parameters" class="quarto-xref">Table 3</a> |
+| $$G_\mathrm{max}$$                     | float | pu   | gmax     | Maximum gate opening                                                    | 1                                                                  |
+| $$G_\mathrm{min}$$                     | float | pu   | gmin     | Minimum gate opening                                                    | 0                                                                  |
+| $$h_\mathrm{dam}$$                     | float | pu   | hdam     | Head available at dam                                                   | 1                                                                  |
+| $$M_\mathrm{set}$$                     | int   | \-   | model    | The kind of model being represented (simple, Francis/Pelton or Kaplan). | \-                                                                 |
+| $$q_\mathrm{nl}$$                      | float | pu   | qnl      | No-load flow at nominal head                                            | see <a href="#tbl-turb_parameters" class="quarto-xref">Table 3</a> |
+| $$R_\mathrm{perm}$$                    | float | pu   | rperm    | Permanent droop                                                         | 0.05                                                               |
+| $$R_\mathrm{temp}$$                    | float | pu   | rtemp    | Temporary droop                                                         | 0.3                                                                |
+| $$T_\mathrm{blade}$$                   | float | s    | tblade   | Blade servo time constant                                               | 100                                                                |
+| $$T_\mathrm{g}$$                       | float | s    | tg       | Gate servo time constant                                                | 0.5                                                                |
+| $$T_\mathrm{p}$$                       | float | s    | tp       | Pilot servo time constant                                               | 0.1                                                                |
+| $$T_\mathrm{r}$$                       | float | s    | tr       | Dashpot time constant                                                   | 5                                                                  |
+| $$T_\mathrm{w}$$                       | float | s    | tw       | Water inertia time constant                                             | 1                                                                  |
+| $$U_\mathrm{c}$$                       | float | pu   | uc       | Max gate closing velocity                                               | -0.2                                                               |
+| $$U_\mathrm{o}$$                       | float | pu   | uo       | Max gate opening velocity                                               | 0.2                                                                |
 
 
 ### Typical values for the parameters that vary with turbine type
 
 <div id="tbl-turb_parameters">
 
-Table 3: Turbine dependent parameters
+Table 3: Turbine type dependent parameters
 </div>
 
-| name              | simple | Francis | Pelton | Kaplan |
+| Parameter name    | Simple | Francis | Pelton | Kaplan |
 |-------------------|--------|---------|--------|--------|
+| $$B_\mathrm{max}$$  | 0      | 0       | 0      | 1.1276 |
 | $$D_\mathrm{turb}$$ | 0.5    | 1.1     | 1.1    | 1.1    |
 | $$q_\mathrm{nl}$$   | 0.08   | 0       | 0      | 0      |
 
@@ -216,10 +226,12 @@ Table 3: Turbine dependent parameters
 > [!NOTE]
 >
 > The simple turbine model uses a proportional turbine characteristic
-> without no-load offset, hence the $$q_\mathrm{nl}$$ = 0.08 pu are
-> recommended. In the other turbine models, no-load flow is already
-> included in their characteristic, hence $$q_\mathrm{nl}$$ = 0 pu. In the
-> model the turbine dependent parameters are chosen automatically by
+> without no-load offset, hence the $$q_\mathrm{nl}$$ = 0.08 pu are to
+> compensate for that simplification. In the other turbine models,
+> no-load flow is already included in their characteristic (see
+> <a href="#fig-gate-head-flow-characteristics"
+> class="quarto-xref">Figure 1</a>), hence $$q_\mathrm{nl}$$ = 0 pu. In
+> the model the turbine dependent parameters are chosen automatically by
 > selecting a turbine type.
 
 ## Variables
@@ -288,13 +300,6 @@ $$x_\mathrm{Tp\,0} = 0$$
 
 $$P_\mathrm{ref\,0}  = G_\mathrm{0} \cdot R_\mathrm{perm}$$
 
-## Assumptions
-
-For the parameters $$\Delta \omega_\mathrm{db}$$, $$\Delta P_\mathrm{db}$$,
-$$u_\mathrm{o}$$,$$u_\mathrm{c}$$, assumed the unit of measurement to be per
-unit (pu), see
-<a href="#tbl-parameters" class="quarto-xref">Table 2</a>. This
-assumption deviates from those specified in the CGMES standard.
 
 ## Open source implementations
 
@@ -302,7 +307,7 @@ This model has been successfully implemented in :
 
 | Software               | URL                                        | Language | Open-Source License                                | Last consulted date | Comments                                                                                              |
 | ---------------------- | ------------------------------------------ | -------- | -------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------- |
-| Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 17/09/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
+| Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 30/10/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
 
 
 ## Table of references & license
@@ -327,13 +332,32 @@ Analysis Tool.” 2015. Available:
 
 </div>
 
-<div id="ref-iec61970-3022023" class="csl-entry">
+<div id="ref-iec2024" class="csl-entry">
 
 <span class="csl-left-margin">[3]
-</span><span class="csl-right-inline">IEC61970-302, “DIN EN IEC
-61970-302 – Schnittstelle für Anwendungsprogramme für
-Energiemanagementsysteme (EMS­API) Teil 302: Allgemeines
-Informationsmodell (CIM) Dynamik.” Jun. 2023.</span>
+</span><span class="csl-right-inline">IEC, “IEC 61970-302:2024 Energy
+management system application program interface (EMS-API) - Part 302:
+Common information model (CIM) dynamics.” VDE, 2024. Accessed: Oct. 30,
+2024. [Online]. Available:
+<https://www.vde-verlag.de/iec-normen/252516/iec-61970-302-2024.html></span>
+
+</div>
+
+<div id="ref-ieee2013" class="csl-entry">
+
+<span class="csl-left-margin">[4]
+</span><span class="csl-right-inline">IEEE, “Dynamic Models for
+Turbine-Governors in Power System Studies.” Jan. 2013.</span>
+
+</div>
+
+<div id="ref-feltes2013" class="csl-entry">
+
+<span class="csl-left-margin">[5]
+</span><span class="csl-right-inline">J. Feltes *et al.*, “Review of
+Existing Hydroelectric Turbine-Governor Simulation Models,”
+ANL/DIS-13/05, 1098022, Oct. 2013. doi:
+[10.2172/1098022](https://doi.org/10.2172/1098022).</span>
 
 </div>
 
