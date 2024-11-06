@@ -32,18 +32,18 @@ The model is based on the equivalent circuit represented below.
 
 ### Parameters
 
-| Parameter|Description | Unit |
-| ---| ---  | --- |
-| $$\omega_s$$ | Synchronous speed | $$rad/s$$ |
-| $$R_s$$ | Stator resistance | $$\Omega$$ |
-| $$X_s$$ | Stator leakage reactance  | $$\Omega$$ |
-| $$R_r$$ | Rotor resistance | $$\Omega$$ |
-| $$X_r$$ | Rotor leakage reactance  | $$\Omega$$ |
-| $$X_m$$ | Magnetising reactance  | $$\Omega$$ |
-| $$J$$ | Moment of inertia | $$kgm^2$$ |
-| $$\eta$$ | Exponent of the torque speed dependency | Unitless |
-| $$C_{l, 0}$$ | Initial load torque | $$Nm$$ |
-| $$\omega_0$$ | Initial rotor speed | $$rad/s$$ |
+| Parameter| Description | Unit | Typical value
+| ---| ---  | --- | --- |
+| $$\omega_s$$ | Synchronous speed | $$rad/s$$ | $$314rad/s$$ |
+| $$R_s$$ | Stator resistance | $$\Omega$$ | $$0.02pu$$ |
+| $$X_s$$ | Stator leakage reactance  | $$\Omega$$ | $$0.1pu$$ |
+| $$R_r$$ | Rotor resistance | $$\Omega$$ | $$0.02pu$$ |
+| $$X_r$$ | Rotor leakage reactance  | $$\Omega$$ | $$0.1pu$$ |
+| $$X_m$$ | Magnetising reactance  | $$\Omega$$ | $$3pu$$ |
+| $$J$$ | Moment of inertia | $$kgm^2$$ | 0.1 to 5s |
+| $$\eta$$ | Exponent of the torque speed dependency | Unitless | 0 to 3 |
+| $$C_{l, 0}$$ | Initial load torque | $$Nm$$ | N/A |
+| $$\omega_0$$ | Initial rotor speed | $$rad/s$$ | N/A |
 
 ### Variables
 

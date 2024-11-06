@@ -28,19 +28,19 @@ The model takes into account transient and subtransient phenomena and is therefo
 
 ### Parameters
 
-| Parameter|Description | Unit |
-| ---| ---  | --- |
-| $$\omega_s$$ | Synchronous speed | $$rad/s$$ |
-| $$R_s$$ | Stator resistance | $$\Omega$$ |
-| $$L_s$$ | Synchronous reactance  | $$\Omega$$ |
-| $$L_p$$ | Transient reactance  | $$\Omega$$ |
-| $$L_{pp}$$ | Subtransient reactance  | $$\Omega$$ |
-| $$t_{p0}$$ | Transient open circuit time constant  | $$s$$ |
-| $$t_{pp0}$$ | Subtransient open circuit time constant  | $$s$$ |
-| $$J$$ | Moment of inertia | $$kgm^2$$ |
-| $$\eta$$ | Exponent of the torque speed dependency | Unitless |
-| $$C_{l, 0}$$ | Initial load torque | $$Nm$$ |
-| $$\omega_0$$ | Initial rotor speed | $$rad/s$$ |
+| Parameter| Description | Unit | Typical value
+| ---| ---  | --- | --- |
+| $$\omega_s$$ | Synchronous speed | $$rad/s$$ | $$314rad/s$$ |
+| $$R_s$$ | Stator resistance | $$\Omega$$ | $$0.02pu$$ |
+| $$L_s$$ | Synchronous reactance  | $$\Omega$$ | $$1.8pu$$ |
+| $$L_p$$ | Transient reactance  | $$\Omega$$ | $$0.12pu$$ |
+| $$L_{pp}$$ | Subtransient reactance  | $$\Omega$$ | $$0.104pu$$ |
+| $$t_{p0}$$ | Transient open circuit time constant  | $$s$$ | $$0.08s$$ |
+| $$t_{pp0}$$ | Subtransient open circuit time constant  | $$s$$ | $$0.0021s$$ |
+| $$J$$ | Moment of inertia | $$kgm^2$$ | 0.1 to 5s |
+| $$\eta$$ | Exponent of the torque speed dependency | Unitless | 0 to 3 |
+| $$C_{l, 0}$$ | Initial load torque | $$Nm$$ | N/A |
+| $$\omega_0$$ | Initial rotor speed | $$rad/s$$ | N/A |
 
 ### Variables
 
