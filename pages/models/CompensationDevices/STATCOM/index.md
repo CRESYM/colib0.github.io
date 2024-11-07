@@ -111,7 +111,7 @@ The following table shows possible values for the parameters of the controllers 
 
 | Parameter | Value | Units |
 | --------- | ----- | ----- |
-| $$V_{peak}$$ | $$2500$$ | V |
+| $$V_{DC}$$ | $$2500$$ | V |
 | $$R_{f}$$ | $$0.03$$ | $$\Omega$$ |
 | $$L_{f}$$ | $$0.001$$ | $$H$$ |
 | $$C_{DC}$$ | $$1.5$$ | $$F$$ |
@@ -126,7 +126,7 @@ The following table shows possible values for the parameters of the controllers 
 | $$\tau_p$$ | $$15$$ | ms |
 | $$K^{ipl}_p$$ | $$1.778 \cdot 10^{-5}$$ | - |
 | $$K^{ipl}_i$$ | $$1.778 \cdot 10^{-2}$$ | - |
-| $$\omega_{DC}$$ | $$ 2\pi 5 $$ | rad?s |
+| $$\omega_{DC}$$ | $$ 2\pi 5 $$ | rad/s |
 | $$\xi_{DC}$$ | $$ 0.707 $$ | - |
 | $$K^{DC}_p$$ | $$ 333.17 $$ | - |
 | $$K^{DC}_i$$ | $$ 74022 $$ | - |
