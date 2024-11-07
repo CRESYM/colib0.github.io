@@ -348,9 +348,9 @@ To decide the saturation limits for the current components, the operation mode o
 * **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{(i^d, i^{d*})}^2} $$.
 
 
-## Parameter tunning 
+## Parameter tuning 
 
-The following table shows possible values for the parameters of the controllers using the tunning proposed:
+The following table shows possible values for the parameters of the controllers using the tuning proposed:
 
 | Parameter | Value | Units |
 | --------- | ----- | ----- |
