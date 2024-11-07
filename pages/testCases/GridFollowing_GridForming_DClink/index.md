@@ -62,7 +62,10 @@ The studied scenario represents the dynamics during setpoint tracking operation.
 
 ## Table of references (mandatory)
 
-
+The references can be consulted in each model's pageÑ
+- [Grid Forming VSC model](../models/generations/Sources/VSC/EMTGridFormingVSC/)
+- [Grid Following VSC model](../models/generations/Sources/VSC/EMTGridFollowingVSC/)
+- [HVDC model page](../models/HVDC/EMTVSC/)
 
 ## Network ​description (mandatory)
 
@@ -108,15 +111,15 @@ It covers:
 
 | Capacitor | C (F) |  
 | ----------- | -------------------- |
-| DC line   |   $$0.15$             |  
+| DC line   |   $$0.15$$           |  
 | GFM   |       $$1.63 \cdot 10^{-4}$$           |  
 
 - **Static data for the loads**
 
 | Loads |  P ($$MW$$)  | Q($$MVar$$) |
 | ----------- | -------------------- | --------- | 
-| Load 1         |     1              |   0.0001    |
-| Load 2         |     0.5              |   0.0001    |
+| Load 1         |    $$ 1 $$             |  $$ 0.0001 $$   |
+| Load 2         |    $$ 0.5 $$           |  $$ 0.0001 $$   |
 
 
 - **Dynamic data for the Grid Following VSC.** 
