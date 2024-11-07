@@ -105,9 +105,9 @@ In both cases, the DC voltage loop must be slower than the internal current cont
 
 You can visit the [Grid Following page](../../generations/Sources/VSC/EMTGridFollowingVSC/), which has a dedicated section on this topic.
 
-## Parameter tunning 
+## Parameter tuning 
 
-The following table shows possible values for the parameters of the controllers using the tunning proposed:
+The following table shows possible values for the parameters of the controllers using the tuning proposed:
 
 | Parameter | Value | Units |
 | --------- | ----- | ----- |
