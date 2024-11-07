@@ -354,7 +354,6 @@ The following table shows possible values for the parameters of the controllers 
 
 | Parameter | Value | Units |
 | --------- | ----- | ----- |
-| $$V_{peak}$$ | $$2500$$ | V |
 | $$R_{f}$$ | $$0.03$$ | $$\Omega$$ |
 | $$L_{f}$$ | $$0.001$$ | $$H$$ |
 | $$\omega_n^{PLL}$$ | $$2\pi 1000$$ | rad/s |
