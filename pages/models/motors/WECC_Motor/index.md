@@ -5,13 +5,13 @@ tags: ["#200", "Induction motor", "RMS", "Dynawo", "Opensource"]
 date: 12/08/2024
 last-updated: 12/08/2024
 authors: Frédéric Sabot (ULB)
-reviewers:
+reviewers: Lampros Papangelis (CRESYM)
 ---
 
 
 ## Context
 
-Motors are a particular kind of load that can account for a large share of the total load especially in industrialised countries. Adequate representation of motors is important, especially in short-term voltage stability studies as motors can cause fault-induced delayed voltage recovery.
+Motors are a particular kind of load that can account for a large share of the total load especially in industrialised countries. Adequate representation of motors is important, especially in short-term voltage stability studies as motors can cause fault-induced delayed voltage recovery [[1]](#1).
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -94,4 +94,4 @@ This model has been successfully implemented in :
 
 ## Table of references
 
-<a id="1">[1]</a> PowerWorld. "Load Characteristic MOTORW", https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic%20MOTORW.htm, Last accessed 12/08/2024
+<a id="1">[1]</a> PowerWorld. "Load Characteristic MOTORW", https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic%20MOTORW.htm

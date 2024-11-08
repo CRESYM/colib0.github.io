@@ -5,7 +5,7 @@ tags: ["#200", "Induction motor", "RMS", "Dynawo", "Opensource"]
 date: 09/08/2024
 last-updated: 09/08/2024
 authors: Frédéric Sabot (ULB)
-reviewers:
+reviewers: Lampros Papangelis (CRESYM)
 ---
 
 
