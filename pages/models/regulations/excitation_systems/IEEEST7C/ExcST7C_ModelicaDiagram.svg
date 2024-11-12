@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg baseProfile='full' height='100.000000%' version='1.1' viewBox='0.000000 0.000000 3094.000000 1818.000000' width='100.000000%' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+
+
+
+  <polygon fill='#ffffff' points='70.866142 23.622047, 70.866142 1795.275591, 3023.622047 1795.275591, 3023.622047 23.622047' stroke='#000000' stroke-width='1.000000' />
+  <polygon fill='#ffffd2' points='129.921260 448.818898, 956.692913 448.818898, 956.692913 259.842520, 129.921260 259.842520' stroke='#000000' stroke-width='1.181102' />
+  <polyline fill='none' points='141.732283 779.527559, 165.354331 779.527559' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='141.732283 744.094488, 165.354331 744.094488' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1275.590551, 248.031496 1275.590551' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1299.212598, 248.031496 1299.212598' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1322.834646, 248.031496 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='248.031496 992.125984, 271.653543 992.125984, 271.653543 989.763780, 290.551181 989.763780' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='248.031496 1015.748031, 271.653543 1015.748031, 271.653543 1018.110236, 290.551181 1018.110236' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='429.921260 1003.937008, 437.007874 1003.937008, 437.007874 1006.299213, 455.905512 1006.299213' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='342.519685 1275.590551, 354.330709 1275.590551, 354.330709 1022.834646, 373.228346 1022.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='347.244094 1003.937008, 373.228346 1003.937008' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 791.338583, 354.330709 791.338583, 354.330709 985.039370, 373.228346 985.039370' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 779.527559, 437.007874 779.527559, 437.007874 977.952756, 455.905512 977.952756' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='512.598425 992.125984, 543.307087 992.125984' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='342.519685 1287.401575, 519.685039 1287.401575, 519.685039 1015.748031, 543.307087 1015.748031' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 767.716535, 519.685039 767.716535, 519.685039 968.503937, 543.307087 968.503937' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='649.606299 992.125984, 673.228346 992.125984' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='342.519685 1299.212598, 649.606299 1299.212598, 649.606299 1015.748031, 673.228346 1015.748031' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 755.905512, 649.606299 755.905512, 649.606299 968.503937, 673.228346 968.503937' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='779.527559 992.125984, 791.338583 992.125984' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='874.015748 992.125984, 903.543307 992.125984' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1440.944882, 885.826772 1440.944882, 885.826772 1027.559055, 903.543307 1027.559055' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='974.409449 1009.842520, 992.125984 1009.842520, 992.125984 1003.937008, 998.031496 1003.937008' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1559.055118, 401.574803 1559.055118, 401.574803 1553.149606, 416.929134 1553.149606' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='516.141732 1553.149606, 956.692913 1553.149606, 956.692913 1039.370079, 998.031496 1039.370079' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1068.897638 1021.653543, 1080.708661 1021.653543' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1270.866142 1015.748031, 1287.401575 1015.748031, 1287.401575 994.488189, 1315.748031 994.488189' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1151.574803 1021.653543, 1157.480315 1021.653543, 1157.480315 994.488189, 1185.826772 994.488189' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1110.236220 1381.889764, 1122.047244 1381.889764, 1122.047244 1384.251969, 1138.582677 1384.251969' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1223.622047 1405.511811, 1228.346457 1405.511811, 1228.346457 1110.236220, 1169.291339 1110.236220, 1169.291339 1037.007874, 1185.826772 1037.007874' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1334.645669 1476.377953, 1346.456693 1476.377953, 1346.456693 1478.740157, 1362.992126 1478.740157' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1448.031496 1500.000000, 1452.755906 1500.000000, 1452.755906 1405.511811, 1275.590551 1405.511811, 1275.590551 1037.007874, 1315.748031 1037.007874' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1677.165354, 980.314961 1677.165354, 980.314961 1381.889764, 992.125984 1381.889764' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1364.173228 1612.204724, 1358.267717 1612.204724, 1358.267717 1521.259843, 1362.992126 1521.259843' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1364.173228 1718.503937, 1133.858268 1718.503937, 1133.858268 1426.771654, 1138.582677 1426.771654' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1677.165354, 980.314961 1677.165354, 980.314961 1476.377953, 1128.543307 1476.377953' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1139.173228 1476.377953, 1204.724409 1476.377953' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1400.787402 1015.748031, 1417.322835 1015.748031, 1417.322835 1021.653543, 1430.314961 1021.653543' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1557.874016 1021.653543, 1582.677165 1021.653543, 1582.677165 1020.472441, 1609.842520 1020.472441' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1709.055118 1045.275591, 1736.220472 1045.275591, 1736.220472 1039.370079, 1759.842520 1039.370079' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1877.952756 1039.370079, 1937.007874 1039.370079' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 744.094488, 1700.787402 744.094488, 1700.787402 1015.748031, 1759.842520 1015.748031' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='259.842520 732.283465, 1901.574803 732.283465, 1901.574803 1015.748031, 1937.007874 1015.748031' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1525.984252 1677.165354, 1476.377953 1677.165354, 1476.377953 1122.047244, 1570.866142 1122.047244, 1570.866142 1070.078740, 1609.842520 1070.078740' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1525.984252 1677.165354, 1476.377953 1677.165354, 1476.377953 1612.204724, 1435.039370 1612.204724' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1525.984252 1677.165354, 1476.377953 1677.165354, 1476.377953 1718.503937, 1435.039370 1718.503937' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2055.118110 1039.370079, 2114.173228 1039.370079' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2255.905512 1039.370079, 2291.338583 1039.370079' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='342.519685 1311.023622, 880.511811 1311.023622' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='891.141732 1311.023622, 951.377953 1311.023622' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='962.007874 1311.023622, 1223.031496 1311.023622' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1233.661417 1311.023622, 1270.275591 1311.023622' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1280.905512 1311.023622, 1471.062992 1311.023622' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1481.692913 1311.023622, 1736.220472 1311.023622, 1736.220472 1062.992126, 1759.842520 1062.992126' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='342.519685 1322.834646, 880.511811 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='891.141732 1322.834646, 951.377953 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='962.007874 1322.834646, 1223.031496 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1233.661417 1322.834646, 1270.275591 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1280.905512 1322.834646, 1471.062992 1322.834646' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1481.692913 1322.834646, 1901.574803 1322.834646, 1901.574803 1062.992126, 1937.007874 1062.992126' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='224.409449 1559.055118, 248.031496 1559.055118, 248.031496 1586.220472, 416.929134 1586.220472' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2433.070866 1039.370079, 2515.748031 1039.370079, 2515.748031 1653.543307, 2149.606299 1653.543307' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2007.874016 1653.543307, 1818.897638 1653.543307, 1818.897638 1677.165354, 1639.370079 1677.165354' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2433.070866 1039.370079, 2586.614173 1039.370079, 2586.614173 862.204724, 2692.913386 862.204724' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='248.031496 366.141732, 377.952756 366.141732' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='519.685039 330.708661, 637.795276 330.708661' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1688.976378 1712.598425, 1665.354331 1712.598425, 1665.354331 1714.960630, 1639.370079 1714.960630' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='2043.307087 1110.236220, 2078.740157 1110.236220, 2078.740157 1086.614173, 2114.173228 1086.614173' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='1381.889764 1074.803150, 1405.511811 1074.803150, 1405.511811 1064.173228, 1430.314961 1064.173228' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='519.685039 366.141732, 637.795276 366.141732' stroke='#00007f' stroke-width='1.181102' />
+  <polyline fill='none' points='519.685039 401.574803, 637.795276 401.574803' stroke='#00007f' stroke-width='1.181102' />
+  <ellipse cx='248.031496' cy='1559.055118' fill='#00007f' rx='2.952756' ry='2.952756' stroke='#00007f' stroke-width='1.000000' />
+  <ellipse cx='980.314961' cy='1476.377953' fill='#00007f' rx='2.952756' ry='2.952756' stroke='#00007f' stroke-width='1.000000' />
+  <ellipse cx='1476.377953' cy='1677.165354' fill='#00007f' rx='2.952756' ry='2.952756' stroke='#00007f' stroke-width='1.000000' />
+  <ellipse cx='1476.377953' cy='1612.204724' fill='#00007f' rx='2.952756' ry='2.952756' stroke='#00007f' stroke-width='1.000000' />
+  <ellipse cx='2515.748031' cy='1039.370079' fill='#00007f' rx='2.952756' ry='2.952756' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='177.165354 803.149606, 248.031496 803.149606, 248.031496 732.283465, 177.165354 732.283465' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='6.000000' text-anchor='start' x='185.598425' y='769.807160'>UEL_OEL_Router_1</text>
+  <polygon fill='#00007f' points='165.354331 739.370079, 177.165354 744.094488, 165.354331 748.818898' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='165.354331 774.803150, 177.165354 779.527559, 165.354331 784.251969' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 727.559055, 259.842520 732.283465, 248.031496 737.007874' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 739.370079, 259.842520 744.094488, 248.031496 748.818898' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 751.181102, 259.842520 755.905512, 248.031496 760.629921' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 762.992126, 259.842520 767.716535, 248.031496 772.440945' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 774.803150, 259.842520 779.527559, 248.031496 784.251969' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='248.031496 786.614173, 259.842520 791.338583, 248.031496 796.062992' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='259.842520 1334.645669, 330.708661 1334.645669, 330.708661 1263.779528, 259.842520 1263.779528' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='9.000000' text-anchor='start' x='264.775591' y='1302.198536'>SCL_Router_1</text>
+  <polygon fill='#00007f' points='248.031496 1270.866142, 259.842520 1275.590551, 248.031496 1280.314961' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='248.031496 1294.488189, 259.842520 1299.212598, 248.031496 1303.937008' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='248.031496 1318.110236, 259.842520 1322.834646, 248.031496 1327.559055' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='330.708661 1270.866142, 342.519685 1275.590551, 330.708661 1280.314961' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='330.708661 1282.677165, 342.519685 1287.401575, 330.708661 1292.125984' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='330.708661 1294.488189, 342.519685 1299.212598, 330.708661 1303.937008' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='330.708661 1306.299213, 342.519685 1311.023622, 330.708661 1315.748031' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='330.708661 1318.110236, 342.519685 1322.834646, 330.708661 1327.559055' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='7.000000' text-anchor='start' x='306.480315' y='976.612291'>add_1</text>
+  <polyline fill='none' points='295.467921 989.763780, 304.733291 989.799638, 311.649756 994.429913' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='295.487150 1018.016291, 304.773094 1018.037835, 311.043449 1013.140205' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='318.897638' cy='1003.937008' fill='none' rx='11.811024' ry='11.811024' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='330.708661 1003.937008, 342.519685 1003.937008' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='18.000000' text-anchor='start' x='312.161417' y='1010.900787'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='309.519685' y='991.165354'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='309.755906' y='1025.181102'>1</text>
+  <polygon fill='#00007f' points='290.551181 987.874016, 295.275591 989.763780, 290.551181 991.653543' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='290.551181 1016.220472, 295.275591 1018.110236, 290.551181 1020.000000' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='342.519685 1002.047244, 347.244094 1003.937008, 342.519685 1005.826772' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='7.000000' text-anchor='start' x='387.157480' y='976.612291'>add3_1</text>
+  <ellipse cx='406.299213' cy='1004.409449' fill='none' rx='11.811024' ry='11.811024' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='418.277031 1003.937008, 425.196850 1003.937008' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='18.000000' text-anchor='start' x='399.562992' y='1011.373228'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='401.173228' y='990.929134'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='381.566929' y='1003.685039'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='402.590551' y='1026.125984'>1</text>
+  <polyline fill='none' points='377.891339 1003.926377, 394.361929 1003.878774' stroke='#000000' stroke-width='1.000000' />
+  <polyline fill='none' points='377.919921 985.004646, 392.003197 985.004646, 401.616969 993.353433' stroke='#000000' stroke-width='1.000000' />
+  <polyline fill='none' points='377.919921 1022.616378, 392.171858 1022.616378, 401.448306 1015.363890' stroke='#000000' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='373.228346 983.149606, 377.952756 985.039370, 373.228346 986.929134' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='373.228346 1002.047244, 377.952756 1003.937008, 373.228346 1005.826772' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='373.228346 1020.944882, 377.952756 1022.834646, 373.228346 1024.724409' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='425.196850 1002.047244, 429.921260 1003.937008, 425.196850 1005.826772' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='7.000000' text-anchor='start' x='471.334646' y='964.801267'>add_2</text>
+  <polyline fill='none' points='460.822252 977.952756, 470.087622 977.988614, 477.004087 982.618890' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='460.841480 1006.205268, 470.127425 1006.226811, 476.397780 1001.329181' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='484.251969' cy='992.125984' fill='none' rx='11.811024' ry='11.811024' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='496.062992 992.125984, 507.874016 992.125984' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='18.000000' text-anchor='start' x='477.515748' y='999.089764'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='474.874016' y='979.354331'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='10.000000' text-anchor='start' x='475.110236' y='1013.370079'>1</text>
+  <polygon fill='#00007f' points='455.905512 976.062992, 460.629921 977.952756, 455.905512 979.842520' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='455.905512 1004.409449, 460.629921 1006.299213, 455.905512 1008.188976' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='507.874016 990.236220, 512.598425 992.125984, 507.874016 994.015748' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='555.118110 1039.370079, 637.795276 1039.370079, 637.795276 956.692913, 555.118110 956.692913' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='15.000000' text-anchor='start' x='561.456693' y='1003.156496'>HV_gate_1</text>
+  <polygon fill='#00007f' points='543.307087 963.779528, 555.118110 968.503937, 543.307087 973.228346' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='543.307087 987.401575, 555.118110 992.125984, 543.307087 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='543.307087 1011.023622, 555.118110 1015.748031, 543.307087 1020.472441' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='637.795276 987.401575, 649.606299 992.125984, 637.795276 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='685.039370 1039.370079, 767.716535 1039.370079, 767.716535 956.692913, 685.039370 956.692913' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='15.000000' text-anchor='start' x='692.377953' y='1003.156496'>LV_gate_1</text>
+  <polygon fill='#00007f' points='673.228346 963.779528, 685.039370 968.503937, 673.228346 973.228346' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='673.228346 987.401575, 685.039370 992.125984, 673.228346 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='673.228346 1011.023622, 685.039370 1015.748031, 673.228346 1020.472441' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='767.716535 987.401575, 779.527559 992.125984, 767.716535 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='803.149606 1027.559055, 862.204724 1027.559055, 862.204724 968.503937, 803.149606 968.503937' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='4.000000' text-anchor='start' x='812.677165' y='999.375246'>AsymmetricalLimiter_1</text>
+  <polygon fill='#00007f' points='791.338583 987.401575, 803.149606 992.125984, 791.338583 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='862.204724 987.401575, 874.015748 992.125984, 862.204724 996.850394' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='9.000000' text-anchor='start' x='923.704724' y='975.623733'>add_3</text>
+  <polyline fill='none' points='909.689232 992.125984, 921.270945 992.170807, 929.916526 997.958652' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='909.713268 1027.441624, 921.320699 1027.468553, 929.158642 1021.346516' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='938.976378' cy='1009.842520' fill='none' rx='14.763780' ry='14.763780' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='953.740157 1009.842520, 968.503937 1009.842520' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='22.000000' text-anchor='start' x='932.181102' y='1018.347244'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='12.000000' text-anchor='start' x='928.003937' y='993.677953'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='12.000000' text-anchor='start' x='928.299213' y='1036.197638'>1</text>
+  <polygon fill='#00007f' points='903.543307 989.763780, 909.448819 992.125984, 903.543307 994.488189' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='903.543307 1025.196850, 909.448819 1027.559055, 903.543307 1029.921260' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='968.503937 1007.480315, 974.409449 1009.842520, 968.503937 1012.204724' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='9.000000' text-anchor='start' x='1013.692913' y='987.434756'>add_1_1</text>
+  <polyline fill='none' points='1004.177421 1003.937008, 1015.759134 1003.981831, 1024.404715 1009.769675' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1004.201457 1039.252648, 1015.808888 1039.279577, 1023.646831 1033.157539' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='1033.464567' cy='1021.653543' fill='none' rx='14.763780' ry='14.763780' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1048.228346 1021.653543, 1062.992126 1021.653543' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='22.000000' text-anchor='start' x='1026.669291' y='1030.158268'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='12.000000' text-anchor='start' x='1022.492126' y='1005.488976'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='12.000000' text-anchor='start' x='1020.287402' y='1047.238349'>-1</text>
+  <polygon fill='#00007f' points='998.031496 1001.574803, 1003.937008 1003.937008, 998.031496 1006.299213' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='998.031496 1037.007874, 1003.937008 1039.370079, 998.031496 1041.732283' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1062.992126 1019.291339, 1068.897638 1021.653543, 1062.992126 1024.015748' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='425.196850 1594.488189, 507.874016 1594.488189, 507.874016 1511.811024, 425.196850 1511.811024' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='428.503937 1548.602362, 504.318898 1548.395669' stroke='#1262be' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='13.000000' text-anchor='start' x='448.589173' y='1540.992298'>Tgs+1</text>
+  <text fill='#1262be' font-family='Arial' font-size='13.000000' text-anchor='start' x='450.432087' y='1565.795448'>Tfs+1</text>
+  <text fill='#00007f' font-family='Arial' font-size='13.000000' text-anchor='start' x='462.328740' y='1591.007087'>z</text>
+  <polygon fill='#00007f' points='416.929134 1549.842520, 425.196850 1553.149606, 416.929134 1556.456693' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='416.929134 1582.913386, 425.196850 1586.220472, 416.929134 1589.527559' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='507.874016 1549.842520, 516.141732 1553.149606, 507.874016 1556.456693' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='9.000000' text-anchor='start' x='1104.370079' y='987.434756'>Gain</text>
+  <polygon fill='#ffffff' points='1086.614173 1051.181102, 1086.614173 992.125984, 1145.669291 1021.653543, 1086.614173 1051.181102' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='9.000000' text-anchor='start' x='1108.232283' y='1060.367827'>Kpa</text>
+  <polygon fill='#00007f' points='1080.708661 1019.291339, 1086.614173 1021.653543, 1080.708661 1024.015748' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1145.669291 1019.291339, 1151.574803 1021.653543, 1145.669291 1024.015748' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1192.913386 1051.181102, 1263.779528 1051.181102, 1263.779528 980.314961, 1192.913386 980.314961' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='20.000000' text-anchor='start' x='1202.519609' y='1020.788669'>max()</text>
+  <polygon fill='#00007f' points='1185.826772 991.653543, 1192.913386 994.488189, 1185.826772 997.322835' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1185.826772 1034.173228, 1192.913386 1037.007874, 1185.826772 1039.842520' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1263.779528 1012.913386, 1270.866142 1015.748031, 1263.779528 1018.582677' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1322.834646 1051.181102, 1393.700787 1051.181102, 1393.700787 980.314961, 1322.834646 980.314961' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='20.000000' text-anchor='start' x='1332.440868' y='1020.788669'>max()</text>
+  <polygon fill='#00007f' points='1315.748031 991.653543, 1322.834646 994.488189, 1315.748031 997.322835' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1315.748031 1034.173228, 1322.834646 1037.007874, 1315.748031 1039.842520' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1393.700787 1012.913386, 1400.787402 1015.748031, 1393.700787 1018.582677' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='1003.937008 1440.944882, 1098.425197 1440.944882, 1098.425197 1334.645669, 1003.937008 1334.645669' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='8.000000' text-anchor='start' x='1011.681102' y='1390.482776'>AsymmetricalLimiter_2</text>
+  <polygon fill='#00007f' points='992.125984 1377.165354, 1003.937008 1381.889764, 992.125984 1386.614173' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1098.425197 1377.165354, 1110.236220 1381.889764, 1098.425197 1386.614173' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='1216.535433 1535.433071, 1322.834646 1535.433071, 1322.834646 1429.133858, 1216.535433 1429.133858' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='9.000000' text-anchor='start' x='1220.685039' y='1485.269402'>AsymmetricalLimiter_3</text>
+  <polygon fill='#00007f' points='1204.724409 1471.653543, 1216.535433 1476.377953, 1204.724409 1481.102362' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1322.834646 1471.653543, 1334.645669 1476.377953, 1322.834646 1481.102362' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='11.000000' text-anchor='start' x='1156.976378' y='1364.547392'>add_1_2</text>
+  <polyline fill='none' points='1145.957787 1384.251969, 1159.855843 1384.305756, 1170.230539 1391.251169' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1145.986630 1426.630736, 1159.915547 1426.663051, 1169.321079 1419.316606' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='1181.102362' cy='1405.511811' fill='none' rx='17.716535' ry='17.716535' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1198.818898 1405.511811, 1216.535433 1405.511811' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='27.000000' text-anchor='start' x='1173.248031' y='1415.957480'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1168.535433' y='1386.354331'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1165.389764' y='1436.502953'>-1</text>
+  <polygon fill='#00007f' points='1138.582677 1381.417323, 1145.669291 1384.251969, 1138.582677 1387.086614' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1138.582677 1423.937008, 1145.669291 1426.771654, 1138.582677 1429.606299' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1216.535433 1402.677165, 1223.622047 1405.511811, 1216.535433 1408.346457' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='11.000000' text-anchor='start' x='1381.385827' y='1459.035581'>add_1_3</text>
+  <polyline fill='none' points='1370.367236 1478.740157, 1384.265291 1478.793945, 1394.639988 1485.739358' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1370.396079 1521.118925, 1384.324996 1521.151240, 1393.730528 1513.804795' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='1405.511811' cy='1500.000000' fill='none' rx='17.716535' ry='17.716535' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1423.228346 1500.000000, 1440.944882 1500.000000' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='27.000000' text-anchor='start' x='1397.657480' y='1510.445669'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1392.944882' y='1480.842520'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1389.799213' y='1530.991142'>-1</text>
+  <polygon fill='#00007f' points='1362.992126 1475.905512, 1370.078740 1478.740157, 1362.992126 1481.574803' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1362.992126 1518.425197, 1370.078740 1521.259843, 1362.992126 1524.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1440.944882 1497.165354, 1448.031496 1500.000000, 1440.944882 1502.834646' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='9.000000' text-anchor='start' x='1391.377953' y='1652.395386'>Gain</text>
+  <polygon fill='#ffffff' points='1429.133858 1582.677165, 1429.133858 1641.732283, 1370.078740 1612.204724, 1429.133858 1582.677165' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='9.000000' text-anchor='start' x='1394.515748' y='1579.462315'>Kl</text>
+  <polygon fill='#00007f' points='1435.039370 1614.566929, 1429.133858 1612.204724, 1435.039370 1609.842520' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1370.078740 1614.566929, 1364.173228 1612.204724, 1370.078740 1609.842520' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='9.000000' text-anchor='start' x='1391.377953' y='1758.694599'>Gain</text>
+  <polygon fill='#ffffff' points='1429.133858 1688.976378, 1429.133858 1748.031496, 1370.078740 1718.503937, 1429.133858 1688.976378' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='9.000000' text-anchor='start' x='1393.015748' y='1685.761528'>Kh</text>
+  <polygon fill='#00007f' points='1435.039370 1720.866142, 1429.133858 1718.503937, 1435.039370 1716.141732' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1370.078740 1720.866142, 1364.173228 1718.503937, 1370.078740 1716.141732' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1440.944882 1074.803150, 1547.244094 1074.803150, 1547.244094 968.503937, 1440.944882 968.503937' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='1445.196850 1015.807087, 1542.673228 1015.541339' stroke='#1262be' stroke-width='1.062992' />
+  <text fill='#1262be' font-family='Arial' font-size='17.000000' text-anchor='start' x='1471.663583' y='1006.215576'>Tcs+1</text>
+  <text fill='#1262be' font-family='Arial' font-size='17.000000' text-anchor='start' x='1471.461614' y='1038.105340'>Tbs+1</text>
+  <text fill='#00007f' font-family='Arial' font-size='17.000000' text-anchor='start' x='1488.828740' y='1070.441732'>z</text>
+  <polygon fill='#00007f' points='1430.314961 1017.401575, 1440.944882 1021.653543, 1430.314961 1025.905512' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1430.314961 1059.921260, 1440.944882 1064.173228, 1430.314961 1068.425197' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1547.244094 1017.401575, 1557.874016 1021.653543, 1547.244094 1025.905512' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00005d' font-family='Arial' font-size='13.000000' text-anchor='start' x='1638.968504' y='997.567101'>add_4</text>
+  <polyline fill='none' points='1618.446815 1020.472441, 1634.661213 1020.535193, 1646.765026 1028.638175' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1618.480465 1069.914337, 1634.730868 1069.952037, 1645.703988 1061.381185' stroke='#00005d' stroke-width='1.000000' />
+  <ellipse cx='1659.448819' cy='1045.275591' fill='none' rx='20.669291' ry='20.669291' stroke='#00005d' stroke-width='1.000000' />
+  <polyline fill='none' points='1680.118110 1045.275591, 1700.787402 1045.275591' stroke='#00005d' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='32.000000' text-anchor='start' x='1650.035433' y='1057.662205'>+</text>
+  <text fill='#1262be' font-family='Arial' font-size='17.000000' text-anchor='start' x='1644.787402' y='1022.725197'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='17.000000' text-anchor='start' x='1645.200787' y='1082.252756'>1</text>
+  <polygon fill='#00007f' points='1609.842520 1017.165354, 1618.110236 1020.472441, 1609.842520 1023.779528' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1609.842520 1066.771654, 1618.110236 1070.078740, 1609.842520 1073.385827' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1700.787402 1041.968504, 1709.055118 1045.275591, 1700.787402 1048.582677' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='1771.653543 1086.614173, 1866.141732 1086.614173, 1866.141732 992.125984, 1771.653543 992.125984' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='17.000000' text-anchor='start' x='1778.397638' y='1045.191954'>HV_gate_2</text>
+  <polygon fill='#00007f' points='1759.842520 1011.023622, 1771.653543 1015.748031, 1759.842520 1020.472441' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1759.842520 1034.645669, 1771.653543 1039.370079, 1759.842520 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1759.842520 1058.267717, 1771.653543 1062.992126, 1759.842520 1067.716535' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1866.141732 1034.645669, 1877.952756 1039.370079, 1866.141732 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#dcdcdc' points='1948.818898 1086.614173, 2043.307087 1086.614173, 2043.307087 992.125984, 1948.818898 992.125984' stroke='#000000' stroke-width='1.000000' />
+  <text fill='#000000' font-family='Arial' font-size='17.000000' text-anchor='start' x='1956.562992' y='1045.191954'>LV_gate_2</text>
+  <polygon fill='#00007f' points='1937.007874 1011.023622, 1948.818898 1015.748031, 1937.007874 1020.472441' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1937.007874 1034.645669, 1948.818898 1039.370079, 1937.007874 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1937.007874 1058.267717, 1948.818898 1062.992126, 1937.007874 1067.716535' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2043.307087 1034.645669, 2055.118110 1039.370079, 2043.307087 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1629.921260 1724.409449, 1535.433071 1724.409449, 1535.433071 1629.921260, 1629.921260 1629.921260' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='1626.141732 1671.968504, 1539.496063 1671.732283' stroke='#1262be' stroke-width='1.000000' />
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1571.615748' y='1663.392717'>Kia</text>
+  <text fill='#1262be' font-family='Arial' font-size='15.000000' text-anchor='start' x='1560.295276' y='1691.739173'>Tias+1</text>
+  <text fill='#00007f' font-family='Arial' font-size='15.000000' text-anchor='start' x='1578.413386' y='1720.488189'>z</text>
+  <polygon fill='#00007f' points='1639.370079 1673.385827, 1629.921260 1677.165354, 1639.370079 1680.944882' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='1639.370079 1711.181102, 1629.921260 1714.960630, 1639.370079 1718.740157' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1535.433071 1673.385827, 1525.984252 1677.165354, 1535.433071 1680.944882' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2125.984252 1098.425197, 2244.094488 1098.425197, 2244.094488 980.314961, 2125.984252 980.314961' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='2130.708661 1032.874016, 2239.015748 1032.578740' stroke='#1262be' stroke-width='1.181102' />
+  <text fill='#1262be' font-family='Arial' font-size='19.000000' text-anchor='start' x='2181.116142' y='1023.348031'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='19.000000' text-anchor='start' x='2158.891732' y='1057.649852'>Tas+1</text>
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='2178.744094' y='1093.623622'>z</text>
+  <polygon fill='#00007f' points='2114.173228 1034.645669, 2125.984252 1039.370079, 2114.173228 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#00007f' points='2114.173228 1081.889764, 2125.984252 1086.614173, 2114.173228 1091.338583' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2244.094488 1034.645669, 2255.905512 1039.370079, 2244.094488 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2303.149606 1098.425197, 2421.259843 1098.425197, 2421.259843 980.314961, 2303.149606 980.314961' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='2362.204724 1092.519685, 2362.204724 999.212598' stroke='#c0c0c0' stroke-width='1.000000' />
+  <polygon fill='#c0c0c0' points='2362.204724 986.220472, 2357.480315 999.212598, 2366.929134 999.212598, 2362.204724 986.220472' stroke='#c0c0c0' stroke-width='1.000000' />
+  <polyline fill='none' points='2309.055118 1039.370079, 2402.362205 1039.370079' stroke='#c0c0c0' stroke-width='1.000000' />
+  <polygon fill='#c0c0c0' points='2415.354331 1039.370079, 2402.362205 1044.094488, 2402.362205 1034.645669, 2415.354331 1039.370079' stroke='#c0c0c0' stroke-width='1.000000' />
+  <polyline fill='none' points='2314.960630 1080.708661, 2332.677165 1080.708661, 2391.732283 998.031496, 2409.448819 998.031496' stroke='#1262be' stroke-width='1.181102' />
+  <text fill='#00005d' font-family='Arial' font-size='19.000000' text-anchor='start' x='2281.661417' y='971.429380'>limiterVrmaxmin_1</text>
+  <text fill='#000000' font-family='Arial' font-size='19.000000' text-anchor='start' x='2290.204724' y='1117.886073'>Vr_max=Vr_max</text>
+  <polygon fill='#00007f' points='2291.338583 1034.645669, 2303.149606 1039.370079, 2291.338583 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2421.259843 1034.645669, 2433.070866 1039.370079, 2421.259843 1044.094488' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2137.795276 1712.598425, 2019.685039 1712.598425, 2019.685039 1594.488189, 2137.795276 1594.488189' stroke='#00007f' stroke-width='1.000000' />
+  <polyline fill='none' points='2096.456693 1653.543307, 2061.023622 1653.543307' stroke='#1262be' stroke-width='1.181102' />
+  <text fill='#1262be' font-family='Arial' font-size='38.000000' text-anchor='start' x='2075.783465' y='1639.215748'>1</text>
+  <text fill='#1262be' font-family='Arial' font-size='38.000000' text-anchor='start' x='2068.740157' y='1698.270866'>z</text>
+  <text fill='#00005d' font-family='Arial' font-size='19.000000' text-anchor='start' x='2033.783465' y='1585.602608'>unitDelay_1</text>
+  <polygon fill='#00007f' points='2149.606299 1648.818898, 2137.795276 1653.543307, 2149.606299 1658.267717' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='2019.685039 1648.818898, 2007.874016 1653.543307, 2019.685039 1658.267717' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='389.763780 425.196850, 507.874016 425.196850, 507.874016 307.086614, 389.763780 307.086614' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='401.318898' y='299.382136'>initModel_1</text>
+  <polygon fill='#00007f' points='377.952756 361.417323, 389.763780 366.141732, 377.952756 370.866142' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='507.874016 361.417323, 519.685039 366.141732, 507.874016 370.866142' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='507.874016 396.850394, 519.685039 401.574803, 507.874016 406.299213' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='507.874016 325.984252, 519.685039 330.708661, 507.874016 335.433071' stroke='#00007f' stroke-width='1.000000' />
+  <polygon fill='#ffffff' points='1795.275591 1724.409449, 1706.692913 1724.409449, 1688.976378 1712.598425, 1706.692913 1700.787402, 1795.275591 1700.787402, 1777.559055 1712.598425' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='6.000000' text-anchor='start' x='1705.082677' y='1714.689050'>x0_lowPassFilterKiaTia_1</text>
+  <polygon fill='#ffffff' points='1937.007874 1098.425197, 2025.590551 1098.425197, 2043.307087 1110.236220, 2025.590551 1122.047244, 1937.007874 1122.047244, 1954.724409 1110.236220' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='6.000000' text-anchor='start' x='1963.200787' y='1112.326845'>x0_lowPassFilter1Ta_1</text>
+  <polygon fill='#ffffff' points='1287.401575 1062.992126, 1366.141732 1062.992126, 1381.889764 1074.803150, 1366.141732 1086.614173, 1287.401575 1086.614173, 1303.149606 1074.803150' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='7.000000' text-anchor='start' x='1305.295276' y='1077.242212'>x0_leadLagTcTb_1</text>
+  <polygon fill='#00007f' points='118.110236 732.283465, 141.732283 744.094488, 118.110236 755.905512' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='70.073474' y='750.563238'>Voel</text>
+  <polygon fill='#00007f' points='118.110236 767.716535, 141.732283 779.527559, 118.110236 791.338583' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='71.073474' y='785.996309'>Vuel</text>
+  <polygon fill='#00007f' points='224.409449 980.314961, 248.031496 992.125984, 224.409449 1003.937008' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='177.372687' y='998.594734'>Vref</text>
+  <polygon fill='#00007f' points='224.409449 1003.937008, 248.031496 1015.748031, 224.409449 1027.559055' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='167.372687' y='1022.216781'>dVref</text>
+  <polygon fill='#00007f' points='200.787402 1263.779528, 224.409449 1275.590551, 200.787402 1287.401575' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='107.750640' y='1282.059301'>Vscl_sum</text>
+  <polygon fill='#00007f' points='200.787402 1287.401575, 224.409449 1299.212598, 200.787402 1311.023622' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='118.750640' y='1305.681348'>Vscl_uel</text>
+  <polygon fill='#00007f' points='200.787402 1311.023622, 224.409449 1322.834646, 200.787402 1334.645669' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='117.750640' y='1329.303396'>Vscl_oel</text>
+  <polygon fill='#00007f' points='200.787402 1429.133858, 224.409449 1440.944882, 200.787402 1452.755906' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='168.750640' y='1447.413632'>Vs</text>
+  <polygon fill='#00007f' points='200.787402 1547.244094, 224.409449 1559.055118, 200.787402 1570.866142' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='168.750640' y='1565.523868'>Vc</text>
+  <polygon fill='#00007f' points='200.787402 1665.354331, 224.409449 1677.165354, 200.787402 1688.976378' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='172.750640' y='1683.634104'>Vt</text>
+  <polygon fill='#00007f' points='224.409449 354.330709, 248.031496 366.141732, 224.409449 377.952756' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='152.372687' y='372.610482'>Efd_init</text>
+  <polygon fill='#ffffff' points='2692.913386 850.393701, 2716.535433 862.204724, 2692.913386 874.015748' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='19.000000' text-anchor='start' x='2723.572195' y='868.673474'>Efd</text>
+  <polygon fill='#ffffff' points='637.795276 330.708661, 670.866142 318.897638, 803.149606 318.897638, 803.149606 342.519685, 670.866142 342.519685' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='12.000000' text-anchor='start' x='665.893701' y='334.738349'>x0_lowPassFilter1Ta_1</text>
+  <polygon fill='#ffffff' points='637.795276 401.574803, 670.866142 389.763780, 803.149606 389.763780, 803.149606 413.385827, 670.866142 413.385827' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='15.000000' text-anchor='start' x='668.393701' y='406.699803'>x0_leadLagTcTb_1</text>
+  <polygon fill='#ffffff' points='637.795276 366.141732, 670.866142 354.330709, 803.149606 354.330709, 803.149606 377.952756, 670.866142 377.952756' stroke='#00007f' stroke-width='1.000000' />
+  <text fill='#00007f' font-family='Arial' font-size='11.000000' text-anchor='start' x='668.393701' y='369.822982'>x0_lowPassFilterKiaTia_1</text>
+
+</svg>
