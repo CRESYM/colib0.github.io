@@ -94,4 +94,4 @@ This model has been successfully implemented in :
 
 ## Table of references
 
-<a id="1">[1]</a> PowerWorld. "Load Characteristic MOTORW", https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic%20MOTORW.htm
+<a id="1">[1]</a> PowerWorld. "Load Characteristic MOTORW", [https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic%20MOTORW.htm](https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic%20MOTORW.htm)
