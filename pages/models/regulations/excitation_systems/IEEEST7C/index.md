@@ -47,18 +47,18 @@ The model is compared between different implementations i.e. as standard model a
 - short circuit at one of the nodes of the test grid.
 The simulations are performed in DIgSILENT PowerFactory 2024.
 
-![Step response characteristic - standard](../ExcST7C_StandardStepResponse.svg "Step response characteristic - standard")
+![Step response characteristic - standard](../IEEEST7C/ExcST7C_StandardStepResponse.svg "Step response characteristic - standard")
 
 Figure 1: Step response characteristic +2% Vref at 1 sec and -2% Vref at 15 sec. Standard model
 
-![Step response characteristic - modelica](../ExcST7C_ModelicaStepResponse.svg "Step response characteristic - modelica")
+![Step response characteristic - modelica](../IEEEST7C/ExcST7C_ModelicaStepResponse.svg "Step response characteristic - modelica")
 
 Figure 2: Step response characteristic +2% Vref at 1 sec and -2% Vref at 15 sec. Modelica based model
 
-![Short circuit event - standard](../ExcST7C_StandardShortCircuitEvent.svg "Short circuit event - standard")
+![Short circuit event - standard](../IEEEST7C/ExcST7C_StandardShortCircuitEvent.svg "Short circuit event - standard")
 igure 3: Short circuit event. Standard model
 
-![Short circuit event - modelica](../ExcST7C_ModelicaShortCircuitEvent.svg "Short circuit event - modelica")
+![Short circuit event - modelica](../IEEEST7C/ExcST7C_ModelicaShortCircuitEvent.svg "Short circuit event - modelica")
 Figure 4: Short circuit event. Modelica based model
 
 ### Implementations mapping
@@ -77,7 +77,7 @@ XXX
 
 The block diagram of the model is provided in IEEE 421.5-2016. The block diagram below is the diagram of the model represented as user defined model based on Modelica equations.
 
-![Model block diagram](../ExcST7C_ModelicaDiagram.svg "Model block diagram")
+![Model block diagram](../IEEEST7C/ExcST7C_ModelicaDiagram.svg "Model block diagram")
 
 Figure 5: Model block diagram
 
