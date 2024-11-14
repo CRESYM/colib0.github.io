@@ -142,7 +142,7 @@ Table 3: Outputs
 
 ### Equations & algorithm  
 
-–here refer to the doc with equations
+The equations related to the model are available in a [document](../IEEEST7C/ModelEquations.docx).
 
 
 ## Open source implementations
