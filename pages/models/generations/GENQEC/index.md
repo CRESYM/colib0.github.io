@@ -80,8 +80,8 @@ The GENQEC model is suitable for EMT as it models with detail the non-linearitie
 
 <div style="font-weight: bold;">Electric Dynamics Equations:</div>
 
-$$ V_d = \frac{\omega_m}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
-$$ V_q = \frac{\omega_m}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
+$$ V_d = \frac{\omega}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
+$$ V_q = \frac{\omega}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
 $$ \frac{1}{\omega_s} \frac{d\Psi_0}{dt} = R_s I_0 + V_0$$
 $$ E''_q = E_{q1} + E_{q2} - I_d (X_{dsat} - X''_{dsat}) $$
 $$ E''_d = E_{d1} + E_{d2} + I_q (X_{qsat} - X''_{qsat}) $$
@@ -169,7 +169,7 @@ $$ X_{mdsat} I_{fd} = \left( X_{dsat} - X_l \right) I_{fd} = \frac{X_d - X_l}{Sa
 The following figure shows the block diagram for this GENQEC model [[2]](#2):
 
 <p align="center">
-<img src="{{'/pages/models/generations/GENQEC/GENQEC_blocks.png' | relative_url }}"
+<img src="{{'/pages/models/generations/GENQEC/GENQEC_blocks.svg' | relative_url }}"
      alt="Block diagram of the GENQEC model"
      style="float: center; width: 600px;" />
 </p>
