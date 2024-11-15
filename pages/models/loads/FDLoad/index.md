@@ -21,8 +21,6 @@ The frequency dependent load model can be used for static analysis considering v
 * The variation of the load when the frequency changes are modeled using a factor dependent on the frequency deviation
 * The load is balanced 
 
-The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
-
 ## Model description
 
 ### Parameters
@@ -50,8 +48,8 @@ The model does not take into account the time-response performance of the load, 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$P(V, f) = P(V) (1 + k_p\Delta f) $$
-$$Q(V, f) = Q(V) (1 + k_q \Delta f) $$
+$$P(V, f) = P(V) (1 + k_p\frac{\Delta f}{f_0}) $$
+$$Q(V, f) = Q(V) (1 + k_q \frac{\Delta f}{f_0}) $$
 </div>
 
 ## Operational principles
@@ -60,11 +58,11 @@ The model considers the load as a general function of voltage for both active an
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$P(V, f) = P(V) (1 + k_p\Delta f) $$
-$$Q(V, f) = Q(V) (1 + k_q \Delta f) $$
+$$P(V, f) = P(V) (1 + k_p\frac{\Delta f}{f_0}) $$
+$$Q(V, f) = Q(V) (1 + k_q \frac{\Delta f}{f_0}) $$
 </div>
 
-where $$k_p$$ and $$k_q$$ are the frequency variation coefficients for active and reactive power, respectively, and $$\Delta f = f - f_0$$ is the frequency deviation, with $$f_0$$ being the nominal frequency of the grid.
+where $$k_p$$ and $$k_q$$ are the frequency variation coefficients for active and reactive power, respectively, and $$\Delta f = f - f_0$$ is the frequency deviation, with $$f_0$$ being the nominal frequency of the grid. The deviation is scaled in per-untis with respect to the nominal frequency.
 
 ## Open source implementations
 

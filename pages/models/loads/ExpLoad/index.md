@@ -23,8 +23,6 @@ The exponential load model can be used for steady-state studies. The assumptions
 * This time dependency can be omitted, just assuming a constant value for the exponent. A common combination of exponents is $$a=1$$ for active power and $$b=2$$ for reactive power.
 * The frequency is constant, and the load is balanced.
 
-The model does not take into account the time-response performance of the load, therefore it is not useful for dynamic studies.
-
 ## Model description
 
 ### Parameters
