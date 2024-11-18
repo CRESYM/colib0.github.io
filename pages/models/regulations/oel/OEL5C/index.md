@@ -25,37 +25,42 @@ The output signal is UOelPu, the overexcitation limiter voltage in pu (base UNom
 
 ## Model parameters
 
-| Parameter | Description | Units |
-| --------- | ----------- | ----- |
-| IBiasPu | OEL reference bias | pu (base UNom) |
-| IfdLevelPu | OEL activation logic pickup level | pu |
-| IfdLimPu | OEL inverse time limit active level | pu |
-| IfdPu | OEL inverse time integrator pickup level | pu |
-| IfdRef1Pu | OEL reference 1 | pu |
-| IfdRef2Pu | OEL reference 2 | pu |
-| K | OEL lead-lag gain | pu |
-| K1 | Exponent for inverse time function | - |
-| KIfdt | OEL inverse time leak gain | pu |
-| KiOel | OEL integral gain | pu |
-| KiVfe | Exciter field current regulator integral gain | pu |
-| KpOel | OEL proportional gain | pu |
-| KpVfe | Exciter field current regulator proportional gain | pu |
-| KScale1 | Scale factor for OEL input | pu |
-| KScale2 | Scale factor for exciter field current | pu |
-| Sw1 | OEL reference logic switch | - |
-| tBOel | OEL lag time constant | s |
-| tCOel | OEL lead time constant | s |
-| tF1 | OEL input transducer time constant | s |
-| tF2 | Exciter field current transducer time constant | s |
-| tIfdLevel | OEL activation logic timer setpoint | s |
-| tOel | OEL inverse time integrator time constant | s |
-| TolPI | Tolerance on PI limit crossing as a fraction of the difference between limits | pu |
-| VfeMaxPu | Exciter field current regulator upper limit | pu (base UNom) |
-| VfeMinPu | Exciter field current regulator lower limit | pu (base UNom) |
-| VfeRefPu | Exciter field current reference setpoint | pu (base UNom) |
-| VOel1MaxPu | OEL inverse time upper limit | pu |
-| VOelMaxPu | OEL PI control upper limit | pu |
-| VOelMinPu | OEL PI control lower limit | pu |
+| Parameter | Description | Unit | Value (set 1) | Value (set 2) | Value (set 3) |
+| --------- | ----------- | ---- | ------------- | ------------- | ------------- |
+| IBiasPu | OEL reference bias | pu (base UNom) | 1 | 1 | 2.15 |
+| IfdLevelPu | OEL activation logic pickup level | pu | 1.4 | 1.4 | 1.4 |
+| IfdLimPu | OEL inverse time limit active level | pu | 6.58 | 6.58 | 6.58 |
+| IfdPu | OEL inverse time integrator pickup level | pu | 1.02 | 1.02 | 1.02 |
+| IfdRef1Pu | OEL reference 1 | pu | 1.25 | 1.25 | 1.25 |
+| IfdRef2Pu | OEL reference 2 | pu | 1 | 1 | 1 |
+| K | OEL lead-lag gain | pu | 1 | 1 | 0 |
+| K1 | Exponent for inverse time function | - | 1 | 1 | 1 |
+| KIfdt | OEL inverse time leak gain | pu | 0.0043 | 0.0043 | 0.0043 |
+| KiOel | OEL integral gain | pu | 17.36 | 8.94 | 0 |
+| KiVfe | Exciter field current regulator integral gain | pu | 0 | 169.1 | 0 |
+| KpOel | OEL proportional gain | pu | 0.46 | 2.861 | 1.0753 |
+| KpVfe | Exciter field current regulator proportional gain | pu | 0 | 1.522 | 0 |
+| KScale1 | Scale factor for OEL input | pu | 0.295 | 0.3503 | 0.2296 |
+| KScale2 | Scale factor for exciter field current | pu | 0 | 0.2317 | 0 |
+| Sw1 | OEL reference logic switch | - | true | false | true |
+| tBOel | OEL lag time constant | s | 0 | 0.32 | 0 |
+| tCOel | OEL lead time constant | s | 0 | 0.9 | 0 |
+| tF1 | OEL input transducer time constant | s | 0 | 0 | 1.22 |
+| tF2 | Exciter field current transducer time constant | s | 0 | 0 | 0 |
+| tIfdLevel | OEL activation logic timer setpoint | s | 1 | 1 | 1 |
+| tOel | OEL inverse time integrator time constant | s | 1 | 1 | 1 |
+| TolPI | Tolerance on PI limit crossing as a fraction of the difference between limits | pu | - | - | - |
+| VfeMaxPu | Exciter field current regulator upper limit | pu (base UNom) | 1 | 1 | 1 |
+| VfeMinPu | Exciter field current regulator lower limit | pu (base UNom) | -0.99 | -0.99 | -0.99 |
+| VfeRefPu | Exciter field current reference setpoint | pu (base UNom) | 0 | 2.151 | 0 |
+| VOel1MaxPu | OEL inverse time upper limit | pu | 9.49 | 9.49 | 9.49 |
+| VOelMaxPu | OEL PI control upper limit | pu | 1 | 1 | 1 |
+| VOelMinPu | OEL PI control lower limit | pu | -0.99 | -0.99 | -0.99 |
+
+The parameter sets correspond to an overexcitation limiter applied to :
+- 1 : a static excitation system;
+- 2 : a rotating excitation system;
+- 3 : a brushless excitation system.
 
 ## Model diagram
 
