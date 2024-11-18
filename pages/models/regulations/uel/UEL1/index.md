@@ -21,8 +21,8 @@ The model provides an underexcitation limiter signal for the purpose of takeover
 
 The input signals are :
 
-| Variable | Description | Units |
-| -------- | ----------- | ----- |
+| Variable | Description | Unit |
+| -------- | ----------- | ---- |
 | itPu | Complex stator current | pu (base SnRef, UNom) |
 | utPu | Complex stator voltage | pu (base UNom) |
 | VfPu | Excitation system stabilizer signal | pu |
@@ -31,21 +31,21 @@ The output signal is UUelPu, the underexcitation limiter voltage in pu (base UNo
 
 ## Model parameters
 
-| Parameter | Description | Units |
-| --------- | ----------- | ----- |
-| Kuc | UEL center setting | pu |
-| Kuf | UEL excitation system stabilizer gain | pu |
-| Kui | UEL integral gain | pu |
-| Kul | UEL proportional gain | pu |
-| Kur | UEL radius setting | pu |
-| tU1 | UEL first lead time constant | s |
-| tU2 | UEL first lag time constant | s |
-| tU3 | UEL second lead time constant | s |
-| tU4 | UEL second lag time constant | s |
-| VUcMaxPu | UEL maximum voltage magnitude | pu (base UNom) |
-| VUiMaxPu | UEL maximum output | pu (base UNom) |
-| VUiMinPu | UEL minimum output | pu (base UNom) |
-| VUrMaxPu | UEL maximum radius | pu (base UNom) |
+| Parameter | Description | Unit | Value |
+| --------- | ----------- | ---- | ----- |
+| Kuc | UEL center setting | pu | 1.38 |
+| Kuf | UEL excitation system stabilizer gain | pu | 3.3 |
+| Kui | UEL integral gain | pu | 0 |
+| Kul | UEL proportional gain | pu | 100 |
+| Kur | UEL radius setting | pu | 1.95 |
+| tU1 | UEL first lead time constant | s | 0 |
+| tU2 | UEL first lag time constant | s | 0.05 |
+| tU3 | UEL second lead time constant | s | 0 |
+| tU4 | UEL second lag time constant | s | 0 |
+| VUcMaxPu | UEL maximum voltage magnitude | pu (base UNom) | 5.8 |
+| VUiMaxPu | UEL maximum output | pu (base UNom) | 18 |
+| VUiMinPu | UEL minimum output | pu (base UNom) | 18 |
+| VUrMaxPu | UEL maximum radius | pu (base UNom) | 5.8 |
 
 ## Model diagram
 

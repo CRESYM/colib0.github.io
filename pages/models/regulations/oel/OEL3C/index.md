@@ -25,19 +25,19 @@ The output signal is UOelPu, the overexcitation limiter voltage in pu (base UNom
 
 ## Model parameters
 
-| Parameter | Description | Units |
-| --------- | ----------- | ----- |
-| ITfPu | OEL timed field current limiter pick up level | pu |
-| K1 | Exponent for OEL error calculation | - |
-| KOel | OEL gain | pu |
-| KpOel | OEL proportional gain | pu |
-| KScale | OEL input signal scaling factor | pu |
-| tF | OEL field current measurement time constant | s |
-| tOel | OEL integral time constant | s |
-| VOel1MaxPu | OEL integrator maximum output | pu (base UNom) |
-| VOel1MinPu | OEL integrator minimum output | pu (base UNom) |
-| VOel2MaxPu | OEL maximum output | pu (base UNom) |
-| VOel2MinPu | OEL minimum output | pu (base UNom) |
+| Parameter | Description | Unit | Value |
+| --------- | ----------- | ---- | ----- |
+| ITfPu | OEL timed field current limiter pick up level | pu | 3.7 |
+| K1 | Exponent for OEL error calculation | - | 1 |
+| KOel | OEL gain | pu | 1 |
+| KpOel | OEL proportional gain | pu | 1 |
+| KScale | OEL input signal scaling factor | pu | - |
+| tF | OEL field current measurement time constant | s | 0.02 |
+| tOel | OEL integral time constant | s | 24 |
+| VOel1MaxPu | OEL integrator maximum output | pu (base UNom) | 0.66 |
+| VOel1MinPu | OEL integrator minimum output | pu (base UNom) | -1 |
+| VOel2MaxPu | OEL maximum output | pu (base UNom) | 0 |
+| VOel2MinPu | OEL minimum output | pu (base UNom) | -1 |
 
 ## Model diagram
 
