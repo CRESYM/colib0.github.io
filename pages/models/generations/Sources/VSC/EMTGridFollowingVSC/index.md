@@ -1,6 +1,6 @@
 ---
 layout: page 
-title: Generic EMT Grid Following Voltage Source Converter with SVPWM Modulation
+title: Generic EMT Grid Following Voltage Source Converter
 tags: ["Opensource", "EMT", "voltage source", "converter", "wind", "pv", "hvdc", "following", "NREL", "PSCAD", "DPSIM", "SimplusGrid", "Matlab"] 
 date: 05/06/2024 
 last-updated: 03/07/2024
@@ -50,7 +50,7 @@ As it can be seen, there are several control blocks that act over the converter 
 * The Phase-Lock Loop (commonly referred to as PLL), which tracks the grid voltage and synchronizes the converter with the grid angle.
 * The Outer Loop, which provides active and reactive power control by setting a current reference from a power reference.
 * The Inner Loop, or Current Loop, which corrects the converter voltage to provide the reference current.
-* The modulation block, which models the switching of the IGBTs that create an AC voltage from a DC source using Pulse-Width Modulation (PWM).
+* The modulation block, which in more simplified models is not applied. In the case of the present model, since other harmonic elements are not considered, it can be omitted.
 
 A detailed explanation of each block is provided in the following subsections.
 
@@ -235,7 +235,7 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L}{\tau_c} + \frac{R}{\tau_c s} $$
 
 </div>
 
-The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). This modulation will be explained in [Section 3.6](#modulation).
+The converter voltage setpoint obtained from this loop ($$v_c^{qd}$$) is then used to modulate the IGBT pulses and generate the AC voltage from the DC source. However, the modulation block can be omitted in some simplified models such as this one, and it can be considered to be directly the actual converter voltage, maintaining the notation without the setpoint indicator ($$*$$). 
 
 
 ### Active and reactive power control
@@ -310,181 +310,63 @@ $$K^{ipl}_i = \frac{2}{3V_{peak}\tau_p}$$
 
 The time constant $$\tau_p$$ will be larger than $$\tau_c$$, since the power loop is designed to have a slower response than the current loop.
 
-### Limitations of current
+### Limitations of current and anti-windup control
 
-The technical constraints of the VSC can be included in the controls using saturation blocks. Depending on the desired operation mode, the converter can be set to prioritize one of the current components. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
+The physical limitations of the converter have to be included in the modelling, in order to simulate the saturation of current and voltage. This allows the simulation of faults using this model.
 
-* **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
-* **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
-
-
-### Modulation
-
-As explained in the current loop section, the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The modulation will determine the switching state of the 3 pairs of IGBTs (as it is assumed to be a 2-level VSC) in order to produce a given voltage. To do so, the technique used is the Space Vector Pulse-Width Modulation (SVPWM) [[9]](#9), which can be modelled with the following block diagram:
-
+To avoid overshooting the current or voltages, an anti-windup control is added to the PI controllers present in the model. The proposed controller is based on the tracking of the difference between the output of the PI controller and the saturation limit [[10]](#10). The control signal is then modified to avoid the overshooting. The block diagram of the anti-windup control is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/ModulationVSC.svg' | relative_url }}"
-     alt="Modulation VSC"
-     style="float: center; margin-right: 10px; width: 100%;" />
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PI_antiwindup.svg' | relative_url }}"
+     alt="Anti-Windup Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 8: Block diagram of the modulation
+Figure 8: Anti-Windup Control Diagram
 </div>
 <br>
 
-This technique projects the AC voltage that is desired to generate (which is the setpoint obtained from the control loops) into the $$\alpha\beta$$ reference frame. Then, it determines in which of the 6 regions delimited by the voltage vectors of the $$2^3 = 8$$ possible configurations of the IGBTs it is enclosed. Since two of the positions correspond to a short-circuit on all the phases, their output voltage will be 0, and they are at the center of the resulting hexagon, belonging to of all the regions. The complete hexagon with a vector projected into it can be seen in the following figure:
+with a gain $$G$$ between 0 and 1.
 
+An alternative approach to implement this anti-windup control is detailed in [[11]](#11), where the integral part of the controller is substituted by a low-pass filter that follows the PI signal. The following block diagram shows the implementation of this alternative anti-windup control:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM.svg' | relative_url }}"
-     alt="SVPWM Diagram"
-     style="float: center; margin-right: 10px; width: 500px;" />
+<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/PI_antiwindup_alternative.svg' | relative_url }}"
+     alt="Anti-Windup Control Diagram"
+     style="float: center; margin-right: 10px; width: 700px;" />
 </div>
 <div align = 'center'>
-Figure 9: SVPWM Voltages Vector Space <a href="#9">[9]</a>
+Figure 9: Alternative Anti-Windup Control Diagram
 </div>
 <br>
 
-As it can be seen, the voltage $$v^{\alpha\beta}$$ can be obtained by adding fractions of two of the vectors that delimit the region. The fraction is commonly known as duty cycle $$D_i = \frac{T_i}{T_z}$$. The duty cycle of the zero-voltage states can be calculated using the remaining time of the PWM as $$D_0 = D_7 = \frac{1 - D_i - D_j}{2}$$, while the other duty cycles have their own formulas to be calculated. Considering the symmetry of the regions, the duty cycles can be calculated referring always to the first region. Let $$D_1$$ be the duty cycle of the state with lower angle than $$v^{\alpha\beta}$$, and $$D_2$$ the duty cycle of the state with higher angle, the following calculations are made starting from the decomposition of the setpoint voltage:
+Where $$\tau_{i} = \frac{K_p}{K_i}$$. 
+
+To decide the saturation limits for the current components, the operation mode of the converter has to be considered, which will determine which current component is prioritized. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
+
+* **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{(i^q, i^{q*})}^2} $$.
+* **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{(i^d, i^{d*})}^2} $$.
 
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+## Parameter tuning 
 
-$$ V_{svm} = \sqrt{V_{\alpha}^2 + V_{\beta}^2} $$
-$$ \theta_{svm} = \arctan(\frac{V_{\beta}}{V_{\alpha}}) $$
-$$ \theta_{sec1} = \theta_{svm} - \frac{\pi}{3}(n - 1)$$
-$$ n = \text{floor}(\frac{\theta_{svm}}{\frac{\pi}{3}}) + 1 $$
-</div>
+The following table shows possible values for the parameters of the controllers using the tuning proposed:
 
-where the floor operation determines the sector of the hexagon depending on the angle of the voltage. The duty cycles can be calculated as:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ D_1 = \frac{\sqrt{3}V_{svm} \sin(\frac{\pi}{3} - \theta_{sec1})}{2E_{DC}} $$
-$$ D_2 = \frac{V_{svm} \sin(\theta_{sec1} - \frac{\pi}{3})}{E_{DC}} $$
-</div>
-
-where $$D_1$$ and $$D_2$$ are the duty cycles of the vectors that limit the sector. Now, $$D_0$$ and $$D_7$$ can be easily calculated. 
-
-The switching order is important, since it is desirable to have a resulting sine-like wave, while minimizing switching losses. A symmetrical pattern that starts and ends at the ⓪-state is chosen, since it helps to transition between two adjacent periods that have the voltage at two different regions, for instance. To minimize losses, the order of states will be the one that results in a single switch between states, meaning that from the state with switch positions $$000$$, the next state will have $$1$$ in a single switch, and the other two switches at $$0$$. The following table shows all the switching states with their output voltage:
-
-<table style="table-layout: fixed; width: 50%; margin-left: auto; margin-right: auto;">
-  <colgroup>
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-  </colgroup>
-<tr style="border-top:2px solid black;">
-     <th style="border-left:2px solid black; text-align:center;">State ID</th>
-     <th style="border-left:2px solid black; text-align:center;">q1</th>
-     <th style="text-align:center;">q2</th>
-     <th style="text-align:center;">q3</th>
-     <th style="border-left:2px solid black; text-align:center;">Va</th>
-     <th style="text-align:center;">Vb</th>
-     <th style="border-right:2px solid black; text-align:center;">Vc</th>
-</tr>
-<tr style="border-top:2px solid black;">
-     <td style="border-left:2px solid black;">$$⓪$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-right:2px solid black;">$$0$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$①$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$\frac{2E_{DC}}{3}$$</td>
-     <td>$$-\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$②$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$1$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-     <td>$$\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{2E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$③$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$1$$</td>
-     <td>$$0$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-     <td>$$\frac{2E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$④$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$1$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{2E_{DC}}{3}$$</td>
-     <td>$$\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$⑤$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$-\frac{E_{DC}}{3}$$</td>
-     <td>$$-\frac{E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{2E_{DC}}{3}$$</td>
-</tr>
-<tr>
-     <td style="border-left:2px solid black;">$$⑥$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$0$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-     <td>$$-\frac{2E_{DC}}{3}$$</td>
-     <td style="border-right:2px solid black;">$$\frac{E_{DC}}{3}$$</td>
-</tr>
-<tr style="border-bottom:2px solid black;">
-     <td style="border-left:2px solid black;">$$⑦$$</td>
-     <td style="border-left:2px solid black;">$$1$$</td>
-     <td>$$1$$</td>
-     <td>$$1$$</td>
-     <td style="border-left:2px solid black;">$$0$$</td>
-     <td>$$0$$</td>
-     <td style="border-right:2px solid black;">$$0$$</td>
-</tr>
-</table>
-
-For instance, if the voltage setpoint is located in the region delimited by states $$⓪/⑦-①-⑥$$ as in Figure 9, the switching order would be $$000 \rightarrow 100 \rightarrow 101 \rightarrow 111 \rightarrow 101 \rightarrow 100 \rightarrow 000$$, or, if we use state identifiers, $$ ⓪ \rightarrow ① \rightarrow  ⑥ \rightarrow  ⑦  \rightarrow  ⑥ \rightarrow  ① \rightarrow  ⓪ $$. This means that the duty cycles are split in two for all the states except the ⑦-state. The following figure represents state ⑥ of the mentioned pattern:
-
-
-<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFollowingVSC/SVPWM_figs.svg' | relative_url }}"
-     alt="SVPWM Switching State"
-     style="float: center; margin-right: 10px; width: 900px;" />
-</div>
-<div align = 'center'>
-Figure 10: Schematics of the instantaneous switching state ⑥. (a) shows the positions of the switches, as well as the whole pattern, (b) represents the IGBT pairs and which of them is on, and (c) shows the equivalent grid for the state.
-</div>
-<br>
-
-As it can be seen in Figure 10(a), the pattern needed to generate the $$v^{\alpha\beta}$$ AC voltage shown in Figure 9 will change the state of one of its switches at a time and starts and ends at 0 voltage. The states $$000$$ and $$111$$ are those where all the switches are closed on the same side, short-circuiting the three phases, while for the rest of the cases, there is a voltage division between the isolated phase and the short-circuited couple, as can be seen from the grid equivalent in Figure 10(c).
-
-The result of the algorithm would determine the state of the switches of the converter, and would send to each IGBT the appropiate signal (check Figure 10(b)). This corresponds to the hardware integration, but since the model is used to simulate the system, the averaged output voltage of the converter during a PWM period can be directly calculated using the duty times:
-
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-
-$$ v_{c}^{\alpha\beta} = D_1 V_1 + D_2 V_2$$
-</div>
-
-where, for the given example, $$V_1 = E_{DC} e^{j0}$$ and $$V_2 = E_{DC} e^{j\frac{\pi}{3}}$$, and $$D_1$$ and $$D_2$$ are the duty cycles calculated for the given voltage setpoint. The output voltage can be then transformed to the *abc* frame.
+| Parameter | Value | Units |
+| --------- | ----- | ----- |
+| $$R_{f}$$ | $$0.03$$ | $$\Omega$$ |
+| $$L_{f}$$ | $$0.001$$ | $$H$$ |
+| $$\omega_n^{PLL}$$ | $$2\pi 1000$$ | rad/s |
+| $$\zeta^{PLL}$$ | $$0.707$$ | - |
+| $$K^{PLL}_p$$ | $$3.55$$ | - |
+| $$K^{PLL}_i$$ | $$1.58 \cdot 10^4$$ | - |
+| $$\tau^{PLL}$$ | $$0.225$$ | ms |
+| $$\tau^c$$ | $$1$$ | ms |
+| $$K^{icl}_p$$ | $$1$$ | - |
+| $$K^{icl}_i$$ | $$30$$ | - |
+| $$\tau_p$$ | $$15$$ | ms |
+| $$K^{ipl}_p$$ | $$1.778 \cdot 10^{-5}$$ | - |
+| $$K^{ipl}_i$$ | $$1.778 \cdot 10^{-2}$$ | - |
 
 
 ## Open source implementations
@@ -507,14 +389,18 @@ This model has been successfully implemented in :
 
 <a id="3">[3]</a> Egea, A.; Junyent-Ferré, A.; Gomis-Bellmunt, O. "Active and reactive power control of grid connected distributed generation systems". Part of: "Modeling and control of sustainable power systems". 2012, p. 47-81. 
 
-<a id="4">[4]</a> Clarke, E., "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
+<a id="4">[4]</a> Clarke, E. "Circuit Analysis Of A-c Power System Vol I", John Wiley and Sons, 1941
 
-<a id="5">[5]</a> Park, R. H., "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
+<a id="5">[5]</a> Park, R. H. "Two-reaction theory of synchronous machines generalized method of analysis-part I", AIEE Transactions, Vol. 48, Issue 3, July 1929. DOI: [10.1109/T-AIEE.1929.5055275](https://doi.org/10.1109/T-AIEE.1929.5055275) 
 
 <a id="6">[6]</a> Chung, Se-Kyo. "A phase tracking system for three phase utility interface inverters". IEEE Transactions on Power Electronics, Vol. 15, No.3, May 2000, DOI: [10.1109/63.844502](https://doi.org/10.1109/63.844502)
 
 <a id="7">[7]</a> Harnefors, L.; Nee, H. P. "Model-Based Current Control of AC Machines Using the Internal Model Control Method". IEEE Transactions on Industrial Applications, Vol. 34, No. 1, January/February 1998, DOI: [10.1109/28.658735](https://doi.org/10.1109/28.658735)
 
-<a id="8">[8]</a> Akagi, H., Watanabe, E., Aredes, M.: "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
+<a id="8">[8]</a> Akagi, H.; Watanabe, E.; Aredes, M. "Instantaneous power theory and Applications to power conditioning". Wiley, Chichester (2007)
 
-<a id="9">[9]</a> Kazmierkowski, M.P., Krishnan, R., Blaabjerg, F.: Control in power electronics. Elsevier, Amsterdam (2002)
+<a id="9">[9]</a> Kazmierkowski, M.P.; Krishnan, R.; Blaabjerg, F. Control in power electronics. Elsevier, Amsterdam (2002)
+
+<a id="10">[10]</a> Espina, J.; Arias, A.; Balcells, J.; Ortega, C. "Speed Anti-Windup PI strategies review for Field Oriented Control of Permanent Magnet Synchronous Machines"[Link](https://upcommons.upc.edu/bitstream/handle/2117/9767/05156047.pdf)
+
+<a id="11">[11]</a> IEEE. " Std. 421.5-2016: IEEE Recommended Practice for Excitation System Models for Power System Stability Studies" DOI: [10.1109/IEEESTD.2016.7553421](https://doi.org/10.1109/IEEESTD.2016.7553421)
