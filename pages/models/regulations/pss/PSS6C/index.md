@@ -67,7 +67,7 @@ VPssMinPu |Minimum output voltage of power system stabilizer |pu (base UNom)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/PSS6C/PSS6C.drawio.svg" alt="PSS6C diagram">
+![PSS6C](/pages/models/regulations/pss/PSS6C/PSS6C.drawio.svg)
 
 ## Open source implementations
 
