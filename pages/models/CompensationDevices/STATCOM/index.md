@@ -101,6 +101,36 @@ There are two main control designs:
 
 In both cases, the DC voltage loop must be slower than the internal current control loop to ensure a stable response.
 
+## Current limitation
+
+You can visit the [Grid Following page](../../generations/Sources/VSC/EMTGridFollowingVSC/), which has a dedicated section on this topic.
+
+## Parameter tuning 
+
+The following table shows possible values for the parameters of the controllers using the tuning proposed:
+
+| Parameter | Value | Units |
+| --------- | ----- | ----- |
+| $$V_{DC}$$ | $$2500$$ | V |
+| $$R_{f}$$ | $$0.03$$ | $$\Omega$$ |
+| $$L_{f}$$ | $$0.001$$ | $$H$$ |
+| $$C_{DC}$$ | $$1.5$$ | $$F$$ |
+| $$\omega_n^{PLL}$$ | $$2\pi 1000$$ | rad/s |
+| $$\zeta^{PLL}$$ | $$0.707$$ | - |
+| $$K^{PLL}_p$$ | $$3.55$$ | - |
+| $$K^{PLL}_i$$ | $$1.58 \cdot 10^4$$ | - |
+| $$\tau^{PLL}$$ | $$0.225$$ | ms |
+| $$\tau^c$$ | $$1$$ | ms |
+| $$K^{icl}_p$$ | $$1$$ | - |
+| $$K^{icl}_i$$ | $$30$$ | - |
+| $$\tau_p$$ | $$15$$ | ms |
+| $$K^{ipl}_p$$ | $$1.778 \cdot 10^{-5}$$ | - |
+| $$K^{ipl}_i$$ | $$1.778 \cdot 10^{-2}$$ | - |
+| $$\omega_{DC}$$ | $$ 2\pi 5 $$ | rad/s |
+| $$\xi_{DC}$$ | $$ 0.707 $$ | - |
+| $$K^{DC}_p$$ | $$ 333.17 $$ | - |
+| $$K^{DC}_i$$ | $$ 74022 $$ | - |
+
 ## Open source implementations
 
 No open-source implementations found.
