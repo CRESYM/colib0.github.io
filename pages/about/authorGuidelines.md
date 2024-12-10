@@ -80,4 +80,4 @@ For control terminology, you can check: {% cite AutomaticControlSystemDictionary
 
 ## References
 
-{% bibliography --file authorGuidelines  %}
+{% bibliography --file authorGuidelines.bib  %}
