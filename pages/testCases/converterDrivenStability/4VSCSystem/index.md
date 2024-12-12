@@ -199,6 +199,6 @@ Some open source implementations of this use case are available in the following
 | Software      | URL | Language  | Open-Source License | Last consulted date | Comments |
 | --------------| --- | --------- | -------------------| ------------------- |
 | Dynawo | [Link](https://github.com/dynawo/dynawo/tree/3093_GFL_VSC) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 17/05/2024 | - |
-| STEPSS | [Link](https://github.com/CRESYM/BiGER/tree/main/testSystems/4vsc_system/STEPPS) | own modelling language | models in open source | 17/05/2024 | - |
+| STEPSS | [Link](https://github.com/CRESYM/colib0.github.io/main/pages/testCases/converterDrivenStability/4VSCSystem/STEPPS) | own modelling language | models in open source | 17/05/2024 | - |
 | EMTP-RV | to be completed | .ecf   | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | - |
 | SimPowerSystem | to be completed | Matlab | to be completed | - |
