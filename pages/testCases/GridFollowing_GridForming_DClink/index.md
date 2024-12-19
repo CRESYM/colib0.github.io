@@ -62,7 +62,7 @@ The studied scenario represents the dynamics during setpoint tracking operation.
 
 ## Table of references (mandatory)
 
-The references can be consulted in each model's pageÑ
+The references can be consulted in each model's page:
 - [Grid Forming VSC model](../models/generations/Sources/VSC/EMTGridFormingVSC/)
 - [Grid Following VSC model](../models/generations/Sources/VSC/EMTGridFollowingVSC/)
 - [HVDC model page](../models/HVDC/EMTVSC/)
@@ -90,7 +90,7 @@ _This section lists the different elements of the network test system._
 - The grid is represented by ideal Voltage Sources.
 - The load is a constant impedance [ZIP load](../models/loads/ZIPload/).
 - The Grid Following converter controls includes a DC Voltage regulation, similar to the controls described in the [STATCOM model](../models/CompensationDevices/STATCOM).
-- The Grid Forming converter controls includes a frequency and voltage regulation using the droop control approach described in the [Grid Forming VSC model](../models/generations/Sources/VSC/EMTGridFormingVSC/).
+- The Grid Forming converter controls include a frequency and voltage regulation using the droop control approach described in the [Grid Forming VSC model](../models/generations/Sources/VSC/EMTGridFormingVSC/).
 
 To avoid moo much information on the same page, some links to the elements model's pages can be provided.
 
@@ -164,11 +164,11 @@ The scenario studied starts with a constant load, and after 1 second, there is s
 
 - **Event:** Setpoing for $$Q_{ac}$$ is changed at 0.5 seconds. At 1s, connection of a new load in the Grid Forming side.
 
-- **Operating point No. 1 (0 to 0.5 s):** $$Q*_{ac}$$ = 0 MVAr, P_{load} = 1 MW.
+- **Operating point No. 1 (0 to 0.5 s):** $$Q^*_{ac}$$ = 0 MVAr, $$P_{load}$$ = 1 MW.
 
-- **Operating point No. 2 (0.5 to 1 s):** $$Q*_{ac}$$ = 0.46 MVAr, P_{load} = 1 MW.
+- **Operating point No. 2 (0.5 to 1 s):** $$Q^*_{ac}$$ = 0.46 MVAr, $$P_{load}$$ = 1 MW.
 
-- **Operating point No. 3 (1 to 2 s):** $$Q*_{ac}$$ = 0.46 MVAr, P_{load} = 1.5 MW.
+- **Operating point No. 3 (1 to 2 s):** $$Q^*_{ac}$$ = 0.46 MVAr, $$P_{load}$$ = 1.5 MW.
 
 - **Control modes:** Setpoint tracking, Grid Forming ($$V_{ac}$$, $$\theta_{ac}$$), Grid Following ($$V_{DC}$$, $$Q_{ac}$$).
 
