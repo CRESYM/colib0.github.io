@@ -1766,7 +1766,7 @@ PowerFactory*
 | $$M_\mathrm{WPqmode}$$ | integer | \- | \- | Control mode (0 = reactive power reference, 1 = power factor reference, 2 = Q(U) droop, 3 = voltage reference) | 2 |
 | $$\mathbf{q_\mathrm{WPmax}}(p_\mathrm{WP})$$ | lookup-table | pu | $$S_\mathrm{base}$$ | Q upper limit lookup-table | [0,1.5; 999,1.5] |
 | $$\mathbf{q_\mathrm{WPmin}}(p_\mathrm{WP})$$ | lookup-table | pu | $$S_\mathrm{base}$$ | Q lower limit lookup-table | [0,-1.5; 999,-1.5] |
-| $$\mathbf{{q_\mathrm{WP}}}(u_\mathrm{err})$$ | lookup-table | pu | $$S_\mathrm{base}$$ | Q(U) static lookup-table | [-0.06,-0.4; 0.06,0.4] |
+| $$\mathbf{q_\mathrm{WP}}(u_\mathrm{err})$$ | lookup-table | pu | $$S_\mathrm{base}$$ | Q(U) static lookup-table | [-0.06,-0.4; 0.06,0.4] |
 | $$r_\mathrm{WPdrop}$$ | float | pu | $$Z_\mathrm{base}$$ | WP voltage drop resistance | 0 |
 | $$T_\mathrm{uqfilt}$$ | float | s | \- | for Q(U) mode time constant | 0.01 |
 | $$u_\mathrm{WPqdip}$$ | float | pu | $$U_\mathrm{base}$$ | UVRT detection U threshold | 0.9 |
