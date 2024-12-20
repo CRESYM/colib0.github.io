@@ -169,7 +169,7 @@ $$ X_{mdsat} I_{fd} = \left( X_{dsat} - X_l \right) I_{fd} = \frac{X_d - X_l}{Sa
 The following figure shows the block diagram for this GENQEC model [[2]](#2):
 
 <p align="center">
-<img src="{{'/pages/models/generations/GENQEC/GENQEC_blocks.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/GENQEC/GENQEC_blocks.svg' | relative_url }}"
      alt="Block diagram of the GENQEC model"
      style="float: center; width: 600px;" />
 </p>
