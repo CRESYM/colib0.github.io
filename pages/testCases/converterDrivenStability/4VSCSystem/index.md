@@ -120,7 +120,7 @@ in Fig. 3.
 
 ## Scenarios and example of simulation results
 
-### Scenario No. 1
+### Scenario #1
 
 Scenario # 1 relates to Operating point #1. The event is a solid three-phase fault on one of the two circuits
 of line A-C, next to bus A. The fault is cleared after 150 ms by opening the line, which remains open. The
@@ -168,7 +168,7 @@ The severe voltage drop caused by the fault is counteracted by a quick decrease 
 </figure>
 <p style='text-align: center; font-family: Serif;'><b> Fig.6 Scenario #1 : reactive powers and iq current setpoints</b></p>
 
-## Scenario #2
+### Scenario #2
 
 Scenario #2 relies on Operating point #2. The event is the opening of one circuit of the line between buses A and B. This 400-kV circuit carrying only 90 MW, the disturbance can be considered small; the purpose of the simulation is to test the small-disturbance stability of the resulting operating point.
 
