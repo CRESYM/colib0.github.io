@@ -3,18 +3,19 @@ layout: page
 title: EPRI Grid Forming
 tags: ["Opensource", "RMS", "GFM", "GFL", "converter", "wind", "generic", "pv", "hvdc", "EPRI", "Dynawo"] 
 date: 20/12/2024
-last-updated: 20/12/2024
+last-updated: 22/01/2025
 id: #63
 authors: Nils Wiese (Fraunhofer IEE), Martin Franke (Fraunhofer IEE), Saikrishna Vallabhaneni
 reviewers: Lampros Papangelis (CRESYM)
 ---
 
+
 ## Context
 
-This model was developped by Electric Power Research Institute (EPRI)
-and provides a standarized approch for inverter based resources [1].
-The orignal model is described in a PDF available on the
-[webpage](https://www.epri.com/research/products/000000003002021403).
+This model was developed by Electric Power Research Institute (EPRI) and
+provides a standardized approach for inverter based resources [1]. The
+original model is described in a report available
+[here](https://www.epri.com/research/products/000000003002021403).
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -24,23 +25,24 @@ model is often used in large-scale stability studies, for which it
 reflects the relevant phenomena. It is not a detailed physical model of
 the unit. Also for some stability phenomena (e.g. resonance stability)
 this model is not sufficient and EMT models or other approaches may be
-necessary. A comparision against EMT is shown in the EPRI documentation
-. It is also available for
-[PSCAD](https://www.pscad.com/knowledge-base/download/PSCAD-EPRI-Generic-GFM.pdf&ved=2ahUKEwjOpr_z0rOKAxVPg_0HHUO_JAgQFnoECBoQAQ&usg=AOvVaw1LVPVn2jXqTdzbFxeCoPo7).
+necessary. A comparison against EMT is shown in the EPRI documentation.
+It is also available for
+[PSCAD](https://www.pscad.com/knowledge-base/download/PSCAD-EPRI-Generic-GFM.pdf).
 
 ## Model description
 
 ### Difference between grid following and grid forming inverter
 
-A grid-following inverter synchronizes itself with the voltage and
-frequency values of the power grid using a Phase-Locked Loop (PLL). The
-PLL tracks the phase angle of the grid and therefore enables the
-inverter control to follow the grid. In contrast, a grid-forming
-inverter actively controls the grid’s voltage and frequency, enabling it
-to create or stabilize the grid, especially in scenarios where
-traditional grid infrastructure is weak or absent. Grid-forming
-inverters do not rely on a PLL. Many approaches synchronize with the
-grid through the power like a synchronous generator.
+A grid-following inverter synchronizes with the power grid’s voltage and
+frequency using a Phase-Locked Loop (PLL), which tracks the grid’s phase
+angle and enables the inverter to adjust accordingly. In contrast, a
+grid-forming inverter can actively establish the grid’s voltage and
+frequency, allowing it to create or stabilize the grid, particularly in
+situations where traditional grid infrastructure is weak or absent.
+Unlike grid-following inverters, grid-forming inverters do not rely on a
+PLL; instead, they can synchronize with the grid similarly to a
+synchronous generator. Several approaches can be found in literature, a
+subset of which is present in the EPRI model.
 
 ### EPRI GFM operation modes
 
@@ -74,8 +76,8 @@ Figure 1: Droop mode diagram
 
 <div id="fig-vsm_mode">
 Figure 2: VSM mode diagram
-
 </div>
+
 
 ![](./drawings/DVOC_Mode.drawio.svg)
 
@@ -95,10 +97,11 @@ Figure 4: PLL mode diagram
 
 > [!NOTE]
 >
-> The xy reference frame is the real – imaginary coordinate frame of the
-> network while the dq reference frame is the coordinate frame of the
-> control.The relative angle between these reference frames is denoted
-> by the control variable $$\theta_\mathrm{inv}$$.
+> The xy reference frame is the real-imaginary coordinate frame of the
+> network, to which all voltage angles are typically referenced, while
+> the dq reference frame functions as the coordinate system of the
+> control. The relative angle between these two reference frames is
+> represented by the control variable $$\theta_\mathrm{inv}$$.
 
 ### D and q reference currents calculation
 
@@ -113,42 +116,43 @@ Figure 5: Calculation of d and q reference currents
 
 ## Parameters
 
-Per-unit parameters are on base of $$P_\mathrm{base}$$, which is normally
-the capability of the inverter in MW.
+In [1], per-unit parameters are based on the inverter’s rated apparent
+power $$S_\mathrm{r}$$ in MVA with a default value of 100 MVA.
 
 <div id="tbl-parameters">
 
 Table 1: Parameters
 </div>
 
-| name                             | type  | unit  | description                          | typical value                                                        |
-| :------------------------------- | :---- | :---- | :----------------------------------- | :------------------------------------------------------------------- |
-| $$\Delta\omega_\mathrm{max}$$    | float | rad/s | Maximum frequency deviation          | 75.0/$$\omega_\mathrm{base}$$                                          |
-| $$\Delta\omega_\mathrm{min}$$    | float | rad/s | Minimum frequency deviation          | -75.0/$$\omega_\mathrm{base}$$                                         |
-| $$d_\mathrm{d}$$                 | float | pu    | VSM damping factor                   | 0.11                                                                 |
-| $$K_\mathrm{1}$$                 | int   | pu    | GFM control type                     | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
-| $$K\mathrm{2}$$                  | int   | pu    | GFM control type                     | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
-| $$K_\mathrm{2}^{\mathrm{dvoc}}$$ | int   | pu    | GFM control type                     | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
-| $$K_\mathrm{Ii}$$                | float | pu    | Current controller integral gain     | 20.0                                                                 |
-| $$K_\mathrm{Ip}$$                | float | pu    | Active power integral gain           | 20.0                                                                 |
-| $$K_\mathrm{Ipll}$$              | float | pu    | PLL integral gain                    | 700.0                                                                |
-| $$K_\mathrm{Iv}$$                | float | pu    | Voltage control integral gain        | see <a href="#tbl-controllerParams" class="quarto-xref">Table 2</a>  |
-| $$K_\mathrm{Pi}$$                | float | pu    | Current controller proportional gain | 0.5                                                                  |
-| $$K_\mathrm{Pp}$$                | float | pu    | Active power proportional gain       | 0.5                                                                  |
-| $$K_\mathrm{Ppll}$$              | float | pu    | PLL proportional gain                | 20.0                                                                 |
-| $$K_\mathrm{Pv}$$                | float | pu    | Voltage control proportional gain    | see <a href="#tbl-controllerParams" class="quarto-xref">Table 2</a>  |
-| $$m_\mathrm{f}$$                 | float | pu    | VSM inertia constant                 | 0.15                                                                 |
-| $$\omega_\mathrm{drp}$$          | float | pu    | Frequency droop                      | 0.033                                                                |
-| $$\omega_\mathrm{flag}$$         | int   | pu    | GFM control type                     | 0-3                                                                  |
-| $$PQ_\mathrm{flag}$$             | int   | pu    | Current priority                     | 0 - P prio.; 1 - Q-prio.                                             |
-| $$Q_\mathrm{drp}$$               | float | pu    | Voltage droop                        | 4.5                                                                  |
-| $$R_\mathrm{f}$$                 | float | pu    | Filter resistance                    | 0.0015                                                               |
-| $$T_\mathrm{e}$$                 | float | s     | Output state time constant           | 0.01                                                                 |
-| $$T\mathrm{f}$$                  | int   | pu    | GFM control type                     | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
-| $$T_\mathrm{r}$$                 | float | s     | Transducer time constant             | 0.005                                                                |
-| $$T_\mathrm{v}$$                 | int   | pu    | GFM control type                     | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
-| $$V_\mathrm{dip}$$               | float | pu    | State freeze threshold               | 0.8                                                                  |
-| $$X_\mathrm{f}$$                 | float | pu    | Filter reactance                     | 0.15                                                                 |
+| name                             | type  | unit  | description                             | typical value                                                        |
+| :------------------------------- | :---- | :---- | :-------------------------------------- | :------------------------------------------------------------------- |
+| $$\Delta\omega_\mathrm{max}$$    | float | rad/s | Maximum frequency deviation             | 75.0/$$\omega_\mathrm{base}$$                                        |
+| $$\Delta\omega_\mathrm{min}$$    | float | rad/s | Minimum frequency deviation             | -75.0/$$\omega_\mathrm{base}$$                                       |
+| $$d_\mathrm{d}$$                 | float | pu    | VSM damping factor                      | 0.11                                                                 |
+| $$K_\mathrm{1}$$                 | int   | pu    | – (depends on $$\omega_\mathrm{flag}$$) | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
+| $$K\mathrm{2}$$                  | int   | pu    | – (depends on $$\omega_\mathrm{flag}$$) | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
+| $$K_\mathrm{2}^{\mathrm{dvoc}}$$ | int   | pu    | – (depends on $$\omega_\mathrm{flag}$$) | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
+| $$K_\mathrm{Ii}$$                | float | pu    | Current controller integral gain        | 20.0                                                                 |
+| $$K_\mathrm{Ip}$$                | float | pu    | Active power integral gain              | 20.0                                                                 |
+| $$K_\mathrm{Ipll}$$              | float | pu    | PLL integral gain                       | 700.0                                                                |
+| $$K_\mathrm{Iv}$$                | float | pu    | Voltage control integral gain           | see <a href="#tbl-controllerParams" class="quarto-xref">Table 2</a>  |
+| $$K_\mathrm{Pi}$$                | float | pu    | Current controller proportional gain    | 0.5                                                                  |
+| $$K_\mathrm{Pp}$$                | float | pu    | Active power proportional gain          | 0.5                                                                  |
+| $$K_\mathrm{Ppll}$$              | float | pu    | PLL proportional gain                   | 20.0                                                                 |
+| $$K_\mathrm{Pv}$$                | float | pu    | Voltage control proportional gain       | see <a href="#tbl-controllerParams" class="quarto-xref">Table 2</a>  |
+| $$m_\mathrm{f}$$                 | float | pu    | VSM inertia constant                    | 0.15                                                                 |
+| $$\omega_\mathrm{drp}$$          | float | pu    | Frequency droop                         | 0.033                                                                |
+| $$\omega_\mathrm{flag}$$         | int   | pu    | GFM control type                        | 0-3                                                                  |
+| $$PQ_\mathrm{flag}$$             | bool  | pu    | Current priority                        | false: P priority; true: Q priority                                  |
+| $$Q_\mathrm{drp}$$               | float | pu    | Voltage droop                           | 4.5                                                                  |
+| $$R_\mathrm{f}$$                 | float | pu    | Filter resistance                       | 0.0015                                                               |
+| $$T_\mathrm{e}$$                 | float | s     | Output state time constant              | 0.01                                                                 |
+| $$T\mathrm{f}$$                  | int   | pu    | – (depends on $$\omega_\mathrm{flag}$$) | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
+| $$T_\mathrm{r}$$                 | float | s     | Transducer time constant                | 0.005                                                                |
+| $$T_\mathrm{v}$$                 | int   | pu    | – (depends on $$\omega_\mathrm{flag}$$) | see <a href="#tbl-controllerParams2" class="quarto-xref">Table 3</a> |
+| $$V_\mathrm{dip}$$               | float | pu    | State freeze threshold                  | 0.8                                                                  |
+| $$X_\mathrm{f}$$                 | float | pu    | Filter reactance                        | 0.15                                                                 |
+
 
 $$\omega_\mathrm{base}$$ is the nominal angular frequency in rad/s.
 
@@ -157,22 +161,22 @@ $$\omega_\mathrm{base}$$ is the nominal angular frequency in rad/s.
 Table 2: Voltage controller parameters depending on control mode
 </div>
 
-| name              | $$\omega_\mathrm{flag}=0$$ | $$\omega_\mathrm{flag} \neq  0$$ |
-| ----------------- | -------------------------- | -------------------------------- |
-| $$K_\mathrm{Iv}$$ | 150.0                      | 10.0                             |
-| $$K_\mathrm{Pv}$$ | 0.5                        | 3.0                              |
+| name            | $$\omega_\mathrm{flag}=0$$ | $$\omega_\mathrm{flag} \neq  0$$ |
+|-----------------|--------------------------|--------------------------------|
+| $$K_\mathrm{Iv}$$ | 150.0                    | 10.0                           |
+| $$K_\mathrm{Pv}$$ | 0.5                      | 3.0                            |
 
 <div id="tbl-controllerParams2">
 
 Table 3: Mode dependent paramaters
 </div>
 
-| GFM Control | $$K_\mathrm{d}$$                      | $$K_\mathrm{1}$$              | $$K_\mathrm{2}$$            | $$K_\mathrm{2}^{\mathrm{dVOC}}$$                           |
-| ----------- | ------------------------------------- | ----------------------------- | --------------------------- | ---------------------------------------------------------- |
-| PLL         | 0.0                                   | 0.0                           | 0.0                         | 0.0                                                        |
-| Droop       | 0.0                                   | $$\omega_\mathrm{drp}$$       | $$Q_\mathrm{drp}$$          | 0.0                                                        |
-| VSM         | $$d_\mathrm{d}\omega_\mathrm{drp}$$ | $$\omega_\mathrm{drp}$$       | $$Q_\mathrm{drp}$$          | 0.0                                                        |
-| dVOC        | 0.0                                   | $$\omega_\mathrm{drp}/s_2^3$$ | $$\omega_\mathrm{drp}/s_3$$ | see <a href="#eq-dvoc1" class="quarto-xref">Equation 1</a> |
+| GFM Control | $$K_\mathrm{d}$$ | $$K_\mathrm{1}$$ | $$K_\mathrm{2}$$ | $$K_\mathrm{2}^{\mathrm{dVOC}}$$ |
+|----|----|----|----|----|
+| PLL | 0.0 | 0.0 | 0.0 | 0.0 |
+| Droop | 0.0 | $$\omega_\mathrm{drp}$$ | $$Q_\mathrm{drp}$$ | 0.0 |
+| VSM | $$d_\mathrm{d}\omega_\mathrm{drp}$$ | $$\omega_\mathrm{drp}$$ | $$Q_\mathrm{drp}$$ | 0.0 |
+| dVOC | 0.0 | $$\omega_\mathrm{drp}/s_2^3$$ | $$\omega_\mathrm{drp}/s_3$$ | see <a href="#eq-dvoc1" class="quarto-xref">Equation 1</a> |
 
 
 <span id="eq-dvoc1">$$
@@ -250,7 +254,6 @@ s_{13} = i_\mathrm{d,loadflow}
  \qquad(15)$$</span>
 
 The index “loadflow” indicates that this is the solution of a loadflow.
-
 
 ## Open source implementations
 
