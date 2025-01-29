@@ -95,7 +95,7 @@ Specifically, [1] defines the following validity domain:
 - phase jumps
 - symmetrical faults, including short-circuits of varying impedance,
   where voltage can dip to close to zero (typical e.g. 0.18 pu)
-- frequency disturbances, variations $$\pm$$ 6%
+- frequency disturbances, variations $$\pm$$ 6 %
 - electromechanical modes of synchronous generator rotor oscillations
   (0.2 Hz … 4 Hz)
 - Typical simulation time frame: 10 s … 30 s
@@ -138,11 +138,11 @@ following:
 Figure 1: Wind turbine type 3 model, based on [1]
 
 </div>
+<div id="fig-wtControlSubstructure">
 
 ![](drawings/WT_generator_control_substructure_type3.drawio.svg)
 
 
-<div id="fig-wtControlSubstructure">
 Figure 2: Wind turbine generator control sub-structure for Type 3A and
 3B WT, based on [1]
 
@@ -170,7 +170,8 @@ lookup-table that provides the angular velocity at which the turbine
 should rotate when it is injecting a certain active power [6]. A
 possible look-up table for this system is shown in
 <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>,
-which is representing example values from *DIgSILENT PowerFactory*.
+which is representing example values from *DIgSILENT PowerFactory*
+[7].
 
 The power-speed-characteristic in
 <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
@@ -230,8 +231,7 @@ _ = plt.text(.745, .1, 'Zone 1', ha='right', va='top')
 
 <div id="fig-lookup-table-omega-pref">
 Figure 4: Lookup table for reference rotation speed as a function of WT
-active power; according to [5] and with data from *DIgSILENT
-PowerFactory* (see
+active power; according to [5] and with data from [7] (see
 <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a>)
 
 </div>
@@ -316,8 +316,8 @@ Figure 5: Wind turbine torque PI block (Type 3), based on [1]
 </div>
 
 In <a href="#fig-torquePi" class="quarto-xref">Figure 5</a> the Torque
-PI Block can be seen. It it acts as a PI-controller and is a subsystem
-of the active power control in
+PI Block can be seen. It acts as a PI-controller and is a subsystem of
+the active power control in
 <a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> [6].
 
 For the calculation of the speed error input $$\omega_\mathrm{err}$$ and
@@ -328,7 +328,7 @@ the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see
 
 The proportional controller part is realized by $$K_\mathrm{Pp}$$.
 
-The integral part of the controller output is the smaller of the
+The integral part of the controller output is the minimum of the
 following two signals [6]:
 
 - The output of the integral controller $$K_\mathrm{Ip}/K_\mathrm{Pp}$$
@@ -381,7 +381,7 @@ $$\tau_\mathrm{uscale}$$ can be used to alter the power injection
 behaviour during fault and also the starting point for power recovery
 after post-fault. For example, setting it to zero results in zero power
 injection during fault. Higher values increase power injection, until
-the current limitation system begins to limit. See [6] for further
+the current limitation system begins to act. See [6] for further
 details.
 
 When $$F_\mathrm{reset}$$ returns to false, the proportional controller
@@ -495,41 +495,41 @@ set to zero.
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory*
+Typical values were gathered from the *DIgSILENT PowerFactory* [7]
 implementation of the model.
 
 <div id="tbl-parameters">
 
-Table 1: Parameters, based on [1], [5] and *DIgSILENT PowerFactory*
+Table 1: Parameters, based on [1], [5] and [7]
 </div>
 
-| name                                  | type  | unit | base                                                        |  description                                                                                                                                     | typical value                                                    |
-| :------------------------------------ | :---- | :--- | :---------------------------------------------------------- |  :---------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------- |
-| $$\mathrm{d}p_{\mathrm{max}}$$        | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          |  Maximum ramp rate of wind turbine power                                                                                                         | 999                                                              |
-| $$\mathrm{d}p_{\mathrm{refmax}}$$     | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          |  Maximum ramp rate for reference power of the wind turbine                                                                                       | 0.3                                                              |
-| $$\mathrm{d}p_{\mathrm{refmin}}$$     | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          |  Minimum ramp rate for reference power of the wind turbine                                                                                       | -0.3                                                             |
-| $$\mathrm{d}\tau_{\mathrm{max}}$$     | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          |  Torque ramp rate limit, as required by some grid codes                                                                                          | 0.25                                                             |
-| $$\mathrm{d}\tau_{\mathrm{maxUVRT}}$$ | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          |  Torque rise rate limit during UVRT                                                                                                              | 0                                                                |
-| $$K_{\mathrm{DTD}}$$                  | float | pu   | $$S_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              |  Active drive train damping: gain                                                                                                                | 1.5 (or 0 if $$M_\mathrm{\omega Tqpi}=\mathrm{false}$$) [5]      |
-| $$K_{\mathrm{Ip}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}} / \mathrm{s}$$ |  Integrator time constant of the PI controller                                                                                                   | 5                                                                |
-| $$K_{\mathrm{Pp}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              |  Proportional gain of the PI controller                                                                                                          | 8                                                                |
-| $$M_\mathrm{\omega Tmax}$$            | bool  | \-   | \-                                                          |  Mode for source of rotational speed for maximum torque calculation $$(false: \omega_{\mathrm{WTR}} - true: \omega_{\mathrm{ref}})$$             | true                                                             |
-| $$M_\mathrm{\omega Tqpi}$$            | bool  | \-   | \-                                                          |  Mode for source of rotational speed for torque PI controller error calculation $$(false: \omega_{\mathrm{gen}} - true: \omega_{\mathrm{WTR}})$$ | true (or false if $$K_\mathrm{DTD}=0$$) [5]                      |
-| $$M_{\mathrm{pUscale}}$$              | bool  | \-   | \-                                                          |  Enable voltage scaling for power reference during a voltage dip (false: no scaling – true: u scaling)                                           | false                                                            |
-| $$M_{\mathrm{pUVRT}}$$                | bool  | \-   | \-                                                          |  Mode for UVRT power control (false: reactive power control – true: voltage control)                                                             | true                                                             |
-| $$\omega_{\mathrm{DTD}}$$             | float | pu   | $$\Omega_{\mathrm{base}}$$                                  |  Active drive train damping: frequency, derived from two-mass model parameters, see <a href="#eq-omegaDtd" class="quarto-xref">Equation 1</a>    | 11.3                                                             |
-| $$\omega_{\mathrm{offset}}$$          | float | pu   | $$\Omega_{\mathrm{base}}$$                                  |  Offset from the reference value to limit controller action during rotor speed changes                                                           | 0                                                                |
-| $$\omega(p)$$                         | float | pu   | $$\Omega_{\mathrm{base}}(S_{\mathrm{base}})$$               |  Lookup table for power as a function of speed                                                                                                   | see <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a> |
-| $$p_{\mathrm{DTDmax}}$$               | float | pu   | $$S_{\mathrm{base}}$$                                       |  Active drive train damping: maximum power                                                                                                       | 0.15                                                             |
-| $$\tau_{\mathrm{emin}}$$              | float | pu   | $$T_{\mathrm{base}}$$                                       |  Minimum torque for the electrical generator                                                                                                     | 0.001                                                            |
-| $$\tau_{\mathrm{uscale}}$$            | float | pu   | $$T_{\mathrm{base}} / U_{\mathrm{base}}$$                   |  Voltage scaling factor for reset torque                                                                                                         | 1                                                                |
-| $$T_{\mathrm{DVS}}$$                  | float | s    | \-                                                          |  Time delay following deep a voltage dip                                                                                                         | 0.05                                                             |
-| $$T_{\mathrm{\omega filtp3}}$$        | float | s    | \-                                                          |  Filter time constant for measuring generator speed                                                                                              | 0.005                                                            |
-| $$T_{\mathrm{\omega ref}}$$           | float | s    | \-                                                          |  Time constant in the speed reference filter                                                                                                     | 0.005                                                            |
-| $$T_{\mathrm{pord}}$$                 | float | s    | \-                                                          |  Power order lag time constant                                                                                                                   | 0.01                                                             |
-| $$u_{\mathrm{DVS}}$$                  | float | pu   | $$U_{\mathrm{base}}$$                                       |  Voltage limit for maintaining UVRT status after a deep voltage dip                                                                              | 0.15                                                             |
-| $$u_{\mathrm{pdip}}$$                 | float | pu   | $$U_{\mathrm{base}}$$                                       |  Voltage dip threshold for active power control, often different from converter thresholds (e.g., 0.8)                                           | 0.9                                                              |
-| $$\zeta$$                             | float | pu   | \-                                                          |  Active drive train damping: damping coefficient                                                                                                 | 0.5                                                              |
+| name                                  | type  | unit | base                                                        | description                                                                                                                                     | typical value                                                    |
+| :------------------------------------ | :---- | :--- | :---------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------- |
+| $$\mathrm{d}p_{\mathrm{max}}$$        | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          | Maximum ramp rate of wind turbine power                                                                                                         | 999                                                              |
+| $$\mathrm{d}p_{\mathrm{refmax}}$$     | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          | Maximum ramp rate for reference power of the wind turbine                                                                                       | 0.3                                                              |
+| $$\mathrm{d}p_{\mathrm{refmin}}$$     | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          | Minimum ramp rate for reference power of the wind turbine                                                                                       | -0.3                                                             |
+| $$\mathrm{d}\tau_{\mathrm{max}}$$     | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          | Torque ramp rate limit, as required by some grid codes                                                                                          | 0.25                                                             |
+| $$\mathrm{d}\tau_{\mathrm{maxUVRT}}$$ | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          | Torque rise rate limit during UVRT                                                                                                              | 0                                                                |
+| $$K_{\mathrm{DTD}}$$                  | float | pu   | $$S_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Active drive train damping: gain                                                                                                                | 1.5 (or 0 if $$M_\mathrm{\omega Tqpi}=\mathrm{false}$$) [5]      |
+| $$K_{\mathrm{Ip}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}} / \mathrm{s}$$ | Integrator time constant of the PI controller                                                                                                   | 5                                                                |
+| $$K_{\mathrm{Pp}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Proportional gain of the PI controller                                                                                                          | 8                                                                |
+| $$M_\mathrm{\omega Tmax}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for maximum torque calculation $$(false: \omega_{\mathrm{WTR}} - true: \omega_{\mathrm{ref}})$$             | true                                                             |
+| $$M_\mathrm{\omega Tqpi}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for torque PI controller error calculation $$(false: \omega_{\mathrm{gen}} - true: \omega_{\mathrm{WTR}})$$ | true (or false if $$K_\mathrm{DTD}=0$$) [5]                      |
+| $$M_{\mathrm{pUscale}}$$              | bool  | \-   | \-                                                          | Enable voltage scaling for power reference during a voltage dip (false: no scaling – true: u scaling)                                           | false                                                            |
+| $$M_{\mathrm{pUVRT}}$$                | bool  | \-   | \-                                                          | Mode for UVRT power control (false: reactive power control – true: voltage control)                                                             | true                                                             |
+| $$\omega_{\mathrm{DTD}}$$             | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Active drive train damping: frequency, derived from two-mass model parameters, see <a href="#eq-omegaDtd" class="quarto-xref">Equation 1</a>    | 11.3                                                             |
+| $$\omega_{\mathrm{offset}}$$          | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Offset from the reference value to limit controller action during rotor speed changes                                                           | 0                                                                |
+| $$\omega(p)$$                         | float | pu   | $$\Omega_{\mathrm{base}}(S_{\mathrm{base}})$$               | Lookup table for power as a function of speed                                                                                                   | see <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a> |
+| $$p_{\mathrm{DTDmax}}$$               | float | pu   | $$S_{\mathrm{base}}$$                                       | Active drive train damping: maximum power                                                                                                       | 0.15                                                             |
+| $$\tau_{\mathrm{emin}}$$              | float | pu   | $$T_{\mathrm{base}}$$                                       | Minimum torque for the electrical generator                                                                                                     | 0.001                                                            |
+| $$\tau_{\mathrm{uscale}}$$            | float | pu   | $$T_{\mathrm{base}} / U_{\mathrm{base}}$$                   | Voltage scaling factor for reset torque                                                                                                         | 1                                                                |
+| $$T_{\mathrm{DVS}}$$                  | float | s    | \-                                                          | Time delay following deep a voltage dip                                                                                                         | 0.05                                                             |
+| $$T_{\mathrm{\omega filtp3}}$$        | float | s    | \-                                                          | Filter time constant for measuring generator speed                                                                                              | 0.005                                                            |
+| $$T_{\mathrm{\omega ref}}$$           | float | s    | \-                                                          | Time constant in the speed reference filter                                                                                                     | 0.005                                                            |
+| $$T_{\mathrm{pord}}$$                 | float | s    | \-                                                          | Power order lag time constant                                                                                                                   | 0.01                                                             |
+| $$u_{\mathrm{DVS}}$$                  | float | pu   | $$U_{\mathrm{base}}$$                                       | Voltage limit for maintaining UVRT status after a deep voltage dip                                                                              | 0.15                                                             |
+| $$u_{\mathrm{pdip}}$$                 | float | pu   | $$U_{\mathrm{base}}$$                                       | Voltage dip threshold for active power control, often different from converter thresholds (e.g., 0.8)                                           | 0.9                                                              |
+| $$\zeta$$                             | float | pu   | \-                                                          | Active drive train damping: damping coefficient                                                                                                 | 0.5                                                              |
 
 
 > [!NOTE]
@@ -540,8 +540,8 @@ Table 1: Parameters, based on [1], [5] and *DIgSILENT PowerFactory*
 
 <div id="tbl-wtLookupTable">
 
-Table 2: Typical values for lookup table $$\omega(p)$$, based on
-*DIgSILENT PowerFactory* implementation
+Table 2: Typical values for lookup table $$\omega(p)$$, based on [7]
+implementation
 </div>
 
 | $$p$$  | $$\omega(p)$$ |
@@ -563,7 +563,6 @@ Table 2: Typical values for lookup table $$\omega(p)$$, based on
 Table 3: Inputs, based on [1] and [5]
 </div>
 
-
 | name                    | type  | unit | base                                                | description                                                                                                        |
 | :---------------------- | :---- | :--- | :-------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
 | $$i_\mathrm{pmax}$$     | float | pu   | $$\frac{S_\mathrm{base}}{\sqrt{3}U_\mathrm{base}}$$ | Maximum active current able to be injected into the grid by the WT as determined by the current limitation system. |
@@ -582,7 +581,6 @@ Table 3: Inputs, based on [1] and [5]
 
 Table 4: Outputs, based on [1]
 </div>
-
 
 | name                    | type  | unit | base                                                | description                                       |
 | :---------------------- | :---- | :--- | :-------------------------------------------------- | :------------------------------------------------ |
@@ -670,7 +668,7 @@ Figure 6: Wind turbine Q control module, based on [1]
 The WT Q Control Module consists of a normal path and a fast reactive
 current injection path, which acts during and some time after an event
 (voltage drop or rise). There are multiple possible operating modes for
-each path, described in detail in [7].
+each path, described in detail in [8].
 
 Depending on the mode, $$x_\mathrm{WTref}$$ can be a voltage or reactive
 power setpoint.
@@ -678,7 +676,7 @@ power setpoint.
 The available control modes are listed in
 <a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a> and
 <a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>. The
-following descriptions have been based on [7] and [1].
+following descriptions have been based on [8] and [1].
 
 For example in mode 1, the normal path consists of two cascaded
 Proportional-Integral (PI) controllers. The first one (reactive power
@@ -692,7 +690,7 @@ the q-axis current which is computed based on the voltage deviation
 $$\Delta u$$, a dead-band and droop (gain $$K_\mathrm{qv}$$).
 
 Special attention must be paid to the reactive current signs in [1],
-as they seem to be inconsistent [7]. In the fast injection path,
+as they seem to be inconsistent [8]. In the fast injection path,
 $$u_\mathrm{WTC}$$ voltage drop leads to $$\Delta u < 0$$, resulting in
 $$i_\mathrm{qvhook} < 0$$. This behavior is opposite to the normal path.
 To solve this, the fast injection path’s sign can be inverted, as has
@@ -731,10 +729,8 @@ on [1]
 
 <div id="tbl-parametersQControl">
 
-Table 7: Parameters of WT Q control, based on [1] and *DIgSILENT
-PowerFactory*
+Table 7: Parameters of WT Q control, based on [1] and [7]
 </div>
-
 
 | name | type | unit | base | description | typical value |
 |:---|:---|:---|:---|:---|:---|
@@ -837,10 +833,8 @@ implement the generator’s capability curve.
 
 <div id="tbl-parametersWTQlim">
 
-Table 10: Parameters of mechanical moduele, based on [1] and
-*DIgSILENT PowerFactory*
+Table 10: Parameters of mechanical module, based on [1] and [7]
 </div>
-
 
 | name | type | unit | base | description | typical value |
 |:---|:---|:---|:---|:---|:---|
@@ -904,7 +898,7 @@ $$K_\mathrm{pqu}$$).
 The following
 <a href="#fig-currentLimCode" class="quarto-xref">Figure 9</a> shows a
 python inspired pseudo-code implementation of the the current limitation
-as shown in [7].
+as shown in [8].
 
 
 ![](drawings/WT_CurrentLim.drawio.svg)
@@ -914,7 +908,6 @@ as shown in [7].
 Figure 8: Wind turbine current limitation, based on [1]
 
 </div>
-
 
     M_DFSLim,imax_hook,iqmax_hook = (0,0,0)
     if F_FRT == 1:
@@ -950,7 +943,7 @@ Figure 8: Wind turbine current limitation, based on [1]
 
 <div id="fig-currentLimCode">
 Figure 9: Python-inspired pseoudo code implementation of the current
-limitation block [7]
+limitation block [8]
 
 </div>
 
@@ -958,10 +951,8 @@ limitation block [7]
 
 <div id="tbl-parametersCurrentLim">
 
-Table 13: Parameters of mechanical moduele, based on [1] and
-*DIgSILENT PowerFactory*
+Table 13: Parameters of mechanical moduele, based on [1] and [7]
 </div>
-
 
 | name | type | unit | base | description | typical value |
 |:---|:---|:---|:---|:---|:---|
@@ -983,7 +974,6 @@ Table 13: Parameters of mechanical moduele, based on [1] and
 
 Table 14: Inputs, based on [1]
 </div>
-
 
 | name | type | unit | base | description |
 |:---|:---|:---|:---|:---|
@@ -1028,7 +1018,7 @@ Figure 10: Wind turbine two mass mechanical module, based on [1]
 
 <div id="tbl-parametersMechanical">
 
-Table 16: Parameters of mechanical moduele, based on [1] and [8]
+Table 16: Parameters of mechanical moduele, based on [1] and [9]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1129,7 +1119,7 @@ resulting in the wind turbine aerodynamic power $$p_\mathrm{aero}$$ [3].
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory*
+Typical values were gathered from the *DIgSILENT PowerFactory* [7]
 implementation of the model.
 
 <div id="tbl-parametersAero">
@@ -1225,7 +1215,7 @@ introduced into the rotor speed error [2].
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory*
+Typical values were gathered from the *DIgSILENT PowerFactory* [7]
 implementation of the model.
 
 <div id="tbl-parametersPitch">
@@ -1300,6 +1290,7 @@ x_\mathrm{I\omega} = x_\mathrm{\theta \omega} = x_\mathrm{\theta} = \theta_0 + (
 x_\mathrm{Ic} = x_\mathrm{\theta c} = 0
  \qquad(17)$$</span>
 
+
 ### Generator system type 3
 
 #### Description
@@ -1365,7 +1356,6 @@ p. 111).
 
 ![](drawings/WT_GS_3B.drawio.svg)
 
-
 <div id="fig-generatorType3b">
 Figure 14: Wind turbine type 3B generator system model, based on [1]
 
@@ -1391,7 +1381,7 @@ when the voltage module’s derivative goes beyond a certain threshold
 <div id="tbl-parametersGenSys3a">
 
 Table 25: Parameters of Type 3A Generator System, based on [1] and
-*DIgSILENT PowerFactory*
+[7]
 </div>
 
 | name                          | type  | unit | base                | description                                                            | typical value |
@@ -1408,7 +1398,7 @@ Table 25: Parameters of Type 3A Generator System, based on [1] and
 <div id="tbl-parametersGenSys3a">
 
 Table 26: Parameters of Type 3B Generator System, based on [1] and
-*DIgSILENT PowerFactory*
+[7]
 </div>
 
 | name                          | type    | unit | base                | description                                                                         | typical value                  |
@@ -1491,13 +1481,27 @@ x_\mathrm{Tgq} = I_\mathrm{gs\,im\,0} - \frac{U_\mathrm{gs\,re\,0}}{X_\mathrm{eq
 x_\mathrm{wo} = 0
  \qquad(25)$$</span>
 
+#### Assumptions in Modelica implementation
+
+### Grid measurement module
+
+Calculates measured values from complex grid voltage and current and
+grid frequency.
+
+
+![](drawings/IEC_WT_meas.drawio.svg)
+
+
+<div id="fig-measurementModule">
+Figure 17: Grid measurement module
+
+</div>
 
 #### Parameters
 
 <div id="tbl-parametersMeasurement">
 
-Table 29: Parameters of measurement module, based on [1] and
-*DIgSILENT PowerFactory*
+Table 29: Parameters of measurement module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1583,8 +1587,7 @@ times.
 
 <div id="tbl-parametersProtection">
 
-Table 32: Parameters of measurement module, based on [1] and
-*DIgSILENT PowerFactory*
+Table 32: Parameters of measurement module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1648,7 +1651,7 @@ Both, the P and Q controllers, freeze their state variables during FRT.
 The WP model controls one single Point of Common Coupling (PCC).
 According to [1] it is normally enough to use a single aggregated
 model for all WTs in a WP. Still, also large WP can be modeled by using
-multiple WP models which all get the same reference values from the WP
+multiple WT models which all get the same reference values from the WP
 controller.
 
 ### WP P Control
@@ -1669,8 +1672,7 @@ external reference changes [1].
 
 <div id="tbl-parametersWPP">
 
-Table 35: Parameters of WP P control, based on [1] and *DIgSILENT
-PowerFactory*
+Table 35: Parameters of WP P control, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1739,7 +1741,6 @@ x_\mathrm{WPIp} = (1-K_\mathrm{WppRef})P_\mathrm{WTRef\,0}
 
 ![](drawings/WP_Q.drawio.svg)
 
-
 <div id="fig-wpReactivePower">
 Figure 20: WP Q control module, based on [1]
 
@@ -1751,8 +1752,7 @@ account through the limitations in the WT model (Q limitation module).
 
 <div id="tbl-parametersWPQ">
 
-Table 38: Parameters of WP Q control, based on [1] and *DIgSILENT
-PowerFactory*
+Table 38: Parameters of WP Q control, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1844,7 +1844,7 @@ variables, based on [1]
 <div id="tbl-parametersLinearCommunictation">
 
 Table 41: Parameters of linear communication module, based on [1] and
-*DIgSILENT PowerFactory*
+[7]
 </div>
 
 | name              | type  | unit | base | description        | typical value |
@@ -1983,8 +1983,7 @@ P_\mathrm{ag\,0} = \Re \left( (U_\mathrm{gs\,re\,0}+ \mathrm{j}U_\mathrm{gs\,im\
 
 ## Open questions
 
-- Why is u/xeqv added to iq command in Type 3B generator system?
-- It remained unclear to the autors what the torque PI input
+- It remained unclear to the authors what the torque PI input
   $$u_\mathrm{TChook}$$ represents in the P Controller.
 
 ## Open source implementations
@@ -1993,7 +1992,7 @@ This model has been successfully implemented in :
 
 | Software               | URL                                        | Language | Open-Source License                                | Last consulted date | Comments                                                                                              |
 | ---------------------- | ------------------------------------------ | -------- | -------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------- |
-| Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 20/12/2024          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
+| Open Modelica / Dynawo | [Dynawo](https://github.com/dynawo/dynawo) | modelica | [MPL v2.0](https://www.mozilla.org/en-US/MPL/2.0/) | 29/01/2025          | For modeling assumptions and test results, see [Dynawo](https://github.com/dynawo/dynawo) repository. |
 
 
 ## Table of references
@@ -2065,9 +2064,17 @@ Power Generation*, vol. 13, no. 7, pp. 1168–1178, 2019, doi:
 
 </div>
 
-<div id="ref-franke2024" class="csl-entry">
+<div id="ref-digsilent2024" class="csl-entry">
 
 <span class="csl-left-margin">[7]
+</span><span class="csl-right-inline">DIgSILENT, “PowerFactory.” 2024.
+Available: <https://www.digsilent.de/></span>
+
+</div>
+
+<div id="ref-franke2024" class="csl-entry">
+
+<span class="csl-left-margin">[8]
 </span><span class="csl-right-inline">M. Franke, A. Guironnet, and C.
 Cardozo, “Comparing IEC and WECC Generic Dynamic Models for Type 4 Wind
 Turbines,” 2024.</span>
@@ -2076,7 +2083,7 @@ Turbines,” 2024.</span>
 
 <div id="ref-tsourakis2009" class="csl-entry">
 
-<span class="csl-left-margin">[8]
+<span class="csl-left-margin">[9]
 </span><span class="csl-right-inline">G. Tsourakis, B. M. Nomikos, and
 C. D. Vournas, “Contribution of Doubly Fed Wind Generators to
 Oscillation Damping,” *IEEE Trans. Energy Convers.*, vol. 24, no. 3, pp.
