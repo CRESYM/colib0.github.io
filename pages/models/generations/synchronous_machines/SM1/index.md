@@ -31,7 +31,7 @@ The resulting models will provide the complete set of dynamic equations of the s
 
 The following schematic shows the components that participate in the synchronous machine operation:
 <p align="center">
-<img src="{{'/pages/models/generations/SM1/SM1_model_scheme.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/SM1/SM1_model_scheme.svg' | relative_url }}"
      alt="Operation of a Synchronous Machine schematic"
      style="float: center; width: 600px;" />
 
@@ -64,7 +64,7 @@ It is the static part of the machine, as its name indicates. This structure give
 shows the structure of the synchronous machine, including the windings.
 
 <p align="center">
-<img src="{{'/pages/models/generations/SM1/SM_rot_stat.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/SM1/SM_rot_stat.svg' | relative_url }}"
      alt="Stator-rotor of a Synchronous Machine schematic"
      style="float: center; width: 400px;" />
 </p>
@@ -240,10 +240,10 @@ These generated powers are limited by the heat limits of the components of the g
 The following charts show the capability and compound curves for different power factors[[1]](#1).
 
 <p float="center">
-<img src="{{'/pages/models/generations/SM1/SM_CapCurve.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/SM1/SM_CapCurve.svg' | relative_url }}"
      alt="Capability curve of a Synchronous Generator"
      width="350px"/>
-<img src="{{'/pages/models/generations/SM1/SM_CompCurves.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/SM1/SM_CompCurves.svg' | relative_url }}"
      alt="Compound curves of a Synchronous Generator"
      width="400px"/>
 </p>

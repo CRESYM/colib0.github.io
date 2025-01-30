@@ -109,7 +109,7 @@ In order to have simpler equations for the salient poles machines (and simplify 
 The following diagram shows the convention for the reference frame as described in [[6]](#6), which is the most common convention used.
 
 <p align="center">
-<img src="{{'/pages/models/generations/SM1/SMSalientPoleScheme.svg' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/SM1/SMSalientPoleScheme.svg' | relative_url }}"
      alt="Operation of a Synchronous Machine schematic"
      style="float: center; width: 400px;" />
 </p>
