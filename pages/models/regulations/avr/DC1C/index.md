@@ -60,7 +60,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-![DC1C](/pages/models/regulations/DC1C/DC1C.drawio.svg)
+![DC1C](/pages/models/regulations/avr/DC1C/DC1C.drawio.svg)
 
 ## Model variant
 

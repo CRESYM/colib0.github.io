@@ -15,7 +15,7 @@ Saturation modelling in synchronous machines is key to perform transient stabili
 
 ## Model use, assumptions, validity domain and limitations
 
-The model is used to perform transient stability analysis of synchronous machines, providing a more accurate representation of the physical machine. It considers that there exists saturation in the iron of the machine, and it is applied to all the inductive terms simultaneously, differently to what the GENROU/GENSAL models with additive saturation consider. Following a recommendation note from the North-America Electrical Reliability Corporation (NERC) [[4]](#4), the GENTPJ is overall recommended for all the synchronous machines as it recognizes the effect of the stator current in saturation. The GENROU, GENSAL and GENTPF (the later being exactly identical to the GENTPJ except an additive term in the saturation function) may induce significant error specially in simulations where reactive power support is considered.
+The model is used to perform transient stability analysis of synchronous machines, providing a more accurate representation of the physical machine. It considers that there exists saturation in the iron of the machine, and it is applied to all the inductive terms simultaneously, differently to what the GENROU/GENSAL models with additive saturation consider. Following a recommendation note from the North-America Electrical Reliability Corporation (NERC) [[4]](#4), the GENTPJ is overall recommended for all the synchronous machines as it recognizes the effect of the stator current in saturation. The GENROU, GENSAL and GENTPF (the latter being exactly identical to the GENTPJ except an additive term in the saturation function) may induce significant error specially in simulations where reactive power support is considered.
 
 The model assumptions are the following:
 
@@ -80,15 +80,15 @@ The GENTPJ model is suitable for EMT as it models with detail the non-linearitie
 
 <div style="font-weight: bold;">Electric Dynamics Equations:</div>
 
-$$ V_d = \frac{\omega_m}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
-$$ V_q = \frac{\omega_m}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
+$$ V_d = \frac{\omega}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
+$$ V_q = \frac{\omega}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
 $$ \frac{1}{\omega_s} \frac{d\Psi_0}{dt} = R_s I_0 + V_0$$
 $$ E''_q = E_{q1} + E_{q2} - I_d (X_d - X''_d) $$
 $$ E''_d = E_{d1} + E_{d2} + I_q (X_q - X''_q) $$
 $$ E'_q = E_{q1} + E_{q2} - \frac{X'_d - X''_d}{X_d - X''_d} E_{q2} - I_d (X_d - X'_d) $$
 $$ E'_d = E_{d1} + E_{d2} - \frac{X'_q - X''_q}{X_q - X''_q} E_{d2} + I_q (X_q - X'_q) $$
-$$ T''_{d0} \frac{dE''_q}{dt} = -Sat_q\frac{X'_d - X''_d}{X_d - X''_d} E_{q2} $$
-$$ T''_{q0} \frac{dE''_d}{dt} = -Sat_d\frac{X'_q - X''_q}{X_q - X''_q} E_{d2} $$
+$$ T''_{d0} \frac{dE''_q}{dt} = -Sat_d\frac{X'_d - X''_d}{X_d - X''_d} E_{q2} $$
+$$ T''_{q0} \frac{dE''_d}{dt} = -Sat_q\frac{X'_q - X''_q}{X_q - X''_q} E_{d2} $$
 $$ T'_{d0} \frac{dE'_q}{dt} = E_{fd} - Sat_dE_{q1} $$
 $$ T'_{q0} \frac{dE'_d}{dt} = -Sat_qE_{d1} $$
 
@@ -165,8 +165,8 @@ The following circuit equations were obtained in the GENSAL model:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ \frac{1}{\omega_s} \frac{d\Psi_d}{dt} = R_s I_d + \frac{\omega_m}{\omega_s} \Psi_q + V_d$$
-$$ \frac{1}{\omega_s} \frac{d\Psi_q}{dt} = R_s I_q - \frac{\omega_m}{\omega_s} \Psi_d + V_q$$
+$$ \frac{1}{\omega_s} \frac{d\Psi_d}{dt} = R_s I_d + \frac{\omega}{\omega_s} \Psi_q + V_d$$
+$$ \frac{1}{\omega_s} \frac{d\Psi_q}{dt} = R_s I_q - \frac{\omega}{\omega_s} \Psi_d + V_q$$
 
 </div>
 
@@ -174,15 +174,15 @@ With proper transformations using the expressions for the fluxes, they can be re
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_d = - R_s I_d +  X_q''I_q + E_d''\frac{\omega_m}{\omega_s}$$
-$$ V_q = - R_s I_q -  X_q''I_d + E_q''\frac{\omega_m}{\omega_s}$$
+$$ V_d = - R_s I_d +  X_q''I_q + E_d''\frac{\omega}{\omega_s}$$
+$$ V_q = - R_s I_q -  X_d''I_d + E_q''\frac{\omega}{\omega_s}$$
 </div>
 
-with  $$E_d'' = E'_d \frac{X_q'' - X_l}{X_q' - X_l} + \Psi_q'' \frac{X_q' - X_q"}{X_q' - X_l} $$, and $$E_q'' = E'_q \frac{X_d'' - X_l}{X_d' - X_l} + \Psi_d'' \frac{X_d' - X_d"}{X_d' - X_l} $$, and where the scaling $$\frac{\omega_m}{\omega_s}$$ is ommited for the subtransient reactances. As discussed for the GENSAL model, $$X_d'' = X_q''$$, which allows to compact the grid interface equations in a single equation:
+with  $$E_d'' = E'_d \frac{X_q'' - X_l}{X_q' - X_l} + \Psi_q'' \frac{X_q' - X_q"}{X_q' - X_l} $$, and $$E_q'' = E'_q \frac{X_d'' - X_l}{X_d' - X_l} + \Psi_d'' \frac{X_d' - X_d"}{X_d' - X_l} $$, and where the scaling $$\frac{\omega}{\omega_s}$$ is ommited for the subtransient reactances. As discussed for the GENSAL model, $$X_d'' = X_q''$$, which allows to compact the grid interface equations in a single equation:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_d + jV_q = \frac{\omega_m}{\omega_s} (E_d'' + jE_q'') - (R_s + jX_d'') (I_d + jI_q) $$
+$$ V_d + jV_q = \frac{\omega}{\omega_s} (E_d'' + jE_q'') - (R_s + jX_d'') (I_d + jI_q) $$
 
 </div>
 
@@ -190,8 +190,8 @@ This is not doable in the GENTPJ model, since generally the subtransient reactan
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
 
-$$ V_d = \frac{\omega_m}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
-$$ V_q = \frac{\omega_m}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
+$$ V_d = \frac{\omega}{\omega_s} E_d'' + I_q X_{qsat}'' - I_dR_a$$
+$$ V_q = \frac{\omega}{\omega_s} E_q'' - I_d X_{dsat}'' - I_qR_a$$
 
 </div>
 
@@ -200,7 +200,7 @@ Again, the frequency factor can be added to the term $$I_q X_{qsat}''$$ and $$I_
 The following figure shows the block diagram for this GENTPJ model [[3]](#3):
 
 <p align="center">
-<img src="{{'/pages/models/generations/GENTPJ/GENTPJ_blocks.png' | relative_url }}"
+<img src="{{'/pages/models/generations/synchronous_machines/GENTPJ/GENTPJ_blocks.png' | relative_url }}"
      alt="Block diagram of the GENTPJ model"
      style="float: center; width: 600px;" />
 </p>
