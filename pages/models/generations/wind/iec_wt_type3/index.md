@@ -82,7 +82,7 @@ The models are positive-sequence RMS models, hence they assume
 symmetrical operating conditions and neglect high-frequency dynamics.
 This type of models is often used in large-scale stability studies, for
 which it reflects the relevant phenomena. It is not a detailed physical
-model of the unit. Also for some stability phenomena (e.g. resonance
+model of the unit. Also for some stability phenomena (e.g. resonance
 stability) this model is not sufficient and EMT models or other
 approaches may be necessary.
 
@@ -94,7 +94,7 @@ Specifically, [1] defines the following validity domain:
 - steady state voltage deviations (0.85 pu … 1.15 pu)
 - phase jumps
 - symmetrical faults, including short-circuits of varying impedance,
-  where voltage can dip to close to zero (typical e.g. 0.18 pu)
+  where voltage can dip to close to zero (typical e.g. 0.18 pu)
 - frequency disturbances, variations $$\pm$$ 6 %
 - electromechanical modes of synchronous generator rotor oscillations
   (0.2 Hz … 4 Hz)
@@ -135,7 +135,7 @@ following:
 
 
 <div id="fig-wtSystem">
-Figure 1: Wind turbine type 3 model, based on [1]
+Figure 1: Wind turbine type 3 model, based on [1]
 
 </div>
 <div id="fig-wtControlSubstructure">
@@ -143,7 +143,7 @@ Figure 1: Wind turbine type 3 model, based on [1]
 ![](drawings/WT_generator_control_substructure_type3.drawio.svg)
 
 
-Figure 2: Wind turbine generator control sub-structure for Type 3A and
+Figure 2: Wind turbine generator control sub-structure for Type 3A and
 3B WT, based on [1]
 
 </div>
@@ -158,23 +158,23 @@ see [5].
 
 
 <div id="fig-wtPControl">
-Figure 3: Wind turbine P control module (Type 3), based on [1]
+Figure 3: Wind turbine P control module (Type 3), based on [1]
 
 </div>
 
-<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> shows the
+<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> shows the
 wind turbine active power control scheme.
 
 The control’s general behaviour is dominated by $$\omega(p)$$, a
 lookup-table that provides the angular velocity at which the turbine
 should rotate when it is injecting a certain active power [6]. A
 possible look-up table for this system is shown in
-<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>,
+<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>,
 which is representing example values from *DIgSILENT PowerFactory*
 [7].
 
 The power-speed-characteristic in
-<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
+<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
 has four main operating zones according to [5]:
 
 - **Zone 1:** The minimum rotational speed has been reached and hence
@@ -191,7 +191,7 @@ has four main operating zones according to [5]:
 > [!NOTE]
 >
 > Dotted lines in
-> <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
+> <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
 > imply that, for simulations, the active power reference presents a
 > certain slope, offering more stable simulations. Under real control
 > conditions, this look-up table has two vertical lines, as shown by the
@@ -230,9 +230,9 @@ _ = plt.text(.745, .1, 'Zone 1', ha='right', va='top')
 
 
 <div id="fig-lookup-table-omega-pref">
-Figure 4: Lookup table for reference rotation speed as a function of WT
+Figure 4: Lookup table for reference rotation speed as a function of WT
 active power; according to [5] and with data from [7] (see
-<a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a>)
+<a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a>)
 
 </div>
 
@@ -262,12 +262,12 @@ speed, which acts as a simpler way to determine a filtered value of
 $$\omega_\mathrm{gen}$$ [5].
 
 The speed error $$\omega_\mathrm{err}$$ is then given to the *Torque PI
-controller* (<a href="#fig-torquePi" class="quarto-xref">Figure 5</a>),
+controller* (<a href="#fig-torquePi" class="quarto-xref">Figure 5</a>),
 which outputs the electromagnetic torque reference $$\tau_\mathrm{out}$$
 [6].
 
 Another input to the torque PI subsystem (see
-<a href="#sec-torque-pi" class="quarto-xref">Section 4.1.1</a>) is the
+<a href="#sec-torque-pi" class="quarto-xref">Section 4.1.1</a>) is the
 maximum electromagnetic torque $$\tau_\mathrm{emax}$$. It is determined by
 calculating a torque value from [5]:
 
@@ -292,7 +292,7 @@ provides an electrical torque that accounts for natural damping by
 considering speed differences between both low and high speed shafts
 (either side of the gearbox) [5]. It is modeled through a second-order
 transfer function as shown towards the bottom right of
-<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a>:
+<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a>:
 
 $$
 K_{\text{DTD}} \cdot \frac{2 \zeta \omega_{\text{DTD}} s}{s^2 + 2 \zeta \omega_{\text{DTD}} s + \omega_{\text{DTD}}^2}
@@ -302,7 +302,7 @@ As mentioned above, in this model the DTD is represented by an active
 power component, not a torque. The transfer function outputs an
 oscillating electrical power that has an efficient damping effect [5]
 (for parameters see
-<a href="#sec-wt-p-params" class="quarto-xref">Section 4.1.3</a>).
+<a href="#sec-wt-p-params" class="quarto-xref">Section 4.1.3</a>).
 
 #### Torque PI block
 
@@ -311,18 +311,18 @@ oscillating electrical power that has an efficient damping effect [5]
 
 
 <div id="fig-torquePi">
-Figure 5: Wind turbine torque PI block (Type 3), based on [1]
+Figure 5: Wind turbine torque PI block (Type 3), based on [1]
 
 </div>
 
-In <a href="#fig-torquePi" class="quarto-xref">Figure 5</a> the Torque
+In <a href="#fig-torquePi" class="quarto-xref">Figure 5</a> the Torque
 PI Block can be seen. It acts as a PI-controller and is a subsystem of
 the active power control in
-<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> [6].
+<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> [6].
 
 For the calculation of the speed error input $$\omega_\mathrm{err}$$ and
 the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see
-<a href="#sec-wt-p-control" class="quarto-xref">Section 4.1</a>.
+<a href="#sec-wt-p-control" class="quarto-xref">Section 4.1</a>.
 
 **Proportional and integral parts of the controller**
 
@@ -362,7 +362,7 @@ These fault signals have the following functions:
   - resets and holds both integrators at $$\tau_\mathrm{reset}$$ (see
     below); for the $$K_\mathrm{Ip}/K_\mathrm{Pp}$$-integrator this can be
     prevented by setting $$M_\mathrm{pUVRT} = \mathrm{false}$$.
-  - sets the speed error $$\omega_\mathrm{err}$$, i.e. the input to the
+  - sets the speed error $$\omega_\mathrm{err}$$, i.e. the input to the
     proportional controller part $$K_\mathrm{Pp}$$, to zero
   - changes the upper ramp rate limit of $$\tau_\mathrm{reset}$$ to
     $$\mathrm{d}\tau_\mathrm{maxUVRT}$$ (usually set to zero, preventing
@@ -392,7 +392,7 @@ with a maximum rate dictated by $$\mathrm{d}\tau_\mathrm{max}$$ [6].
 #### Variable limits integrator with set/reset and freeze
 
 The integrators used in the Torque PI model in
-<a href="#fig-torquePi" class="quarto-xref">Figure 5</a> need variable
+<a href="#fig-torquePi" class="quarto-xref">Figure 5</a> need variable
 limits, set/reset and freeze functionalities. A suggestion for the
 implementation is shown below and the description follows thereafter.
 
@@ -500,7 +500,7 @@ implementation of the model.
 
 <div id="tbl-parameters">
 
-Table 1: Parameters, based on [1], [5] and [7]
+Table 1: Parameters of WT P control module, based on [1], [5] and [7]
 </div>
 
 | name                                  | type  | unit | base                                                        | description                                                                                                                                     | typical value                                                    |
@@ -512,14 +512,14 @@ Table 1: Parameters, based on [1], [5] and [7]
 | $$\mathrm{d}\tau_{\mathrm{maxUVRT}}$$ | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          | Torque rise rate limit during UVRT                                                                                                              | 0                                                                |
 | $$K_{\mathrm{DTD}}$$                  | float | pu   | $$S_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Active drive train damping: gain                                                                                                                | 1.5 (or 0 if $$M_\mathrm{\omega Tqpi}=\mathrm{false}$$) [5]      |
 | $$K_{\mathrm{Ip}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}} / \mathrm{s}$$ | Integrator time constant of the PI controller                                                                                                   | 5                                                                |
-| $$K_{\mathrm{Pp}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Proportional gain of the PI controller                                                                                                          | 8                                                                |
+| $$K_{\mathrm{Pp}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Proportional gain of the PI controller                                                                                                          | 3                                                                |
 | $$M_\mathrm{\omega Tmax}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for maximum torque calculation $$(false: \omega_{\mathrm{WTR}} - true: \omega_{\mathrm{ref}})$$             | true                                                             |
 | $$M_\mathrm{\omega Tqpi}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for torque PI controller error calculation $$(false: \omega_{\mathrm{gen}} - true: \omega_{\mathrm{WTR}})$$ | true (or false if $$K_\mathrm{DTD}=0$$) [5]                      |
 | $$M_{\mathrm{pUscale}}$$              | bool  | \-   | \-                                                          | Enable voltage scaling for power reference during a voltage dip (false: no scaling – true: u scaling)                                           | false                                                            |
 | $$M_{\mathrm{pUVRT}}$$                | bool  | \-   | \-                                                          | Mode for UVRT power control (false: reactive power control – true: voltage control)                                                             | true                                                             |
-| $$\omega_{\mathrm{DTD}}$$             | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Active drive train damping: frequency, derived from two-mass model parameters, see <a href="#eq-omegaDtd" class="quarto-xref">Equation 1</a>    | 11.3                                                             |
+| $$\omega_{\mathrm{DTD}}$$             | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Active drive train damping: frequency, derived from two-mass model parameters, see <a href="#eq-omegaDtd" class="quarto-xref">Equation 1</a>    | 11.3                                                             |
 | $$\omega_{\mathrm{offset}}$$          | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Offset from the reference value to limit controller action during rotor speed changes                                                           | 0                                                                |
-| $$\omega(p)$$                         | float | pu   | $$\Omega_{\mathrm{base}}(S_{\mathrm{base}})$$               | Lookup table for power as a function of speed                                                                                                   | see <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a> |
+| $$\omega(p)$$                         | float | pu   | $$\Omega_{\mathrm{base}}(S_{\mathrm{base}})$$               | Lookup table for power as a function of speed                                                                                                   | see <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a> |
 | $$p_{\mathrm{DTDmax}}$$               | float | pu   | $$S_{\mathrm{base}}$$                                       | Active drive train damping: maximum power                                                                                                       | 0.15                                                             |
 | $$\tau_{\mathrm{emin}}$$              | float | pu   | $$T_{\mathrm{base}}$$                                       | Minimum torque for the electrical generator                                                                                                     | 0.001                                                            |
 | $$\tau_{\mathrm{uscale}}$$            | float | pu   | $$T_{\mathrm{base}} / U_{\mathrm{base}}$$                   | Voltage scaling factor for reset torque                                                                                                         | 1                                                                |
@@ -540,7 +540,7 @@ Table 1: Parameters, based on [1], [5] and [7]
 
 <div id="tbl-wtLookupTable">
 
-Table 2: Typical values for lookup table $$\omega(p)$$, based on [7]
+Table 2: Typical values for lookup table $$\omega(p)$$, based on [7]
 implementation
 </div>
 
@@ -560,7 +560,7 @@ implementation
 
 <div id="tbl-inputsPControl">
 
-Table 3: Inputs, based on [1] and [5]
+Table 3: Inputs, based on [1] and [5]
 </div>
 
 | name                    | type  | unit | base                                                | description                                                                                                        |
@@ -579,7 +579,7 @@ Table 3: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsPControl">
 
-Table 4: Outputs, based on [1]
+Table 4: Outputs, based on [1]
 </div>
 
 | name                    | type  | unit | base                                                | description                                       |
@@ -589,7 +589,7 @@ Table 4: Outputs, based on [1]
 | $$p_\mathrm{ord}$$      | float | pu   | $$S_\mathrm{base}$$                                 | Active power order from wind turbine controller   |
 
 
-#### Equations & algorithm  
+#### Equations & algorithm  
 
 <span id="eq-omegaDtd">$$
 \omega_{\mathrm{DTD}} = \sqrt{k_{\mathrm{drt}} \left( \frac{1}{2 \cdot H_{\mathrm{WTR}}} + \frac{1}{2 \cdot H_{\mathrm{gen}}} \right)}
@@ -600,10 +600,10 @@ Table 4: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 The lookup-table $$\mathbf{\omega}(p)$$ is the same as described in
-<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>.
+<a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>.
 
 <span id="eq-initPOrd">$$
 x_\mathrm{pord\,0} = P_\mathrm{ord\,0}
@@ -661,7 +661,7 @@ x_\mathrm{KIpKPp\,0} =
 
 
 <div id="fig-QControlModule">
-Figure 6: Wind turbine Q control module, based on [1]
+Figure 6: Wind turbine Q control module, based on [1]
 
 </div>
 
@@ -674,8 +674,8 @@ Depending on the mode, $$x_\mathrm{WTref}$$ can be a voltage or reactive
 power setpoint.
 
 The available control modes are listed in
-<a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a> and
-<a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>. The
+<a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a> and
+<a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>. The
 following descriptions have been based on [8] and [1].
 
 For example in mode 1, the normal path consists of two cascaded
@@ -695,12 +695,12 @@ $$u_\mathrm{WTC}$$ voltage drop leads to $$\Delta u < 0$$, resulting in
 $$i_\mathrm{qvhook} < 0$$. This behavior is opposite to the normal path.
 To solve this, the fast injection path’s sign can be inverted, as has
 been done in
-<a href="#fig-QControlModule" class="quarto-xref">Figure 6</a> (red -1
+<a href="#fig-QControlModule" class="quarto-xref">Figure 6</a> (red -1
 block).
 
 <div id="tbl-qControlModesNormal">
 
-Table 5: Q control normal path control modes, based on [1]
+Table 5: Q control normal path control modes, based on [1]
 </div>
 
 | $$M_\mathrm{qG}$$ | Description |
@@ -713,7 +713,7 @@ Table 5: Q control normal path control modes, based on [1]
 
 <div id="tbl-qControlModesFast">
 
-Table 6: Q control reactive current injection path control modes, based
+Table 6: Q control reactive current injection path control modes, based
 on [1]
 </div>
 
@@ -729,7 +729,7 @@ on [1]
 
 <div id="tbl-parametersQControl">
 
-Table 7: Parameters of WT Q control, based on [1] and [7]
+Table 7: Parameters of WT Q control, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -746,8 +746,8 @@ Table 7: Parameters of WT Q control, based on [1] and [7]
 | $$K_\mathrm{Pu}$$ | float | pu | $$I_\mathrm{base}/U_\mathrm{base}$$ | U PI controller proportional gain | 2 |
 | $$K_\mathrm{PuFRT}$$ | float | pu | $$I_\mathrm{base}/U_\mathrm{base}$$ | U PI controller proportional gain during FRT | 0 |
 | $$K_\mathrm{qv}$$ | float | pu | $$I_\mathrm{base}/U_\mathrm{base}$$ | Droop for fast reactive current injection | 2 |
-| $$M_\mathrm{qFRT}$$ | bool | \- | \- | Fast reactive current injection Q control mode (<a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>) | 2 |
-| $$M_\mathrm{qG}$$ | bool | \- | \- | Normal path Q control mode (<a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a>) | 1 |
+| $$M_\mathrm{qFRT}$$ | bool | \- | \- | Fast reactive current injection Q control mode (<a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>) | 2 |
+| $$M_\mathrm{qG}$$ | bool | \- | \- | Normal path Q control mode (<a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a>) | 1 |
 | $$r_\mathrm{drop}$$ | float | pu | $$Z_\mathrm{base}$$ | Voltage drop resistance | 0 |
 | $$T_\mathrm{post}$$ | float | s | \- | Duration of post-fault period | 0 |
 | $$T_\mathrm{qord}$$ | float | s | \- | Time constant in reactive power order lag | 0 |
@@ -766,7 +766,7 @@ Table 7: Parameters of WT Q control, based on [1] and [7]
 
 <div id="tbl-inputsQControl">
 
-Table 8: Inputs, based on [1] and [5]
+Table 8: Inputs, based on [1] and [5]
 </div>
 
 | name | type | unit | base | description |
@@ -785,7 +785,7 @@ Table 8: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsQControl">
 
-Table 9: Outputs, based on [1]
+Table 9: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -799,7 +799,7 @@ Table 9: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXiu">$$
 x_\mathrm{Iu\,0} = x_\mathrm{qord\,0} = Q_\mathrm{ord\,0}/U_\mathrm{0}
@@ -820,7 +820,7 @@ x_\mathrm{uss\,0} = 0
 
 
 <div id="fig-WTQLim">
-Figure 7: WT Q limitation module, based on [1]
+Figure 7: WT Q limitation module, based on [1]
 
 </div>
 
@@ -833,7 +833,7 @@ implement the generator’s capability curve.
 
 <div id="tbl-parametersWTQlim">
 
-Table 10: Parameters of mechanical module, based on [1] and [7]
+Table 10: Parameters of Q limitation module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -850,7 +850,7 @@ Table 10: Parameters of mechanical module, based on [1] and [7]
 
 <div id="tbl-inputsWTQlim">
 
-Table 11: Inputs, based on [1]
+Table 11: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -864,7 +864,7 @@ Table 11: Inputs, based on [1]
 
 <div id="tbl-outputsWTQlim">
 
-Table 12: Outputs, based on [1]
+Table 12: Outputs, based on [1]
 </div>
 
 | name                 | type  | unit | base              | description               |
@@ -876,7 +876,7 @@ Table 12: Outputs, based on [1]
 ### Current limitation
 
 The current limitation acts after the P and Q controls as shown in
-<a href="#fig-wtControlSubstructure" class="quarto-xref">Figure 2</a>.
+<a href="#fig-wtControlSubstructure" class="quarto-xref">Figure 2</a>.
 The priority between active and reactive current can be set by
 $$M_\mathrm{qpri}$$. Outside FRT, P-Priority is always active regardless
 of $$M_\mathrm{qpri}$$.
@@ -896,7 +896,7 @@ injection when voltage is already high (parameters $$u_\mathrm{pqumax}$$,
 $$K_\mathrm{pqu}$$).
 
 The following
-<a href="#fig-currentLimCode" class="quarto-xref">Figure 9</a> shows a
+<a href="#fig-currentLimCode" class="quarto-xref">Figure 9</a> shows a
 python inspired pseudo-code implementation of the the current limitation
 as shown in [8].
 
@@ -905,7 +905,7 @@ as shown in [8].
 
 
 <div id="fig-WTCurrentLim">
-Figure 8: Wind turbine current limitation, based on [1]
+Figure 8: Wind turbine current limitation, based on [1]
 
 </div>
 
@@ -942,7 +942,7 @@ Figure 8: Wind turbine current limitation, based on [1]
         ))
 
 <div id="fig-currentLimCode">
-Figure 9: Python-inspired pseoudo code implementation of the current
+Figure 9: Python-inspired pseoudo code implementation of the current
 limitation block [8]
 
 </div>
@@ -951,7 +951,7 @@ limitation block [8]
 
 <div id="tbl-parametersCurrentLim">
 
-Table 13: Parameters of mechanical moduele, based on [1] and [7]
+Table 13: Parameters of current limitation module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -972,7 +972,7 @@ Table 13: Parameters of mechanical moduele, based on [1] and [7]
 
 <div id="tbl-inputsCurrentLim">
 
-Table 14: Inputs, based on [1]
+Table 14: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -990,7 +990,7 @@ Table 14: Inputs, based on [1]
 
 <div id="tbl-outputsCurrentLim">
 
-Table 15: Outputs, based on [1]
+Table 15: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1010,7 +1010,7 @@ between generator rotor and WT rotor).
 
 
 <div id="fig-mechanicalModule">
-Figure 10: Wind turbine two mass mechanical module, based on [1]
+Figure 10: Wind turbine two mass mechanical module, based on [1]
 
 </div>
 
@@ -1018,7 +1018,7 @@ Figure 10: Wind turbine two mass mechanical module, based on [1]
 
 <div id="tbl-parametersMechanical">
 
-Table 16: Parameters of mechanical moduele, based on [1] and [9]
+Table 16: Parameters of mechanical module, based on [1] and [9]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1035,7 +1035,7 @@ Table 16: Parameters of mechanical moduele, based on [1] and [9]
 
 <div id="tbl-inputsMechanical">
 
-Table 17: Inputs, based on [1]
+Table 17: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1048,7 +1048,7 @@ Table 17: Inputs, based on [1]
 
 <div id="tbl-outputsMechanical">
 
-Table 18: Outputs, based on [1]
+Table 18: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1060,7 +1060,7 @@ Table 18: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXwtr">$$
 x_\mathrm{WTR\,0} = x_\mathrm{gen\,0} = \omega_0
@@ -1073,7 +1073,7 @@ x_\mathrm{drt\,0} = P_\mathrm{ag\,0} / \omega_0
 ### Two-dimensional aerodynamic module
 
 The two-dimensional aerodynamic module is shown in
-<a href="#fig-wtAerodynamic" class="quarto-xref">Figure 11</a>.
+<a href="#fig-wtAerodynamic" class="quarto-xref">Figure 11</a>.
 $$\theta_0$$ represents the rated pitch angle (refers to the angle at
 which the turbine blades are positioned to achieve maximum power output
 at a specific wind speed).
@@ -1083,7 +1083,7 @@ at a specific wind speed).
 
 
 <div id="fig-wtAerodynamic">
-Figure 11: Wind turbine two-dimensional aerodynamic module (Type 3),
+Figure 11: Wind turbine two-dimensional aerodynamic module (Type 3),
 based on [1]
 
 </div>
@@ -1124,7 +1124,7 @@ implementation of the model.
 
 <div id="tbl-parametersAero">
 
-Table 19: Parameters, based on [1]
+Table 19: Parameters, based on [1]
 </div>
 
 | name                                   | type  | unit | base                                                          | description                                                                                       | typical values |
@@ -1150,7 +1150,7 @@ Table 19: Parameters, based on [1]
 
 <div id="tbl-inputsAero">
 
-Table 20: Inputs, based on [1]
+Table 20: Inputs, based on [1]
 </div>
 
 | name                    | type  | unit | base                       | description              |
@@ -1163,7 +1163,7 @@ Table 20: Inputs, based on [1]
 
 <div id="tbl-outputsAero">
 
-Table 21: Outputs, based on [1]
+Table 21: Outputs, based on [1]
 </div>
 
 | name                | type  | unit | base | description                    |
@@ -1178,12 +1178,12 @@ Table 21: Outputs, based on [1]
 
 
 <div id="fig-wtPitchAngleControl">
-Figure 12: Wind turbine pitch angle module (Type 3), based on [1]
+Figure 12: Wind turbine pitch angle module (Type 3), based on [1]
 
 </div>
 
 The pitch angle control module is shown in
-<a href="#fig-wtPitchAngleControl" class="quarto-xref">Figure 12</a>. It
+<a href="#fig-wtPitchAngleControl" class="quarto-xref">Figure 12</a>. It
 uses two PI controllers to control the pitch angle $$\theta$$, one
 associated with rotor speed ($$K_\mathrm{I\omega}$$, $$K_\mathrm{P\omega}$$)
 and one with generator power ($$K_\mathrm{Ic}$$, $$K_\mathrm{Pc}$$) [2].
@@ -1220,7 +1220,7 @@ implementation of the model.
 
 <div id="tbl-parametersPitch">
 
-Table 22: Parameters, based on [1]
+Table 22: Parameters, based on [1]
 </div>
 
 | name                                      | type  | unit  | base                                                   | description                                              | typical values |
@@ -1251,7 +1251,7 @@ Table 22: Parameters, based on [1]
 
 <div id="tbl-inputsPitch">
 
-Table 23: Inputs, based on [1]
+Table 23: Inputs, based on [1]
 </div>
 
 | name                    | type  | unit | base                     | description                         |
@@ -1266,7 +1266,7 @@ Table 23: Inputs, based on [1]
 
 <div id="tbl-outputsPitch">
 
-Table 24: Outputs, based on [1]
+Table 24: Outputs, based on [1]
 </div>
 
 | name       | type  | unit | base | description              |
@@ -1277,10 +1277,10 @@ Table 24: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 For the used parameters of the aerodynamic module, see
-<a href="#sec-aerodynamic2d" class="quarto-xref">Section 4.6</a>
+<a href="#sec-aerodynamic2d" class="quarto-xref">Section 4.6</a>
 
 <span id="eq-initIomega">$$ 
 x_\mathrm{I\omega} = x_\mathrm{\theta \omega} = x_\mathrm{\theta} = \theta_0 + (P_\mathrm{ag\,0}-p_\mathrm{avail})/\mathrm{d}p_\mathrm{\theta}
@@ -1325,7 +1325,7 @@ fault inception and fault clearance [2].
 
 
 <div id="fig-generatorType3a">
-Figure 13: Wind turbine type 3A generator system model, based on [1]
+Figure 13: Wind turbine type 3A generator system model, based on [1]
 
 </div>
 
@@ -1345,11 +1345,11 @@ these electromagnetic transients (related to rotor flux derivative)
 
 The air-gap power $$p_\mathrm{ag}$$ is an additional output of the model,
 which is used as an input for the mechanical model in
-<a href="#fig-mechanicalModule" class="quarto-xref">Figure 10</a>.
+<a href="#fig-mechanicalModule" class="quarto-xref">Figure 10</a>.
 
 In this model a DC chopper is assumed. The model is not applicable for
 older DFIG systems that require a crowbar during grid faults ([3],
-p. 111).
+p. 111).
 
 ##### Type 3B
 
@@ -1357,14 +1357,14 @@ p. 111).
 ![](drawings/WT_GS_3B.drawio.svg)
 
 <div id="fig-generatorType3b">
-Figure 14: Wind turbine type 3B generator system model, based on [1]
+Figure 14: Wind turbine type 3B generator system model, based on [1]
 
 </div>
 
 The Type 3B Generator System models a DFIG with crowbar circuit.
 
 In the model, as shown in
-<a href="#fig-generatorType3b" class="quarto-xref">Figure 14</a>, the
+<a href="#fig-generatorType3b" class="quarto-xref">Figure 14</a>, the
 crowbar system is not physically modeled but instead represented by
 multiplying the current commands by zero for a certain period of time
 when the voltage module’s derivative goes beyond a certain threshold
@@ -1380,7 +1380,7 @@ when the voltage module’s derivative goes beyond a certain threshold
 
 <div id="tbl-parametersGenSys3a">
 
-Table 25: Parameters of Type 3A Generator System, based on [1] and
+Table 25: Parameters of Type 3A Generator System, based on [1] and
 [7]
 </div>
 
@@ -1397,7 +1397,7 @@ Table 25: Parameters of Type 3A Generator System, based on [1] and
 
 <div id="tbl-parametersGenSys3a">
 
-Table 26: Parameters of Type 3B Generator System, based on [1] and
+Table 26: Parameters of Type 3B Generator System, based on [1] and
 [7]
 </div>
 
@@ -1418,7 +1418,7 @@ Table 26: Parameters of Type 3B Generator System, based on [1] and
 
 <div id="tbl-inputsGensys">
 
-Table 27: Inputs, based on [1] and [5]
+Table 27: Inputs, based on [1] and [5]
 </div>
 
 | name                          | type    | unit | base                | description                       |
@@ -1435,7 +1435,7 @@ Table 27: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsGensys">
 
-Table 28: Outputs, based on [1]
+Table 28: Outputs, based on [1]
 </div>
 
 | name                          | type    | unit | base                | description                                                              |
@@ -1447,7 +1447,7 @@ Table 28: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXip">$$ 
 x_\mathrm{Ip} = P_\mathrm{ord\,0}/U_0
@@ -1493,7 +1493,7 @@ grid frequency.
 
 
 <div id="fig-measurementModule">
-Figure 17: Grid measurement module
+Figure 17: Grid measurement module
 
 </div>
 
@@ -1501,7 +1501,7 @@ Figure 17: Grid measurement module
 
 <div id="tbl-parametersMeasurement">
 
-Table 29: Parameters of measurement module, based on [1] and [7]
+Table 29: Parameters of measurement module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1520,7 +1520,7 @@ Table 29: Parameters of measurement module, based on [1] and [7]
 
 <div id="tbl-inputsMeasurement">
 
-Table 30: Inputs, based on [1]
+Table 30: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1534,7 +1534,7 @@ Table 30: Inputs, based on [1]
 
 <div id="tbl-outputsMeasurement">
 
-Table 31: Outputs, based on [1]
+Table 31: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1550,7 +1550,7 @@ Table 31: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXmeasp">$$
 x_\mathrm{meas\,p} = P_0
@@ -1581,13 +1581,13 @@ specific ranges of protection levels along with associated disconnection
 times.
 
 ![Grid protecton system module (timer: see
-<a href="#fig-generatorType3bTimer" class="quarto-xref">Figure 16</a>)](drawings/Grid_Protection.drawio.svg)
+<a href="#fig-generatorType3bTimer" class="quarto-xref">Figure 16</a>)](drawings/Grid_Protection.drawio.svg)
 
 #### Parameters
 
 <div id="tbl-parametersProtection">
 
-Table 32: Parameters of measurement module, based on [1] and [7]
+Table 32: Parameters of measurement module, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1608,7 +1608,7 @@ Table 32: Parameters of measurement module, based on [1] and [7]
 
 <div id="tbl-inputsProtection">
 
-Table 33: Inputs, based on [1]
+Table 33: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1621,7 +1621,7 @@ Table 33: Inputs, based on [1]
 
 <div id="tbl-outputsProtection">
 
-Table 34: Outputs, based on [1]
+Table 34: Outputs, based on [1]
 </div>
 
 | name             | type    | unit | base | description                         |
@@ -1636,15 +1636,15 @@ Table 34: Outputs, based on [1]
 
 
 <div id="fig-wp">
-Figure 18: Wind plant control and communictaion, based on [1]
+Figure 18: Wind plant control and communictaion, based on [1]
 
 </div>
 
 The Wind Plant (WP) model includes two controllers: active power /
 frequency controller
-(<a href="#fig-wpActivePower" class="quarto-xref">Figure 19</a>) and and
+(<a href="#fig-wpActivePower" class="quarto-xref">Figure 19</a>) and and
 reactive power / voltage control
-(<a href="#fig-wpReactivePower" class="quarto-xref">Figure 20</a>).
+(<a href="#fig-wpReactivePower" class="quarto-xref">Figure 20</a>).
 
 Both, the P and Q controllers, freeze their state variables during FRT.
 
@@ -1661,7 +1661,7 @@ controller.
 
 
 <div id="fig-wpActivePower">
-Figure 19: WPP P control module, based on [1]
+Figure 19: WPP P control module, based on [1]
 
 </div>
 
@@ -1672,7 +1672,7 @@ external reference changes [1].
 
 <div id="tbl-parametersWPP">
 
-Table 35: Parameters of WP P control, based on [1] and [7]
+Table 35: Parameters of WP P control, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1699,7 +1699,7 @@ Table 35: Parameters of WP P control, based on [1] and [7]
 
 <div id="tbl-inputsWPP">
 
-Table 36: Inputs, based on [1]
+Table 36: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1715,7 +1715,7 @@ Table 36: Inputs, based on [1]
 
 <div id="tbl-outputsWPP">
 
-Table 37: Outputs, based on [1]
+Table 37: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1726,7 +1726,7 @@ Table 37: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXwppref">$$
 x_\mathrm{WPPref} = P_\mathrm{WTRef\,0}
@@ -1742,7 +1742,7 @@ x_\mathrm{WPIp} = (1-K_\mathrm{WppRef})P_\mathrm{WTRef\,0}
 ![](drawings/WP_Q.drawio.svg)
 
 <div id="fig-wpReactivePower">
-Figure 20: WP Q control module, based on [1]
+Figure 20: WP Q control module, based on [1]
 
 </div>
 
@@ -1752,7 +1752,7 @@ account through the limitations in the WT model (Q limitation module).
 
 <div id="tbl-parametersWPQ">
 
-Table 38: Parameters of WP Q control, based on [1] and [7]
+Table 38: Parameters of WP Q control, based on [1] and [7]
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1786,7 +1786,7 @@ Table 38: Parameters of WP Q control, based on [1] and [7]
 
 <div id="tbl-inputsWPQ">
 
-Table 39: Inputs, based on [1]
+Table 39: Inputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1801,7 +1801,7 @@ Table 39: Inputs, based on [1]
 
 <div id="tbl-outputsWPQ">
 
-Table 40: Outputs, based on [1]
+Table 40: Outputs, based on [1]
 </div>
 
 | name | type | unit | base | description |
@@ -1813,7 +1813,7 @@ Table 40: Outputs, based on [1]
 #### Initial equations
 
 For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
 
 <span id="eq-initXuqfilt">$$
 x_\mathrm{uqfilt} = Q_0
@@ -1834,7 +1834,7 @@ x_\mathrm{PDrefRamprate} = \frac{Q_\mathrm{ord\,0}}{U_0}
 
 
 <div id="fig-wpCommunication">
-Figure 21: Linear communication delay module, example with 3 delayed
+Figure 21: Linear communication delay module, example with 3 delayed
 variables, based on [1]
 
 </div>
@@ -1843,7 +1843,7 @@ variables, based on [1]
 
 <div id="tbl-parametersLinearCommunictation">
 
-Table 41: Parameters of linear communication module, based on [1] and
+Table 41: Parameters of linear communication module, based on [1] and
 [7]
 </div>
 
@@ -1859,7 +1859,7 @@ Table 41: Parameters of linear communication module, based on [1] and
 
 <div id="tbl-inputsLinearCommunication">
 
-Table 42: Inputs, based on [1]
+Table 42: Inputs, based on [1]
 </div>
 
 | name                             | type  | unit | base | description          |
@@ -1871,7 +1871,7 @@ Table 42: Inputs, based on [1]
 
 <div id="tbl-outputsLinearCommunication">
 
-Table 43: Outputs, based on [1]
+Table 43: Outputs, based on [1]
 </div>
 
 | name                                   | type  | unit | base | description           |
