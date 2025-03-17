@@ -226,7 +226,7 @@ _ = plt.text(.745, .1, 'Zone 1', ha='right', va='top')
 
 </details>
 
-![](WindType3_files/figure-commonmark/fig-lookup-table-omega-pref-output-1.png)
+![](drawings/fig-lookup-table-omega-pref-output-1.png)
 
 
 <div id="fig-lookup-table-omega-pref">
