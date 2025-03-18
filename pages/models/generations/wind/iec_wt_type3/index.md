@@ -38,7 +38,7 @@ Wind Turbine
 ## Context
 
 This document refers to the IEC 61400-27-1 models which have been
-developed with the following specifications in mind [1]:
+developed with the following specifications in mind [[1]](#1):
 
 - Use in wind power plant models or standalone wind turbines
 
@@ -54,7 +54,7 @@ developed with the following specifications in mind [1]:
   - **Type 4:** Synchronous generator, grid-connected via a full-size
     power converter
 
-Other model considerations according to [1]:
+Other model considerations according to [[1]](#1):
 
 - Include over/under frequency and voltage protection for realistic WT
   disconnection modeling
@@ -63,12 +63,12 @@ Other model considerations according to [1]:
 - Phase-locked loop dynamics are not included in the models (they are
   modeled through a first order lag element)
 
-The IEC 61400-27-1 [1] defines one of the most widely used series of
+The IEC 61400-27-1 [[1]](#1) defines one of the most widely used series of
 RMS models for Wind Turbine (WT) generators, another one being the WECC
 model series, developed by EPRI.
 
 The models are separated in several sub systems. The information and
-drawings are taken from [1] [2] [3] [4] [5] [6].
+drawings are taken from [[1]](#1) [[2]](#2) [[3]](#3) [[4]](#4) [[5]](#5) [[6]](#6).
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -86,7 +86,7 @@ model of the unit. Also for some stability phenomena (e.g. resonance
 stability) this model is not sufficient and EMT models or other
 approaches may be necessary.
 
-Specifically, [1] defines the following validity domain:
+Specifically, [[1]](#1) defines the following validity domain:
 
 - positive sequence dynamics
 - transmission grid simulations
@@ -104,10 +104,10 @@ Specifically, [1] defines the following validity domain:
   power)
 - Simulation step width up to 1/4 fundamental frequency cycle (5 ms at
   50 Hz), which implies that the model Bandwidth cannot be above 15 Hz.
-- According to [2], the Type 3 WT model can operate with variable
+- According to [[2]](#2), the Type 3 WT model can operate with variable
   speed with slip values from -0.3 to +0.4.
 
-Vice versa, [1] states that the models are not intended for the
+Vice versa, [[1]](#1) states that the models are not intended for the
 following:
 
 - The models are not designed for long-term stability assessments.
@@ -130,52 +130,54 @@ following:
 
 ## Wind turbine type 3
 
-
 ![](drawings/WT_system.drawio.svg)
 
 
 <div id="fig-wtSystem">
-Figure 1: Wind turbine type 3 model, based on [1]
+Figure 1: Wind turbine type 3 model, based on <a href="#1">[1]</a>
 
 </div>
-<div id="fig-wtControlSubstructure">
+
 
 ![](drawings/WT_generator_control_substructure_type3.drawio.svg)
 
 
+<div id="fig-wtControlSubstructure">
 Figure 2: Wind turbine generator control sub-structure for Type 3A and
-3B WT, based on [1]
+3B WT, based on <a href="#1">[1]</a>
 
 </div>
 
 ### P control module
 
 For detailed assessment of the parameters’ impact on model behaviour,
-see [5].
+see <a href="#5">[5]</a>.
 
 
 ![](drawings/WT_P_control_type3.drawio.svg)
 
 
 <div id="fig-wtPControl">
-Figure 3: Wind turbine P control module (Type 3), based on [1]
+
+Figure 3: Wind turbine P control module (Type 3), based on <a href="#1">[1]</a>
 
 </div>
+
 
 <a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> shows the
 wind turbine active power control scheme.
 
 The control’s general behaviour is dominated by $$\omega(p)$$, a
 lookup-table that provides the angular velocity at which the turbine
-should rotate when it is injecting a certain active power [6]. A
+should rotate when it is injecting a certain active power [[6]](#6). A
 possible look-up table for this system is shown in
 <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>,
 which is representing example values from *DIgSILENT PowerFactory*
-[7].
+[[7]](#7).
 
 The power-speed-characteristic in
 <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>
-has four main operating zones according to [5]:
+has four main operating zones according to <a href="#5">[5]</a>:
 
 - **Zone 1:** The minimum rotational speed has been reached and hence
   cannot decrease further due to physical (component) limits, mainly
@@ -195,7 +197,7 @@ has four main operating zones according to [5]:
 > imply that, for simulations, the active power reference presents a
 > certain slope, offering more stable simulations. Under real control
 > conditions, this look-up table has two vertical lines, as shown by the
-> solid lines. [5]
+> solid lines. [[5]](#5)
 
 <details class="code-fold">
 <summary>Code</summary>
@@ -231,7 +233,7 @@ _ = plt.text(.745, .1, 'Zone 1', ha='right', va='top')
 
 <div id="fig-lookup-table-omega-pref">
 Figure 4: Lookup table for reference rotation speed as a function of WT
-active power; according to [5] and with data from [7] (see
+active power; according to <a href="#5">[5]</a> and with data from <a href="#5">[7]</a> (see
 <a href="#tbl-wtLookupTable" class="quarto-xref">Table 2</a>)
 
 </div>
@@ -243,7 +245,7 @@ The power-speed-characteristic’s speed reference output is then filtered
 >
 > The time constant $$T_\mathrm{\omega ref}$$ can be set to a very high
 > value to enforce a fixed reference rotational speed during the
-> simulation, which can be a desired operational mode. [5]
+> simulation, which can be a desired operational mode. [[5]](#5)
 
 The filtered speed reference $$\omega_\mathrm{ref}$$ is subtracted from
 the measured angular velocity $$\omega_\text{gen}$$ (generator speed) or
@@ -259,17 +261,17 @@ it won’t be able to efficiently filter that resonance from the signal.
 Alternatively, by setting $$M_\mathrm{\omega Tqpi}=\mathrm{true}$$, the
 rotor speed $$\omega_\mathrm{WTR}$$ can be used instead of the generator
 speed, which acts as a simpler way to determine a filtered value of
-$$\omega_\mathrm{gen}$$ [5].
+$$\omega_\mathrm{gen}$$ <a href="#5">[5]</a>.
 
 The speed error $$\omega_\mathrm{err}$$ is then given to the *Torque PI
 controller* (<a href="#fig-torquePi" class="quarto-xref">Figure 5</a>),
 which outputs the electromagnetic torque reference $$\tau_\mathrm{out}$$
-[6].
+[[6]](#6).
 
 Another input to the torque PI subsystem (see
 <a href="#sec-torque-pi" class="quarto-xref">Section 4.1.1</a>) is the
 maximum electromagnetic torque $$\tau_\mathrm{emax}$$. It is determined by
-calculating a torque value from [5]:
+calculating a torque value from <a href="#5">[5]</a>:
 
 - The reference power value $$p_\mathrm{WTref}$$, during voltage dips
   optionally scaled down by the terminal voltage $$u_\mathrm{WTC}$$ (if
@@ -281,7 +283,7 @@ calculating a torque value from [5]:
 
 After the torque PI controller, the electromagnetic torque reference
 $$\tau_\mathrm{out}$$ is multiplied by the generator’s rotational speed
-$$\omega_\mathrm{gen}$$ to obtain a power reference [6].
+$$\omega_\mathrm{gen}$$ to obtain a power reference <a href="#6">[6]</a>.
 
 To obtain the active current command $$i_\mathrm{pcmd}$$, $$p_\mathrm{ord}$$
 is divided by the measured voltage $$u_\mathrm{WTCfilt}$$.
@@ -290,7 +292,7 @@ To the active power order $$p_\mathrm{ord}$$ an additional component from
 the Drive Train Damping (DTD) system is added. Physically, the DTD
 provides an electrical torque that accounts for natural damping by
 considering speed differences between both low and high speed shafts
-(either side of the gearbox) [5]. It is modeled through a second-order
+(either side of the gearbox) [[5]](#5). It is modeled through a second-order
 transfer function as shown towards the bottom right of
 <a href="#fig-wtPControl" class="quarto-xref">Figure 3</a>:
 
@@ -300,7 +302,7 @@ $$
 
 As mentioned above, in this model the DTD is represented by an active
 power component, not a torque. The transfer function outputs an
-oscillating electrical power that has an efficient damping effect [5]
+oscillating electrical power that has an efficient damping effect [[5]](#5)
 (for parameters see
 <a href="#sec-wt-p-params" class="quarto-xref">Section 4.1.3</a>).
 
@@ -311,14 +313,14 @@ oscillating electrical power that has an efficient damping effect [5]
 
 
 <div id="fig-torquePi">
-Figure 5: Wind turbine torque PI block (Type 3), based on [1]
+Figure 5: Wind turbine torque PI block (Type 3), based on <a href="#1">[1]</a>
 
 </div>
 
 In <a href="#fig-torquePi" class="quarto-xref">Figure 5</a> the Torque
 PI Block can be seen. It acts as a PI-controller and is a subsystem of
 the active power control in
-<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> [6].
+<a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> <a href="#6">[6]</a>.
 
 For the calculation of the speed error input $$\omega_\mathrm{err}$$ and
 the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see
@@ -329,7 +331,7 @@ the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see
 The proportional controller part is realized by $$K_\mathrm{Pp}$$.
 
 The integral part of the controller output is the minimum of the
-following two signals [6]:
+following two signals [[6]](#6):
 
 - The output of the integral controller $$K_\mathrm{Ip}/K_\mathrm{Pp}$$
 - A torque value increasing as a ramp with rising rate
@@ -345,7 +347,7 @@ $$F_\mathrm{i}$$ steps to 1, the integer output $$F_\mathrm{o}$$ is 1 and a
 *timer* starts to run. As soon as $$F_\mathrm{i}$$ steps back to 0,
 $$F_\mathrm{o}$$ steps to 2 if the *timer* has not reached
 $$T_\mathrm{DVS}$$. Once the timer reaches $$T_\mathrm{DVS}$$,
-$$F_\mathrm{o}$$ steps back to 0. [1]
+$$F_\mathrm{o}$$ steps back to 0. <a href="#1">[1]</a>
 
 The delay flag block is used to implement the following fault signals:
 
@@ -366,7 +368,7 @@ These fault signals have the following functions:
     proportional controller part $$K_\mathrm{Pp}$$, to zero
   - changes the upper ramp rate limit of $$\tau_\mathrm{reset}$$ to
     $$\mathrm{d}\tau_\mathrm{maxUVRT}$$ (usually set to zero, preventing
-    $$\tau_\mathrm{reset}$$ from inceasing during fault) [6]
+    $$\tau_\mathrm{reset}$$ from inceasing during fault) <a href="#6">[6]</a>
 - $$F_\mathrm{freeze\,I}$$ freezes the integral controller part
   ($$K_\mathrm{Ip}/K_\mathrm{Pp}$$) while true.
 
@@ -381,13 +383,13 @@ $$\tau_\mathrm{uscale}$$ can be used to alter the power injection
 behaviour during fault and also the starting point for power recovery
 after post-fault. For example, setting it to zero results in zero power
 injection during fault. Higher values increase power injection, until
-the current limitation system begins to act. See [6] for further
+the current limitation system begins to act. See [[6]](#6) for further
 details.
 
 When $$F_\mathrm{reset}$$ returns to false, the proportional controller
 $$K_\mathrm{Pp}$$ will work again as before the fault. The integral
 controller will increase from $$\tau_\mathrm{reset}$$ to steady-state,
-with a maximum rate dictated by $$\mathrm{d}\tau_\mathrm{max}$$ [6].
+with a maximum rate dictated by $$\mathrm{d}\tau_\mathrm{max}$$ [[6]](#6).
 
 #### Variable limits integrator with set/reset and freeze
 
@@ -481,7 +483,7 @@ ruled by the parameter `DefaultLimitMax`: `y` is equal to either
 **set/reset**
 
 The integrator’s output is forced to the value of `set` while
-`reset=true`, as it is descibed in [1].
+`reset=true`, as it is descibed in [[1]](#1).
 
 When `reset` returns to false (=falling edge), the integrator’s state is
 reinitialized to set to resume integration without a jump discontinuity
@@ -495,12 +497,12 @@ set to zero.
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory* [7]
+Typical values were gathered from the *DIgSILENT PowerFactory* [[7]](#7)
 implementation of the model.
 
 <div id="tbl-parameters">
 
-Table 1: Parameters of WT P control module, based on [1], [5] and [7]
+Table 1: Parameters of WT P control module, based on <a href="#1">[1]</a>, <a href="#5">[5]</a> and <a href="#7">[7]</a>
 </div>
 
 | name                                  | type  | unit | base                                                        | description                                                                                                                                     | typical value                                                    |
@@ -510,11 +512,11 @@ Table 1: Parameters of WT P control module, based on [1], [5] and [7]
 | $$\mathrm{d}p_{\mathrm{refmin}}$$     | float | pu   | $$S_{\mathrm{base}} / \mathrm{s}$$                          | Minimum ramp rate for reference power of the wind turbine                                                                                       | -0.3                                                             |
 | $$\mathrm{d}\tau_{\mathrm{max}}$$     | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          | Torque ramp rate limit, as required by some grid codes                                                                                          | 0.25                                                             |
 | $$\mathrm{d}\tau_{\mathrm{maxUVRT}}$$ | float | pu   | $$T_{\mathrm{base}} / \mathrm{s}$$                          | Torque rise rate limit during UVRT                                                                                                              | 0                                                                |
-| $$K_{\mathrm{DTD}}$$                  | float | pu   | $$S_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Active drive train damping: gain                                                                                                                | 1.5 (or 0 if $$M_\mathrm{\omega Tqpi}=\mathrm{false}$$) [5]      |
+| $$K_{\mathrm{DTD}}$$                  | float | pu   | $$S_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Active drive train damping: gain                                                                                                                | 1.5 (or 0 if $$M_\mathrm{\omega Tqpi}=\mathrm{false}$$) [[5]](#5)      |
 | $$K_{\mathrm{Ip}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}} / \mathrm{s}$$ | Integrator time constant of the PI controller                                                                                                   | 5                                                                |
 | $$K_{\mathrm{Pp}}$$                   | float | pu   | $$T_{\mathrm{base}} / \Omega_{\mathrm{base}}$$              | Proportional gain of the PI controller                                                                                                          | 3                                                                |
 | $$M_\mathrm{\omega Tmax}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for maximum torque calculation $$(false: \omega_{\mathrm{WTR}} - true: \omega_{\mathrm{ref}})$$             | true                                                             |
-| $$M_\mathrm{\omega Tqpi}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for torque PI controller error calculation $$(false: \omega_{\mathrm{gen}} - true: \omega_{\mathrm{WTR}})$$ | true (or false if $$K_\mathrm{DTD}=0$$) [5]                      |
+| $$M_\mathrm{\omega Tqpi}$$            | bool  | \-   | \-                                                          | Mode for source of rotational speed for torque PI controller error calculation $$(false: \omega_{\mathrm{gen}} - true: \omega_{\mathrm{WTR}})$$ | true (or false if $$K_\mathrm{DTD}=0$$) [[5]](#5)                      |
 | $$M_{\mathrm{pUscale}}$$              | bool  | \-   | \-                                                          | Enable voltage scaling for power reference during a voltage dip (false: no scaling – true: u scaling)                                           | false                                                            |
 | $$M_{\mathrm{pUVRT}}$$                | bool  | \-   | \-                                                          | Mode for UVRT power control (false: reactive power control – true: voltage control)                                                             | true                                                             |
 | $$\omega_{\mathrm{DTD}}$$             | float | pu   | $$\Omega_{\mathrm{base}}$$                                  | Active drive train damping: frequency, derived from two-mass model parameters, see <a href="#eq-omegaDtd" class="quarto-xref">Equation 1</a>    | 11.3                                                             |
@@ -534,15 +536,18 @@ Table 1: Parameters of WT P control module, based on [1], [5] and [7]
 
 > [!NOTE]
 >
-> According to [1], using rotor speed instead of generator speed (by
+> According to [[1]](#1), using rotor speed instead of generator speed (by
 > setting $$M_\mathrm{\omega Tqpi} = true$$) is an easy way to filter the
 > speed measurement.
 
-<div id="tbl-wtLookupTable">
-
-Table 2: Typical values for lookup table $$\omega(p)$$, based on [7]
+Table 2: Typical values for lookup table $$ \omega(p) $$, based on [[7]](#7)
 implementation
-</div>
+
+<!--<div id="tbl-wtLookupTable">
+
+Table 2: Typical values for lookup table <span> \omega(p) </span>, based on [7]
+implementation
+</div>-->
 
 | $$p$$  | $$\omega(p)$$ |
 |:-----|:------------|
@@ -560,7 +565,7 @@ implementation
 
 <div id="tbl-inputsPControl">
 
-Table 3: Inputs, based on [1] and [5]
+Table 3: Inputs, based on <a href="#1">[1]</a> and <a href="#5">[5]</a>
 </div>
 
 | name                    | type  | unit | base                                                | description                                                                                                        |
@@ -579,7 +584,7 @@ Table 3: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsPControl">
 
-Table 4: Outputs, based on [1]
+Table 4: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                    | type  | unit | base                                                | description                                       |
@@ -661,14 +666,14 @@ x_\mathrm{KIpKPp\,0} =
 
 
 <div id="fig-QControlModule">
-Figure 6: Wind turbine Q control module, based on [1]
+Figure 6: Wind turbine Q control module, based on <a href="#1">[1]</a>
 
 </div>
 
 The WT Q Control Module consists of a normal path and a fast reactive
 current injection path, which acts during and some time after an event
 (voltage drop or rise). There are multiple possible operating modes for
-each path, described in detail in [8].
+each path, described in detail in [[8]](#8).
 
 Depending on the mode, $$x_\mathrm{WTref}$$ can be a voltage or reactive
 power setpoint.
@@ -676,7 +681,7 @@ power setpoint.
 The available control modes are listed in
 <a href="#tbl-qControlModesNormal" class="quarto-xref">Table 5</a> and
 <a href="#tbl-qControlModesFast" class="quarto-xref">Table 6</a>. The
-following descriptions have been based on [8] and [1].
+following descriptions have been based on <a href="#8">[8]</a> and <a href="#1">[1]</a>.
 
 For example in mode 1, the normal path consists of two cascaded
 Proportional-Integral (PI) controllers. The first one (reactive power
@@ -700,7 +705,7 @@ block).
 
 <div id="tbl-qControlModesNormal">
 
-Table 5: Q control normal path control modes, based on [1]
+Table 5: Q control normal path control modes, based on <a href="#1">[1]</a>
 </div>
 
 | $$M_\mathrm{qG}$$ | Description |
@@ -714,7 +719,7 @@ Table 5: Q control normal path control modes, based on [1]
 <div id="tbl-qControlModesFast">
 
 Table 6: Q control reactive current injection path control modes, based
-on [1]
+on <a href="#1">[1]</a>
 </div>
 
 | $$M_\mathrm{qFRT}$$ | During Fault | Post Fault |
@@ -729,7 +734,7 @@ on [1]
 
 <div id="tbl-parametersQControl">
 
-Table 7: Parameters of WT Q control, based on [1] and [7]
+Table 7: Parameters of WT Q control, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -766,7 +771,7 @@ Table 7: Parameters of WT Q control, based on [1] and [7]
 
 <div id="tbl-inputsQControl">
 
-Table 8: Inputs, based on [1] and [5]
+Table 8: Inputs, based on <a href="#1">[1]</a> and <a href="#5">[5]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -785,7 +790,7 @@ Table 8: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsQControl">
 
-Table 9: Outputs, based on [1]
+Table 9: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -820,7 +825,7 @@ x_\mathrm{uss\,0} = 0
 
 
 <div id="fig-WTQLim">
-Figure 7: WT Q limitation module, based on [1]
+Figure 7: WT Q limitation module, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -833,7 +838,7 @@ implement the generator’s capability curve.
 
 <div id="tbl-parametersWTQlim">
 
-Table 10: Parameters of Q limitation module, based on [1] and [7]
+Table 10: Parameters of Q limitation module, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -850,7 +855,7 @@ Table 10: Parameters of Q limitation module, based on [1] and [7]
 
 <div id="tbl-inputsWTQlim">
 
-Table 11: Inputs, based on [1]
+Table 11: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -864,7 +869,7 @@ Table 11: Inputs, based on [1]
 
 <div id="tbl-outputsWTQlim">
 
-Table 12: Outputs, based on [1]
+Table 12: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                 | type  | unit | base              | description               |
@@ -882,8 +887,7 @@ $$M_\mathrm{qpri}$$. Outside FRT, P-Priority is always active regardless
 of $$M_\mathrm{qpri}$$.
 
 Current is limited to the maximum admissible current $$i_\mathrm{max}$$.
-During FRT there is a separate maximum current value
-$$i_\mathrm{maxdip}$$.
+During FRT there is a separate maximum current value $$i_\mathrm{maxdip}$$.
 
 In addition to $$i_\mathrm{max}$$, Voltage Dependent Limits (VDL) are
 defined for active and reactive current components through the look-up
@@ -898,14 +902,14 @@ $$K_\mathrm{pqu}$$).
 The following
 <a href="#fig-currentLimCode" class="quarto-xref">Figure 9</a> shows a
 python inspired pseudo-code implementation of the the current limitation
-as shown in [8].
+as shown in <a href="#8">[8]</a>.
 
 
 ![](drawings/WT_CurrentLim.drawio.svg)
 
 
 <div id="fig-WTCurrentLim">
-Figure 8: Wind turbine current limitation, based on [1]
+Figure 8: Wind turbine current limitation, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -943,7 +947,7 @@ Figure 8: Wind turbine current limitation, based on [1]
 
 <div id="fig-currentLimCode">
 Figure 9: Python-inspired pseoudo code implementation of the current
-limitation block [8]
+limitation block <a href="#8">[8]</a>
 
 </div>
 
@@ -951,7 +955,7 @@ limitation block [8]
 
 <div id="tbl-parametersCurrentLim">
 
-Table 13: Parameters of current limitation module, based on [1] and [7]
+Table 13: Parameters of current limitation module, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -972,7 +976,7 @@ Table 13: Parameters of current limitation module, based on [1] and [7]
 
 <div id="tbl-inputsCurrentLim">
 
-Table 14: Inputs, based on [1]
+Table 14: Inputs, based on <a href="#1">[1]</a> 
 </div>
 
 | name | type | unit | base | description |
@@ -990,7 +994,7 @@ Table 14: Inputs, based on [1]
 
 <div id="tbl-outputsCurrentLim">
 
-Table 15: Outputs, based on [1]
+Table 15: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1010,7 +1014,7 @@ between generator rotor and WT rotor).
 
 
 <div id="fig-mechanicalModule">
-Figure 10: Wind turbine two mass mechanical module, based on [1]
+Figure 10: Wind turbine two mass mechanical module, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1018,7 +1022,7 @@ Figure 10: Wind turbine two mass mechanical module, based on [1]
 
 <div id="tbl-parametersMechanical">
 
-Table 16: Parameters of mechanical module, based on [1] and [9]
+Table 16: Parameters of mechanical module, based on <a href="#1">[1]</a> and <a href="#9">[9]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1035,7 +1039,7 @@ Table 16: Parameters of mechanical module, based on [1] and [9]
 
 <div id="tbl-inputsMechanical">
 
-Table 17: Inputs, based on [1]
+Table 17: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1048,7 +1052,7 @@ Table 17: Inputs, based on [1]
 
 <div id="tbl-outputsMechanical">
 
-Table 18: Outputs, based on [1]
+Table 18: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1084,7 +1088,7 @@ at a specific wind speed).
 
 <div id="fig-wtAerodynamic">
 Figure 11: Wind turbine two-dimensional aerodynamic module (Type 3),
-based on [1]
+based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1115,16 +1119,16 @@ term of $$\mathrm{d}p_{\omega}$$ and depends on the wind speed.
 
 The resulting change $$\Delta p_\mathrm{\omega}$$ of aerodynamic power
 depending on rotor speed is added to $$p_\mathrm{avail}$$ as well,
-resulting in the wind turbine aerodynamic power $$p_\mathrm{aero}$$ [3].
+resulting in the wind turbine aerodynamic power $$p_\mathrm{aero}$$ [[3]](#3).
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory* [7]
+Typical values were gathered from the *DIgSILENT PowerFactory* [[7]](#7)
 implementation of the model.
 
 <div id="tbl-parametersAero">
 
-Table 19: Parameters, based on [1]
+Table 19: Parameters, based on <a href="#1">[1]</a>
 </div>
 
 | name                                   | type  | unit | base                                                          | description                                                                                       | typical values |
@@ -1139,7 +1143,7 @@ Table 19: Parameters, based on [1]
 
 > [!NOTE]
 >
-> According to [1], for $$0 < p_\mathrm{avail} < 1$$ the pitch angle
+> According to [[1]](#1), for $$0 < p_\mathrm{avail} < 1$$ the pitch angle
 > should be zero. It should be greater than zero if
 > $$p_\mathrm{avail} = 1$$ or if the initial value of $$p_\mathrm{aero}$$ is
 > less than $$p_\mathrm{avail}$$.
@@ -1150,7 +1154,7 @@ Table 19: Parameters, based on [1]
 
 <div id="tbl-inputsAero">
 
-Table 20: Inputs, based on [1]
+Table 20: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                    | type  | unit | base                       | description              |
@@ -1163,7 +1167,7 @@ Table 20: Inputs, based on [1]
 
 <div id="tbl-outputsAero">
 
-Table 21: Outputs, based on [1]
+Table 21: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                | type  | unit | base | description                    |
@@ -1178,7 +1182,7 @@ Table 21: Outputs, based on [1]
 
 
 <div id="fig-wtPitchAngleControl">
-Figure 12: Wind turbine pitch angle module (Type 3), based on [1]
+Figure 12: Wind turbine pitch angle module (Type 3), based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1186,7 +1190,7 @@ The pitch angle control module is shown in
 <a href="#fig-wtPitchAngleControl" class="quarto-xref">Figure 12</a>. It
 uses two PI controllers to control the pitch angle $$\theta$$, one
 associated with rotor speed ($$K_\mathrm{I\omega}$$, $$K_\mathrm{P\omega}$$)
-and one with generator power ($$K_\mathrm{Ic}$$, $$K_\mathrm{Pc}$$) [2].
+and one with generator power ($$K_\mathrm{Ic}$$, $$K_\mathrm{Pc}$$) <a href="#2">[2]</a>.
 
 The outputs of both PI controllers are pitch angle setpoints
 ($$\theta_\mathrm{\omega}$$ and $$\theta_\mathrm{c}$$). They are kept inside
@@ -1204,23 +1208,23 @@ $$\mathrm{d}\theta_{\mathrm{min|max}}$$.
 
 The pitch angle rate of change plays a crucial role during power system
 faults since it avoids overspeeding during faults by controlling how
-fast the aerodynamic power is reduced [2].
+fast the aerodynamic power is reduced [[2]](#2).
 
 Since a Doubly-Fed Induction Generator (DFIG) turbine is already
 operating at rated rotor speed before reaching nominal wind speed, under
 certain conditions, the pitch ($$\theta$$ \> 0) could be activated even
 though the generated active power is lower than 1 pu. Therefore, the
 cross-coupling gain $$K_\mathrm{PX}$$ is used to modify the signal
-introduced into the rotor speed error [2].
+introduced into the rotor speed error [[2]](#2).
 
 #### Parameters
 
-Typical values were gathered from the *DIgSILENT PowerFactory* [7]
+Typical values were gathered from the *DIgSILENT PowerFactory* [[7]](#7)
 implementation of the model.
 
 <div id="tbl-parametersPitch">
 
-Table 22: Parameters, based on [1]
+Table 22: Parameters, based on <a href="#1">[1]</a>
 </div>
 
 | name                                      | type  | unit  | base                                                   | description                                              | typical values |
@@ -1251,7 +1255,7 @@ Table 22: Parameters, based on [1]
 
 <div id="tbl-inputsPitch">
 
-Table 23: Inputs, based on [1]
+Table 23: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                    | type  | unit | base                     | description                         |
@@ -1266,7 +1270,7 @@ Table 23: Inputs, based on [1]
 
 <div id="tbl-outputsPitch">
 
-Table 24: Outputs, based on [1]
+Table 24: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name       | type  | unit | base | description              |
@@ -1295,11 +1299,11 @@ x_\mathrm{Ic} = x_\mathrm{\theta c} = 0
 
 #### Description
 
-Two different models (3A and 3B) have been definded in the IEC [1],
+Two different models (3A and 3B) have been definded in the IEC [[1]](#1),
 depending on the FRT solution implemented for the WT.
 
 FRT implies large currents in the rotor and large power injected into
-the DC circuit of the converter [2]. Rotor and converter protection
+the DC circuit of the converter [[2]](#2). Rotor and converter protection
 against high currents and voltages is realized by a DC chopper and/or an
 AC crowbar circuit.
 
@@ -1314,9 +1318,9 @@ rotor’s windings short-circuited through the crowbar resistances. This
 way, overcurrents and -voltages are prevented but there is no control
 action by the converter on the rotor windings anymore and the generator
 acts like a conventional slip-ring induction machine (Type 1 machine)
-[4]. This leads to a delay on the delivery of voltage control
+[[4]](#4). This leads to a delay on the delivery of voltage control
 functionality as well as active and reactive power transients after
-fault inception and fault clearance [2].
+fault inception and fault clearance [[2]](#2).
 
 ##### Type 3A
 
@@ -1325,7 +1329,7 @@ fault inception and fault clearance [2].
 
 
 <div id="fig-generatorType3a">
-Figure 13: Wind turbine type 3A generator system model, based on [1]
+Figure 13: Wind turbine type 3A generator system model, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1341,14 +1345,14 @@ Because the stator is directly coupled to the grid in case of a DFIG, an
 abrupt voltage variation will cause a change in the reactive power flow.
 The addition/subtraction of $$u / x_\mathrm{eqv}$$ is added to simulate
 these electromagnetic transients (related to rotor flux derivative)
-[2] [6].
+[[2]](#2) [[6]](#6).
 
 The air-gap power $$p_\mathrm{ag}$$ is an additional output of the model,
 which is used as an input for the mechanical model in
 <a href="#fig-mechanicalModule" class="quarto-xref">Figure 10</a>.
 
 In this model a DC chopper is assumed. The model is not applicable for
-older DFIG systems that require a crowbar during grid faults ([3],
+older DFIG systems that require a crowbar during grid faults ([[3]](#3),
 p. 111).
 
 ##### Type 3B
@@ -1357,7 +1361,7 @@ p. 111).
 ![](drawings/WT_GS_3B.drawio.svg)
 
 <div id="fig-generatorType3b">
-Figure 14: Wind turbine type 3B generator system model, based on [1]
+Figure 14: Wind turbine type 3B generator system model, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1368,7 +1372,7 @@ In the model, as shown in
 crowbar system is not physically modeled but instead represented by
 multiplying the current commands by zero for a certain period of time
 when the voltage module’s derivative goes beyond a certain threshold
-[5].
+<a href="#5">[5]</a>.
 
 <div>
 
@@ -1380,8 +1384,8 @@ when the voltage module’s derivative goes beyond a certain threshold
 
 <div id="tbl-parametersGenSys3a">
 
-Table 25: Parameters of Type 3A Generator System, based on [1] and
-[7]
+Table 25: Parameters of Type 3A Generator System, based on <a href="#1">[1]</a> and
+<a href="#7">[7]</a>
 </div>
 
 | name                          | type  | unit | base                | description                                                            | typical value |
@@ -1397,8 +1401,8 @@ Table 25: Parameters of Type 3A Generator System, based on [1] and
 
 <div id="tbl-parametersGenSys3a">
 
-Table 26: Parameters of Type 3B Generator System, based on [1] and
-[7]
+Table 26: Parameters of Type 3B Generator System, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
+
 </div>
 
 | name                          | type    | unit | base                | description                                                                         | typical value                  |
@@ -1418,7 +1422,7 @@ Table 26: Parameters of Type 3B Generator System, based on [1] and
 
 <div id="tbl-inputsGensys">
 
-Table 27: Inputs, based on [1] and [5]
+Table 27: Inputs, based on <a href="#1">[1]</a> and <a href="#5">[5]</a>
 </div>
 
 | name                          | type    | unit | base                | description                       |
@@ -1435,7 +1439,7 @@ Table 27: Inputs, based on [1] and [5]
 
 <div id="tbl-outputsGensys">
 
-Table 28: Outputs, based on [1]
+Table 28: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                          | type    | unit | base                | description                                                              |
@@ -1501,7 +1505,7 @@ Figure 17: Grid measurement module
 
 <div id="tbl-parametersMeasurement">
 
-Table 29: Parameters of measurement module, based on [1] and [7]
+Table 29: Parameters of measurement module, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1520,7 +1524,7 @@ Table 29: Parameters of measurement module, based on [1] and [7]
 
 <div id="tbl-inputsMeasurement">
 
-Table 30: Inputs, based on [1]
+Table 30: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1534,7 +1538,7 @@ Table 30: Inputs, based on [1]
 
 <div id="tbl-outputsMeasurement">
 
-Table 31: Outputs, based on [1]
+Table 31: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1576,7 +1580,7 @@ x_\mathrm{meas\,f} = x_\mathrm{meas\,df} = 0
 
 The grid protection module offers protection against both over-voltage
 and under-voltage, as well as over-frequency and under-frequency
-conditions. As desribed in [1], this time-based grid protection has
+conditions. As desribed in [[1]](#1), this time-based grid protection has
 specific ranges of protection levels along with associated disconnection
 times.
 
@@ -1587,7 +1591,7 @@ times.
 
 <div id="tbl-parametersProtection">
 
-Table 32: Parameters of measurement module, based on [1] and [7]
+Table 32: Parameters of measurement module, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1608,7 +1612,7 @@ Table 32: Parameters of measurement module, based on [1] and [7]
 
 <div id="tbl-inputsProtection">
 
-Table 33: Inputs, based on [1]
+Table 33: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1621,7 +1625,7 @@ Table 33: Inputs, based on [1]
 
 <div id="tbl-outputsProtection">
 
-Table 34: Outputs, based on [1]
+Table 34: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name             | type    | unit | base | description                         |
@@ -1636,7 +1640,7 @@ Table 34: Outputs, based on [1]
 
 
 <div id="fig-wp">
-Figure 18: Wind plant control and communictaion, based on [1]
+Figure 18: Wind plant control and communictaion, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1649,7 +1653,7 @@ reactive power / voltage control
 Both, the P and Q controllers, freeze their state variables during FRT.
 
 The WP model controls one single Point of Common Coupling (PCC).
-According to [1] it is normally enough to use a single aggregated
+According to [[1]](#1) it is normally enough to use a single aggregated
 model for all WTs in a WP. Still, also large WP can be modeled by using
 multiple WT models which all get the same reference values from the WP
 controller.
@@ -1661,18 +1665,18 @@ controller.
 
 
 <div id="fig-wpActivePower">
-Figure 19: WPP P control module, based on [1]
+Figure 19: WPP P control module, based on <a href="#1">[1]</a>
 
 </div>
 
 The active power controller controls P as a function of frequency or
-external reference changes [1].
+external reference changes [[1]](#1).
 
 #### Parameters
 
 <div id="tbl-parametersWPP">
 
-Table 35: Parameters of WP P control, based on [1] and [7]
+Table 35: Parameters of WP P control, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1699,7 +1703,7 @@ Table 35: Parameters of WP P control, based on [1] and [7]
 
 <div id="tbl-inputsWPP">
 
-Table 36: Inputs, based on [1]
+Table 36: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1715,7 +1719,7 @@ Table 36: Inputs, based on [1]
 
 <div id="tbl-outputsWPP">
 
-Table 37: Outputs, based on [1]
+Table 37: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1742,17 +1746,17 @@ x_\mathrm{WPIp} = (1-K_\mathrm{WppRef})P_\mathrm{WTRef\,0}
 ![](drawings/WP_Q.drawio.svg)
 
 <div id="fig-wpReactivePower">
-Figure 20: WP Q control module, based on [1]
+Figure 20: WP Q control module, based on <a href="#1">[1]</a>
 
 </div>
 
 The reactive power controller can control power factor, reactive power,
-or voltage [1]. Reactive power capability limitations are taken into
+or voltage [[1]](#1). Reactive power capability limitations are taken into
 account through the limitations in the WT model (Q limitation module).
 
 <div id="tbl-parametersWPQ">
 
-Table 38: Parameters of WP Q control, based on [1] and [7]
+Table 38: Parameters of WP Q control, based on <a href="#1">[1]</a> and <a href="#7">[7]</a>
 </div>
 
 | name | type | unit | base | description | typical value |
@@ -1786,7 +1790,7 @@ Table 38: Parameters of WP Q control, based on [1] and [7]
 
 <div id="tbl-inputsWPQ">
 
-Table 39: Inputs, based on [1]
+Table 39: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1801,7 +1805,7 @@ Table 39: Inputs, based on [1]
 
 <div id="tbl-outputsWPQ">
 
-Table 40: Outputs, based on [1]
+Table 40: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name | type | unit | base | description |
@@ -1835,7 +1839,7 @@ x_\mathrm{PDrefRamprate} = \frac{Q_\mathrm{ord\,0}}{U_0}
 
 <div id="fig-wpCommunication">
 Figure 21: Linear communication delay module, example with 3 delayed
-variables, based on [1]
+variables, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1843,8 +1847,8 @@ variables, based on [1]
 
 <div id="tbl-parametersLinearCommunictation">
 
-Table 41: Parameters of linear communication module, based on [1] and
-[7]
+Table 41: Parameters of linear communication module, based on <a href="#1">[1]</a> and
+<a href="#7">[7]</a>
 </div>
 
 | name              | type  | unit | base | description        | typical value |
@@ -1859,7 +1863,7 @@ Table 41: Parameters of linear communication module, based on [1] and
 
 <div id="tbl-inputsLinearCommunication">
 
-Table 42: Inputs, based on [1]
+Table 42: Inputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                             | type  | unit | base | description          |
@@ -1871,7 +1875,7 @@ Table 42: Inputs, based on [1]
 
 <div id="tbl-outputsLinearCommunication">
 
-Table 43: Outputs, based on [1]
+Table 43: Outputs, based on <a href="#1">[1]</a>
 </div>
 
 | name                                   | type  | unit | base | description           |
@@ -1881,7 +1885,7 @@ Table 43: Outputs, based on [1]
 
 ## Base values
 
-The following base values are defined according to [1]:
+The following base values are defined according to [[1]](#1):
 
 <span id="eq-sBase">$$ 
 S_\mathrm{base} = 
@@ -1997,99 +2001,50 @@ This model has been successfully implemented in :
 
 ## Table of references
 
-<div id="refs" class="references csl-bib-body" entry-spacing="0">
 
-<div id="ref-iec2020" class="csl-entry">
+<a id="1">[1]</a> **IEC 61400-27-1** Wind Energy Generation Systems – Part 27 – Electrical simulation models – Generic models. Jul. 2020.
 
-<span class="csl-left-margin">[1]
-</span><span class="csl-right-inline">“IEC 61400-27-1 Wind Energy
-Generation Systems – Part27 – Electrical simulation models – Generic
-models.” Jul. 2020.</span>
-
-</div>
-
-<div id="ref-honrubia-escribano2018" class="csl-entry">
-
-<span class="csl-left-margin">[2]
-</span><span class="csl-right-inline">A. Honrubia-Escribano, E.
+<a id="2">[2]</a> A. Honrubia-Escribano, E.
 Gómez-Lázaro, J. Fortmann, P. Sørensen, and S. Martin-Martinez, “Generic
 dynamic wind turbine models for power system stability analysis: A
 comprehensive review,” *Renewable and Sustainable Energy Reviews*, vol.
 81, pp. 1939–1952, Jan. 2018, doi:
-[10.1016/j.rser.2017.06.005](https://doi.org/10.1016/j.rser.2017.06.005).</span>
+[10.1016/j.rser.2017.06.005](https://doi.org/10.1016/j.rser.2017.06.005).
 
-</div>
-
-<div id="ref-fortmann2014" class="csl-entry">
-
-<span class="csl-left-margin">[3]
-</span><span class="csl-right-inline">J. Fortmann, *Modeling of wind
+<a id="3">[3]</a> J. Fortmann, *Modeling of wind
 turbines with doubly fed generator system*. Wiesbaden: Springer Vieweg,
-2014. doi:
-[10.1007/978-3-658-06882-0](https://doi.org/10.1007/978-3-658-06882-0).</span>
+1. doi:
+[10.1007/978-3-658-06882-0](https://doi.org/10.1007/978-3-658-06882-0).
 
-</div>
-
-<div id="ref-fortmann2014a" class="csl-entry">
-
-<span class="csl-left-margin">[4]
-</span><span class="csl-right-inline">J. Fortmann, S. Engelhardt, J.
+<a id="4">[4]</a> J. Fortmann, S. Engelhardt, J.
 Kretschmann, C. Feltes, and I. Erlich, “New Generic Model of DFG-Based
 Wind Turbines for RMS-Type Simulation,” *IEEE Transactions on Energy
 Conversion*, vol. 29, no. 1, pp. 110–118, Mar. 2014, doi:
-[10.1109/TEC.2013.2287251](https://doi.org/10.1109/TEC.2013.2287251).</span>
+[10.1109/TEC.2013.2287251](https://doi.org/10.1109/TEC.2013.2287251).
 
-</div>
-
-<div id="ref-lorenzo-bonache2017" class="csl-entry">
-
-<span class="csl-left-margin">[5]
-</span><span class="csl-right-inline">A. Lorenzo-Bonache, A.
+<a id="5">[5]</a> A. Lorenzo-Bonache, A.
 Honrubia-Escribano, F. Jiménez-Buendía, Á. Molina-García, and E.
 Gómez-Lázaro, “Generic Type 3 Wind Turbine Model Based on IEC
 61400-27-1: Parameter Analysis and Transient Response under Voltage
 Dips,” *Energies*, vol. 10, no. 9, 9, p. 1441, Sep. 2017, doi:
-[10.3390/en10091441](https://doi.org/10.3390/en10091441).</span>
+[10.3390/en10091441](https://doi.org/10.3390/en10091441).
 
-</div>
-
-<div id="ref-lorenzo-bonache2019" class="csl-entry">
-
-<span class="csl-left-margin">[6]
-</span><span class="csl-right-inline">A. Lorenzo-Bonache, A.
+<a id="6">[6]</a> A. Lorenzo-Bonache, A.
 Honrubia-Escribano, J. Fortmann, and E. Gómez-Lázaro, “Generic Type 3 WT
 models: Comparison between IEC and WECC approaches,” *IET Renewable
 Power Generation*, vol. 13, no. 7, pp. 1168–1178, 2019, doi:
-[10.1049/iet-rpg.2018.6098](https://doi.org/10.1049/iet-rpg.2018.6098).</span>
+[10.1049/iet-rpg.2018.6098](https://doi.org/10.1049/iet-rpg.2018.6098).
 
-</div>
+<a id="7">[7]</a> DIgSILENT, “PowerFactory.” 2024.
+Available: <https://www.digsilent.de/>
 
-<div id="ref-digsilent2024" class="csl-entry">
-
-<span class="csl-left-margin">[7]
-</span><span class="csl-right-inline">DIgSILENT, “PowerFactory.” 2024.
-Available: <https://www.digsilent.de/></span>
-
-</div>
-
-<div id="ref-franke2024" class="csl-entry">
-
-<span class="csl-left-margin">[8]
-</span><span class="csl-right-inline">M. Franke, A. Guironnet, and C.
+<a id="8">[8]</a> M. Franke, A. Guironnet, and C.
 Cardozo, “Comparing IEC and WECC Generic Dynamic Models for Type 4 Wind
-Turbines,” 2024.</span>
+Turbines,” 2024.
 
-</div>
-
-<div id="ref-tsourakis2009" class="csl-entry">
-
-<span class="csl-left-margin">[9]
-</span><span class="csl-right-inline">G. Tsourakis, B. M. Nomikos, and
+<a id="9">[9]</a> G. Tsourakis, B. M. Nomikos, and
 C. D. Vournas, “Contribution of Doubly Fed Wind Generators to
 Oscillation Damping,” *IEEE Trans. Energy Convers.*, vol. 24, no. 3, pp.
 783–791, Sep. 2009, doi:
-[10.1109/TEC.2009.2025330](https://doi.org/10.1109/TEC.2009.2025330).</span>
+[10.1109/TEC.2009.2025330](https://doi.org/10.1109/TEC.2009.2025330).
 
-</div>
-
-</div>
