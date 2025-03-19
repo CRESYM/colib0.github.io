@@ -268,8 +268,7 @@ controller* (<a href="#fig-torquePi" class="quarto-xref">Figure 5</a>),
 which outputs the electromagnetic torque reference $$\tau_\mathrm{out}$$
 [[6]](#6).
 
-Another input to the torque PI subsystem (see
-<a href="#sec-torque-pi" class="quarto-xref">Section 4.1.1</a>) is the
+Another input to the torque PI subsystem (see section below) is the
 maximum electromagnetic torque $$\tau_\mathrm{emax}$$. It is determined by
 calculating a torque value from <a href="#5">[5]</a>:
 
@@ -303,8 +302,9 @@ $$
 As mentioned above, in this model the DTD is represented by an active
 power component, not a torque. The transfer function outputs an
 oscillating electrical power that has an efficient damping effect [[5]](#5)
-(for parameters see
-<a href="#sec-wt-p-params" class="quarto-xref">Section 4.1.3</a>).
+(for parameters see 
+<a href="#tbl-parameters" class="quarto-xref">Table 1</a>).
+
 
 #### Torque PI block
 
@@ -323,7 +323,7 @@ the active power control in
 <a href="#fig-wtPControl" class="quarto-xref">Figure 3</a> <a href="#6">[6]</a>.
 
 For the calculation of the speed error input $$\omega_\mathrm{err}$$ and
-the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see
+the maximum electromagnetic torque input $$\tau_\mathrm{emax}$$, see 
 <a href="#sec-wt-p-control" class="quarto-xref">Section 4.1</a>.
 
 **Proportional and integral parts of the controller**
