@@ -11,29 +11,16 @@ id: #62
 
 ## List Of Acronyms
 
-<span id="acronyms_DFIG">DFIG</span>  
-Doubly-Fed Induction Generator
 
-<span id="acronyms_FRT">FRT</span>  
-Fault Ride Through
-
-<span id="acronyms_GSC">GSC</span>  
-Grid Side Converter
-
-<span id="acronyms_PCC">PCC</span>  
-Point of Common Coupling
-
-<span id="acronyms_PD">PD</span>  
-Power Device
-
-<span id="acronyms_RSC">RSC</span>  
-Rotor Side Converter
-
-<span id="acronyms_WP">WP</span>  
-Wind Plant
-
-<span id="acronyms_WT">WT</span>  
-Wind Turbine
+|----------|-------------------------------------|
+| DFIG     | Doubly-Fed Induction Generator      |
+| FRT      | Fault Ride Through                  |
+| GSC      | Grid Side Converter                 |
+| PCC      | Point of Common Coupling            |
+| PD       | Power Device                        |
+| RSC      | Rotor Side Converter                |
+| WP       | Wind Plant                          |
+| WT       | Wind Turbine                        |
 
 ## Context
 
