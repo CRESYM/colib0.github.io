@@ -268,7 +268,7 @@ controller* (<a href="#fig-torquePi" class="quarto-xref">Figure 5</a>),
 which outputs the electromagnetic torque reference $$\tau_\mathrm{out}$$
 [[6]](#6).
 
-Another input to the torque PI subsystem (see section below) is the
+Another input to the torque PI subsystem (see [Torque PI block](#torque-pi-block)) is the
 maximum electromagnetic torque $$\tau_\mathrm{emax}$$. It is determined by
 calculating a torque value from <a href="#5">[5]</a>:
 
@@ -604,8 +604,8 @@ Table 4: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 The lookup-table $$\mathbf{\omega}(p)$$ is the same as described in
 <a href="#fig-lookup-table-omega-pref" class="quarto-xref">Figure 4</a>.
@@ -803,8 +803,8 @@ Table 9: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXiu">$$
 x_\mathrm{Iu\,0} = x_\mathrm{qord\,0} = Q_\mathrm{ord\,0}/U_\mathrm{0}
@@ -1063,8 +1063,8 @@ Table 18: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXwtr">$$
 x_\mathrm{WTR\,0} = x_\mathrm{gen\,0} = \omega_0
@@ -1280,8 +1280,8 @@ Table 24: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 For the used parameters of the aerodynamic module, see
 <a href="#sec-aerodynamic2d" class="quarto-xref">Section 4.6</a>
@@ -1450,8 +1450,8 @@ Table 28: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXip">$$ 
 x_\mathrm{Ip} = P_\mathrm{ord\,0}/U_0
@@ -1553,8 +1553,8 @@ Table 31: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXmeasp">$$
 x_\mathrm{meas\,p} = P_0
@@ -1729,8 +1729,8 @@ Table 37: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXwppref">$$
 x_\mathrm{WPPref} = P_\mathrm{WTRef\,0}
@@ -1816,8 +1816,8 @@ Table 40: Outputs, based on <a href="#1">[1]</a>
 
 #### Initial equations
 
-For the used initialization helper variables, see
-<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.
+For the used initialization helper variables, see [Operating point and initialization helpers](#operating-point-and-initialization-helpers)
+<!--<a href="#sec-initHelpersGlobal" class="quarto-xref">Section 7</a>.-->
 
 <span id="eq-initXuqfilt">$$
 x_\mathrm{uqfilt} = Q_0
