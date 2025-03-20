@@ -1484,7 +1484,7 @@ grid frequency.
 
 
 <div id="fig-measurementModule">
-Figure 17: Grid measurement module
+Figure 17: Grid measurement module, based on <a href="#1">[1]</a>
 
 </div>
 
@@ -1571,7 +1571,7 @@ conditions. As desribed in [[1]](#1), this time-based grid protection has
 specific ranges of protection levels along with associated disconnection
 times.
 
-![Grid protecton system module (timer: see
+![Grid protection system module, based on <a href="#1">[1]</a> (timer: see
 <a href="#fig-generatorType3bTimer" class="quarto-xref">Figure 16</a>)](drawings/Grid_Protection.drawio.svg)
 
 #### Parameters
