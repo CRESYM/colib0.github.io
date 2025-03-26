@@ -1,6 +1,6 @@
 ---
 layout: page
-title: OEL5C
+title: UEL1
 tags: ["Voltage regulator", "UEL1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "IEEE", "dynawo", "#236"]
 date: 08/10/2024
 last-updated: 09/10/2024
