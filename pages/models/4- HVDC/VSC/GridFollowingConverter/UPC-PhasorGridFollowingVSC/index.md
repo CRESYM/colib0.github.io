@@ -34,7 +34,12 @@ From this model, some approximations can be made to reduce the complexity of the
 
 The model can be described with the following schematic:
 
-![EMT GF VSC scheme](FullPhasor_GF_VSC.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'FullPhasor_GF_VSC.svg'}}"
+      alt="phasor GF VSC scheme"
+      style="float: center; margin-right: 10px; width: 650px;" />
+ </div>
+ 
 <div align = 'center'>
 Figure 1: Phasor Grid Following VSC scheme <a href="#2">[2]</a>
 </div>
@@ -86,7 +91,11 @@ $$ \omega = \frac{\theta_i - \theta_{i-1}}{\Delta t} $$
 
 This tracking, alongside the transformations mentioned in the previous section, can be represented by the following block diagram:
 
-![Angle Tracking Diagram](Phasor_qd0_GF.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'Phasor_qd0_GF.svg'}}"
+      alt="Angle Tracking Diagram"
+      style="float: center; margin-right: 10px; width: 500px;" />
+ </div>
 <div align = 'center'>
 Figure 2: Angle Tracking and dq0 Transformation Diagram 
 </div>
@@ -106,7 +115,12 @@ where $$\tau_{pll}$$ is the time constant of the PLL and $$\omega_{pll}$$ is the
 
 The same current control as in the EMT model is used to determine the converter voltage that has to be applied in order to maintain the current at the setpoint. The model uses the Internal Model Control method (IMC), described in [[7]](#7), which provides PI controllers tuned in terms of the machine parameters (in this case $$R$$ and $$L$$) with the desired response. The control is based on the following block diagram:
 
-![Current Control Diagram](CurrentControlDiagram.svg)
+
+ <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'CurrentControlDiagram.svg'}}"
+      alt="Current Control Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 3: Current Control Diagram <a href="#3">[3]</a>
 </div>
@@ -133,7 +147,11 @@ $$ \frac{i^{qd*}_c(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
 
 The following schematic represents the closed-loop block diagram for the current loop:
 
-![Current Error Diagram](CurrentErrorVSC_Phasor.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'CurrentErrorVSC_Phasor.svg'}}"
+      alt="Current Error Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 4: Current Error Diagram
 </div>
@@ -195,7 +213,11 @@ $$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^q} $$
 
 This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram shows the current setpoints output using the power setpoints:
 
-![Power Control Diagram](PowerLoopVSC.svg)
+ <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PowerLoopVSC.svg'}}"
+      alt="Power Control Diagram"
+      style="float: center; margin-right: 10px; height: 180px;" />
+ </div>
 <div align = 'center'>
 Figure 5: Power Control Diagram <a href="#3">[3]</a>
 </div>
@@ -203,8 +225,12 @@ Figure 5: Power Control Diagram <a href="#3">[3]</a>
 
 To determine the PI controller parameters, we include the current loop as the plant of the power loop, in order to obtain a response that accounts for the inner-loop dynamics. The following block diagram shows the complete power loop:
 
-![Power Control Diagram](ErrorPowerLoopVSC.svg)
-<div>
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'ErrorPowerLoopVSC.svg'}}"
+      alt="Power Control Diagram"
+      style="float: center; margin-right: 10px; height: 280px;" />
+ </div>
+ <div align = 'center'>
 Figure 6: Closed-Loop Power Control Diagram
 </div>
 <br>
@@ -247,7 +273,11 @@ The model presented can have some of its dynamics simplified in order to perform
 
 The following figure (which corresponds to Figure 6 of [[1]](#1)) depicts the performance for all these models compared to the EMT model in one particular scenario, in which the power setpoint tracking for $$P^*, Q^*$$ was studied:
 
-![Phasor models comparison](ErrorPlot_Phasor.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'ErrorPlot_Phasor.svg'}}"
+      alt="Phasor Models Comparison"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 7: Phasor Models Error Comparison <a href="#1">[1]</a>
 </div>
@@ -255,7 +285,11 @@ Figure 7: Phasor Models Error Comparison <a href="#1">[1]</a>
 
 As a summary, the Full-Phasor model is proven as a reliable although slower model. It is capable to solve with good accuracy the system for time step sizes that are outside the convergence range of the EMT model. The $$I_0$$ and $$I_1$$ Phasor models are able to reach convergence at bigger time steps with a decent accuracy (around $$10^3$$ $$\mu s$$), while the $$PQ_1$$ model is the fastest but with a good accuracy compared to the rest of the models for bigger time steps. Generally, choosing between one or other model depends on the time step size desired to use, rather than the type of study, as all the phasor models can work in a similar range of frequencies, as seen in the following figure:
 
-![Phasor Models Suitability](Phasor_suitability.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'Phasor_suitability.svg'}}"
+      alt="Phasor Models Suitability"
+      style="float: center; margin-right: 10px; width: 500px;" />
+ </div>
 <div align = 'center'>
 Figure 8: Phasor Models Suitability <a href="#1">[1]</a>
 </div>

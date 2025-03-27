@@ -34,7 +34,7 @@ The model is valid for high-frequency phenomena studies, such as short-circuit c
 The model can be described with the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/EMT_GFM_VSC.svg' | relative_url }}"
+<img src="{{ 'EMT_GFM_VSC.svg'}}"
      alt="EMT GF VSC scheme"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -107,7 +107,7 @@ $$ K_{\Delta P} = \frac{\Delta \omega}{\Delta P}$$
 where the droop constant $$K_{\Delta P}$$ is the slope of the droop curve, normally determined by grid codes in terms of the percentual variation of the frequency with respect to a variation of the active power. In addition to this droop control, it is common to apply a low-pass filter to the power measurement: $$\frac{1}{\tau_{\Delta P} s + 1}$$, with $$\tau_{\Delta P} = \frac{1}{\omega_{\Delta P}}$$ and $$\omega_{\Delta P}$$ the bandwith of the filter. This avoids having higher harmonics in the frequency signal. The block diagram of the synchronization loop is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/SynchronizationLoopGFM.svg' | relative_url }}"
+<img src="{{ 'SynchronizationLoopGFM.svg'}}"
      alt="Synchronization Loop Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -127,7 +127,7 @@ $$ K_{\Delta Q} = \frac{\Delta Q}{\Delta V} $$
 where the droop constant $$K_{\Delta Q}$$ is the slope of the droop curve. Again, the reactive power measurement is filtered to avoid including high-frequency harmonics, applying a low-pass filter with a bandwidth $$\omega_{\Delta Q}$$, and a time constant $$\tau_{\Delta Q} = \frac{1}{\omega_{\Delta Q}}$$. The block diagram of the reactive power droop control is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/ReactiveDroopGFM.svg' | relative_url }}"
+<img src="{{ 'ReactiveDroopGFM.svg'}}"
      alt="Reactive Power Droop Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -148,7 +148,7 @@ $$ J \frac{d\omega}{dt} = P_r^* - P_e - P_d$$
 where $$J$$ is the inertia of the machine, $$\omega$$ is the angular frequency of the machine, $$P_r^*$$ is the virtual input power (which emulates the mechanical power), and $$P_e$$ is the electrical power and $$P_d$$ is the damping power of the virtual machine. The input power is calculated as the sum of the setpoint power and the droop power deviation $$P_r^* = P^* + k_{\omega}(\omega^*-\omega)$$, the electrical power is the measure of the active power, and the damping power is obtained from simulating the damping using the relationship $$P_d = k_d (\omega - \omega_g)$$, where $$\omega_g$$ is the measure of the grid frequency, that has to be measured using a PLL, which can be the same as in the [Grid Following model](../EMTGridFollowingVSC/). The full control diagram is shown in the following figure:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/VSM_GFM.svg' | relative_url }}"
+<img src="{{ 'VSM_GFM.svg'}}"
      alt="VSM Diagram"
      style="float: center; margin-right: 10px; width: 850px;" />
 </div>
@@ -182,7 +182,7 @@ $$ \begin{bmatrix} \hat{i^d} \\ \hat{i^q} \end{bmatrix} = \begin{bmatrix} i^d_c 
 With the following block diagram representing the above relationship, and including a PI controller, forming the open-loop block diagram:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/VoltageControlGFM.svg' | relative_url }}"
+<img src="{{ 'VoltageControlGFM.svg'}}"
      alt="Voltage Control Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -203,7 +203,7 @@ $$ \frac{v^q_f}{\hat{i^q}} = \frac{1}{sC_f} $$
 with the following block diagram:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/VoltageErrorGFM.svg' | relative_url }}"
+<img src="{{ 'VoltageErrorGFM.svg'}}"
      alt="Voltage Closed-Loop Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>
@@ -254,7 +254,7 @@ $$ v_c^{qd*} - v_{f}^{qd} =\begin{bmatrix} R_f & L_f \omega\\ -L_f \omega & R_f 
 where $$\omega$$ is the angular frequency of the grid obtained in the synchronization loop, and $$v^{d*} = 0$$. The block diagram associated to this system is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/generations/Sources/VSC/EMTGridFormingVSC/CurrentControlGFM.svg' | relative_url }}"
+<img src="{{ 'CurrentControlGFM.svg'}}"
      alt="Current Control Diagram"
      style="float: center; margin-right: 10px; width: 700px;" />
 </div>

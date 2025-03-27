@@ -34,7 +34,11 @@ It is not useful to calculate unbalanced situation as the model is based on the 
 
 The model can be described with the following schematic:
 
-![EMT GF VSC scheme](EMT_GF_VSC_scheme.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'EMT_GF_VSC_scheme.svg'}}"
+      alt="EMT GF VSC scheme"
+      style="float: center; margin-right: 10px; width: 500px;" />
+ </div>
 <div align = 'center'>
 Figure 1: EMT Grid Following VSC scheme <a href="#1">[1]</a>
 </div>
@@ -96,7 +100,11 @@ As it can be seen, the Park transformation is dependent of the angle $$\hat{\the
 
 The goal of the PLL is to track the grid frequency and angle, as it is needed to establish the operating points of the converter using the control loops. The design of this controller is detailed in [[6]](#6). As stated earlier, when the voltage is synchronized with the reference frame (in this case, the grid), $$v_d = 0$$. To perform this tracking, the control applied considers a PI controller, yielding the following control structure:
 
-![PLL Control Diagram](PLL_ControlDiagram.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PLL_ControlDiagram.svg'}}"
+      alt="PLL Control Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 2: PLL Control Diagram <a href="#3">[3]</a>
 </div>
@@ -104,7 +112,12 @@ Figure 2: PLL Control Diagram <a href="#3">[3]</a>
 
 Using the Park transformation over the grid measured voltages, and assuming a small phase difference between the output of the converter and the grid voltage, the linearization $$ v^g_d = E_m \sin(\delta) \approx E_m \delta $$ can be applied in order to simplify the closed-loop transfer function for the tunning of the controller. $$E_m$$ is the peak value of the grid voltage and $$\delta = \theta - \hat{\theta}$$ is the angle difference between the measured and the reference frame angle. The linearized control structure is the following:
 
-![PLL Control Diagram](LinearPLLBlock.svg)
+
+ <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'LinearPLLBlock.svg'}}"
+      alt="PLL Control Diagram"
+      style="float: center; margin-right: 10px; width: 800px;" />
+ </div>
 <div align = 'center'>
 Figure 3: Linearized PLL Control Diagram 
 </div>
@@ -155,7 +168,11 @@ $$ v_{c}^{qd} - v_{g}^{qd} =\begin{bmatrix} R & L \omega\\ -L \omega & R \end{bm
 
 where $$\omega$$ is the angular frequency of the grid obtained in the PLL, and $$v_{g}^d = 0$$. The block diagram associated to this system is the following:
 
-![Current Control Diagram](CurrentControlDiagram.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'CurrentControlDiagram.svg'}}"
+      alt="Current Control Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 4: Current Control Diagram <a href="#3">[3]</a>
 </div>
@@ -186,7 +203,11 @@ $$ \frac{i^{qd}(s)}{\hat{v}^{qd}(s)} = \frac{1}{R + sL} $$
 
 The following schematic represents the closed-loop block diagram for the current loop:
 
-![Current Error diagram](CurrentErrorVSC.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'CurrentErrorVSC.svg'}}"
+      alt="Current Error Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 5: Current Error Diagram
 </div>
@@ -249,7 +270,11 @@ $$ i^{d*} = \frac{2}{3} \frac{Q^*}{v^d} $$
 
 This relationship can be used to calculate directly the current setpoint for a given value of $$v^q$$, which could be considered constant if the grid voltage is stable, or it can come directly from the voltage measurements. However, it is not robust when there are transient phenomena or perturbations in the grid voltage. To have a smoother response, a power loop is designed to control the current setpoints using a PI controller. The following block diagram represents the open-loop power control:
 
-![Power control diagram](PowerLoopVSC.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PowerLoopVSC.svg'}}"
+      alt="Power Control Diagram"
+      style="float: center; margin-right: 10px; height: 180px;" />
+ </div>
 <div align = 'center'>
 Figure 6: Power Control Diagram <a href="#3">[3]</a>
 </div>
@@ -257,7 +282,11 @@ Figure 6: Power Control Diagram <a href="#3">[3]</a>
 
 In order to tune the PI controller parameters, the closed-loop of the system is considered. In order to have the feedback loop, the power output is calculated including the current loop dynamics and the conversion from current to power using the instantaneous power theory. The following block diagram shows the complete power loop:
 
-![Power control diagram](ErrorPowerLoopVSC.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'ErrorPowerLoopVSC.svg' }}"
+      alt="Error power loop"
+      style="float: center; margin-right: 10px; height: 280px;" />
+ </div>
 <div align = 'center'>
 Figure 7: Closed-Loop Power Control Diagram
 </div>
@@ -288,7 +317,11 @@ The physical limitations of the converter have to be included in the modelling, 
 
 To avoid overshooting the current or voltages, an anti-windup control is added to the PI controllers present in the model. The proposed controller is based on the tracking of the difference between the output of the PI controller and the saturation limit [[10]](#10). The control signal is then modified to avoid the overshooting. The block diagram of the anti-windup control is the following:
 
-![Anti-windup control diagram](PI_antiwindup.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PI_antiwindup.svg' }}"
+      alt="Anti-Windup Control Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 8: Anti-Windup Control Diagram
 </div>
@@ -298,7 +331,11 @@ with a gain $$G$$ between 0 and 1.
 
 An alternative approach to implement this anti-windup control is detailed in [[11]](#11), where the integral part of the controller is substituted by a low-pass filter that follows the PI signal. The following block diagram shows the implementation of this alternative anti-windup control:
 
-![Anti-windup control diagram](PI_antiwindup_alternative.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PI_antiwindup_alternative.svg'}}"
+      alt="Anti-Windup Control Diagram"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 9: Alternative Anti-Windup Control Diagram
 </div>

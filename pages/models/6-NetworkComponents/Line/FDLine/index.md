@@ -87,7 +87,7 @@ The developed model assumes the following equivalent circuit:
 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/FDLine/FD_scheme.svg' | relative_url }}"
+<img src="{{ 'FD_scheme.svg'}}"
      alt="Equivalent circuit of the frequency dependent line"
      style="float: center; margin-right: 10px;" />
 </div>
@@ -151,7 +151,7 @@ Where the integral prior to the time $$\tau$$ is zero, since the weight function
 Since the terms $$b_S$$ and $$b_R$$ are obtained from historical values of voltages, they can be modelled as two voltage sources $$e_{S_h}$$ and $$e_{R_h}$$, obtaining the following equivalent circuit:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/FDLine/FDLine_ThevEquiv.svg' | relative_url }}"
+<img src="{{ 'FDLine_ThevEquiv.svg'}}"
      alt="FD Thevenin Equivalent Circuit of a transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
@@ -174,7 +174,7 @@ It can be converted into its Norton equivalent, as shown in the following schema
 
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/FDLine/FDLine_NortonEquiv.svg' | relative_url }}"
+<img src="{{ 'FDLine_NortonEquiv.svg'}}"
      alt="Norton Equivalent Circuit of a transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
