@@ -8,8 +8,6 @@ author: Urban Rudez
 reviewer: Mathilde Bongrain
 ---
 
-# Underfrequency load shedding protection scheme based on System frequency response model
-
 ## Context
 
 System frequency response model (SFRM) is useful for representing frequency behavior of an electric power system after a sudden power imbalance occurs. It was developed to average the dynamic behavior of multiple synchronous machines into an equivalent single-generator unit model. It filters out all inter-generator oscillations and provides the average electric power system frequency response. SFRM was first introduced in [1] and was utilized in several publications since then.
@@ -55,7 +53,7 @@ In Fig. 1, variables Δ*P* represent an initial power imbalance (usually a step-
  Apart from conventional UFLS algorithm, the model includes an innovative UFLS ([3], [4] intellectual property of University of Ljubljana, Slovenia), with two different types of settings.
 
 <figure style="text-align: center;">
-    <img src="{{ '/pages/models/protectionDevices/UFLS/Fig1_SFRM.jpg' | relative_url }}"
+    <img src="{{ 'Fig1_SFRM.jpg'}}"
     alt=""
     style="display: block; margin: auto;"/>
     <p style="text-align: center; font-family: Serif;"><b> Fig.1. System frequency response model (SFRM) linear transfer function with non-linear UFLS (LFDD) </b></p>
@@ -69,7 +67,7 @@ Conventional UFLS is designed to operate via activation of numerous frequency re
 - sum of all stage sizes.
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/models/protectionDevices/UFLS/Fig2_UFLS_in_subs.jpg' | relative_url }}"
+     <img src="{{ 'Fig2_UFLS_in_subs.jpg'}}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.2. Frequency relay designation to UFLS stages </b></p>
@@ -123,7 +121,7 @@ where:
 For understanding purposes, physical meaning of *M*(*t*) and its variation through time are represented graphically by Fig. 3. Fig. 3a depicts frequency response of an electric power system after negative power imbalance occurs at moment denoted with “event”, whereas *M*(*t*) at two instances *M*(*t*<sub>1</sub>) and *M*(*t*<sub>2</sub>) is shown in Fig. 3b.
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/models/protectionDevices/UFLS/Fig3_UFLS_inn.jpg' | relative_url }}"
+     <img src="{{ 'Fig3_UFLS_inn.jpg'}}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.3. Graphical representation of frequency-stability margin <i>M</i>(<i>t</i>) calculation (a) and <i>M</i>(<i>t</i>) variation through time (b) after a negative power imbalance occurs </b></p>
@@ -132,7 +130,7 @@ For understanding purposes, physical meaning of *M*(*t*) and its variation throu
 Frequency stability margin *M*(*t*) is transparently adopted to UFLS by depicting a trajectory of the operating point in the frequency *f*(*t*) versus frequency stability margin *M*(*t*) diagram (*f*-*M* plane). In Fig. 4a, several frequency response curves are depicted, among which red, black and blue are of interest. Red curve represents a stable case in which there is no need for UFLS activation. Black curve shows somewhat a borderline case in which frequency is indeed stabilized without UFLS, yet it reaches very low frequency values. A blue case is clearly unstable, meaning that UFLS activation is required. A corresponding three trajectories in *f*-*M* diagram are depicted in Fig. 4b, from which it is obvious that vicinity to lower-left hand side corner of the *f*-*M* diagram can be considered as a tripping criterion.
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/models/protectionDevices/UFLS/Fig4_fM_diag.jpg' | relative_url }}"
+     <img src="{{ 'Fig4_fM_diag.jpg'}}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.4. Different system frequency responses with respect to time (a) and corresponding trajectories in <i>f</i>-<i>M</i> plane (b) </b></p>
@@ -141,7 +139,7 @@ Frequency stability margin *M*(*t*) is transparently adopted to UFLS by depictin
 One has numerous possibilities for defining the shape of tripping curves in *f*-*M* plane. In the presented use cases, we apply three of them, depicted in Fig. 5. Horizontal tripping lines in Fig. 5a correspond to *M*-independent conventional UFLS, whereas L-shaped (Fig. 5b) or ellipse-shaped (Fig. 5c) tripping curves indicate two possibilities, that we find most useful for practical applications.
 
 <figure style="text-align: center;">
-     <img src="{{ '/pages/models/protectionDevices/UFLS/Fig5_UFLS_set.jpg' | relative_url }}"
+     <img src="{{ 'Fig5_UFLS_set.jpg'}}"
      alt="xx"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.5. UFLS setting in <i>f</i>-<i>M</i> plane: conventional (a), L-shaped UL-UFLS (b), ellipse-shaped UL-UFLS (c) </b></p>

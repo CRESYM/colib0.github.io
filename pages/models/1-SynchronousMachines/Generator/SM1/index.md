@@ -31,7 +31,11 @@ The resulting models will provide the complete set of dynamic equations of the s
 
 The following schematic shows the components that participate in the synchronous machine operation:
 
-![](SM1_model_scheme.svg)
+<p align="center">
+ <img src="{{'SM1_model_scheme.svg'}}"
+      alt="Operation of a Synchronous Machine schematic"
+      style="float: center; width: 600px;" />
+</p>
 <div style="text-align:center">
 Figure 1: Synchronous machine model schematic
 </div>
@@ -59,7 +63,11 @@ The field magnitude will remain constant value, with a value dependent on the ge
 It is the static part of the machine, as its name indicates. This structure gives physical support to the whole machine, while it typically contains the armature winding. It is a three-phase winding distributed in a circular cavity 120º apart one from each other. The uniform rotation of the magnetic field created by the rotor winding will generate currents at each winding 120º apart in the phasorial space. The instantaneous value for each phase is noted as $$i_a$$, $$i_b$$, and $$i_c$$. The following Figure [[2]](#2)
 shows the structure of the synchronous machine, including the windings.
 
-![](SM_rot_stat.svg)
+<p align="center">
+ <img src="{{'SM_rot_stat.svg'}}"
+      alt="Stator-rotor of a Synchronous Machine schematic"
+      style="float: center; width: 400px;" />
+ </p>
 <div style="text-align:center">
 Figure 2: Synchronous machine static part diagram
 </div>
@@ -231,8 +239,14 @@ These generated powers are limited by the heat limits of the components of the g
 
 The following charts show the capability and compound curves for different power factors[[1]](#1).
 
-![Capability curve of a Synchronous Generator](SM_CapCurve.svg)
-![Compound curves of a Synchronous Generator](SM_CompCurves.svg)
+<p float="center">
+ <img src="{{'SM_CapCurve.svg'}}"
+      alt="Capability curve of a Synchronous Generator"
+      width="350px"/>
+ <img src="{{'SM_CompCurves.svg'}}"
+      alt="Compound curves of a Synchronous Generator"
+      width="400px"/>
+ </p>
 <div style="text-align:center">
 Figures 5 and 6: Capability and compound curves of a synchronous machine
 </div>

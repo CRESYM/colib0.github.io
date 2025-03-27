@@ -38,7 +38,7 @@ It cannot be used to perform transient analysis, as it does not consider the tim
 There are two physical parts of the transformers relevant for the model described, as seen in the following schematic representation [[3]](#3):
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/Transformers/CantileverTransformer/Trafo_scheme.svg' | relative_url }}"
+<img src="{{ 'Trafo_scheme.svg'}}"
      alt="Transformer schematic representation"
      style="float: center; margin-right: 10px; width: 500px" />
 </div>
@@ -184,7 +184,7 @@ showing that the input power equals the output power. This is a result of the se
 The transformer can now be described with the following equivalent circuit, normally referred to as *equivalent-T circuit*, as an ideal transformer with external impedances that model all the losses:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/Transformers/CantileverTransformer/Tequiv_trafo.svg' | relative_url }}"
+<img src="{{ 'Tequiv_trafo.svg'}}"
      alt="T-equivalent circuit of a transformer"
      style="float: center; margin-right: 10px; width: 500px" />
 </div>
@@ -233,7 +233,7 @@ $$ v_{2}' = \frac{N_1}{N_2}v_{2} $$
 The equivalent-T circuit can be simplified by moving the shunt impedance to before the primary resistance and reactance, which enables the representation of both windings' impedance as a unified equivalent impedance. The error induced by displacing the shunt impedance is small, since it is only disregarding the voltage drop caused by the exciting current when passing through the primary impedance, and this current is much smaller than the primary current. The resulting equivalent circuit is called the *cantilever equivalent circuit*, which in this case is referred from the primary circuit, meaning that the secondary circuit quantities have to be rescaled using the transformation ratio. The following figure represents this equivalent circuit:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/Transformers/CantileverTransformer/cantilever.svg' | relative_url }}"
+<img src="{{ 'cantilever.svg'}}"
      alt="Cantilever equivalent circuit of a transformer"
      style="float: center; margin-right: 10px; width: 450px" />
 </div>

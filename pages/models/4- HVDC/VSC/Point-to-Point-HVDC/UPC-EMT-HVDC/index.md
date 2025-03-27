@@ -19,7 +19,7 @@ The model presented is valid to perform EMT simulations of an HVDC link, (a poin
 
 * There are two converters at both ends of the line. The model showcases a Grid Forming - Grid Following configuration (although there could be different configurations).
 * The DC line is represented by a resistance and one capacitor at each end that are useful for the transient stability of the line.
-* Each of the converters follows the same assumptions as in the individual models, available here: [EMT Grid Following](../../generations/Sources/VSC/EMTGridFollowingVSC/) and [EMT Grid Forming](../../generations/Sources/VSC/EMTGridFormingVSC/).
+* Each of the converters follows the same assumptions as in the individual models, available here: [EMT Grid Following](../../GridFollowingConverter/EMTGridFollowingVSC/) and [EMT Grid Forming](../../GridFormingConverter/UPC-EMTGridFormingVSC/).
 
 As all the EMTs model, it is not suitable for low-frequency studies, such as power flow or dynamic stability studies, as its computational cost is high, and the time step cannot be reduced too much without losing convergence. 
 
@@ -27,7 +27,11 @@ As all the EMTs model, it is not suitable for low-frequency studies, such as pow
 
 The equivalent circuit of this model is shown in the following figure:
 
-![HVDC scheme](HVDC_scheme.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'HVDC_scheme.svg'}}"
+      alt="HVDC scheme"
+      style="float: center; margin-right: 10px; width: 900px;" />
+ </div>
 <div align = 'center'>
 Figure 1: Equivalent circuit of the HVDC model
 </div>
@@ -76,14 +80,17 @@ Both converters follow the same control principles as the individual models, but
 
 #### Grid Forming
 
-The main controls of the [EMT Grid Forming converter](../../generations/Sources/VSC/EMTGridFormingVSC/) in the DC link are the same as in the isolated mode. In this case, instead of having an AC equivalent voltage source, there is a three-phase load or generator which can be modelled using the ZIP model (for instance, some possibilities would be a fixed impedance load, or a fixed power load/generator). Since there is no grid, the model proposed imposes directly the angle from a reference angular speed, without considering any droop control, as well as the voltage magnitude. This means that the AC side of the GFM converter acts as an ideal voltage source. Another possibility would consider an active power setpoint with a droop control for the frequency. Again, this showcases how the two degrees of freedom of the converter can be used to define the control.
+The main controls of the [EMT Grid Forming converter](../../GridFormingConverter/UPC-EMTGridFormingVSC/) in the DC link are the same as in the isolated mode. In this case, instead of having an AC equivalent voltage source, there is a three-phase load or generator which can be modelled using the ZIP model (for instance, some possibilities would be a fixed impedance load, or a fixed power load/generator). Since there is no grid, the model proposed imposes directly the angle from a reference angular speed, without considering any droop control, as well as the voltage magnitude. This means that the AC side of the GFM converter acts as an ideal voltage source. Another possibility would consider an active power setpoint with a droop control for the frequency. Again, this showcases how the two degrees of freedom of the converter can be used to define the control.
 
 #### Grid Following
 
 There are a few more changes in this case since it has to maintain a DC voltage level while exchanging power. Its control resembles the one in the [STATCOM model](../../CompensationDevices/STATCOM/), incorporating a DC voltage control over the standard Grid Following controls, but adding the DC power exchanged in the active power tracking. The modified setpoint tracking is shown in the following block diagram:
 
-![HVDC P control](PcontrolHVDC.svg)
-
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PcontrolHVDC.svg'}}"
+      alt="HVDC P control"
+      style="float: center; margin-right: 10px; width: 700px;" />
+ </div>
 <div align = 'center'>
 Figure 2: Active power control diagram of the HVDC model
 </div>

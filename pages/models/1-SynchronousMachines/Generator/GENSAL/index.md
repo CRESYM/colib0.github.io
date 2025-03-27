@@ -108,13 +108,19 @@ In order to have simpler equations for the salient poles machines (and simplify 
 
 The following diagram shows the convention for the reference frame as described in [[6]](#6), which is the most common convention used.
 
-![](../SM1/SMSalientPoleScheme.svg)
+<p align="center">
+ <img src="{{'SMSalientPoleScheme.svg'}}"
+      alt="Operation of a Synchronous Machine schematic"
+      style="float: center; width: 400px;" />
+ </p>
+ <div style="text-align:center">
 
 <div id="fig-modelSchema">
 
 Figure 4: Salient pole synchronous machine schematic
 
 </div>
+<br>
 
 As it can be seen, in addition to the field winding, the model considers three more windings $$(1d, 1q, 2q)$$ that act as dampers, and do not have electrical connections. The transformation for stator currents is the following:
 

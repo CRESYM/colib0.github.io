@@ -168,13 +168,15 @@ $$ X_{mdsat} I_{fd} = \left( X_{dsat} - X_l \right) I_{fd} = \frac{X_d - X_l}{Sa
 
 The following figure shows the block diagram for this GENQEC model [[2]](#2):
 
-![](GENQEC_blocks.svg)
-
-<div id="fig-modelSchema">
-
-Figure 1: Block diagram of the GENQEC model
-
-</div>
+<p align="center">
+ <img src="{{'GENQEC_blocks.svg'}}"
+      alt="Block diagram of the GENQEC model"
+      style="float: center; width: 600px;" />
+ </p>
+ <div style="text-align:center">
+ Figure 1: Block diagram of the GENQEC model
+ </div>
+ <br>
 
 ## Open source implementations
 

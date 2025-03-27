@@ -176,7 +176,7 @@ The distributed parameters line model considers the distribution of the impedanc
 Suppose a line with its circuit parameters $$z = r + jx$$ and $$ y = g + jb$$ calculated as the shown in the previous section. An infinitesimal section of the line, of length $$dx$$, can be represented by the following schematic:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/piLine/distLine.svg' | relative_url }}"
+<img src="{{ 'distLine.svg'}}"
      alt="Schematic of the distributed parameter transmission line"
      style="float: center; margin-right: 10px;" />
 </div>
@@ -279,7 +279,7 @@ $$
 The pi-equivalent circuit corresponds to a representation of the line with the line admittance equally lumped into the ends of the line. The equivalent circuit proposed is the following:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/models/lines/piLine/pi_eq_scheme.svg' | relative_url }}"
+<img src="{{ 'pi_eq_scheme.svg'}}"
      alt="pi-equivalent circuit of the lumped admittance transmission line"
      style="float: center; margin-right: 10px;" />
 </div>

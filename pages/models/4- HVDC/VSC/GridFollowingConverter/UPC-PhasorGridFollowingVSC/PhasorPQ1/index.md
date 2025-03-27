@@ -32,7 +32,11 @@ The error is considerably higher than any of the more complete models for smalle
 
 The diagram of the complete model is shown in the following figure.
 
-![Phasor Models Comparison](PhasorPQ1.svg)
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PhasorPQ1.svg'}}"
+      alt="Phasor Models Comparison"
+      style="float: center; margin-right: 10px; width: 600px;" />
+ </div>
 <div align = 'center'>
 Figure 1: Phasor-PQ1 Model Block Diagram <a href="#1">[1]</a>
 </div>

@@ -200,7 +200,9 @@ Again, the frequency factor can be added to the term $$I_q X_{qsat}''$$ and $$I_
 The following figure shows the block diagram for this GENTPJ model [[3]](#3):
 
 <p align="center">
-![](GENTPJ_blocks.png)
+<img src="{{'GENTPJ_blocks.png'}}"
+      alt="Block diagram of the GENTPJ model"
+      style="float: center; width: 600px;" />
 </p>
 <div style="text-align:center">
 Figure 1: Block diagram of the GENTPJ model

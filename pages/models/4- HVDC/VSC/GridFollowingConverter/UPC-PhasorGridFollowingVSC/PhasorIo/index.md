@@ -28,7 +28,12 @@ The model is valid for low-frequency phenomena studies, similarly to the Phasor-
 ## Model description
 
 The diagram of the complete model is shown in the following figure.
-![Phasor-I0 Model Block Diagram](PhasorI0.svg)
+
+<div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'PhasorI0.svg'}}"
+      alt="Phasor-I0 Model Block Diagram"
+      style="float: center; margin-right: 10px; width: 600px;" />
+ </div>
 <div align = 'center'>
 Figure 1: Phasor-I0 Model Block Diagram <a href="#1">[1]</a>
 </div>

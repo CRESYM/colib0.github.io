@@ -78,7 +78,11 @@ To maintain the level of voltage, the shunt element has to maintain the same $$Q
 
 The compensator is considered to be connected to the end of a transmission line at its voltage level $$\|V_R\|$$. The following schematic represents the simplified circuit:
 
-![Compensation scheme](Compdevice_scheme.svg)
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:center; vertical-align: middle; padding:4px 0;">
+ <img src="{{ 'Compdevice_scheme.svg'}}"
+      alt="Compensation scheme"
+      style="float: center; margin-right: 10px;" />
+ </div>
 <div align = 'center'>
 Figure 1: Compensation scheme
 </div>
