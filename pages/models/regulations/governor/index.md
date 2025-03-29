@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Governors
+title: Governors (GOV)
 tags: [Governor]
 ---
 
