@@ -14,38 +14,19 @@ id: #60
 The *Kundur two area system* is a test system for studies on dynamic
 stability, oscillations, damping, power exchange and other use cases. It
 is a widely used standard test case defined in Kundur’s *Power system
-stability and control* [1] (Fig. E12.8).
+stability and control* [[1]](#1) (Fig. E12.8).
 
 ## Table of references
 
-<div id="refs" class="references csl-bib-body" entry-spacing="0">
+<a id="1">[1]</a> P. Kundur, *Power System Stability
+and Control*. New York: McGraw-Hill Education Ltd, 1994.
 
-<div id="ref-kundur1994" class="csl-entry">
-
-<span class="csl-left-margin">[1]
-</span><span class="csl-right-inline">P. Kundur, *Power System Stability
-and Control*. New York: McGraw-Hill Education Ltd, 1994.</span>
-
-</div>
-
-<div id="ref-ramos2015" class="csl-entry">
-
-<span class="csl-left-margin">[2]
-</span><span class="csl-right-inline">R. Ramos and I. Hiskens,
+<a id="2">[2]</a> R. Ramos and I. Hiskens,
 “PES-TR18: Benchmark Systems for Small-Signal Stability Analysis and
-Control,” Aug. 2015.</span>
+Control,” Aug. 2015.
 
-</div>
-
-<div id="ref-shackshaft1979" class="csl-entry">
-
-<span class="csl-left-margin">[3]
-</span><span class="csl-right-inline">Shackshaft and Henser, “Model of
-generator saturation for use in power system studies.” Apr. 1979.</span>
-
-</div>
-
-</div>
+<a id="3">[3]</a> Shackshaft and Henser, “Model of
+generator saturation for use in power system studies.” Apr. 1979.
 
 ## Network ​description
 
@@ -54,16 +35,15 @@ generator saturation for use in power system studies.” Apr. 1979.</span>
 
 <div id="fig-two-area-system">
 
-Figure 1: Kundur’s two-area test system [1]
+Figure 1: Kundur’s two-area test system <a href="#1">[1]</a>
 
 </div>
 
 In <a href="#fig-two-area-system" class="quarto-xref">Figure 1</a> the
-test system is shown. As [1] describes it, it consists of two similar
+test system is shown. As [[1]](#1) describes it, it consists of two similar
 areas connected by a weak tie.
 
-The parameters are listed in
-<a href="#sec-data" class="quarto-xref">Section 5</a>. The system
+The parameters are listed in [Section 5](#input-data). The system
 consists of 11 buses connected by lines or transformers. There are 4
 generators G1…G4, two loads L7 and L9 as well as two shunt capacitors C7
 and C9.
@@ -93,10 +73,8 @@ scenario:
   - (with/without transient gain reduction (TGR) and/or power system
     stabilizer (PSS))
 
-For details on the scenarios, see
-<a href="#sec-scenarios" class="quarto-xref">Section 6</a>. The
-parameters are given in the tables of
-<a href="#sec-data" class="quarto-xref">Section 5</a>.
+For details on the scenarios, see [Section 6](#scenarios). The
+parameters are given in the tables of [Section 5](#input-data).
 
 ### Loads (static ZIP model)
 
@@ -127,7 +105,7 @@ Table 1: ZIP Load parameters
 | $$Z_\mathrm{q}$$ | Impedance coefficient for reactive power |
 
 
-In [1] it is stated that the active power should be modelled as
+In [[1]](#1) it is stated that the active power should be modelled as
 constant current and the reactive power as constant impedance: All
 coefficients can be set to zero except
 $$I_\mathrm{p} = Z_\mathrm{q} = 1$$.
@@ -168,10 +146,8 @@ Table 2: Synchronous machine parameters
 | $$X_\mathrm{q}'$$    | 0.55 pu                                            | $$U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}$$ |
 | $$X_\mathrm{q}''$$   | 0.25 pu                                            | $$U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}$$ |
 
-<div id="tbl-dc1a-parameters">
+Table 3: AVR DC1A parameters, see [[2]](#2)
 
-Table 3: AVR DC1A parameters, see [2]
-</div>
 
 | Parameter           | Value     | Description                           |
 |:--------------------|:----------|:--------------------------------------|
@@ -191,10 +167,9 @@ Table 3: AVR DC1A parameters, see [2]
 | $$V_\mathrm{R\,max}$$ | 5 pu      | Max. AVR output                       |
 | $$V_\mathrm{R\,min}$$ | -3 pu     | Min. AVR output                       |
 
-<div id="tbl-st1a-parameters">
 
-Table 4: AVR ST1A parameters, see [2]
-</div>
+Table 4: AVR ST1A parameters, see [[2]](#2)
+
 
 | parameter           | Value  | Description                               |
 |:--------------------|:-------|:------------------------------------------|
@@ -217,10 +192,9 @@ Table 4: AVR ST1A parameters, see [2]
 | $$V_\mathrm{R\,max}$$ | 4 pu   | Max. rectifier bridge output              |
 | $$V_\mathrm{R\,min}$$ | -4 pu  | Min. rectifier bridge output              |
 
-<div id="tbl-pss-parameters">
 
-Table 5: PSS parameters, see [2]
-</div>
+Table 5: PSS parameters, see [[2]](#2)
+
 
 | parameter           | Value    | Description                             |
 |:--------------------|:---------|:----------------------------------------|
@@ -287,7 +261,7 @@ Table 8: Load parameters
 
 ## Scenarios
 
-The following sceniarios are taken from [1] and [2], which are also
+The following sceniarios are taken from [[1]](#1) and [[2]](#2), which are also
 considered for reference results.
 
 The shown results are obtained from the Dyna$$\omega$$o Modelica
@@ -348,7 +322,7 @@ constant excitation.
 
 <a href="#fig-example-a-eigenvalues" class="quarto-xref">Figure 2</a>
 shows the result of an eigenvalue analysis of this system, compared to
-the reference values from [1]. The remaining differences probalby
+the reference values from [[1]](#1). The remaining differences probalby
 originate from differing model implementations of the synchronous
 machines in Dyna$$\omega$$ compared to the ones used by Kundur.
 
@@ -367,8 +341,8 @@ Figure 2: Eigenvalues of the system with constant excitation voltage
 >
 > To obtain a steady state initial condition, the exact values for the
 > generators active and reactive power and voltage angles from load flow
-> (<a href="#sec-loadflow" class="quarto-xref">Section 6.1</a>) need to
-> be used as initial values in the dynamic simulation.
+> [Section 6.1](#load-flow) need to be used as initial values in the dynamic 
+> simulation.
 
 > [!NOTE]
 >
@@ -376,25 +350,23 @@ Figure 2: Eigenvalues of the system with constant excitation voltage
 > constant $$T_\mathrm{R}$$ = 0.01 s, then the voltage measurement first
 > order lag and the field flux linkage $$\lambda_\mathrm{f}$$ oscillate
 > against each other with high amplitude. This is not represented in the
-> reference results of [2]. To avoid this behaviour, set
+> reference results of [[2]](#2). To avoid this behaviour, set
 > $$T_\mathrm{R} = 10^{-6}$$ s. This has been done for the Dyna$$\omega$$o
 > implementation.
 
 #### Part 1: Self-excieted dc exciter (DC1A)
 
-Instead of constant excitation voltage as in
-<a href="#sec-exampleA" class="quarto-xref">Section 6.2</a>, now the
+Instead of constant excitation voltage as in [Section 6.2](#example-a), now the
 self-excited DC exciter DC1A is used. For parameters, see
 <a href="#tbl-dc1a-parameters" class="quarto-xref">Table 3</a>.
 
-In [2] this case has not been taken into account for comparative
+In [[2]](#2) this case has not been taken into account for comparative
 analysis. Like there, it has not been investigated using the
 Dyna$$\omega$$o implementation.
 
 #### Part 2: Thyristor exciter (ST1A) with high transient gain
 
-Instead of constant excitation voltage as in
-<a href="#sec-exampleA" class="quarto-xref">Section 6.2</a>, now the
+Instead of constant excitation voltage as in [Section 6.2](#example-a), now the
 thyristor exciter ST1A is used. For parameters, see
 <a href="#tbl-dc1a-parameters" class="quarto-xref">Table 3</a>. It has
 high transient gain, i.e. no transient gain reduction.
@@ -403,7 +375,7 @@ The implementation in Dyna$$\omega$$o does not allow to set saturation
 parameters $$A_\mathrm{sat}$$ and $$B_\mathrm{sat}$$ as in
 <a href="#tbl-sm-parameters" class="quarto-xref">Table 2</a> because its
 synchronous machine model uses a different saturation model. Instead of
-the model from Kundur [1], the Shackshaft model [3] is used. To get
+the model from Kundur [[1]](#1), the Shackshaft model [[3]](#3) is used. To get
 the unstable pole close to the one in the Kundur reference, the
 Shackshaft parameters have been set to $$m_\mathrm{d}=1$$,
 $$m_\mathrm{q}=1$$, $$n_\mathrm{d}=9$$, $$n_\mathrm{q}=9$$.
@@ -419,15 +391,15 @@ Figure 3: Unstable eigenvalue of the system with exciter ST1A
 
 </div>
 
-As in [2], a steps to the synchronous machines’ voltege references
+As in [[2]](#2), a steps to the synchronous machines’ voltege references
 have been applied according to
 <a href="#tbl-example-b-steps" class="quarto-xref">Table 11</a>. Those
 were selected to excite the inter-area oscillation mode and the other
-electromechanical modes in the system [2].
+electromechanical modes in the system [[2]](#2).
 
 <div id="tbl-example-b-steps">
 
-Table 11: Voltage reference steps as in [2]
+Table 11: Voltage reference steps as in <a href="#2">[2]</a>
 </div>
 
 | Generator | Step of $$U_\mathrm{ref}$$ |
@@ -463,7 +435,7 @@ activated by setting $$T_\mathrm{A} = 1$$.
 Simlilarly to
 <a href="#sec-exampleB2" class="quarto-xref">Section 6.3.2</a>, the ST1A
 exciter is used. In this case, a power system stabilizer according to
-[1] (Figure 6-8) is activated and parameterized according to
+[[1]](#1) (Figure 6-8) is activated and parameterized according to
 <a href="#tbl-pss-parameters" class="quarto-xref">Table 5</a>.
 
 ## Open source implementations
