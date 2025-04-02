@@ -4,6 +4,9 @@ title: ST5C
 tags: ["Voltage regulator", "ST5C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEST5C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # Exc IEEE ST5C model
 
@@ -63,7 +66,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/ST5C/ST5C.drawio.svg" alt="ST5C diagram">
+![ST5C](/pages/models/regulations/avr/ST5C/ST5C.drawio.svg)
 
 ## Model variant
 

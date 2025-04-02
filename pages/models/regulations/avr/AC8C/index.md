@@ -4,6 +4,9 @@ title: AC8C
 tags: ["Voltage regulator", "AC8C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEAC8C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # Exc IEEE AC8C model
 
@@ -86,9 +89,9 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AC8C/AC8C.drawio.svg" alt="AC8C diagram">
+![AC8C](/pages/models/regulations/avr/AC8C/AC8C.drawio.svg)
 
-Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/avr/AcRotatingExciter/)
 
 ## Model variant
 

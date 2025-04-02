@@ -4,6 +4,9 @@ title: DC1C
 tags: ["Voltage regulator", DC1C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEDC1C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # Exc IEEE DC1C model
 
@@ -60,7 +63,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-![DC1C](/pages/models/regulations/DC1C/DC1C.drawio.svg)
+![DC1C](/pages/models/regulations/avr/DC1C/DC1C.drawio.svg)
 
 ## Model variant
 

@@ -1,0 +1,38 @@
+FNOM 50 ;
+
+SHUNT E E -160. 1 ;
+SHUNT C C  400. 1 ;
+
+# WP1, WP2 AND HDVC1 IN GRID FOLLOWING MODE (detailed model)
+
+#              	  name       bus    FP    FQ   P    Q     R      L      r     Snom    Rc      Xc      Kp     Ki   Tlpf    Kpp    Kip   Trlim  dPdt_min dPdt_max   Kpv    Kiv    
+INJEC  GFOL_det   WP1         E     1.    1.   0.   0.   0.005  0.12   1.05   2400.  0.005   0.12   0.4584   6.  0.0033   33.3   10.   0.002    -999.     0.5    0.0333  10.
+# tau   Vpllb  Vpllu   Imax    Vs1    Vs2    iqmax   vqswitch ;                                                      
+ 0.10    0.4    0.5   1.0    0.01   0.005    99.0      0     ;  Vs1=0.95  Vs2=0.5
+
+#              	  name       bus    FP    FQ   P    Q     R      L      r     Snom    Rc      Xc      Kp     Ki   Tlpf    Kpp    Kip   Trlim  dPdt_min dPdt_max   Kpv    Kiv 
+INJEC  GFOL_det   WP2         F     1.    1.   0.   0.   0.005  0.12   1.04   2400.  0.005   0.12   0.4584   6.  0.0033   33.3   10.   0.002    -999.     0.5    0.1667  50.  
+# tau   Vpllb  Vpllu   Imax    Vs1    Vs2    iqmax   vqswitch ;                                                       
+ 0.10    0.4    0.5  1.0    0.01   0.005    99.0      1     ;  Vs1=0.95  Vs2=0.5
+ 
+#              	  name       bus    FP    FQ   P    Q     R      L      r     Snom    Rc      Xc      Kp     Ki   Tlpf    Kpp    Kip   Trlim  dPdt_min dPdt_max  Kpv     Kiv    
+INJEC  GFOL_det   HVDC1       A     1.    1.   0.   0.   0.005  0.15   1.02   1200.  0.005   0.15   0.5730   6.  0.0033   33.3   10.   0.002    -999.    10.0    0.1667  50.  
+# tau   Vpllb  Vpllu   Imax    Vs1    Vs2    iqmax   vqswitch ;                                                      
+ 0.10    0.4    0.5   1.0    0.01   0.005    99.0      1     ;c
+
+# HVDC2 IN GRID FOLLOWING MODE (comment/uncomment according to configuration)
+
+#              	  name       bus    FP    FQ   P    Q     R      L      r     Snom    Rc      Xc      Kp     Ki   Tlpf    Kpp    Kip   Trlim  dPdt_min dPdt_max  Kpv     Kiv    
+#INJEC  GFOL_det   HVDC2       B     1.    1.   0.   0.   0.005  0.15   1.04   1700.  0.005   0.15   0.5730   6.  0.0033   33.3   10.   0.002    -999.    10.0    0.1667  50. 
+# tau   Vpllb  Vpllu   Imax    Vs1     Vs2    iqmax   vqswitch ;                                                      
+# 0.10    0.4    0.5    1.0    0.01   0.005   99.0      1     ;  Vs1=0.95  Vs2=0.5
+
+
+# HVDC2 IN GRID FORMING MODE (comment/uncomment according to configuration)
+
+#               name      bus    FP    FQ    P    Q    Rpr     Lpr   r    Snom    H     D     Kp      Tpll    R    Imax    Kcs    Tcs     
+INJEC    GFOR   HVDC2      B     1.    1.    0.   0.  0.005   0.15  1.04  1700.   5.    0.  0.01592   0.05    25.  1.000   2.05  0.000 ;    Kp=0.01592  D=300.  Kcs=2.05
+     
+# Thévenin equivalent
+
+INJEC THEVEQ  EQUIV  C  1. 1. 0. 0. 20000. ;

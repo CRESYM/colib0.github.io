@@ -313,16 +313,39 @@ $$ G_{c}(s) = K_p + \frac{K_i}{s} = \frac{L_f}{\tau_c} + \frac{R_f}{\tau_c s} $$
 
 ### Limitations of current
 
-The technical constraints of the VSC can be included in the controls using saturation blocks. Depending on the desired operation mode, the converter can be set to prioritize one of the current components. These operation modes are typically defined by the grid codes, although a possible implementation could be the following:
-
-* **Normal operation**: The converter will follow the $$i^q$$ component setpoint, prioritizing the active power, and then $$i^d$$ will be limited by the operational limits of the converter $$i^d_{max} = \sqrt{I_{max}^2 - \max{i^q, i^{q*}}} $$.
-* **Transient or fault operation**: The converter will now prioritize the $$i^d$$ component, which will follow its reference, and $$i^q_{max} = \sqrt{I_{max}^2 - \max{i^d, i^{d*}}^2} $$.
-
+The technical constraints of the VSC can be included in the controls using saturation blocks. In section 3.5 of the [EMT Grid Following Model](../EMTGridFollowingVSC/), there is an example of implementation of the anti-windup controls for the transformer.
 
 ### Modulation
 
 As in the [EMT Grid Following Model](../EMTGridFollowingVSC/), the converter voltage setpoint obtained can be considered directly the converter voltage, in what is called an Averaged Model, since it does not consider the switching process. However, a more complete EMT simulation will model the modulation performed to obtain the sinusoidal voltage from the DC source. The details can be consulted in Section 3.6 of the said model.
 
+## Parameter tuning
+
+The following table shows possible values for the parameters of the controllers using the tuning proposed:
+
+- **Static data for the lines**
+
+| Line/Cable  | Nominal Voltage (kV) |  R ($$\Omega$$) |  L ($$H$$)  |
+| ----------- | -------------------- | --------- | ---------- |
+| Converter - grid filter (grid connection)   |    $$2.45$$ kV              |   $$0.0326$$     | $$0.001038$$     |
+| Converter - capacitor (GFM)   |    $$2.45$$ kV              |   $$0.0048913$$     | $$0.00031139$$     |
+
+- **Control parameters**
+
+| Parameter | Value | Units |
+| --------- | ----- | ----- |
+| $$C$$     | $$1.63 \cdot 10^{-4}$$ |  F  |
+| $$\omega_n^{PLL}$$ | $$2\pi 1000$$ | rad/s |
+| $$\zeta^{PLL}$$ | $$0.707$$ | - |
+| $$K^{PLL}_p$$ | $$3.55$$ | - |
+| $$K^{PLL}_i$$ | $$1.58 \cdot 10^4$$ | - |
+| $$\tau^{PLL}$$ | $$0.225$$ | ms |
+| $$\tau^c$$ | $$1$$ | ms |
+| $$K^{icl}_p$$ | $$0.13494$$ | - |
+| $$K^{icl}_i$$ | $$100$$ | - |
+| $$K^{vcl}_p$$ | $$5$$ | - |
+| $$K^{vcl}_i$$ | $$500$$ | - |
+| $$K^{Droop}_p$$ | $$2\pi 50$$ | - |
 
 ## Open source implementations
 

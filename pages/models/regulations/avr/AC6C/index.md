@@ -4,6 +4,9 @@ title: AC6C
 tags: ["Voltage regulator", "AC6C", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcIEEEAC6C", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # Exc IEEE AC6C model
 
@@ -12,7 +15,7 @@ last-updated: 24/05/2024
 This model is part of the alternator supplied rectifier excitation systems that use an ac alternator and stationary or rotating rectifiers to produce generator field requirements.
 
 This voltage regulator model first appeared in the IEEE Std 421.5-2016 {% cite IEEEExciterModels2016 %}. It has been reproduced identically in the IEC 61970-302:2024 version {% cite IECCIMForDynamics2024 %}.
-In previous standard versions (1992, 2005), its predecessor model was called AC6A. Compared to AC6A, AC1C has additional options for connecting OEL and UEL inputs.
+In previous standard versions (1992, 2005), its predecessor model was called AC6A. Compared to AC6A, AC6C has additional options for connecting OEL and UEL inputs.
 
 ## Model use, assumptions, validity domain and limitations
 
@@ -76,9 +79,9 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/AC6C/AC6C.drawio.svg" alt="AC6C diagram">
+![AC6C](/pages/models/regulations/avr/AC6C/AC6C.drawio.svg)
 
-Where the AC rotating exciter model is modelled [here](/pages/models/regulations/AcRotatingExciter/)
+Where the AC rotating exciter model is modelled [here](/pages/models/regulations/avr/AcRotatingExciter/)
 
 ## Model variant
 

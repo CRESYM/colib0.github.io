@@ -4,6 +4,9 @@ title: PSS1A
 tags: ["Power system stabilizer", "PSS1A", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "PssIEEE1A", "IEEE", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # PSS1A model
 
@@ -47,7 +50,7 @@ SNom |Nominal apparent power|MVA (only if PGenPu is the input signal)|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/PSS1A/PSS1A.drawio.svg" alt="PSS1A diagram">
+![PSS1A](/pages/models/regulations/pss/PSS1A/PSS1A.drawio.svg)
 
 ## Open source implementations
 

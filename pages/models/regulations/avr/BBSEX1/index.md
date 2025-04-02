@@ -4,6 +4,9 @@ title: BBSEX1
 tags: ["Voltage regulator", "BBSEX1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "ExcBBC", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # BBSEX1 model
 
@@ -48,7 +51,7 @@ The output signal is EfdPu, the excitation voltage in pu (user-selected base vol
 
 ## Model diagram
 
-<img src="/pages/models/regulations/BBSEX1/BBSEX1.drawio.svg" alt="BBSEX1 diagram">
+![BBSEX1](/pages/models/regulations/avr/BBSEX1/BBSEX1.drawio.svg)
 
 ## Open source implementations
 

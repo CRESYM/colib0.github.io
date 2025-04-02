@@ -4,6 +4,9 @@ title: TGOV3
 tags: ["Governor", "TGOV3", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovSteamFV3", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # TGOV3 model
 
@@ -55,7 +58,7 @@ Uc |Maximum valve closing velocity |pu/s|
 
 ## Model diagram
 
-<img src="/pages/models/regulations/TGOV3/TGOV3.drawio.svg" alt="TGOV3 diagram">
+![TGOV3](/pages/models/regulations/governor/TGOV3/TGOV3.drawio.svg)
 
 ## Open source implementations
 

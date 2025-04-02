@@ -4,6 +4,9 @@ title: TGOV1
 tags: ["Governor", "TGOV1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovSteam0", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # TGOV1 model
 
@@ -43,7 +46,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model diagram
 
-<img src="/pages/models/regulations/TGOV1/TGOV1.drawio.svg" alt="TGOV1 diagram">
+![TGOV1](/pages/models/regulations/governor/TGOV1/TGOV1.drawio.svg)
 
 ## Open source implementations
 

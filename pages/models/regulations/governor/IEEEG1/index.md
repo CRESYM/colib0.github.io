@@ -1,9 +1,12 @@
 ---
 layout: page
-title: IEEEG1 GovSteam 1
+title: IEEEG1 / GovSteam 1
 tags: ["Governor", "IEEEG1", "generic", "Opensource", "CIM model", "RMS", "phasor", "MRL4", "Single phase", "GovSteam1", "IEC", "dynawo", "#106"]
 date: 05/04/2024
 last-updated: 24/05/2024
+id: #106
+authors: Erwan Guichard (DPS for RTE)
+reviewers: Mathilde Bongrain (CRESYM)
 ---
 # IEEEG1 model / GovSteam 1
 
@@ -64,7 +67,7 @@ The output signal is PmPu, the mechanical power in pu (base PNomTurb).
 
 ## Model diagram
 
-<img src="/pages/models/regulations/IEEEG1/IEEEG1.drawio.svg" alt="IEEEG1 diagram">
+![IEEEG1](/pages/models/regulations/governor/IEEEG1/IEEEG1.drawio.svg)
 
 ## Open source implementations
 
