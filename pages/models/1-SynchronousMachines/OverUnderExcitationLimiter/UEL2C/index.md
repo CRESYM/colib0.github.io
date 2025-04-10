@@ -79,7 +79,7 @@ The UEL lookup table is defined by 5 pairs (active power, reactive power) in pu,
 
 ## Model diagram
 
-![UEL2C](/pages/models/regulations/uel/UEL2C/UEL2C.drawio.svg)
+![UEL2C](UEL2C.drawio.svg)
 
 ## Open source implementations
 

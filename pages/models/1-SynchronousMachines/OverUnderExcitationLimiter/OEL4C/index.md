@@ -44,7 +44,7 @@ The output signal is UOelPu, the overexcitation limiter voltage in pu (base UNom
 
 ## Model diagram
 
-![OEL4C](/pages/models/regulations/oel/OEL4C/OEL4C.drawio.svg)
+![OEL4C](OEL4C.drawio.svg)
 
 ## Open source implementations
 

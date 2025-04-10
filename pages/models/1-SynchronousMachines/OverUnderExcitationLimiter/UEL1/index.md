@@ -52,7 +52,7 @@ The output signal is UUelPu, the underexcitation limiter voltage in pu (base UNo
 
 ## Model diagram
 
-![UEL1](/pages/models/regulations/uel/UEL1/UEL1.drawio.svg)
+![UEL1](UEL1.drawio.svg)
 
 ## Open source implementations
 

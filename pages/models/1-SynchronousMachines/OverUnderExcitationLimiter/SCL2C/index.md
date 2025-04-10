@@ -124,11 +124,11 @@ The parameter sets correspond to a stator current limitation output :
 
 ## Model diagram
 
-![SCL2C](/pages/models/regulations/scl/SCL2C/SCL2C.drawio.svg)
+![SCL2C](SCL2C.drawio.svg)
 
 The SCL reference current is calculated with the following model :
 
-![SclReferenceCurrent](/pages/models/regulations/scl/SCL2C/SclReferenceCurrent.drawio.svg)
+![SclReferenceCurrent](SclReferenceCurrent.drawio.svg)
 
 The SCL OEL activation logic has four inputs (on the left, from top to bottom, IOelActPu, tErr, IRefPu, at the top right corner, VtFiltPu) and one output (IOelBiasPu) calculated as follows :
 

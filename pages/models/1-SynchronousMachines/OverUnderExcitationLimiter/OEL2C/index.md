@@ -82,11 +82,11 @@ The parameter sets correspond to an overexcitation limitation output :
 
 ## Model diagram
 
-![OEL2C](/pages/models/regulations/oel/OEL2C/OEL2C.drawio.svg)
+![OEL2C](OEL2C.drawio.svg)
 
 The OEL reference current is calculated with the following model :
 
-![OelReferenceCurrent](/pages/models/regulations/oel/OEL2C/OelReferenceCurrent.drawio.svg)
+![OelReferenceCurrent](OelReferenceCurrent.drawio.svg)
 
 The OEL activation logic has three inputs (from top to bottom, IActPu, tErr, IRefPu) and one output (IBiasPu) calculated as follows :
 

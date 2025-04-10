@@ -67,7 +67,7 @@ The parameter sets correspond to an overexcitation limiter applied to :
 
 ## Model diagram
 
-![OEL5C](/pages/models/regulations/oel/OEL5C/OEL5C.drawio.svg)
+![OEL5C](OEL5C.drawio.svg)
 
 ## Open source implementations
 

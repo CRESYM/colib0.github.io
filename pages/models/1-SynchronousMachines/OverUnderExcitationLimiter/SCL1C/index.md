@@ -67,7 +67,7 @@ The parameter sets correspond to a stator current limitation :
 
 ## Model diagram
 
-![SCL1C](/pages/models/regulations/scl/SCL1C/SCL1C.drawio.svg)
+![SCL1C](SCL1C.drawio.svg)
 
 The input "ISclErrPu or 0" of the OEL switch is determined as follows :
 
