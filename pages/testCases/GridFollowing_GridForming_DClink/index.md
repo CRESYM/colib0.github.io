@@ -13,25 +13,24 @@ reviewers: Josep Fanals (eRoots)
 
 The following test case is used to study the behavior of a DC link using EMT simulations of the converters. There is a Voltage Source Converter at each side of the line, one operating in Grid Forming mode and the other operating in Grid Following mode. 
 
-The scenario presented simulates a DC interconnection between a grid and an isolated load. The Grid Following converter is at the grid side, and it controls the DC voltage level as well as the reactive power exchange of the link. The Grid Forming converter is at the load side, and it generates an AC voltage, controlling its amplitude and frequency. This combined control mode can be obtained following the rules described in the [HVDC model page](/pages/models/HVDC/EMTVSC). The Grid Forming's control is the only type I control (mode 1), while the Grid Following's is a type II (mode 4).
+The scenario presented simulates a DC interconnection between a grid and an isolated load. The Grid Following converter is at the grid side, and it controls the DC voltage level as well as the reactive power exchange of the link. The Grid Forming converter is at the load side, and it generates an AC voltage, controlling its amplitude and frequency. This combined control mode can be obtained following the rules described in the [HVDC model page](/pages/models/4-%20HVDC/VSC/Point-to-Point-HVDC/UPC-EMT-HVDC/index.md). The Grid Forming's control is the only type I control (mode 1), while the Grid Following's is a type II (mode 4).
 
 The studied scenario represents the dynamics during setpoint tracking operation. 
 
-
-## Table of references 
+## Table of references
 
 The references can be consulted in each model's page:
-- [Grid Forming VSC model](/pages/models/generations/Sources/VSC/EMTGridFormingVSC)
-- [Grid Following VSC model](/pages/models/generations/Sources/VSC/EMTGridFollowingVSC)
-- [HVDC model page](/pages/models/HVDC/EMTVSC/)
+- [Grid Forming VSC model](/pages/models/4-%20HVDC/VSC/GridFormingConverter/UPC-EMTGridFormingVSC/)
+- [Grid Following VSC model](/pages/models/4-%20HVDC/VSC/GridFollowingConverter/EMTGridFollowingVSC/)
+- [HVDC model page](/pages/models/4-%20HVDC/VSC/Point-to-Point-HVDC/UPC-EMT-HVDC/index.md)
 
-## Network ​description 
+## Network ​description
 
 The network is formed by two VSC in Grid Following - Grid Forming configuration, a symetric monopolar DC link, a three-phase voltage source representing the grid and a load. 
 
 
 <div style="background-color:rgba(0, 0, 0, 0); text-align:center; vertical-align: middle; padding:4px 0;">
-<img src="{{ '/pages/testCases/GridFollowing_GridForming_DClink/HVDC_scheme.svg' | relative_url }}"
+<img src="{{ 'HVDC_scheme.svg'}}"
      alt="HVDC scheme"
      style="float: center; margin-right: 10px; width: 900px;" />
 </div>
@@ -44,9 +43,9 @@ Figure 1: Circuit of the DC model test case studied.
 ## Static and Dynamic models​ description 
 
 - The grid is represented by ideal Voltage Sources.
-- The load is a constant impedance [ZIP load](/pages/models/loads/ZIPload/).
-- The Grid Following converter controls includes a DC Voltage regulation, similar to the controls described in the [STATCOM model](/pages/models/CompensationDevices/STATCOM).
-- The Grid Forming converter controls include a frequency and voltage regulation using the droop control approach described in the [Grid Forming VSC model](/pages/models/generations/Sources/VSC/EMTGridFormingVSC/).
+- The load is a constant impedance [ZIP load](/pages/models/2-Loads/ZIPLoad/).
+- The Grid Following converter controls includes a DC Voltage regulation, similar to the controls described in the [STATCOM model](/pages/models/3-CompensationAndFACTS/STATCOM/).
+- The Grid Forming converter controls include a frequency and voltage regulation using the droop control approach described in the [Grid Forming VSC model](/pages/models/4-%20HVDC/VSC/GridFormingConverter/UPC-EMTGridFormingVSC/).
 
 To avoid too much information on the same page, some links to the elements model's pages can be provided.
 
