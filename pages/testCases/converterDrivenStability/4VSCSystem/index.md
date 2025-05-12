@@ -30,7 +30,7 @@ This benchmark was originally proposed by Prof. Thierry Van Cutsem (formerly wit
 The one-line diagram is shown in the following figure (Fig.1):
 
 <figure>
-     <img src="{{ '/pages/testCases/converterDrivenStability/4VSCSystem/oneline.png' | relative_url }}"
+     <img src="{{ 'oneline.png'}}"
      alt="Four VSC system"
      style="float: center; margin-right: 10px;"/>
      <p style='text-align: center; font-family: Serif;'><b> Fig.1. one line diagram </b></p>
@@ -76,7 +76,7 @@ The line, cable, transformer and VSC parameters are given in Table 1, 2 and 3, r
 
 ## Dynamic models​
 
-A single dynamic model is used for all four [converters](/pages/models/generations/Sources/VSC/RMSGridFollowingVSC/) (though with a control variant for WP1 with respect to the other VSCs).
+A single dynamic model is used for all four [converters](/pages/models/4-%20HVDC/VSC/GridFollowingConverter/L2EP-RMSGridFollowingVSC/) (though with a control variant for WP1 with respect to the other VSCs).
 
 ## Operating points
 
