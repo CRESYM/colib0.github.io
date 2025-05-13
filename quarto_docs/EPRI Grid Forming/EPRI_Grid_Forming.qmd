@@ -1,0 +1,239 @@
+---
+title: "EPRI Grid Forming"
+author: 
+  - "Nils Wiese (Fraunhofer IEE)"
+  - "Martin Franke (Fraunhofer IEE)"
+  - "Saikrishna Vallabhaneni"
+bibliography: ./literature.bib
+csl: ../literature/ieee.csl
+keep-tex: true
+format:
+    html:
+        code-fold: false
+        toc: true
+        toc-title: "Table of contents"
+        number-sections: true
+    pdf:
+        tbl-colwidths: auto
+        toc: true
+        toc-depth: 3
+        toc-title: "Table of contents"
+        lof: true
+        lot: true
+        number-sections: true
+        papersize: a4
+        geometry:
+          - inner=2.5cm
+          - outer=2.5cm
+          - top=3cm
+          - bottom=4cm
+          - headsep=22pt
+          - headheight=11pt
+          - footskip=33pt
+          - ignorehead
+          - ignorefoot
+          - heightrounded
+    docx:
+        toc: true
+        number-sections: true
+    gfm:
+        html-math-method: plain
+        number-sections: false
+        toc: false
+
+---
+
+
+# Context 
+
+This model was developed by Electric Power Research Institute (EPRI) and provides a standardized approach for inverter based resources @epri2021.
+The original model is described in a report available [here](https://www.epri.com/research/products/000000003002021403).
+
+# Model use, assumptions, validity domain and limitations
+
+The model is a positive-sequence RMS model, hence it assumes symmetrical operating conditions and neglects high-frequency dynamics. This type of model is often used in large-scale stability studies, for which it reflects the relevant phenomena. It is not a detailed physical model of the unit. Also for some stability phenomena (e.g. resonance stability) this model is not sufficient and EMT models or other approaches may be necessary. A comparison against EMT is shown in the EPRI documentation. It is also available for [PSCAD](https://www.pscad.com/knowledge-base/download/PSCAD-EPRI-Generic-GFM.pdf).
+
+
+# Model description 
+
+## Difference between grid following and grid forming inverter 
+
+A grid-following inverter synchronizes with the power grid's voltage and frequency using a Phase-Locked Loop (PLL), which tracks the grid's phase angle and enables the inverter to adjust accordingly. In contrast, a grid-forming inverter can actively establish the grid's voltage and frequency, allowing it to create or stabilize the grid, particularly in situations where traditional grid infrastructure is weak or absent. Unlike grid-following inverters, grid-forming inverters do not rely on a PLL; instead, they can synchronize with the grid similarly to a synchronous generator. Several approaches can be found in literature, a subset of which is present in the EPRI model.
+
+## EPRI GFM operation modes
+The Generic EPRI GFM model offers four control modes:
+
+- Droop based, $\omega_\mathrm{flag}=1$, see @fig-droop_mode
+- Virtual Synchronous Machine (VSM), $\omega_\mathrm{flag}=2$, see @fig-vsm_mode
+- Dispatchable Virtual Oscillator (dVOC) based GFM, $\omega_\mathrm{flag}=3$, see @fig-dvoc_mode
+- Phase Locked Loop (Grid following mode), $\omega_\mathrm{flag}=0$, see @fig-pll_mode
+
+
+# Model schema
+The different control method diagrams of the GFM is shown below:
+
+  ![Droop mode diagram](./drawings/Droop_Mode.drawio.png){#fig-droop_mode}
+
+  ![VSM mode diagram](./drawings/VSM_Mode.drawio.png){#fig-vsm_mode}
+
+  ![dVOC mode diagram](./drawings/DVOC_Mode.drawio.png){#fig-dvoc_mode}
+
+  ![PLL mode diagram](./drawings/PLL_Mode.drawio.png){#fig-pll_mode}
+
+
+::: {.callout-note}
+The xy reference frame is the real-imaginary coordinate frame of the network, to which all voltage angles are typically referenced, while the dq reference frame functions as the coordinate system of the control. The relative angle between these two reference frames is represented by the control variable $\theta_\mathrm{inv}$.
+:::
+
+## D and q reference currents calculation
+
+![Calculation of d and q reference currents](./drawings/Grid_Forming.drawio.png){#fig-IdIqRefCalculation}
+
+
+# Parameters
+
+In @epri2021, per-unit parameters are based on the inverter's rated apparent power $S_\mathrm{r}$ in MVA with a default value of 100 MVA.
+
+| name                           | type  | unit | modelica name   | description                            | typical value                       |
+| :----------------------------- | :---- | :--- | :-------------- | :------------------------------------- | :---------------------------------- |
+| $\Delta\omega_\mathrm{max}$    | float | pu/s | DeltaOmegaMaxPu | Maximum frequency deviation            | 75.0/$\omega_\mathrm{base}$         |
+| $\Delta\omega_\mathrm{min}$    | float | pu/s | DeltaOmegaMinPu | Minimum frequency deviation            | -75.0/$\omega_\mathrm{base}$        |
+| $d_\mathrm{d}$                 | float | pu   | DD              | VSM damping factor                     | 0.11                                |
+| $K_\mathrm{1}$                 | float | pu   | K1              | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $K\mathrm{2}$                  | float | pu   | K2              | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $K_\mathrm{2}^{\mathrm{dvoc}}$ | float | pu   | K2Dvoc          | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $K_\mathrm{d}$                 | float | pu   | KD              | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $K_\mathrm{Ii}$                | float | pu   | KIi             | Current controller integral gain       | 20.0                                |
+| $K_\mathrm{Ip}$                | float | pu   | KIp             | Active power integral gain             | 20.0                                |
+| $K_\mathrm{Ipll}$              | float | pu   | KIPll           | PLL integral gain                      | 700.0                               |
+| $K_\mathrm{Iv}$                | float | pu   | KIv             | Voltage control integral gain          | see @tbl-controllerParams           |
+| $K_\mathrm{Pi}$                | float | pu   | KPi             | Current controller proportional gain   | 0.5                                 |
+| $K_\mathrm{Pp}$                | float | pu   | KPp             | Active power proportional gain         | 0.5                                 |
+| $K_\mathrm{Ppll}$              | float | pu   | KPPll           | PLL proportional gain                  | 20.0                                |
+| $K_\mathrm{Pv}$                | float | pu   | KPv             | Voltage control proportional gain      | see @tbl-controllerParams           |
+| $m_\mathrm{f}$                 | float | pu   | MF              | VSM inertia constant                   | 0.15                                |
+| $\omega_\mathrm{drp}$          | float | pu   | OmegaDroopPu    | Frequency droop                        | 0.033                               |
+| $\omega_\mathrm{flag}$         | int   | pu   | OmegaFlag       | GFM control type                       | 0-3                                 |
+| $PQ_\mathrm{flag}$             | bool  | pu   | PQflag          | Current priority                       | false: P priority; true: Q priority |
+| $Q_\mathrm{drp}$               | float | pu   | QDroopPu        | Voltage droop                          | 4.5                                 |
+| $R_\mathrm{f}$                 | float | pu   | RFilterPu       | Filter resistance                      | 0.0015                              |
+| $T_\mathrm{e}$                 | float | s    | tE              | Output state time constant             | 0.01                                |
+| $T\mathrm{f}$                  | float | s    | tF              | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $T_\mathrm{r}$                 | float | s    | tR              | Transducer time constant               | 0.005                               |
+| $T_\mathrm{v}$                 | float | s    | tV              | -- (depends on $\omega_\mathrm{flag}$) | see @tbl-controllerParams2          |
+| $V_\mathrm{dip}$               | float | pu   | UDipPu          | Freeze voltage in pu (base UNom)       | 0.8                                 |
+| $X_\mathrm{f}$                 | float | pu   | XFilterPu       | Filter reactance                       | 0.15                                |
+: Parameters {#tbl-parameters tbl-colwidths="[6,6,5,10,44,15]"}
+
+$\omega_\mathrm{base}$ is the nominal angular frequency in rad/s.
+
+| name            | $\omega_\mathrm{flag}=0$ | $\omega_\mathrm{flag} \neq  0$ |
+| --------------- | ------------------------ | ------------------------------ |
+| $K_\mathrm{Iv}$ | 150.0                    | 10.0                           |
+| $K_\mathrm{Pv}$ | 0.5                      | 3.0                            |
+: Voltage controller parameters depending on control mode {#tbl-controllerParams}
+
+
+| GFM Control | $K_\mathrm{d}$                    | $K_\mathrm{1}$              | $K_\mathrm{2}$            | $K_\mathrm{2}^{\mathrm{dVOC}}$ |
+| ----------- | --------------------------------- | --------------------------- | ------------------------- | ------------------------------ |
+| PLL         | 0.0                               | 0.0                         | 0.0                       | 0.0                            |
+| Droop       | 0.0                               | $\omega_\mathrm{drp}$       | $Q_\mathrm{drp}$          | 0.0                            |
+| VSM         | $d_\mathrm{d}\omega_\mathrm{drp}$ | $\omega_\mathrm{drp}$       | $Q_\mathrm{drp}$          | 0.0                            |
+| dVOC        | 0.0                               | $\omega_\mathrm{drp}/s_2^3$ | $\omega_\mathrm{drp}/s_3$ | see @eq-dvoc1                  |
+: Mode dependent paramaters  {#tbl-controllerParams2 tbl-colwidths="[20,10,10,10,10]"}
+
+
+$$
+\frac{K_2^{dvoc}}{\omega_{drp}} = \frac{4 \cdot 100^4}{100^4 - \left( 2 \cdot \left(100 - 100 \cdot Q_{drp}\right)^2 - 100^2 \right)^2}
+$$ {#eq-dvoc1}
+
+
+
+## Inputs
+
+| name                  | type    | unit | modelica name | description                               |
+| --------------------- | ------- | ---- | ------------- | ----------------------------------------- |
+| $I_\mathrm{x,y}$      | complex | pu   | iINjPu        | measured current in real/imag. quantities |
+| $\omega_\mathrm{ref}$ | float   | pu   | omegaRefPu    | speed reference (difference to nominal)   |
+| $P_\mathrm{aux}$      | float   | pu   | PAuxPu        | auxiliary active power                    |
+| $P_\mathrm{ref}$      | float   | pu   | PRefPu        | active power setpoint                     |
+| $Q_\mathrm{aux}$      | float   | pu   | QAuxPu        | auxiliary reactive power                  |
+| $Q_\mathrm{ref}$      | float   | pu   | QRefPu        | reactive power setpoint                   |
+| $V_\mathrm{ref}$      | float   | pu   | URefPu        | voltage setpoint                          |
+| $V_\mathrm{x,y}$      | complex | pu   | uINjPu        | measured voltage in real/imag. quantities |
+
+: Inputs {#tbl-inputs}
+
+## Outputs
+
+| name           | type  | unit | modelica name | description                     |
+| -------------- | ----- | ---- | ------------- | ------------------------------- |
+| $E_\mathrm{x}$ | float | pu   | UrSourcePu    | output voltage in real quantity |
+| $E_\mathrm{y}$ | float | pu   | UiSourcePu    | output voltage in imag quantity |
+: Outputs {#tbl-outputs}
+
+
+# Initial equations
+
+$$
+s_0 = P_\mathrm{ref}
+$$ {#eq-s0}
+
+$$
+s_1 = Q_\mathrm{ref}
+$$ {#eq-s1}
+
+
+$$ 
+s_2 = \theta_\mathrm{loadflow} 
+$$ {#eq-s2} 
+$$ 
+s_3 = V_\mathrm{ref}
+$$ {#eq-s3} 
+$$ 
+s_4 = \omega_\mathrm{grid} - \omega_\mathrm{base}
+$$ {#eq-s4} 
+$$ 
+s_5 = \theta_\mathrm{loadflow} 
+$$ {#eq-s5} 
+$$ 
+s_6 = E_\mathrm{q,loadflow} - v_\mathrm{q,loadflow} - i_\mathrm{q,loadflow}R_\mathrm{f} - i_\mathrm{d,loadflow}X_\mathrm{f}
+$$ {#eq-s6}
+$$ 
+s_7 = E_\mathrm{d,loadflow} - v_\mathrm{d,loadflow} - i_\mathrm{d,loadflow}R_\mathrm{f} + i_\mathrm{q,loadflow}X_\mathrm{f}
+$$ {#eq-s7}
+$$ 
+s_8 = E_\mathrm{q,loadflow} 
+$$ {#eq-s8} 
+$$ 
+s_9 = E_\mathrm{d,loadflow} 
+$$ {#eq-s9}
+
+$$ 
+s_{10} = i_\mathrm{q,loadflow} 
+$$ {#eq-s10}
+$$ 
+s_{11} = i_\mathrm{q,loadflow} 
+$$ {#eq-s11}
+$$ 
+s_{12} = i_\mathrm{d,loadflow}  
+$$ {#eq-s12} 
+$$ 
+s_{13} = i_\mathrm{d,loadflow} 
+$$ {#eq-s13}
+
+The index "loadflow" indicates that this is the solution of a loadflow.
+
+
+
+# Assumptions in modelica implementation (Open source implementations)
+
+
+In GFM mode the output angle is multiplied with the nominal angular freauency in rad/s ($\omega_\mathrm{base}$). 
+$\omega_\mathrm{ref}$ is set to zero as the whole model is already in real/imaginary quantities. In case of a speed reference change only the difference to nominal speed has to be given.
+
+# Table of references & license
+
+::: {#refs}
+:::
+

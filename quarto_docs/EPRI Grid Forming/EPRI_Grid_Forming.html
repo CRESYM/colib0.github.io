@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nils Wiese (Fraunhofer IEE)">
+<meta name="author" content="Martin Franke (Fraunhofer IEE)">
+<meta name="author" content="Saikrishna Vallabhaneni">
+
+<title>EPRI Grid Forming</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="EPRI_Grid_Forming_files/libs/clipboard/clipboard.min.js"></script>
+<script src="EPRI_Grid_Forming_files/libs/quarto-html/quarto.js"></script>
+<script src="EPRI_Grid_Forming_files/libs/quarto-html/popper.min.js"></script>
+<script src="EPRI_Grid_Forming_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="EPRI_Grid_Forming_files/libs/quarto-html/anchor.min.js"></script>
+<link href="EPRI_Grid_Forming_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="EPRI_Grid_Forming_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="EPRI_Grid_Forming_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="EPRI_Grid_Forming_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="EPRI_Grid_Forming_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context"><span class="header-section-number">1</span> Context</a></li>
+  <li><a href="#model-use-assumptions-validity-domain-and-limitations" id="toc-model-use-assumptions-validity-domain-and-limitations" class="nav-link" data-scroll-target="#model-use-assumptions-validity-domain-and-limitations"><span class="header-section-number">2</span> Model use, assumptions, validity domain and limitations</a></li>
+  <li><a href="#model-description" id="toc-model-description" class="nav-link" data-scroll-target="#model-description"><span class="header-section-number">3</span> Model description</a>
+  <ul class="collapse">
+  <li><a href="#difference-between-grid-following-and-grid-forming-inverter" id="toc-difference-between-grid-following-and-grid-forming-inverter" class="nav-link" data-scroll-target="#difference-between-grid-following-and-grid-forming-inverter"><span class="header-section-number">3.1</span> Difference between grid following and grid forming inverter</a></li>
+  <li><a href="#epri-gfm-operation-modes" id="toc-epri-gfm-operation-modes" class="nav-link" data-scroll-target="#epri-gfm-operation-modes"><span class="header-section-number">3.2</span> EPRI GFM operation modes</a></li>
+  </ul></li>
+  <li><a href="#model-schema" id="toc-model-schema" class="nav-link" data-scroll-target="#model-schema"><span class="header-section-number">4</span> Model schema</a>
+  <ul class="collapse">
+  <li><a href="#d-and-q-reference-currents-calculation" id="toc-d-and-q-reference-currents-calculation" class="nav-link" data-scroll-target="#d-and-q-reference-currents-calculation"><span class="header-section-number">4.1</span> D and q reference currents calculation</a></li>
+  </ul></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">5</span> Parameters</a>
+  <ul class="collapse">
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs"><span class="header-section-number">5.1</span> Inputs</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">5.2</span> Outputs</a></li>
+  </ul></li>
+  <li><a href="#initial-equations" id="toc-initial-equations" class="nav-link" data-scroll-target="#initial-equations"><span class="header-section-number">6</span> Initial equations</a></li>
+  <li><a href="#assumptions-in-modelica-implementation-open-source-implementations" id="toc-assumptions-in-modelica-implementation-open-source-implementations" class="nav-link" data-scroll-target="#assumptions-in-modelica-implementation-open-source-implementations"><span class="header-section-number">7</span> Assumptions in modelica implementation (Open source implementations)</a></li>
+  <li><a href="#table-of-references-license" id="toc-table-of-references-license" class="nav-link" data-scroll-target="#table-of-references-license"><span class="header-section-number">8</span> Table of references &amp; license</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="..\..\EPRI_Grid_Forming.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="EPRI_Grid_Forming.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="EPRI_Grid_Forming.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">EPRI Grid Forming</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nils Wiese (Fraunhofer IEE) </p>
+             <p>Martin Franke (Fraunhofer IEE) </p>
+             <p>Saikrishna Vallabhaneni </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="context" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Context</h1>
+<p>This model was developed by Electric Power Research Institute (EPRI) and provides a standardized approach for inverter based resources <span class="citation" data-cites="epri2021"><a href="#ref-epri2021" role="doc-biblioref">[1]</a></span>. The original model is described in a report available <a href="https://www.epri.com/research/products/000000003002021403">here</a>.</p>
+</section>
+<section id="model-use-assumptions-validity-domain-and-limitations" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Model use, assumptions, validity domain and limitations</h1>
+<p>The model is a positive-sequence RMS model, hence it assumes symmetrical operating conditions and neglects high-frequency dynamics. This type of model is often used in large-scale stability studies, for which it reflects the relevant phenomena. It is not a detailed physical model of the unit. Also for some stability phenomena (e.g.&nbsp;resonance stability) this model is not sufficient and EMT models or other approaches may be necessary. A comparison against EMT is shown in the EPRI documentation. It is also available for <a href="https://www.pscad.com/knowledge-base/download/PSCAD-EPRI-Generic-GFM.pdf">PSCAD</a>.</p>
+</section>
+<section id="model-description" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Model description</h1>
+<section id="difference-between-grid-following-and-grid-forming-inverter" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="difference-between-grid-following-and-grid-forming-inverter"><span class="header-section-number">3.1</span> Difference between grid following and grid forming inverter</h2>
+<p>A grid-following inverter synchronizes with the power grid’s voltage and frequency using a Phase-Locked Loop (PLL), which tracks the grid’s phase angle and enables the inverter to adjust accordingly. In contrast, a grid-forming inverter can actively establish the grid’s voltage and frequency, allowing it to create or stabilize the grid, particularly in situations where traditional grid infrastructure is weak or absent. Unlike grid-following inverters, grid-forming inverters do not rely on a PLL; instead, they can synchronize with the grid similarly to a synchronous generator. Several approaches can be found in literature, a subset of which is present in the EPRI model.</p>
+</section>
+<section id="epri-gfm-operation-modes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="epri-gfm-operation-modes"><span class="header-section-number">3.2</span> EPRI GFM operation modes</h2>
+<p>The Generic EPRI GFM model offers four control modes:</p>
+<ul>
+<li>Droop based, <span class="math inline">\(\omega_\mathrm{flag}=1\)</span>, see <a href="#fig-droop_mode" class="quarto-xref">Figure&nbsp;1</a></li>
+<li>Virtual Synchronous Machine (VSM), <span class="math inline">\(\omega_\mathrm{flag}=2\)</span>, see <a href="#fig-vsm_mode" class="quarto-xref">Figure&nbsp;2</a></li>
+<li>Dispatchable Virtual Oscillator (dVOC) based GFM, <span class="math inline">\(\omega_\mathrm{flag}=3\)</span>, see <a href="#fig-dvoc_mode" class="quarto-xref">Figure&nbsp;3</a></li>
+<li>Phase Locked Loop (Grid following mode), <span class="math inline">\(\omega_\mathrm{flag}=0\)</span>, see <a href="#fig-pll_mode" class="quarto-xref">Figure&nbsp;4</a></li>
+</ul>
+</section>
+</section>
+<section id="model-schema" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Model schema</h1>
+<p>The different control method diagrams of the GFM is shown below:</p>
+<div id="fig-droop_mode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-droop_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./drawings/Droop_Mode.drawio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-droop_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Droop mode diagram
+</figcaption>
+</figure>
+</div>
+<div id="fig-vsm_mode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vsm_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./drawings/VSM_Mode.drawio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vsm_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: VSM mode diagram
+</figcaption>
+</figure>
+</div>
+<div id="fig-dvoc_mode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dvoc_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./drawings/DVOC_Mode.drawio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dvoc_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: dVOC mode diagram
+</figcaption>
+</figure>
+</div>
+<div id="fig-pll_mode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pll_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./drawings/PLL_Mode.drawio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pll_mode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: PLL mode diagram
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The xy reference frame is the real-imaginary coordinate frame of the network, to which all voltage angles are typically referenced, while the dq reference frame functions as the coordinate system of the control. The relative angle between these two reference frames is represented by the control variable <span class="math inline">\(\theta_\mathrm{inv}\)</span>.</p>
+</div>
+</div>
+<section id="d-and-q-reference-currents-calculation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="d-and-q-reference-currents-calculation"><span class="header-section-number">4.1</span> D and q reference currents calculation</h2>
+<div id="fig-IdIqRefCalculation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-IdIqRefCalculation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./drawings/Grid_Forming.drawio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-IdIqRefCalculation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Calculation of d and q reference currents
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="parameters" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Parameters</h1>
+<p>In <span class="citation" data-cites="epri2021"><a href="#ref-epri2021" role="doc-biblioref">[1]</a></span>, per-unit parameters are based on the inverter’s rated apparent power <span class="math inline">\(S_\mathrm{r}\)</span> in MVA with a default value of 100 MVA.</p>
+<div id="tbl-parameters" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[6,6,5,10,44,15]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Parameters
+</figcaption>
+<div aria-describedby="tbl-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 44%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">modelica name</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">typical value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Delta\omega_\mathrm{max}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">rad/s</td>
+<td style="text-align: left;">DeltaOmegaMax</td>
+<td style="text-align: left;">Maximum frequency deviation</td>
+<td style="text-align: left;">75.0/<span class="math inline">\(\omega_\mathrm{base}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Delta\omega_\mathrm{min}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">rad/s</td>
+<td style="text-align: left;">DeltaOmegaMin</td>
+<td style="text-align: left;">Minimum frequency deviation</td>
+<td style="text-align: left;">-75.0/<span class="math inline">\(\omega_\mathrm{base}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(d_\mathrm{d}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">DD</td>
+<td style="text-align: left;">VSM damping factor</td>
+<td style="text-align: left;">0.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{1}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">K1Pu</td>
+<td style="text-align: left;">– (depends on <span class="math inline">\(\omega_\mathrm{flag}\)</span>)</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams2" class="quarto-xref">Table&nbsp;3</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K\mathrm{2}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">K2Pu</td>
+<td style="text-align: left;">– (depends on <span class="math inline">\(\omega_\mathrm{flag}\)</span>)</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams2" class="quarto-xref">Table&nbsp;3</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{2}^{\mathrm{dvoc}}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">K2DvocPu</td>
+<td style="text-align: left;">– (depends on <span class="math inline">\(\omega_\mathrm{flag}\)</span>)</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams2" class="quarto-xref">Table&nbsp;3</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Ii}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KIiPu</td>
+<td style="text-align: left;">Current controller integral gain</td>
+<td style="text-align: left;">20.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Ip}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KIpPu</td>
+<td style="text-align: left;">Active power integral gain</td>
+<td style="text-align: left;">20.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Ipll}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KIpllPu</td>
+<td style="text-align: left;">PLL integral gain</td>
+<td style="text-align: left;">700.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Iv}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KIvPu</td>
+<td style="text-align: left;">Voltage control integral gain</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams" class="quarto-xref">Table&nbsp;2</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Pi}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KPiPu</td>
+<td style="text-align: left;">Current controller proportional gain</td>
+<td style="text-align: left;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Pp}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KPpPu</td>
+<td style="text-align: left;">Active power proportional gain</td>
+<td style="text-align: left;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Ppll}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KPpllPu</td>
+<td style="text-align: left;">PLL proportional gain</td>
+<td style="text-align: left;">20.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{Pv}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">KPvPu</td>
+<td style="text-align: left;">Voltage control proportional gain</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams" class="quarto-xref">Table&nbsp;2</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(m_\mathrm{f}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">MF</td>
+<td style="text-align: left;">VSM inertia constant</td>
+<td style="text-align: left;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\omega_\mathrm{drp}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">OmegaDroopPu</td>
+<td style="text-align: left;">Frequency droop</td>
+<td style="text-align: left;">0.033</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\omega_\mathrm{flag}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">OmegaFlag</td>
+<td style="text-align: left;">GFM control type</td>
+<td style="text-align: left;">0-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(PQ_\mathrm{flag}\)</span></td>
+<td style="text-align: left;">bool</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">PQflag</td>
+<td style="text-align: left;">Current priority</td>
+<td style="text-align: left;">false: P priority; true: Q priority</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Q_\mathrm{drp}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">QDroopPu</td>
+<td style="text-align: left;">Voltage droop</td>
+<td style="text-align: left;">4.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(R_\mathrm{f}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">RFilterPu</td>
+<td style="text-align: left;">Filter resistance</td>
+<td style="text-align: left;">0.0015</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{e}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">s</td>
+<td style="text-align: left;">TE</td>
+<td style="text-align: left;">Output state time constant</td>
+<td style="text-align: left;">0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T\mathrm{f}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">TFPu</td>
+<td style="text-align: left;">– (depends on <span class="math inline">\(\omega_\mathrm{flag}\)</span>)</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams2" class="quarto-xref">Table&nbsp;3</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{r}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">s</td>
+<td style="text-align: left;">TR</td>
+<td style="text-align: left;">Transducer time constant</td>
+<td style="text-align: left;">0.005</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{v}\)</span></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">TVPu</td>
+<td style="text-align: left;">– (depends on <span class="math inline">\(\omega_\mathrm{flag}\)</span>)</td>
+<td style="text-align: left;">see <a href="#tbl-controllerParams2" class="quarto-xref">Table&nbsp;3</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{dip}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">VDipPu</td>
+<td style="text-align: left;">State freeze threshold</td>
+<td style="text-align: left;">0.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{f}\)</span></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">pu</td>
+<td style="text-align: left;">XFilterPu</td>
+<td style="text-align: left;">Filter reactance</td>
+<td style="text-align: left;">0.15</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><span class="math inline">\(\omega_\mathrm{base}\)</span> is the nominal angular frequency in rad/s.</p>
+<div id="tbl-controllerParams" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-controllerParams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Voltage controller parameters depending on control mode
+</figcaption>
+<div aria-describedby="tbl-controllerParams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 34%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th><span class="math inline">\(\omega_\mathrm{flag}=0\)</span></th>
+<th><span class="math inline">\(\omega_\mathrm{flag} \neq  0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(K_\mathrm{Iv}\)</span></td>
+<td>150.0</td>
+<td>10.0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(K_\mathrm{Pv}\)</span></td>
+<td>0.5</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-controllerParams2" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[20,10,10,10,10]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-controllerParams2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Mode dependent paramaters
+</figcaption>
+<div aria-describedby="tbl-controllerParams2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GFM Control</th>
+<th><span class="math inline">\(K_\mathrm{d}\)</span></th>
+<th><span class="math inline">\(K_\mathrm{1}\)</span></th>
+<th><span class="math inline">\(K_\mathrm{2}\)</span></th>
+<th><span class="math inline">\(K_\mathrm{2}^{\mathrm{dVOC}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PLL</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td>Droop</td>
+<td>0.0</td>
+<td><span class="math inline">\(\omega_\mathrm{drp}\)</span></td>
+<td><span class="math inline">\(Q_\mathrm{drp}\)</span></td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>VSM</td>
+<td><span class="math inline">\(d_\mathrm{d}\omega_\mathrm{drp}\)</span></td>
+<td><span class="math inline">\(\omega_\mathrm{drp}\)</span></td>
+<td><span class="math inline">\(Q_\mathrm{drp}\)</span></td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td>dVOC</td>
+<td>0.0</td>
+<td><span class="math inline">\(\omega_\mathrm{drp}/s_2^3\)</span></td>
+<td><span class="math inline">\(\omega_\mathrm{drp}/s_3\)</span></td>
+<td>see <a href="#eq-dvoc1" class="quarto-xref">Equation&nbsp;1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><span id="eq-dvoc1"><span class="math display">\[
+\frac{K_2^{dvoc}}{\omega_{drp}} = \frac{4 \cdot 100^4}{100^4 - \left( 2 \cdot \left(100 - 100 \cdot Q_{drp}\right)^2 - 100^2 \right)^2}
+\tag{1}\]</span></span></p>
+<section id="inputs" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="inputs"><span class="header-section-number">5.1</span> Inputs</h2>
+<div id="tbl-inputs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Inputs
+</figcaption>
+<div aria-describedby="tbl-inputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>type</th>
+<th>unit</th>
+<th>modelica name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(I_\mathrm{x,y}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>iINjPu</td>
+<td>measured current in real/imag. quantities</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\omega_\mathrm{ref}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>OmegaRefPu</td>
+<td>speed reference (difference to nominal)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P_\mathrm{aux}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>PAuxPu</td>
+<td>auxiliary active power</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_\mathrm{ref}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>PRefPu</td>
+<td>active power setpoint</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Q_\mathrm{aux}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>QAuxPu</td>
+<td>auxiliary reactive power</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Q_\mathrm{ref}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>QRefPu</td>
+<td>reactive power setpoint</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(V_\mathrm{ref}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>VRefPu</td>
+<td>voltage setpoint</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(V_\mathrm{x,y}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>uINjPu</td>
+<td>measured voltage in real/imag. quantities</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="outputs" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="outputs"><span class="header-section-number">5.2</span> Outputs</h2>
+<div id="tbl-outputs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-outputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Outputs
+</figcaption>
+<div aria-describedby="tbl-outputs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 19%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>type</th>
+<th>unit</th>
+<th>modelica name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(E_\mathrm{x}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>urScourePu</td>
+<td>output voltage in real quantity</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(E_\mathrm{y}\)</span></td>
+<td>float</td>
+<td>pu</td>
+<td>uiScourePu</td>
+<td>output voltage in imag quantity</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="initial-equations" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Initial equations</h1>
+<p><span id="eq-s0"><span class="math display">\[
+s_0 = P_\mathrm{ref}
+\tag{2}\]</span></span></p>
+<p><span id="eq-s1"><span class="math display">\[
+s_1 = Q_\mathrm{ref}
+\tag{3}\]</span></span></p>
+<p><span id="eq-s2"><span class="math display">\[
+s_2 = \theta_\mathrm{loadflow}
+\tag{4}\]</span></span> <span id="eq-s3"><span class="math display">\[
+s_3 = V_\mathrm{ref}
+\tag{5}\]</span></span> <span id="eq-s4"><span class="math display">\[
+s_4 = \omega_\mathrm{grid} - \omega_\mathrm{base}
+\tag{6}\]</span></span> <span id="eq-s5"><span class="math display">\[
+s_5 = \theta_\mathrm{loadflow}
+\tag{7}\]</span></span> <span id="eq-s6"><span class="math display">\[
+s_6 = E_\mathrm{q,loadflow} - v_\mathrm{q,loadflow} - i_\mathrm{q,loadflow}R_\mathrm{f} - i_\mathrm{d,loadflow}X_\mathrm{f}
+\tag{8}\]</span></span> <span id="eq-s7"><span class="math display">\[
+s_7 = E_\mathrm{d,loadflow} - v_\mathrm{d,loadflow} - i_\mathrm{d,loadflow}R_\mathrm{f} + i_\mathrm{q,loadflow}X_\mathrm{f}
+\tag{9}\]</span></span> <span id="eq-s8"><span class="math display">\[
+s_8 = E_\mathrm{q,loadflow}
+\tag{10}\]</span></span> <span id="eq-s9"><span class="math display">\[
+s_9 = E_\mathrm{d,loadflow}
+\tag{11}\]</span></span></p>
+<p><span id="eq-s10"><span class="math display">\[
+s_{10} = i_\mathrm{q,loadflow}
+\tag{12}\]</span></span> <span id="eq-s11"><span class="math display">\[
+s_{11} = i_\mathrm{q,loadflow}
+\tag{13}\]</span></span> <span id="eq-s12"><span class="math display">\[
+s_{12} = i_\mathrm{d,loadflow}  
+\tag{14}\]</span></span> <span id="eq-s13"><span class="math display">\[
+s_{13} = i_\mathrm{d,loadflow}
+\tag{15}\]</span></span></p>
+<p>The index “loadflow” indicates that this is the solution of a loadflow.</p>
+</section>
+<section id="assumptions-in-modelica-implementation-open-source-implementations" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Assumptions in modelica implementation (Open source implementations)</h1>
+<p>In GFM mode the output angle is multiplied with the nominal angular freauency in rad/s (<span class="math inline">\(\omega_\mathrm{base}\)</span>). <span class="math inline">\(\omega_\mathrm{ref}\)</span> is set to zero as the whole model is already in real/imaginary quantities. In case of a speed reference change only the difference to nominal speed has to be given.</p>
+</section>
+<section id="table-of-references-license" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Table of references &amp; license</h1>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-epri2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">EPRI, <span>“Generic <span>Positive Sequence Domain Model</span> of <span>Grid Forming Inverter Based Resource</span>,”</span> Dec. 2021.</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

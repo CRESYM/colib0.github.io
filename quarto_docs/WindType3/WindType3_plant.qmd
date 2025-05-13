@@ -1,0 +1,78 @@
+---
+title: "IEC Wind Power Plant"
+author: 
+    name: "Martin Franke, Luka Plavec (Fraunhofer IEE)"
+    email: martin.franke@iee.fraunhofer.de
+    url: https://github.com/martinscripts
+bibliography: ../literature/literature.bib
+csl: ../literature/ieee.csl
+acronyms:
+    # loa_format: '`- **{shortname}**: {longname}`{=raw}'
+#   loa_title: "List of Acronyms"
+#   loa_header_classes: []
+#   loa_format: nil
+#   include_unused: false
+#   insert_loa: "beginning"
+    insert_links: false
+#   id_prefix: "acronyms_"
+#   sorting: "alphabetical"
+#   non_existing: "key"
+#   style: "long-short"
+    fromfile:
+      - ./acronyms.yml
+filters:
+    - acronyms
+keep-tex: true
+execute: 
+  eval: true
+format:
+    html:
+        code-fold: false
+        toc: true
+        toc-title: "Table of contents"
+        number-sections: true
+    pdf:
+        tbl-colwidths: auto
+        toc: true
+        toc-depth: 3
+        toc-title: "Table of contents"
+        lof: true
+        lot: true
+        number-sections: true
+        papersize: a4
+        geometry:
+          - inner=2.5cm
+          - outer=2.5cm
+          - top=3cm
+          - bottom=4cm
+          - headsep=22pt
+          - headheight=11pt
+          - footskip=33pt
+          - ignorehead
+          - ignorefoot
+          - heightrounded
+    docx:
+        toc: true
+        number-sections: true
+    gfm:
+        html-math-method: plain
+        number-sections: false
+        toc: false
+    typst:
+        toc: true
+        section-numbering: 1.1.a
+        columns: 1
+---
+
+# Context TODO
+
+The model is separated in several sub systems. The information and drawings are taken from @iec2020
+
+# Model Description TODO
+
+### Wind plant control and communication
+
+# Table of references
+
+::: {#refs}
+:::

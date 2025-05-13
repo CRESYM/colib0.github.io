@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Martin Franke">
+
+<title>Kundur two-area system</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="Kundur_two_area_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Kundur_two_area_files/libs/quarto-html/quarto.js"></script>
+<script src="Kundur_two_area_files/libs/quarto-html/popper.min.js"></script>
+<script src="Kundur_two_area_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Kundur_two_area_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Kundur_two_area_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Kundur_two_area_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Kundur_two_area_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Kundur_two_area_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Kundur_two_area_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#use-case-purpose-and-context" id="toc-use-case-purpose-and-context" class="nav-link active" data-scroll-target="#use-case-purpose-and-context"><span class="header-section-number">1</span> Use case purpose​ and context</a></li>
+  <li><a href="#table-of-references" id="toc-table-of-references" class="nav-link" data-scroll-target="#table-of-references"><span class="header-section-number">2</span> Table of references</a></li>
+  <li><a href="#network-description" id="toc-network-description" class="nav-link" data-scroll-target="#network-description"><span class="header-section-number">3</span> Network ​description</a></li>
+  <li><a href="#static-and-dynamic-models-description" id="toc-static-and-dynamic-models-description" class="nav-link" data-scroll-target="#static-and-dynamic-models-description"><span class="header-section-number">4</span> Static and Dynamic models​ description</a>
+  <ul class="collapse">
+  <li><a href="#generators" id="toc-generators" class="nav-link" data-scroll-target="#generators"><span class="header-section-number">4.1</span> Generators</a></li>
+  <li><a href="#loads-static-zip-model" id="toc-loads-static-zip-model" class="nav-link" data-scroll-target="#loads-static-zip-model"><span class="header-section-number">4.2</span> Loads (static ZIP model)</a></li>
+  </ul></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">5</span> Input Data</a></li>
+  <li><a href="#sec-scenarios" id="toc-sec-scenarios" class="nav-link" data-scroll-target="#sec-scenarios"><span class="header-section-number">6</span> Scenarios</a>
+  <ul class="collapse">
+  <li><a href="#sec-loadflow" id="toc-sec-loadflow" class="nav-link" data-scroll-target="#sec-loadflow"><span class="header-section-number">6.1</span> Load flow</a></li>
+  <li><a href="#sec-exampleA" id="toc-sec-exampleA" class="nav-link" data-scroll-target="#sec-exampleA"><span class="header-section-number">6.2</span> Example a</a></li>
+  <li><a href="#sec-exampleB" id="toc-sec-exampleB" class="nav-link" data-scroll-target="#sec-exampleB"><span class="header-section-number">6.3</span> Example b</a></li>
+  </ul></li>
+  <li><a href="#open-source-implementations" id="toc-open-source-implementations" class="nav-link" data-scroll-target="#open-source-implementations"><span class="header-section-number">7</span> Open source implementations</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Kundur_two_area.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Kundur two-area system</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Martin Franke </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- ---
+layout: page
+title: Kundur two-area system (ID: 60)
+tags: [Opensource, small, TCRL3, '#60', rms, dynawo, frequency, OpenModelica, Modelica] 
+date: 13/08/2024  
+last-updated: 13/08/2024 
+authors: Martin Franke
+reviewers: 
+--- -->
+<section id="use-case-purpose-and-context" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="use-case-purpose-and-context"><span class="header-section-number">1</span> Use case purpose​ and context</h2>
+<p>The <em>Kundur two area system</em> is a test system for studies on dynamic stability, oscillations, damping, power exchange and other use cases. It is a widely used standard test case defined in Kundur’s <em>Power system stability and control</em> <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span> (Fig. E12.8).</p>
+</section>
+<section id="table-of-references" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="table-of-references"><span class="header-section-number">2</span> Table of references</h2>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-kundur1994" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">P. Kundur, <em>Power System Stability and Control</em>. New York: McGraw-Hill Education Ltd, 1994.</div>
+</div>
+<div id="ref-ramos2015" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R. Ramos and I. Hiskens, <span>“<span>PES-TR18</span>: <span>Benchmark Systems</span> for <span>Small-Signal Stability Analysis</span> and <span>Control</span>,”</span> Aug. 2015.</div>
+</div>
+<div id="ref-shackshaft1979" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Shackshaft and Henser, <span>“Model of generator saturation for use in power system studies.”</span> Apr. 1979.</div>
+</div>
+</div>
+</section>
+<section id="network-description" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="network-description"><span class="header-section-number">3</span> Network ​description</h2>
+<div id="fig-two-area-system" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-two-area-system-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="drawings/Kundur_two_area.drawio.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-two-area-system-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Kundur’s two-area test system <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span>
+</figcaption>
+</figure>
+</div>
+<p>In <a href="#fig-two-area-system" class="quarto-xref">Figure&nbsp;1</a> the test system is shown. As <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span> describes it, it consists of two similar areas connected by a weak tie.</p>
+<p>The parameters are listed in <a href="#sec-data" class="quarto-xref">Section&nbsp;5</a>. The system consists of 11 buses connected by lines or transformers. There are 4 generators G1…G4, two loads L7 and L9 as well as two shunt capacitors C7 and C9.</p>
+</section>
+<section id="static-and-dynamic-models-description" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="static-and-dynamic-models-description"><span class="header-section-number">4</span> Static and Dynamic models​ description</h2>
+<p>This test case includes the following components:</p>
+<section id="generators" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="generators"><span class="header-section-number">4.1</span> Generators</h3>
+<section id="governors" class="level4" data-number="4.1.1">
+<h4 data-number="4.1.1" class="anchored" data-anchor-id="governors"><span class="header-section-number">4.1.1</span> Governors</h4>
+<p>The generator model <strong>does not include a governor</strong>.</p>
+</section>
+<section id="avrs" class="level4" data-number="4.1.2">
+<h4 data-number="4.1.2" class="anchored" data-anchor-id="avrs"><span class="header-section-number">4.1.2</span> AVRs</h4>
+<p>The following AVRs are used in this test system, depending on the used scenario:</p>
+<ul>
+<li>no AVR: Manual excitation, i.e.&nbsp;constant field voltage</li>
+<li>AVR DC1A (similar to DC1C, <a href="https://colib.net/pages/models/regulations/avr/DC1C/">see colib page here</a>)
+<ul>
+<li><span class="math inline">\(K_\mathrm{a}=\)</span> 20 pu</li>
+<li><span class="math inline">\(K_\mathrm{a}=\)</span> 200 pu</li>
+</ul></li>
+<li>AVR ST1A (similar to ST1C, <a href="https://colib.net/pages/models/regulations/avr/ST1C/">see colib page here</a>)
+<ul>
+<li>(with/without transient gain reduction (TGR) and/or power system stabilizer (PSS))</li>
+</ul></li>
+</ul>
+<p>For details on the scenarios, see <a href="#sec-scenarios" class="quarto-xref">Section&nbsp;6</a>. The parameters are given in the tables of <a href="#sec-data" class="quarto-xref">Section&nbsp;5</a>.</p>
+</section>
+</section>
+<section id="loads-static-zip-model" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="loads-static-zip-model"><span class="header-section-number">4.2</span> Loads (static ZIP model)</h3>
+<p><a href="#eq-zipload-p" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-zipload-q" class="quarto-xref">Equation&nbsp;2</a> define ZIP load model. Depending on the coefficients in <a href="#tbl-zip-load-parameters" class="quarto-xref">Table&nbsp;1</a> it models a constant impedance, current or power load.</p>
+<p><span id="eq-zipload-p"><span class="math display">\[
+P = P_\mathrm{Ref} \cdot (1 + \Delta P) \cdot \left(Z_\mathrm{p} \cdot \left(\frac{U}{U_\mathrm{0}}\right)^2 + I_\mathrm{p} \cdot \frac{U}{U_\mathrm{0}} + P_\mathrm{p}\right)
+\tag{1}\]</span></span> <span id="eq-zipload-q"><span class="math display">\[
+Q = Q_\mathrm{Ref} \cdot (1 + \Delta Q) \cdot \left(Z_\mathrm{q} \cdot \left(\frac{U}{U_\mathrm{0}}\right)^2 + I_\mathrm{q} \cdot \frac{U}{U_\mathrm{0}} + P_\mathrm{q}\right)
+\tag{2}\]</span></span></p>
+<div id="tbl-zip-load-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-zip-load-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: ZIP Load parameters
+</figcaption>
+<div aria-describedby="tbl-zip-load-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(I_\mathrm{p}\)</span></td>
+<td style="text-align: left;">Current coefficient for active power</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(I_\mathrm{q}\)</span></td>
+<td style="text-align: left;">Current coefficient for reactive power</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{p}\)</span></td>
+<td style="text-align: left;">Power coefficient for active power</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{q}\)</span></td>
+<td style="text-align: left;">Power coefficient for reactive power</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Z_\mathrm{p}\)</span></td>
+<td style="text-align: left;">Impedance coefficient for active power</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Z_\mathrm{q}\)</span></td>
+<td style="text-align: left;">Impedance coefficient for reactive power</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>In <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span> it is stated that the active power should be modelled as constant current and the reactive power as constant impedance: All coefficients can be set to zero except <span class="math inline">\(I_\mathrm{p} = Z_\mathrm{q} = 1\)</span>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Loads L7, L9 and shunt capacitors C7, C9 can all be modeled as ZIP loads. To reproduce the <strong>load flow results</strong> from Kundur, the loads need to be modeled as constant power (P and Q), while the shunt capacitors need to be modeled as constant impedance.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-data" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">5</span> Input Data</h2>
+<div id="tbl-sm-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sm-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Synchronous machine parameters
+</figcaption>
+<div aria-describedby="tbl-sm-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 46%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">value</th>
+<th>pu base</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{Sat}\)</span></td>
+<td style="text-align: left;">0.015</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(B_\mathrm{Sat}\)</span></td>
+<td style="text-align: left;">9.6</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H\)</span></td>
+<td style="text-align: left;">6.5 s (for G1 and G2) and 6.175 pu (for G3 and G4)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{D}\)</span></td>
+<td style="text-align: left;">0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Psi_\mathrm{T1}\)</span></td>
+<td style="text-align: left;">0.9</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(R_\mathrm{a}\)</span></td>
+<td style="text-align: left;">0.0025 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(S_\mathrm{r\,SM}\)</span></td>
+<td style="text-align: left;">900 MVA</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{d0}'\)</span></td>
+<td style="text-align: left;">8.0 s</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{d0}''\)</span></td>
+<td style="text-align: left;">0.03 s</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{q0}'\)</span></td>
+<td style="text-align: left;">0.4 s</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{q0}''\)</span></td>
+<td style="text-align: left;">0.05 s</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(U_\mathrm{n\,SM}\)</span></td>
+<td style="text-align: left;">20 kV</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{d}\)</span></td>
+<td style="text-align: left;">1.8 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{d}'\)</span></td>
+<td style="text-align: left;">0.3 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{d}''\)</span></td>
+<td style="text-align: left;">0.25 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{l}\)</span></td>
+<td style="text-align: left;">0.2 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{q}\)</span></td>
+<td style="text-align: left;">1.7 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{q}'\)</span></td>
+<td style="text-align: left;">0.55 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_\mathrm{q}''\)</span></td>
+<td style="text-align: left;">0.25 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,SM}^2 / S_\mathrm{r\,SM}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-dc1a-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dc1a-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: AVR DC1A parameters, see <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>
+</figcaption>
+<div aria-describedby="tbl-dc1a-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 13%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{ex}\)</span></td>
+<td style="text-align: left;">0.0056 pu</td>
+<td style="text-align: left;">Exciter saturation factor</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(B_\mathrm{ex}\)</span></td>
+<td style="text-align: left;">1.075 pu</td>
+<td style="text-align: left;">Exciter saturation factor</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{A}\)</span></td>
+<td style="text-align: left;">20 pu</td>
+<td style="text-align: left;">AVR steady state gain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{E}\)</span></td>
+<td style="text-align: left;">1 pu</td>
+<td style="text-align: left;">Exciter feedback time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{F}\)</span></td>
+<td style="text-align: left;">0.125 pu</td>
+<td style="text-align: left;">Stabilizer feedback gain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{A}\)</span></td>
+<td style="text-align: left;">0.055 s</td>
+<td style="text-align: left;">AVR equivalent time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{B}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 1 denominator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{C}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 2 numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{C}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 2 numerator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{C}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 2 numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{E}\)</span></td>
+<td style="text-align: left;">0.36 s</td>
+<td style="text-align: left;">Exciter time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{F1}\)</span></td>
+<td style="text-align: left;">1.8 s</td>
+<td style="text-align: left;">Stabilizer feedback time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{R}\)</span></td>
+<td style="text-align: left;">0.05 s</td>
+<td style="text-align: left;">Voltage transducer time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{R\,max}\)</span></td>
+<td style="text-align: left;">5 pu</td>
+<td style="text-align: left;">Max. AVR output</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{R\,min}\)</span></td>
+<td style="text-align: left;">-3 pu</td>
+<td style="text-align: left;">Min. AVR output</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-st1a-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-st1a-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: AVR ST1A parameters, see <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>
+</figcaption>
+<div aria-describedby="tbl-st1a-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 9%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(I_\mathrm{LR}\)</span></td>
+<td style="text-align: left;">3 pu</td>
+<td style="text-align: left;">Field current instantaneous limit</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{A}\)</span></td>
+<td style="text-align: left;">200 pu</td>
+<td style="text-align: left;">AVR steady state gain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{C}\)</span></td>
+<td style="text-align: left;">0 pu</td>
+<td style="text-align: left;">Commutation factor for rectifier bridge</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{F}\)</span></td>
+<td style="text-align: left;">0 pu</td>
+<td style="text-align: left;">Stabilizer feedback gain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{LR}\)</span></td>
+<td style="text-align: left;">0 pu</td>
+<td style="text-align: left;">Field current limiter gain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{A}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">Rectifier bridge equivalent time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{B}\)</span></td>
+<td style="text-align: left;">10 s</td>
+<td style="text-align: left;">TGR block 1 denominator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{B1}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 1 denominator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{C}\)</span></td>
+<td style="text-align: left;">1 s</td>
+<td style="text-align: left;">TGR block 1 numerator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{C1}\)</span></td>
+<td style="text-align: left;">0 s</td>
+<td style="text-align: left;">TGR block 2 numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{F}\)</span></td>
+<td style="text-align: left;">1 s</td>
+<td style="text-align: left;">Stabilizer feedback time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{R}\)</span></td>
+<td style="text-align: left;">0.01 s</td>
+<td style="text-align: left;">Voltage transducer time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{A\,max}\)</span></td>
+<td style="text-align: left;">4 pu</td>
+<td style="text-align: left;">Max. AVR output</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{A\,min}\)</span></td>
+<td style="text-align: left;">-4 pu</td>
+<td style="text-align: left;">Min. AVR output</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{I\,max}\)</span></td>
+<td style="text-align: left;">99 pu</td>
+<td style="text-align: left;">Max. voltage error</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{I\,min}\)</span></td>
+<td style="text-align: left;">-99 pu</td>
+<td style="text-align: left;">Min. voltage error</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{R\,max}\)</span></td>
+<td style="text-align: left;">4 pu</td>
+<td style="text-align: left;">Max. rectifier bridge output</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{R\,min}\)</span></td>
+<td style="text-align: left;">-4 pu</td>
+<td style="text-align: left;">Min. rectifier bridge output</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-pss-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pss-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: PSS parameters, see <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>
+</figcaption>
+<div aria-describedby="tbl-pss-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 12%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{1}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order denominator coefficient</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{2}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order denominator coefficient</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{3}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order numerator coefficient</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{4}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order numerator coefficient</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{5}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order denominator coefficient</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(A_\mathrm{6}\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2nd order denominator coefficient</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(K_\mathrm{S}\)</span></td>
+<td style="text-align: left;">20 pu</td>
+<td style="text-align: left;">PSS gain</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(L_\mathrm{S\,max}\)</span></td>
+<td style="text-align: left;">0.05 pu</td>
+<td style="text-align: left;">PSS max. output</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(L_\mathrm{S\,min}\)</span></td>
+<td style="text-align: left;">-0.05 pu</td>
+<td style="text-align: left;">PSS min. output</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{1}\)</span></td>
+<td style="text-align: left;">0.05 s</td>
+<td style="text-align: left;">1st lead-lag numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{2}\)</span></td>
+<td style="text-align: left;">0.02 s</td>
+<td style="text-align: left;">1st lead-lag denominator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{3}\)</span></td>
+<td style="text-align: left;">3 s</td>
+<td style="text-align: left;">2nd lead-lag numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{4}\)</span></td>
+<td style="text-align: left;">5.4 s</td>
+<td style="text-align: left;">2nd lead-lag denominator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{5}\)</span></td>
+<td style="text-align: left;">10 s</td>
+<td style="text-align: left;">Washout block numerator time constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T_\mathrm{6}\)</span></td>
+<td style="text-align: left;">10 s</td>
+<td style="text-align: left;">Washout block denominator time constant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{CL}\)</span></td>
+<td style="text-align: left;">0 pu</td>
+<td style="text-align: left;">Lower voltage limit for PSS operation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(V_\mathrm{CU}\)</span></td>
+<td style="text-align: left;">0 pu</td>
+<td style="text-align: left;">Upper voltage limit for PSS operation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-trafo-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-trafo-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Step-up transformer parameters
+</figcaption>
+<div aria-describedby="tbl-trafo-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 15%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">value</th>
+<th>pu base</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">off-nominal ratio</td>
+<td style="text-align: left;">1</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(S_\mathrm{r\,Tr}\)</span></td>
+<td style="text-align: left;">900 MVA</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(ü\)</span></td>
+<td style="text-align: left;">230kV/20kV</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\underline{X}_\mathrm{Tr}\)</span></td>
+<td style="text-align: left;">0 + j0.15 pu</td>
+<td><span class="math inline">\(U_\mathrm{n\,Tr}^2 / S_\mathrm{r\,Tr}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-grid-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grid-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7: Grid parameters
+</figcaption>
+<div aria-describedby="tbl-grid-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 27%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">value</th>
+<th>pu base</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b_\mathrm{C}\)</span></td>
+<td style="text-align: left;">0.00175 pu / km</td>
+<td><span class="math inline">\(S_\mathrm{r\,grid} / U_\mathrm{n\,grid}^2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">line length <span class="math inline">\(l\)</span></td>
+<td style="text-align: left;">see <a href="#fig-two-area-system" class="quarto-xref">Figure&nbsp;1</a></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(r\)</span></td>
+<td style="text-align: left;">0.0001 pu / km</td>
+<td><span class="math inline">\(U_\mathrm{n\,grid}^2 / S_\mathrm{r\,grid}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(S_\mathrm{r\,grid}\)</span></td>
+<td style="text-align: left;">100 MVA</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(U_\mathrm{n\,grid}\)</span></td>
+<td style="text-align: left;">230 kV</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(x_\mathrm{L}\)</span></td>
+<td style="text-align: left;">0.001 pu / km</td>
+<td><span class="math inline">\(U_\mathrm{n\,grid}^2 / S_\mathrm{r\,grid}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-load-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-load-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8: Load parameters
+</figcaption>
+<div aria-describedby="tbl-load-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">parameter</th>
+<th style="text-align: left;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{C7}\)</span></td>
+<td style="text-align: left;">0 MW</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{C9}\)</span></td>
+<td style="text-align: left;">0 MW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{L7}\)</span></td>
+<td style="text-align: left;">967 MW</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P_\mathrm{L9}\)</span></td>
+<td style="text-align: left;">1767 MW</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Q_\mathrm{C7}\)</span></td>
+<td style="text-align: left;">200 MVAr</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Q_\mathrm{C9}\)</span></td>
+<td style="text-align: left;">350 MVAr</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Q_\mathrm{L7}\)</span></td>
+<td style="text-align: left;">100 MVAr</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Q_\mathrm{L9}\)</span></td>
+<td style="text-align: left;">100 MVAr</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-scenarios" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="sec-scenarios"><span class="header-section-number">6</span> Scenarios</h2>
+<p>The following sceniarios are taken from <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span> and <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>, which are also considered for reference results.</p>
+<p>The shown results are obtained from the Dyna<span class="math inline">\(\omega\)</span>o Modelica implementation of the test case.</p>
+<section id="sec-loadflow" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="sec-loadflow"><span class="header-section-number">6.1</span> Load flow</h3>
+<p>The load flow results are given in <a href="#tbl-loadflowU" class="quarto-xref">Table&nbsp;9</a> and <a href="#tbl-loadflowS" class="quarto-xref">Table&nbsp;10</a>.</p>
+<div id="tbl-loadflowU" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-loadflowU-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9: Loadflow voltages of Dyna<span class="math inline">\(\omega\)</span>o implementation
+</figcaption>
+<div aria-describedby="tbl-loadflowU-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Bus name</th>
+<th style="text-align: left;">Complex voltage in pu</th>
+<th style="text-align: left;">Kundur reference voltage in pu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">bus01</td>
+<td style="text-align: left;"><span class="math inline">\(1.030 \angle 20.200°\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1.03 \angle 20.2°\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bus02</td>
+<td style="text-align: left;"><span class="math inline">\(1.010 \angle 10.433°\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1.01 \angle 10.5°\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bus03</td>
+<td style="text-align: left;"><span class="math inline">\(1.030 \angle -6.885°\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1.03 \angle -6.8°\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bus04</td>
+<td style="text-align: left;"><span class="math inline">\(1.010 \angle -17.074°\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1.01 \angle -17.0°\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bus05</td>
+<td style="text-align: left;"><span class="math inline">\(1.006 \angle 13.737°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bus06</td>
+<td style="text-align: left;"><span class="math inline">\(0.978 \angle 3.651°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bus07</td>
+<td style="text-align: left;"><span class="math inline">\(0.961 \angle -4.759°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bus08</td>
+<td style="text-align: left;"><span class="math inline">\(0.949 \angle -18.633°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bus09</td>
+<td style="text-align: left;"><span class="math inline">\(0.971 \angle -32.234°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bus10</td>
+<td style="text-align: left;"><span class="math inline">\(0.983 \angle -23.819°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bus11</td>
+<td style="text-align: left;"><span class="math inline">\(1.008 \angle -13.511°\)</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-loadflowS" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-loadflowS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10: Loadflow generator powers of Dyna<span class="math inline">\(\omega\)</span>o implementation
+</figcaption>
+<div aria-describedby="tbl-loadflowS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Generator name</th>
+<th style="text-align: left;">Complex power in MVA</th>
+<th style="text-align: left;">Kundur reference power in MVA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">G1</td>
+<td style="text-align: left;"><span class="math inline">\(700.105 + \mathrm{j}185.067\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(700 + \mathrm{j}185\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;"><span class="math inline">\(700.000 + \mathrm{j}234.676\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(700 + \mathrm{j}235\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">G3</td>
+<td style="text-align: left;"><span class="math inline">\(719.000 + \mathrm{j}175.986\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(719 + \mathrm{j}176\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">G4</td>
+<td style="text-align: left;"><span class="math inline">\(700.000 + \mathrm{j}202.071\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(700 + \mathrm{j}202\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<ul>
+<li>The active power exchange from Area 1 to Area 2 (see <a href="#fig-two-area-system" class="quarto-xref">Figure&nbsp;1</a>) is 400.431 MW in the Dyna<span class="math inline">\(\omega\)</span>o implementation and 400 MW in the Kundur reference.</li>
+</ul>
+</section>
+<section id="sec-exampleA" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="sec-exampleA"><span class="header-section-number">6.2</span> Example a</h3>
+<p><em>Example a</em> examines small-signal performance of the system with constant excitation.</p>
+<ul>
+<li>All four generators are on manual excitation (field voltage <span class="math inline">\(E_\mathrm{fd} = \mathrm{const.}\)</span>)</li>
+<li>Constant current characteristics of active load components</li>
+<li>Constant impedance characteristics of reactive load components</li>
+</ul>
+<p><a href="#fig-example-a-eigenvalues" class="quarto-xref">Figure&nbsp;2</a> shows the result of an eigenvalue analysis of this system, compared to the reference values from <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span>. The remaining differences probalby originate from differing model implementations of the synchronous machines in Dyna<span class="math inline">\(\omega\)</span> compared to the ones used by Kundur.</p>
+<div id="fig-example-a-eigenvalues" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-a-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/20240814123344.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-a-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Eigenvalues of the system with constant excitation voltage
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-exampleB" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="sec-exampleB"><span class="header-section-number">6.3</span> Example b</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To obtain a steady state initial condition, the exact values for the generators active and reactive power and voltage angles from load flow (<a href="#sec-loadflow" class="quarto-xref">Section&nbsp;6.1</a>) need to be used as initial values in the dynamic simulation.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the Dyna<span class="math inline">\(\omega\)</span>o implementation, if the voltage transducer time constant <span class="math inline">\(T_\mathrm{R}\)</span> = 0.01 s, then the voltage measurement first order lag and the field flux linkage <span class="math inline">\(\lambda_\mathrm{f}\)</span> oscillate against each other with high amplitude. This is not represented in the reference results of <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>. To avoid this behaviour, set <span class="math inline">\(T_\mathrm{R} = 10^{-6}\)</span> s. This has been done for the Dyna<span class="math inline">\(\omega\)</span>o implementation.</p>
+</div>
+</div>
+<section id="sec-exampleB1" class="level4" data-number="6.3.1">
+<h4 data-number="6.3.1" class="anchored" data-anchor-id="sec-exampleB1"><span class="header-section-number">6.3.1</span> Part 1: Self-excieted dc exciter (DC1A)</h4>
+<p>Instead of constant excitation voltage as in <a href="#sec-exampleA" class="quarto-xref">Section&nbsp;6.2</a>, now the self-excited DC exciter DC1A is used. For parameters, see <a href="#tbl-dc1a-parameters" class="quarto-xref">Table&nbsp;3</a>.</p>
+<p>In <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span> this case has not been taken into account for comparative analysis. Like there, it has not been investigated using the Dyna<span class="math inline">\(\omega\)</span>o implementation.</p>
+</section>
+<section id="sec-exampleB2" class="level4" data-number="6.3.2">
+<h4 data-number="6.3.2" class="anchored" data-anchor-id="sec-exampleB2"><span class="header-section-number">6.3.2</span> Part 2: Thyristor exciter (ST1A) with high transient gain</h4>
+<p>Instead of constant excitation voltage as in <a href="#sec-exampleA" class="quarto-xref">Section&nbsp;6.2</a>, now the thyristor exciter ST1A is used. For parameters, see <a href="#tbl-dc1a-parameters" class="quarto-xref">Table&nbsp;3</a>. It has high transient gain, i.e.&nbsp;no transient gain reduction.</p>
+<p>The implementation in Dyna<span class="math inline">\(\omega\)</span>o does not allow to set saturation parameters <span class="math inline">\(A_\mathrm{sat}\)</span> and <span class="math inline">\(B_\mathrm{sat}\)</span> as in <a href="#tbl-sm-parameters" class="quarto-xref">Table&nbsp;2</a> because its synchronous machine model uses a different saturation model. Instead of the model from Kundur <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span>, the Shackshaft model <span class="citation" data-cites="shackshaft1979"><a href="#ref-shackshaft1979" role="doc-biblioref">[3]</a></span> is used. To get the unstable pole close to the one in the Kundur reference, the Shackshaft parameters have been set to <span class="math inline">\(m_\mathrm{d}=1\)</span>, <span class="math inline">\(m_\mathrm{q}=1\)</span>, <span class="math inline">\(n_\mathrm{d}=9\)</span>, <span class="math inline">\(n_\mathrm{q}=9\)</span>.</p>
+<p>The voltage transducer time constant has been</p>
+<div id="fig-example-b-2-eigenvalues" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-b-2-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/20240814131709.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-b-2-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Unstable eigenvalue of the system with exciter ST1A
+</figcaption>
+</figure>
+</div>
+<p>As in <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>, a steps to the synchronous machines’ voltege references have been applied according to <a href="#tbl-example-b-steps" class="quarto-xref">Table&nbsp;11</a>. Those were selected to excite the inter-area oscillation mode and the other electromechanical modes in the system <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>.</p>
+<div id="tbl-example-b-steps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-b-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11: Voltage reference steps as in <span class="citation" data-cites="ramos2015"><a href="#ref-ramos2015" role="doc-biblioref">[2]</a></span>
+</figcaption>
+<div aria-describedby="tbl-example-b-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Generator</th>
+<th style="text-align: left;">Step of <span class="math inline">\(U_\mathrm{ref}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">G1</td>
+<td style="text-align: left;">+3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;">-1%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">G3</td>
+<td style="text-align: left;">-3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">G4</td>
+<td style="text-align: left;">+1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The step response of the generators can be seen in <a href="#fig-example-b-2-stepresponse" class="quarto-xref">Figure&nbsp;4</a>.</p>
+<div id="fig-example-b-2-stepresponse" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-b-2-stepresponse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/20240814133617.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-b-2-stepresponse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Unstable step response of the system with ST1A without transient gain reduction
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-exampleB3" class="level4" data-number="6.3.3">
+<h4 data-number="6.3.3" class="anchored" data-anchor-id="sec-exampleB3"><span class="header-section-number">6.3.3</span> Part 3: Thyristor exciter (ST1A) with transient gain reduction (TGR)</h4>
+<p>Simlilarly to <a href="#sec-exampleB2" class="quarto-xref">Section&nbsp;6.3.2</a>, the ST1A exciter is used. In this case, transient gain reduction (TGR) is activated by setting <span class="math inline">\(T_\mathrm{A} = 1\)</span>.</p>
+</section>
+<section id="sec-exampleB4" class="level4" data-number="6.3.4">
+<h4 data-number="6.3.4" class="anchored" data-anchor-id="sec-exampleB4"><span class="header-section-number">6.3.4</span> Part 4: Thyristor exciter (ST1A) with high transient gain and PSS</h4>
+<p>Simlilarly to <a href="#sec-exampleB2" class="quarto-xref">Section&nbsp;6.3.2</a>, the ST1A exciter is used. In this case, a power system stabilizer according to <span class="citation" data-cites="kundur1994"><a href="#ref-kundur1994" role="doc-biblioref">[1]</a></span> (Figure 6-8) is activated and parameterized according to <a href="#tbl-pss-parameters" class="quarto-xref">Table&nbsp;5</a>.</p>
+</section>
+</section>
+</section>
+<section id="open-source-implementations" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="open-source-implementations"><span class="header-section-number">7</span> Open source implementations</h2>
+<p>This model has been successfully implemented in :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Software</th>
+<th>URL</th>
+<th>Language</th>
+<th>Open-Source License</th>
+<th>Last consulted date</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Open Modelica / Dynawo</td>
+<td><a href="https://github.com/dynawo/dynawo">Dynawo</a></td>
+<td>modelica</td>
+<td><a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL v2.0</a></td>
+<td>15/08/2024</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

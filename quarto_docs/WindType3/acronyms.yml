@@ -1,0 +1,21 @@
+---
+acronyms:
+  keys:
+  # Define your keys here
+    - shortname: WT
+      longname: Wind Turbine
+    - shortname: RSC
+      longname: Rotor Side Converter
+    - shortname: GSC
+      longname: Grid Side Converter
+    - shortname: DFIG
+      longname: Doubly-Fed Induction Generator
+    - shortname: FRT
+      longname: Fault Ride Through
+    - shortname: PD
+      longname: Power Device
+    - shortname: PCC
+      longname: Point of Common Coupling
+    - shortname: WP
+      longname: Wind Plant
+---

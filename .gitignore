@@ -14,3 +14,4 @@ Gemfile.lock
 
 # Back-up drawio files
 *.drawio.bkp
+*.pdf

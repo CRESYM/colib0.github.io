@@ -1,0 +1,141 @@
+---
+title: "Kundur two-area system"
+author: "Martin Franke"
+bibliography: ../literature/literature.bib
+csl: ../literature/ieee.csl
+format:
+    html:
+        code-fold: false
+        toc: true
+        number-sections: true
+---
+
+# Use case purpose​
+The *Kundur two area system* is a test system for studies on dynamic stability, oscillations, damping, power exchange and other use cases.
+It is a widely used standard test case defined in Kundur's *Power system stability and control* @kundur1994[fig. E12.8]. 
+
+# Table of references
+
+who did the test, link to article or code repository​
+
+TODO add references to suitable publications with output data we can use as a reference. 
+
+# Network ​description
+
+![Kundur's two-area test system TODOremake](images/20240129125320.png){#fig-two-area-system}
+
+In @fig-two-area-system the test system is shown. As @kundur1994 describes it, it consists of two similar areas connected by a weak tie. 
+
+The parameters listed in @sec-data.
+The system consists of 11 buses connected by lines or transformers. There are 4 generators G1...G4, two loads L7 and L9 as well as two shunt capacitors C7 and C9 on the load buses.
+
+# Included models​
+This test case includes the following network components: 
+
+## Generators
+### Saturation
+- Saturation parameters $A_\mathrm{sat}$ and $B_\mathrm{sat}$ are given in Kundur. If different models are used saturation, the parameters must be converted accordingly. TODO_conversionForDynawoGenerator
+
+## Governors
+The generator model **does not include a governor**.
+
+## AVRs
+- DC1A TODO_parameters
+- Parameters $A_\mathrm{sat}$ and $B_\mathrm{sat}$ need to be in line with the saturation parameters of the generator model.
+
+
+## Loads (static ZIP model)
+
+@eq-zipload-p and @eq-zipload-q define ZIP load model. Depending on the coefficients in @tbl-zip-load-parameters it models a constant impedance, current or power load.  
+
+$$
+P = P_\mathrm{Ref} \cdot (1 + \Delta P) \cdot \left(Z_\mathrm{p} \cdot \left(\frac{U}{U_\mathrm{0}}\right)^2 + I_\mathrm{p} \cdot \frac{U}{U_\mathrm{0}} + P_\mathrm{p}\right)
+$${#eq-zipload-p}
+$$
+Q = Q_\mathrm{Ref} \cdot (1 + \Delta Q) \cdot \left(Z_\mathrm{q} \cdot \left(\frac{U}{U_\mathrm{0}}\right)^2 + I_\mathrm{q} \cdot \frac{U}{U_\mathrm{0}} + P_\mathrm{q}\right)
+$${#eq-zipload-q}
+
+
+| parameter      | description                              |
+| -------------- | ---------------------------------------- |
+| $Z_\mathrm{p}$ | Impedance coefficient for active power   |
+| $I_\mathrm{p}$ | Current coefficient for active power     |
+| $P_\mathrm{p}$ | Power coefficient for active power       |
+| $Z_\mathrm{q}$ | Impedance coefficient for reactive power |
+| $I_\mathrm{q}$ | Current coefficient for reactive power   |
+| $P_\mathrm{q}$ | Power coefficient for reactive power     |
+: ZIP Load parameters {#tbl-zip-load-parameters}
+
+In @kundur1994 it is stated that the active power should be modelled as constant current and the reactive power as constant impedance: All coefficients can be set to zero except $I_\mathrm{p} = Z_\mathrm{q} = 1$.
+
+# Data {#sec-data}
+
+| parameter          | value                                               |
+| ------------------ | --------------------------------------------------- |
+| $S_\mathrm{r\,SM}$ | 900 MVA                                             |
+| $U_\mathrm{n\,SM}$ | 20 kV                                               |
+| $X_\mathrm{d}$     | 1.8 pu                                              |
+| $X_\mathrm{q}$     | 1.7 pu                                              |
+| $X_\mathrm{l}$     | 0.2 pu                                              |
+| $X_\mathrm{d}'$    | 0.3 pu                                              |
+| $X_\mathrm{q}'$    | 0.55 pu                                             |
+| $X_\mathrm{d}''$   | 0.25 pu                                             |
+| $X_\mathrm{q}''$   | 0.25 pu                                             |
+| $R_\mathrm{a}$     | 0.0025 pu                                           |
+| $T_\mathrm{d0}'$   | 8.0 s                                               |
+| $T_\mathrm{q0}'$   | 0.4 s                                               |
+| $T_\mathrm{d0}''$  | 0.03 s                                              |
+| $T_\mathrm{q0}''$  | 0.05 s                                              |
+| $A_\mathrm{Sat}$   | 0.015 pu                                            |
+| $B_\mathrm{Sat}$   | 9.6 pu                                              |
+| $\Psi_\mathrm{T1}$ | 0.9 pu                                              |
+| $H$                | 6.5 pu (for G1 and G2) and 6.175 pu (for G3 and G4) |
+| $K_\mathrm{D}$     | 0 pu                                                |
+: Synchronous machine parameters (pu on $S_\mathrm{r\,SM}$ and $U_\mathrm{n\,SM}$ base) {#tbl-sm-parameters}
+
+
+| parameter                   | value        |
+| --------------------------- | ------------ |
+| $S_\mathrm{r\,Tr}$          | 900 MVA      |
+|                             | 20/230 kV    |
+| $\underline{X}_\mathrm{Tr}$ | 0 + j0.15 pu |
+| off-nominal ratio           | 1            |
+: Step-up transformer parameters (pu on $S_\mathrm{r\,Tr}$ and $U_\mathrm{n\,Tr}$ base) {#tbl-trafo-parameters}
+
+| parameter            | value                    |
+| -------------------- | ------------------------ |
+| $S_\mathrm{r\,grid}$ | 100 MVA                  |
+| $U_\mathrm{n\,grid}$ | 230 kV                   |
+| line length $l$      | see @fig-two-area-system |
+| $r$                  | 0.0001 pu / km           |
+| $x_\mathrm{L}$       | 0.001 pu / km            |
+| $b_\mathrm{C}$       | 0.0.00175 pu / km        |
+: Grid parameters (pu on $S_\mathrm{r\,grid}$ and $U_\mathrm{n\,grid}$ base) {#tbl-grid-parameters}
+
+
+# Scenarios
+
+## Scenario No. XX: 
+
+**Operating point No. 1**
+
+**Control modes**
+
+**Event** 
+
+**Variant A:** 
+
+
+# Simulation parameters
+type of problem: DAE
+type of resolution
+time step: XX 
+simulation duration:
+time of event: 
+
+# Outputs: ​
+Display curves 
+Interpretation of the results
+
+# Open source implementations
+links to repositories containing the implemented use cases​
