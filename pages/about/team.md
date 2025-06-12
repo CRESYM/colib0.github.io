@@ -29,3 +29,5 @@ Most of them belong to [CRESYM](https://cresym.eu/), a non-profit association.
 - [Dynawo - test cases](https://github.com/dynawo/dynawo/tree/master/examples)
 - [OpenIPSL - models and test cases](https://github.com/OpenIPSL/OpenIPSL)
 - [Simplus-grid-tool - models and test cases](https://github.com/Future-Power-Networks/Simplus-Grid-Tool)
+- [Popular Open Source Libraries for Power System Analysis](https://github.com/ps-wiki/best-of-ps)
+- [ANDES - test cases](https://andes.readthedocs.io/en/stable/getting_started/testcases/index.html)
